@@ -1,319 +1,270 @@
 [English](README.md) | [中文](docs/zh/README.md)
 
-## 目錄
+## 목차
 
-- [✨ Features](#features1)
-- [🧭 Usage Guide](#usage-guide)
-- [🖥️ Task Viewer Tool](#task-viewer-tool)
-- [🔬 Research Mode](#research-mode)
-- [🧠 Task Memory Function](#task-memory-function)
-- [📋 Project Rules Initialization](#project-rules)
-- [🌐 Web GUI](#web-gui)
-- [📚 Documentation Resources](#documentation)
-- [🔧 Installation and Usage](#installation)
-- [🔌 Using with MCP-Compatible Clients](#clients)
-- [💡 System Prompt Guidance](#prompt)
-- [🛠️ Available Tools Overview](#tools)
-- [📄 License](#license)
-- [🤖 Recommended Models](#recommended)
+- [✨ 주요 기능](#features1)
+- [🧭 사용 가이드](#usage-guide)
+- [🖥️ 작업 뷰어 도구](#task-viewer-tool)
+- [🔬 연구 모드](#research-mode)
+- [🧠 작업 메모리 기능](#task-memory-function)
+- [📋 프로젝트 규칙 초기화](#project-rules)
+- [🌐 웹 GUI](#web-gui)
+- [📚 문서 리소스](#documentation)
+- [🔧 설치 및 사용법](#installation)
+- [🔌 MCP 호환 클라이언트에서 사용](#clients)
+- [💡 시스템 프롬프트 가이드](#prompt)
+- [🛠️ 사용 가능한 도구 개요](#tools)
+- [📄 라이선스](#license)
+- [🤖 권장 모델](#recommended)
 
 # MCP Shrimp Task Manager
 
-[![Shrimp Task Manager Demo](/docs/yt.png)](https://www.youtube.com/watch?v=Arzu0lV09so)
+[![Shrimp Task Manager 데모](/docs/yt.png)](https://www.youtube.com/watch?v=Arzu0lV09so)
 
-[![smithery badge](https://smithery.ai/badge/@cjo4m06/mcp-shrimp-task-manager)](https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager)
+[![smithery 배지](https://smithery.ai/badge/@cjo4m06/mcp-shrimp-task-manager)](https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager)
 
-> 🚀 An intelligent task management system based on Model Context Protocol (MCP), providing an efficient programming workflow framework for AI Agents.
+> 🚀 Model Context Protocol (MCP) 기반의 지능형 작업 관리 시스템으로, AI Agent를 위한 효율적인 프로그래밍 워크플로우 프레임워크를 제공합니다.
 
 <a href="https://glama.ai/mcp/servers/@cjo4m06/mcp-shrimp-task-manager">
-  <img width="380" height="200" src="https://glama.ai/mcp/servers/@cjo4m06/mcp-shrimp-task-manager/badge" alt="Shrimp Task Manager MCP server" />
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@cjo4m06/mcp-shrimp-task-manager/badge" alt="Shrimp Task Manager MCP 서버" />
 </a>
 
-Shrimp Task Manager guides Agents through structured workflows for systematic programming, enhancing task memory management mechanisms, and effectively avoiding redundant and repetitive coding work.
+Shrimp Task Manager는 Agent를 체계적인 프로그래밍을 위한 구조화된 워크플로우로 안내하며, 작업 메모리 관리 메커니즘을 향상시키고 중복되고 반복적인 코딩 작업을 효과적으로 방지합니다.
 
-## ✨ <a id="features1"></a>Features
+## ✨ <a id="features1"></a>주요 기능
 
-- **Task Planning and Analysis**: Deep understanding and analysis of complex task requirements
-- **Intelligent Task Decomposition**: Automatically break down large tasks into manageable smaller tasks
-- **Dependency Management**: Precisely handle dependencies between tasks, ensuring correct execution order
-- **Execution Status Tracking**: Real-time monitoring of task execution progress and status
-- **Task Completeness Verification**: Ensure task results meet expected requirements
-- **Task Complexity Assessment**: Automatically evaluate task complexity and provide optimal handling suggestions
-- **Automatic Task Summary Updates**: Automatically generate summaries upon task completion, optimizing memory performance
-- **Task Memory Function**: Automatically backup task history, providing long-term memory and reference capabilities
-- **Research Mode**: Systematic technical research capabilities with guided workflows for exploring technologies, best practices, and solution comparisons
-- **Project Rules Initialization**: Define project standards and rules to maintain consistency across large projects
-- **<a id="web-gui"></a>Web GUI**: Provides an optional web-based graphical user interface for task management. Enable by setting `ENABLE_GUI=true` in your `.env` file. When enabled, a `WebGUI.md` file containing the access address will be created in your `DATA_DIR`. You can customize the web port by setting `WEB_PORT` (if not specified, an available port will be automatically selected).
-- **<a id="task-viewer"></a>Task Viewer**: A modern, React-based web interface for viewing and managing task data across multiple profiles with advanced features like drag & drop tabs, real-time search, and configurable auto-refresh. See the [Task Viewer documentation](tools/task-viewer) for setup and usage instructions.
+- **작업 계획 및 분석**: 복잡한 작업 요구사항의 깊은 이해와 분석
+- **지능형 작업 분해**: 큰 작업을 관리 가능한 작은 작업으로 자동 분할
+- **의존성 관리**: 작업 간 의존성을 정확히 처리하여 올바른 실행 순서 보장
+- **실행 상태 추적**: 작업 실행 진행 상황과 상태의 실시간 모니터링
+- **작업 완성도 검증**: 작업 결과가 예상 요구사항을 충족하는지 확인
+- **작업 복잡도 평가**: 작업 복잡도를 자동으로 평가하고 최적 처리 방안 제시
+- **자동 작업 요약 업데이트**: 작업 완료 시 자동으로 요약 생성, 메모리 성능 최적화
+- **작업 메모리 기능**: 작업 기록을 자동으로 백업하여 장기 메모리와 참조 기능 제공
+- **연구 모드**: 기술, 모범 사례, 솔루션 비교를 위한 가이드 워크플로우가 있는 체계적인 기술 연구 기능
+- **프로젝트 규칙 초기화**: 프로젝트 표준과 규칙을 정의하여 대규모 프로젝트에서 일관성 유지
+- **<a id="web-gui"></a>웹 GUI**: 작업 관리를 위한 선택적 웹 기반 그래픽 사용자 인터페이스 제공. `.env` 파일에서 `ENABLE_GUI=true`로 설정하여 활성화. 활성화되면 `DATA_DIR`에 접근 주소가 포함된 `WebGUI.md` 파일이 생성됩니다. `WEB_PORT`를 설정하여 웹 포트를 사용자 정의할 수 있습니다 (지정하지 않으면 사용 가능한 포트가 자동으로 선택됩니다).
+- **<a id="task-viewer"></a>작업 뷰어**: 드래그 앤 드롭 탭, 실시간 검색, 구성 가능한 자동 새로고침과 같은 고급 기능을 갖춘 여러 프로필에서 작업 데이터를 보고 관리하기 위한 현대적인 React 기반 웹 인터페이스. 설정 및 사용 지침은 [작업 뷰어 문서](tools/task-viewer)를 참조하세요.
 
-  ![Task Viewer Interface](tools/task-viewer/screenshot.png)
+  ![작업 뷰어 인터페이스](tools/task-viewer/screenshot.png)
   
-  ![Task Viewer in Action](tools/task-viewer/taskview.png)
+  ![작업 뷰어 실행 중](tools/task-viewer/taskview.png)
 
-## 🧭 <a id="usage-guide"></a>Usage Guide
+## 🧭 <a id="usage-guide"></a>사용 가이드
 
-Shrimp Task Manager offers a structured approach to AI-assisted programming through guided workflows and systematic task management.
+Shrimp Task Manager는 가이드 워크플로우와 체계적인 작업 관리를 통해 AI 지원 프로그래밍에 대한 구조화된 접근 방식을 제공합니다.
 
-### What is Shrimp?
+### Shrimp란 무엇인가요?
 
-Shrimp is essentially a prompt template that guides AI Agents to better understand and work with your project. It uses a series of prompts to ensure the Agent aligns closely with your project's specific needs and conventions.
+Shrimp는 본질적으로 AI Agent가 프로젝트를 더 잘 이해하고 작업할 수 있도록 안내하는 프롬프트 템플릿입니다. 일련의 프롬프트를 사용하여 Agent가 프로젝트의 특정 요구사항과 규칙에 밀접하게 정렬되도록 보장합니다.
 
-### Research Mode in Practice
+### 실제 연구 모드
 
-Before diving into task planning, you can leverage the research mode for technical investigation and knowledge gathering. This is particularly useful when:
+작업 계획을 시작하기 전에 기술 조사와 지식 수집을 위해 연구 모드를 활용할 수 있습니다. 이는 다음과 같은 경우에 특히 유용합니다:
 
-- You need to explore new technologies or frameworks
-- You want to compare different solution approaches
-- You're investigating best practices for your project
-- You need to understand complex technical concepts
+- 새로운 기술이나 프레임워크를 탐색해야 할 때
+- 다양한 솔루션 접근 방식을 비교하고 싶을 때
+- 프로젝트의 모범 사례를 조사할 때
+- 복잡한 기술 개념을 이해해야 할 때
 
-Simply tell the Agent "research [your topic]" or "enter research mode for [technology/problem]" to begin systematic investigation. The research findings will then inform your subsequent task planning and development decisions.
+Agent에게 "research [주제]" 또는 "enter research mode for [기술/문제]"라고 말하면 체계적인 조사를 시작할 수 있습니다. 연구 결과는 이후 작업 계획 및 개발 결정에 정보를 제공합니다.
 
-### First-Time Setup
+### 최초 설정
 
-When working with a new project, simply tell the Agent "init project rules". This will guide the Agent to generate a set of rules tailored to your project's specific requirements and structure.
+새 프로젝트로 작업할 때는 Agent에게 "init project rules"라고 말하기만 하면 됩니다. 이는 Agent가 프로젝트의 특정 요구사항과 구조에 맞춰 규칙 세트를 생성하도록 안내합니다.
 
-### Task Planning Process
+### 작업 계획 과정
 
-To develop or update features, use the command "plan task [your description]". The system will reference the previously established rules, attempt to understand your project, search for relevant code sections, and propose a comprehensive plan based on the current state of your project.
+기능을 개발하거나 업데이트하려면 "plan task [설명]" 명령을 사용하세요. 시스템은 이전에 설정된 규칙을 참조하고, 프로젝트를 이해하려고 시도하며, 관련 코드 섹션을 검색하고, 프로젝트의 현재 상태를 기반으로 포괄적인 계획을 제안합니다.
 
-### Feedback Mechanism
+### 피드백 메커니즘
 
-During the planning process, Shrimp guides the Agent through multiple steps of thinking. You can review this process and provide feedback if you feel it's heading in the wrong direction. Simply interrupt and share your perspective - the Agent will incorporate your feedback and continue the planning process.
+계획 과정에서 Shrimp는 Agent가 여러 단계의 사고를 거치도록 안내합니다. 이 과정을 검토하고 잘못된 방향으로 가고 있다고 느끼면 피드백을 제공할 수 있습니다. 간단히 중단하고 관점을 공유하면 Agent가 피드백을 통합하고 계획 과정을 계속합니다.
 
-### Task Execution
+### 작업 실행
 
-When you're satisfied with the plan, use "execute task [task name or ID]" to implement it. If you don't specify a task name or ID, the system will automatically identify and execute the highest priority task.
+계획에 만족하면 "execute task [작업 이름 또는 ID]"를 사용하여 구현하세요. 작업 이름이나 ID를 지정하지 않으면 시스템이 자동으로 최우선 순위 작업을 식별하고 실행합니다.
 
-### Continuous Mode
+### 연속 모드
 
-If you prefer to execute all tasks in sequence without manual intervention for each task, use "continuous mode" to automatically process the entire task queue.
+각 작업에 대해 수동 개입 없이 모든 작업을 순차적으로 실행하려면 "continuous mode"를 사용하여 전체 작업 큐를 자동으로 처리하세요.
 
-### Token Limitation Note
+### 토큰 제한 참고
 
-Due to LLM token limits, context may be lost during lengthy conversations. If this occurs, simply open a new chat session and ask the Agent to continue execution. The system will pick up where it left off without requiring you to repeat the task details or context.
+LLM 토큰 제한으로 인해 긴 대화 중에 컨텍스트가 손실될 수 있습니다. 이 경우 새 채팅 세션을 열고 Agent에게 실행을 계속하라고 요청하기만 하면 됩니다. 시스템은 작업 세부사항이나 컨텍스트를 반복할 필요 없이 중단된 지점에서 계속됩니다.
 
-### Prompt Language and Customization
+### 프롬프트 언어 및 사용자 정의
 
-You can switch the language of system prompts by setting the `TEMPLATES_USE` environment variable. It supports `en` (English) and `zh` (Traditional Chinese) by default. Furthermore, you can copy an existing template directory (e.g., `src/prompts/templates_en`) to the location specified by `DATA_DIR`, modify it, and then point `TEMPLATES_USE` to your custom template directory name. This allows for deeper prompt customization. For detailed instructions.
+`TEMPLATES_USE` 환경 변수를 설정하여 시스템 프롬프트의 언어를 전환할 수 있습니다. 기본적으로 `en` (영어)와 `zh` (번체 중국어)를 지원합니다. 또한 기존 템플릿 디렉토리(예: `src/prompts/templates_en`)를 `DATA_DIR`로 지정된 위치에 복사하고, 수정한 다음 `TEMPLATES_USE`를 사용자 정의 템플릿 디렉토리 이름으로 가리킬 수 있습니다. 이를 통해 더 깊은 프롬프트 사용자 정의가 가능합니다. 자세한 지침은 [프롬프트 사용자 정의 가이드](docs/en/prompt-customization.md)를 참조하세요.
 
-## 🔬 <a id="research-mode"></a>Research Mode
+## 🔬 <a id="research-mode"></a>연구 모드
 
-Shrimp Task Manager includes a specialized research mode designed for systematic technical investigation and knowledge gathering.
+Shrimp Task Manager는 체계적인 기술 조사와 지식 수집을 위해 설계된 전문 연구 모드를 포함합니다.
 
-### What is Research Mode?
+### 연구 모드란?
 
-Research Mode is a guided workflow system that helps AI Agents conduct thorough and systematic technical research. It provides structured approaches to exploring technologies, comparing solutions, investigating best practices, and gathering comprehensive information for programming tasks.
+연구 모드는 AI Agent가 철저하고 체계적인 기술 연구를 수행할 수 있도록 도와주는 가이드 워크플로우 시스템입니다. 기술 탐색, 솔루션 비교, 모범 사례 조사, 프로그래밍 작업을 위한 포괄적인 정보 수집을 위한 구조화된 접근 방식을 제공합니다.
 
-### Key Features
+### 주요 기능
 
-- **Systematic Investigation**: Structured workflows ensure comprehensive coverage of research topics
-- **Multi-Source Research**: Combines web search and codebase analysis for complete understanding
-- **State Management**: Maintains research context and progress across multiple sessions
-- **Guided Exploration**: Prevents research from becoming unfocused or going off-topic
-- **Knowledge Integration**: Seamlessly integrates research findings with task planning and execution
+- **체계적 조사**: 구조화된 워크플로우로 연구 주제의 포괄적인 커버리지 보장
+- **다중 소스 연구**: 완전한 이해를 위해 웹 검색과 코드베이스 분석 결합
+- **상태 관리**: 여러 세션에 걸쳐 연구 컨텍스트와 진행 상황 유지
+- **가이드 탐색**: 연구가 집중을 잃거나 주제에서 벗어나는 것을 방지
+- **지식 통합**: 연구 결과를 작업 계획 및 실행과 원활하게 통합
 
-### When to Use Research Mode
+### 연구 모드를 사용해야 할 때
 
-Research Mode is particularly valuable for:
+연구 모드는 다음과 같은 경우에 특히 가치가 있습니다:
 
-- **Technology Exploration**: Investigating new frameworks, libraries, or tools
-- **Best Practices Research**: Finding industry standards and recommended approaches
-- **Solution Comparison**: Evaluating different technical approaches or architectures
-- **Problem Investigation**: Deep-diving into complex technical challenges
-- **Architecture Planning**: Researching design patterns and system architectures
+- **기술 탐색**: 새로운 프레임워크, 라이브러리 또는 도구 조사
+- **모범 사례 연구**: 업계 표준 및 권장 접근 방식 찾기
+- **솔루션 비교**: 다양한 기술적 접근 방식이나 아키텍처 평가
+- **문제 조사**: 복잡한 기술적 과제에 대한 심층 분석
+- **아키텍처 계획**: 디자인 패턴 및 시스템 아키텍처 연구
 
-### How to Use Research Mode
+### 연구 모드 사용법
 
-Simply tell the Agent to enter research mode with your topic:
+Agent에게 주제와 함께 연구 모드에 진입하라고 말하기만 하면 됩니다:
 
-- **Basic usage**: "Enter research mode for [your topic]"
-- **Specific research**: "Research [specific technology/problem]"
-- **Comparative analysis**: "Research and compare [options A vs B]"
+- **기본 사용법**: "Enter research mode for [주제]"
+- **특정 연구**: "Research [특정 기술/문제]"
+- **비교 분석**: "Research and compare [옵션 A vs B]"
 
-The system will guide the Agent through structured research phases, ensuring thorough investigation while maintaining focus on your specific needs.
+시스템은 Agent를 구조화된 연구 단계로 안내하여 철저한 조사를 보장하면서 특정 요구사항에 집중할 수 있도록 합니다.
 
-### Research Workflow
+### 연구 워크플로우
 
-1. **Topic Definition**: Clearly define the research scope and objectives
-2. **Information Gathering**: Systematic collection of relevant information
-3. **Analysis and Synthesis**: Processing and organizing findings
-4. **State Updates**: Regular progress tracking and context preservation
-5. **Integration**: Applying research results to your project context
+1. **주제 정의**: 연구 범위와 목표를 명확히 정의
+2. **정보 수집**: 관련 정보의 체계적 수집
+3. **분석 및 종합**: 결과 처리 및 구성
+4. **상태 업데이트**: 정기적인 진행 상황 추적 및 컨텍스트 보존
+5. **통합**: 연구 결과를 프로젝트 컨텍스트에 적용
 
-> **💡 Recommendation**: For the best research mode experience, we recommend using **Claude 4 Sonnet**, which provides exceptional analytical capabilities and comprehensive research synthesis.
+> **💡 권장사항**: 최고의 연구 모드 경험을 위해 **Claude 4 Sonnet**을 사용하는 것을 권장합니다. 이는 예외적인 분석 능력과 포괄적인 연구 종합을 제공합니다.
 
-## 🧠 <a id="task-memory-function"></a>Task Memory Function
+## 🧠 <a id="task-memory-function"></a>작업 메모리 기능
 
-Shrimp Task Manager has long-term memory capabilities, automatically saving task execution history and providing reference experiences when planning new tasks.
+Shrimp Task Manager는 장기 메모리 기능을 갖추고 있어 작업 실행 기록을 자동으로 저장하고 새 작업을 계획할 때 참조 경험을 제공합니다.
 
-### Key Features
+### 주요 기능
 
-- The system automatically backs up tasks to the memory directory
-- Backup files are named in chronological order, in the format tasks_backup_YYYY-MM-DDThh-mm-ss.json
-- Task planning Agents automatically receive guidance on how to use the memory function
+- 시스템이 작업을 메모리 디렉토리에 자동으로 백업
+- 백업 파일은 시간순으로 명명되며, 형식은 tasks_backup_YYYY-MM-DDThh-mm-ss.json
+- 작업 계획 Agent는 메모리 기능 사용 방법에 대한 안내를 자동으로 받음
 
-### Advantages and Benefits
+### 장점 및 이점
 
-- **Avoid Duplicate Work**: Reference past tasks, no need to solve similar problems from scratch
-- **Learn from Successful Experiences**: Utilize proven effective solutions, improve development efficiency
-- **Learning and Improvement**: Identify past mistakes or inefficient solutions, continuously optimize workflows
-- **Knowledge Accumulation**: Form a continuously expanding knowledge base as system usage increases
+- **중복 작업 방지**: 과거 작업 참조, 유사한 문제를 처음부터 해결할 필요 없음
+- **성공 경험 학습**: 검증된 효과적인 솔루션 활용, 개발 효율성 향상
+- **학습 및 개선**: 과거 실수나 비효율적인 솔루션 식별, 워크플로우 지속적 최적화
+- **지식 축적**: 시스템 사용이 증가함에 따라 지속적으로 확장되는 지식 베이스 형성
 
-Through effective use of the task memory function, the system can continuously accumulate experience, with intelligence level and work efficiency continuously improving.
+작업 메모리 기능을 효과적으로 사용함으로써 시스템은 지속적으로 경험을 축적할 수 있으며, 지능 수준과 작업 효율성이 지속적으로 향상됩니다.
 
-## 📋 <a id="project-rules"></a>Project Rules Initialization
+## 📋 <a id="project-rules"></a>프로젝트 규칙 초기화
 
-The Project Rules feature helps maintain consistency across your codebase:
+프로젝트 규칙 기능은 코드베이스 전체의 일관성을 유지하는 데 도움이 됩니다:
 
-- **Standardize Development**: Establish consistent coding patterns and practices
-- **Onboard New Developers**: Provide clear guidelines for project contributions
-- **Maintain Quality**: Ensure all code meets established project standards
+- **개발 표준화**: 일관된 코딩 패턴과 관행 확립
+- **새 개발자 온보딩**: 프로젝트 기여를 위한 명확한 가이드라인 제공
+- **품질 유지**: 모든 코드가 설정된 프로젝트 표준을 충족하도록 보장
 
-> **⚠️ Recommendation**: Initialize project rules when your project grows larger or undergoes significant changes. This helps maintain consistency and quality as complexity increases.
+> **⚠️ 권장사항**: 프로젝트가 더 커지거나 중요한 변경을 겪을 때 프로젝트 규칙을 초기화하세요. 이는 복잡성이 증가함에 따라 일관성과 품질을 유지하는 데 도움이 됩니다.
 
-Use the `init_project_rules` tool to set up or update project standards when:
+다음과 같은 경우 `init_project_rules` 도구를 사용하여 프로젝트 표준을 설정하거나 업데이트하세요:
 
-- Starting a new large-scale project
-- Onboarding new team members
-- Implementing major architectural changes
-- Adopting new development conventions
+- 새로운 대규모 프로젝트 시작
+- 새 팀원 온보딩
+- 주요 아키텍처 변경 구현
+- 새로운 개발 관례 채택
 
-### Usage Examples
+### 사용 예시
 
-You can easily access this feature with simple natural language commands:
+간단한 자연어 명령으로 이 기능에 쉽게 접근할 수 있습니다:
 
-- **For initial setup**: Simply tell the Agent "init rules" or "init project rules"
-- **For updates**: When your project evolves, tell the Agent "Update rules" or "Update project rules"
+- **초기 설정 시**: Agent에게 "init rules" 또는 "init project rules"라고 말하기만 하면 됩니다
+- **업데이트 시**: 프로젝트가 발전할 때 Agent에게 "Update rules" 또는 "Update project rules"라고 말하세요
 
-This tool is particularly valuable when your codebase expands or undergoes significant structural changes, helping maintain consistent development practices throughout the project lifecycle.
+이 도구는 코드베이스가 확장되거나 중요한 구조적 변경을 겪을 때 특히 가치가 있으며, 프로젝트 수명 주기 전체에서 일관된 개발 관행을 유지하는 데 도움이 됩니다.
 
-## 📚 <a id="documentation"></a>Documentation Resources
+## 📚 <a id="documentation"></a>문서 리소스
 
-- [Prompt Customization Guide](docs/en/prompt-customization.md): Instructions for customizing tool prompts via environment variables
-- [Changelog](CHANGELOG.md): Record of all notable changes to this project
+- [프롬프트 사용자 정의 가이드](docs/en/prompt-customization.md): 환경 변수를 통한 도구 프롬프트 사용자 정의 지침
+- [변경 로그](CHANGELOG.md): 이 프로젝트의 모든 주요 변경사항 기록
 
-## 🔧 <a id="installation"></a>Installation and Usage
+## 🔧 <a id="installation"></a>설치 및 사용법
 
-### 🎯 **Simple Command System**
+### 🎯 **간단한 명령어 시스템**
 
-STM now features a simplified command system that automatically generates command documentation in `~/.claude/commands/stm/` during installation:
+STM은 이제 설치 시 `~/.claude/commands/stm/`에 명령어 문서를 자동으로 생성하는 간소화된 명령어 시스템을 제공합니다:
 
-| Command | Function | Description |
-|---------|----------|-------------|
-| `plan` | Task Planning | Create and plan new tasks |
-| `analyze` | Task Analysis | Deep analyze task requirements |
-| `reflect` | Task Review | Review and improve task approach |
-| `split` | Task Splitting | Break large tasks into smaller units |
-| `list` | Task Listing | View all tasks |
-| `execute` | Task Execution | Execute selected tasks |
-| `verify` | Task Verification | Verify task completion |
-| `delete` | Task Deletion | Delete individual tasks |
-| `clear_all` | Clear All | Delete all tasks |
-| `update` | Task Update | Modify task content |
-| `query` | Task Search | Search tasks |
-| `detail` | Task Details | View task details |
-| `process` | Thought Process | Step-by-step thinking |
-| `init` | Project Rules | Set project development rules |
-| `research` | Research Mode | Technical research mode |
+| 명령어 | 기능 | 설명 |
+|--------|------|------|
+| `plan` | 작업 계획 | 새 작업을 계획하고 생성 |
+| `analyze` | 작업 분석 | 작업 요구사항을 깊이 분석 |
+| `reflect` | 작업 검토 | 작업 접근 방식을 검토하고 개선 |
+| `split` | 작업 분할 | 큰 작업을 작은 단위로 분할 |
+| `list` | 작업 목록 | 모든 작업 보기 |
+| `execute` | 작업 실행 | 선택된 작업 실행 |
+| `verify` | 작업 확인 | 작업 완료 검증 |
+| `delete` | 작업 삭제 | 개별 작업 삭제 |
+| `clear_all` | 전체 삭제 | 모든 작업 삭제 |
+| `update` | 작업 업데이트 | 작업 내용 수정 |
+| `query` | 작업 검색 | 작업 검색 |
+| `detail` | 작업 세부사항 | 작업 세부 정보 보기 |
+| `process` | 사고 과정 | 단계별 사고 |
+| `init` | 규칙 설정 | 프로젝트 개발 규칙 설정 |
+| `research` | 연구 모드 | 기술 연구 모드 |
 
-### Installing via Smithery
+### Smithery를 통한 설치
 
-To install Shrimp Task Manager for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager):
+[Smithery](https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager)를 통해 Claude Desktop용 Shrimp Task Manager를 자동으로 설치하려면:
 
 ```bash
 npx -y @smithery/cli install @cjo4m06/mcp-shrimp-task-manager --client claude
 ```
 
-### Manual Installation
+### 수동 설치
 
 ```bash
-# Install dependencies
+# 의존성 설치
 npm install
 
-# Build and start service
+# 빌드 및 서비스 시작
 npm run build
 
-# Generate command files (optional)
+# 명령어 파일 생성 (선택사항)
 npm run generate-commands
 ```
 
-## 🔌 <a id="clients"></a>Using with MCP-Compatible Clients
+## 🔌 <a id="clients"></a>MCP 호환 클라이언트에서 사용
 
-Shrimp Task Manager can be used with any client that supports the Model Context Protocol, such as Cursor IDE.
+Shrimp Task Manager는 Cursor IDE와 같은 Model Context Protocol을 지원하는 모든 클라이언트에서 사용할 수 있습니다.
 
-### Configuration in Cursor IDE
+### Cursor IDE에서 구성
 
-Shrimp Task Manager offers two configuration methods: global configuration and project-specific configuration.
+Shrimp Task Manager는 전역 구성과 프로젝트별 구성의 두 가지 구성 방법을 제공합니다.
 
-#### ListRoots Protocol Support
+#### ListRoots 프로토콜 지원
 
-Shrimp Task Manager now supports the **ListRoots protocol**, which enables automatic project isolation and flexible path configuration:
+Shrimp Task Manager는 이제 자동 프로젝트 격리와 유연한 경로 구성을 가능하게 하는 **ListRoots 프로토콜**을 지원합니다:
 
-- **If your client supports ListRoots** (e.g., Cursor IDE):
+- **클라이언트가 ListRoots를 지원하는 경우** (예: Cursor IDE):
 
-  - **Absolute path mode**: Create a project folder within the specified DATA_DIR, enabling you to use a global mcp.json configuration while Shrimp automatically isolates projects
-  - **Relative path mode**: Create the DATA_DIR within your project root directory for project-specific data storage
+  - **절대 경로 모드**: 지정된 DATA_DIR 내에 프로젝트 폴더를 생성하여 전역 mcp.json 구성을 사용하면서 Shrimp가 자동으로 프로젝트를 격리할 수 있도록 함
+  - **상대 경로 모드**: 프로젝트 루트 디렉토리 내에 DATA_DIR을 생성하여 프로젝트별 데이터 저장
 
-- **If your client doesn't support ListRoots**:
-  - DATA_DIR maintains the legacy behavior (absolute paths recommended)
-  - We recommend asking your client vendor to support the ListRoots protocol for enhanced functionality
+- **클라이언트가 ListRoots를 지원하지 않는 경우**:
+  - DATA_DIR은 레거시 동작을 유지 (절대 경로 권장)
+  - 향상된 기능을 위해 클라이언트 벤더에게 ListRoots 프로토콜 지원을 요청하는 것을 권장합니다
 
-#### Global Configuration
+#### 전역 구성
 
-1. Open the Cursor IDE global configuration file (usually located at `~/.cursor/mcp.json`)
-2. Add the following configuration in the `mcpServers` section:
+1. Cursor IDE 전역 구성 파일을 엽니다 (보통 `~/.cursor/mcp.json`에 위치)
+2. `mcpServers` 섹션에 다음 구성을 추가합니다:
 
-**Option A: Absolute Path (Project Isolation Mode)**
-
-```json
-{
-  "mcpServers": {
-    "shrimp-task-manager": {
-      "command": "node",
-      "args": ["/path/to/mcp-shrimp-task-manager/dist/index.js"],
-      "env": {
-        "DATA_DIR": "/Users/username/ShrimpData", // Absolute path - creates project folders automatically
-        "TEMPLATES_USE": "en",
-        "ENABLE_GUI": "false"
-      }
-    }
-  }
-}
-```
-
-**Option B: NPX with Absolute Path**
-
-```json
-{
-  "mcpServers": {
-    "shrimp-task-manager": {
-      "command": "npx",
-      "args": ["-y", "mcp-shrimp-task-manager"],
-      "env": {
-        "DATA_DIR": "/Users/username/ShrimpData", // Absolute path - creates project folders automatically
-        "TEMPLATES_USE": "en",
-        "ENABLE_GUI": "false"
-      }
-    }
-  }
-}
-```
-
-> ⚠️ Please replace `/path/to/mcp-shrimp-task-manager` and `/Users/username/ShrimpData` with your actual paths.
->
-> 💡 **Absolute Path Advantage**: With ListRoots support, Shrimp automatically creates separate folders for each project (e.g., `/Users/username/ShrimpData/my-project/`, `/Users/username/ShrimpData/another-project/`), enabling perfect project isolation with a single global configuration.
->
-> 💡 **Optional:** You can add `"WEB_PORT": "3000"` to the `env` section to specify a custom port for the web GUI. If not specified, an available port will be automatically selected.
-
-#### Project-Specific Configuration
-
-You can also set up dedicated configurations for each project. This method allows using relative paths for project-contained data storage:
-
-1. Create a `.cursor` directory in the project root
-2. Create an `mcp.json` file in this directory with the following content:
-
-**Option A: Relative Path (Project-Contained Mode)**
+**옵션 A: 절대 경로 (프로젝트 격리 모드)**
 
 ```json
 {
@@ -322,7 +273,7 @@ You can also set up dedicated configurations for each project. This method allow
       "command": "node",
       "args": ["/path/to/mcp-shrimp-task-manager/dist/index.js"],
       "env": {
-        "DATA_DIR": ".shrimp", // Relative path - creates folder within project root
+        "DATA_DIR": "/Users/username/ShrimpData", // 절대 경로 - 프로젝트 폴더를 자동으로 생성
         "TEMPLATES_USE": "en",
         "ENABLE_GUI": "false"
       }
@@ -331,7 +282,7 @@ You can also set up dedicated configurations for each project. This method allow
 }
 ```
 
-**Option B: NPX with Relative Path**
+**옵션 B: NPX와 절대 경로**
 
 ```json
 {
@@ -340,7 +291,7 @@ You can also set up dedicated configurations for each project. This method allow
       "command": "npx",
       "args": ["-y", "mcp-shrimp-task-manager"],
       "env": {
-        "DATA_DIR": "shrimp-data", // Relative path - creates folder within project root
+        "DATA_DIR": "/Users/username/ShrimpData", // 절대 경로 - 프로젝트 폴더를 자동으로 생성
         "TEMPLATES_USE": "en",
         "ENABLE_GUI": "false"
       }
@@ -349,100 +300,27 @@ You can also set up dedicated configurations for each project. This method allow
 }
 ```
 
-**Option C: Absolute Path (Alternative)**
-
-```json
-{
-  "mcpServers": {
-    "shrimp-task-manager": {
-      "command": "npx",
-      "args": ["-y", "mcp-shrimp-task-manager"],
-      "env": {
-        "DATA_DIR": "/Users/username/ShrimpData", // Absolute path with project isolation
-        "TEMPLATES_USE": "en",
-        "ENABLE_GUI": "false"
-      }
-    }
-  }
-}
-```
-
-> ⚠️ Please replace `/path/to/mcp-shrimp-task-manager` with your actual path.
+> ⚠️ `/path/to/mcp-shrimp-task-manager`와 `/Users/username/ShrimpData`를 실제 경로로 교체하세요.
 >
-> 💡 **Relative Path Advantage**: Data is stored within your project directory (e.g., `./shrimp-data/`), making it easy to include or exclude from version control as needed.
+> 💡 **절대 경로 장점**: ListRoots 지원으로 Shrimp는 각 프로젝트에 대해 별도의 폴더를 자동으로 생성합니다 (예: `/Users/username/ShrimpData/my-project/`, `/Users/username/ShrimpData/another-project/`), 단일 전역 구성으로 완벽한 프로젝트 격리를 가능하게 합니다.
 >
-> 💡 **Optional:** You can add `"WEB_PORT": "3000"` to the `env` section to specify a custom port for the web GUI. If not specified, an available port will be automatically selected.
+> 💡 **선택사항**: `env` 섹션에 `"WEB_PORT": "3000"`을 추가하여 웹 GUI의 사용자 정의 포트를 지정할 수 있습니다. 지정하지 않으면 사용 가능한 포트가 자동으로 선택됩니다.
 
-### ⚠️ Important Configuration Notes
+#### 프로젝트별 구성
 
-The **DATA_DIR parameter** is the directory where Shrimp Task Manager stores task data, conversation logs, and other information. The new implementation supports both absolute and relative paths with intelligent behavior based on your client's capabilities.
+각 프로젝트에 대한 전용 구성을 설정할 수도 있습니다. 이 방법을 사용하면 프로젝트 포함 데이터 저장을 위해 상대 경로를 사용할 수 있습니다:
 
-#### 🚀 With ListRoots Protocol Support (Recommended)
-
-If your client supports the **ListRoots protocol** (like Cursor IDE), Shrimp Task Manager automatically detects your project root and provides enhanced functionality:
-
-**Absolute Path Mode (Project Isolation):**
-
-- Configuration: `"DATA_DIR": "/Users/username/ShrimpData"`
-- Behavior: Creates `{DATA_DIR}/{project-name}/` automatically
-- Example: For project "my-app" → `/Users/username/ShrimpData/my-app/`
-- **Advantage**: Use one global configuration for all projects with perfect isolation
-
-**Relative Path Mode (Project-Contained):**
-
-- Configuration: `"DATA_DIR": ".shrimp"` or `"DATA_DIR": "shrimp-data"`
-- Behavior: Creates `{project-root}/{DATA_DIR}/` within your project
-- Example: For DATA_DIR "shrimp-data" → `./shrimp-data/`
-- **Advantage**: Data stays with your project, easy to include/exclude from version control
-
-#### ⚠️ Without ListRoots Protocol Support (Legacy Mode)
-
-If your client **doesn't support ListRoots**, the system falls back to legacy behavior:
-
-- **Absolute paths are strongly recommended** to avoid path resolution issues
-- Relative paths may cause inconsistent behavior across different environments
-- Consider requesting ListRoots support from your client vendor for enhanced functionality
-
-> **Legacy Warning**: Without ListRoots support, using relative paths may cause:
->
-> - Data files not found, causing system initialization failure
-> - Task status loss or inability to save correctly
-> - Inconsistent application behavior across different environments
-> - System crashes or failure to start
-
-#### 💡 Choosing the Right Configuration
-
-**Use Absolute Path (Global) when:**
-
-- You want to manage multiple projects with one configuration
-- You prefer centralized data storage
-- You want automatic project isolation
-
-**Use Relative Path (Project-Specific) when:**
-
-- You want data to stay within the project directory
-- You work on projects in different environments
-- You need fine control over what gets included in version control
-
-**Use Legacy Mode when:**
-
-- Your client doesn't support ListRoots protocol
-- You need compatibility with older client versions
-
-### 🔧 Environment Variable Configuration
-
-Shrimp Task Manager supports customizing prompt behavior through environment variables, allowing you to fine-tune AI assistant responses without modifying code. You can set these variables in the configuration or through an `.env` file:
+1. 프로젝트 루트에 `.cursor` 디렉토리를 생성합니다
+2. 이 디렉토리에 다음 내용이 포함된 `mcp.json` 파일을 생성합니다:
 
 ```json
 {
   "mcpServers": {
     "shrimp-task-manager": {
       "command": "node",
-      "args": ["/path/to/mcp-shrimp-task-manager/dist/index.js"],
+      "args": ["./node_modules/.bin/mcp-shrimp-task-manager"],
       "env": {
-        "DATA_DIR": "/path/to/project/data",
-        "MCP_PROMPT_PLAN_TASK": "Custom planning guidance...",
-        "MCP_PROMPT_EXECUTE_TASK_APPEND": "Additional execution instructions...",
+        "DATA_DIR": "./.shrimp-data", // 상대 경로 - 프로젝트별 데이터 저장
         "TEMPLATES_USE": "en",
         "ENABLE_GUI": "false"
       }
@@ -451,96 +329,87 @@ Shrimp Task Manager supports customizing prompt behavior through environment var
 }
 ```
 
-There are two customization methods:
+> 💡 **상대 경로 장점**: 프로젝트별 데이터 저장을 위해 상대 경로를 사용할 수 있으며, 프로젝트와 함께 이동할 수 있습니다.
 
-- **Override Mode** (`MCP_PROMPT_[FUNCTION_NAME]`): Completely replace the default prompt
-- **Append Mode** (`MCP_PROMPT_[FUNCTION_NAME]_APPEND`): Add content to the existing prompt
+### 환경 변수
 
-Additionally, there are other system configuration variables:
+다음 환경 변수를 사용하여 Shrimp Task Manager의 동작을 사용자 정의할 수 있습니다:
 
-- **DATA_DIR**: Specifies the directory where task data is stored
-- **TEMPLATES_USE**: Specifies the template set to use for prompts. Defaults to `en`. Currently available options are `en` and `zh`. To use custom templates, copy the `src/prompts/templates_en` directory to the location specified by `DATA_DIR`, rename the copied directory (e.g., to `my_templates`), and set `TEMPLATES_USE` to the new directory name (e.g., `my_templates`)
-- **ENABLE_GUI**: Enables or disables the web-based graphical user interface. Set to `true` to enable, `false` to disable (default)
-- **WEB_PORT**: Specifies the port for the web GUI. If not specified, an available port will be automatically selected. Only takes effect when `ENABLE_GUI` is set to `true`
+| 변수 | 기본값 | 설명 |
+|------|--------|------|
+| `DATA_DIR` | `./data` | 작업 데이터 저장 디렉토리 |
+| `TEMPLATES_USE` | `en` | 사용할 프롬프트 템플릿 언어 (`en` 또는 `zh`) |
+| `ENABLE_GUI` | `false` | 웹 GUI 활성화 여부 |
+| `WEB_PORT` | 자동 선택 | 웹 GUI 포트 (ENABLE_GUI=true일 때) |
 
-For detailed instructions on customizing prompts, including supported parameters and examples, see the [Prompt Customization Guide](docs/en/prompt-customization.md).
+## 💡 <a id="prompt"></a>시스템 프롬프트 가이드
 
-## 💡 <a id="prompt"></a>System Prompt Guidance
+### Cursor IDE에서 사용자 정의 모드 설정
 
-### Cursor IDE Configuration
+Cursor IDE에서 Shrimp Task Manager를 최대한 활용하려면 사용자 정의 모드를 설정하는 것을 권장합니다:
 
-You can enable Cursor Settings => Features => Custom modes, and configure the following two modes:
-
-#### TaskPlanner Mode
-
-```
-You are a professional task planning expert. You must interact with users, analyze their needs, and collect project-related information. Finally, you must use "plan_task" to create tasks. When the task is created, you must summarize it and inform the user to use the "TaskExecutor" mode to execute the task.
-You must focus on task planning. Do not use "execute_task" to execute tasks.
-Serious warning: you are a task planning expert, you cannot modify the program code directly, you can only plan tasks, and you cannot modify the program code directly, you can only plan tasks.
-```
-
-#### TaskExecutor Mode
+#### TaskPlanner 모드
 
 ```
-You are a professional task execution expert. When a user specifies a task to execute, use "execute_task" to execute the task.
-If no task is specified, use "list_tasks" to find unexecuted tasks and execute them.
-When the execution is completed, a summary must be given to inform the user of the conclusion.
-You can only perform one task at a time, and when a task is completed, you are prohibited from performing the next task unless the user explicitly tells you to.
-If the user requests "continuous mode", all tasks will be executed in sequence.
+당신은 전문적인 작업 계획 전문가입니다. 사용자와 상호작용하여 사용자의 요구사항을 분석하고 프로젝트 관련 정보를 수집하며, 최종적으로 "plan" 도구를 사용하여 작업을 생성해야 합니다. 작업 생성이 완료되면 반드시 요약을 정리하고 사용자에게 "TaskExecutor" 모드를 사용하여 작업 실행을 안내해야 합니다.
+당신은 작업 계획에만 집중해야 하며 "execute" 도구를 사용하여 작업을 실행하는 것을 금지합니다.
+심각한 경고: 당신은 작업 계획 전문가이며, 코드를 직접 수정할 수 없고, 작업만 계획할 수 있으며, 코드를 직접 수정할 수 없고, 작업만 계획할 수 있습니다.
 ```
 
-> 💡 Choose the appropriate mode based on your needs:
+#### TaskExecutor 모드
+
+```
+당신은 전문적인 작업 실행 전문가입니다. 사용자가 실행할 작업을 지정한 경우 "execute" 도구를 사용하여 작업을 실행하고,
+작업을 지정하지 않은 경우 "list" 도구를 사용하여 미실행 작업을 찾아 실행합니다.
+실행이 완료되면 반드시 요약을 정리하여 사용자에게 결론을 알려야 합니다.
+당신은 한 번에 하나의 작업만 실행할 수 있으며, 작업이 완료되면 사용자가 명시적으로 알리지 않는 한 다음 작업을 진행하는 것을 금지합니다.
+사용자가 "연속 모드"를 요청하면 순서대로 모든 작업을 연속 실행합니다
+```
+
+> 💡 요구사항 시나리오에 따라 적절한 모드를 선택하세요:
 >
-> - Use **TaskPlanner** mode when planning tasks
-> - Use **TaskExecutor** mode when executing tasks
+> - 작업을 계획해야 할 때 **TaskPlanner** 모드 사용
+> - 작업을 실행해야 할 때 **TaskExecutor** 모드 사용
 
-### Using with Other Tools
+### 다른 도구에서 사용
 
-If your tool doesn't support Custom modes, you can:
+도구가 사용자 정의 모드 기능을 지원하지 않는 경우:
 
-- Manually paste the appropriate prompts at different stages
-- Or directly use simple commands like `Please plan the following task: ......` or `Please start executing the task...`
+- 다른 단계에서 수동으로 해당 프롬프트를 붙여넣기
+- 또는 `작업을 계획해주세요: ......` 또는 `작업 실행을 시작해주세요...`와 같은 간단한 명령 직접 사용
 
-## 🛠️ <a id="tools"></a>Available Tools Overview
+## 🛠️ <a id="tools"></a>사용 가능한 도구 개요
 
-After configuration, you can use the following tools:
+구성이 완료되면 다음 도구를 사용할 수 있습니다:
 
-| Category                     | Tool Name            | Description                                      |
-| ---------------------------- | -------------------- | ------------------------------------------------ |
-| **Task Planning**            | `plan_task`          | Start planning tasks                             |
-| **Task Analysis**            | `analyze_task`       | In-depth analysis of task requirements           |
-|                              | `process_thought`    | Step-by-step reasoning for complex problems      |
-| **Solution Assessment**      | `reflect_task`       | Reflect and improve solution concepts            |
-| **Research & Investigation** | `research_mode`      | Enter systematic technical research mode         |
-| **Project Management**       | `init_project_rules` | Initialize or update project standards and rules |
-| **Task Management**          | `split_tasks`        | Break tasks into subtasks                        |
-|                              | `list_tasks`         | Display all tasks and status                     |
-|                              | `query_task`         | Search and list tasks                            |
-|                              | `get_task_detail`    | Display complete task details                    |
-|                              | `delete_task`        | Delete incomplete tasks                          |
-| **Task Execution**           | `execute_task`       | Execute specific tasks                           |
-|                              | `verify_task`        | Verify task completion                           |
+| 기능 분류 | 도구 이름 | 기능 설명 |
+| ------------ | ------------ | ------------ |
+| **작업 계획** | `plan` | 작업 계획 시작 |
+| **작업 분석** | `analyze` | 작업 요구사항 깊이 분석 |
+| | `process` | 복잡한 문제에 대한 단계별 추론 |
+| **방안 평가** | `reflect` | 방안 구상에 대한 반성과 개선 |
+| **작업 분할** | `split` | 큰 작업을 작은 단위로 분할 |
+| **작업 관리** | `list` | 모든 작업 목록 조회 |
+| | `execute` | 선택된 작업 실행 |
+| | `verify` | 작업 완료 여부 검증 |
+| | `delete` | 개별 작업 삭제 |
+| | `clear_all` | 모든 작업 삭제 |
+| | `update` | 작업 내용 수정 |
+| | `query` | 작업 검색 |
+| | `detail` | 작업 상세 정보 조회 |
+| **프로젝트 관리** | `init` | 프로젝트 개발 규칙 설정 |
+| **연구** | `research` | 기술 연구 모드 |
 
-## 🔧 Technical Implementation
+## 📄 <a id="license"></a>라이선스
 
-- **Node.js**: High-performance JavaScript runtime environment
-- **TypeScript**: Provides type-safe development environment
-- **MCP SDK**: Interface for seamless interaction with large language models
-- **UUID**: Generate unique and reliable task identifiers
+이 프로젝트는 MIT 라이선스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
-## 📄 <a id="license"></a>License
+## 🤖 <a id="recommended"></a>권장 모델
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+최적의 경험을 위해 다음 모델을 권장합니다:
 
-## <a id="recommended"></a>Recommended Models
+- **Claude 4 Sonnet**: 복잡한 작업 계획 및 분석에 탁월
+- **Claude 4 Opus**: 대규모 프로젝트 및 복잡한 아키텍처에 이상적
+- **Claude 3.5 Sonnet**: 일반적인 개발 작업에 적합
 
-For the best experience, we recommend using the following models:
-
-- **Claude 3.7**: Offers strong understanding and generation capabilities.
-- **Gemini 2.5**: Google's latest model, performs excellently.
-
-Due to differences in training methods and understanding capabilities across models, using other models might lead to varying results for the same prompts. This project has been optimized for Claude 3.7 and Gemini 2.5.
-
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=cjo4m06/mcp-shrimp-task-manager&type=Timeline)](https://www.star-history.com/#cjo4m06/mcp-shrimp-task-manager&Timeline)
+> 💡 **성능 팁**: 더 나은 결과를 위해 모델의 컨텍스트 창을 최대한 활용하고, 필요에 따라 새 채팅 세션을 시작하여 토큰 제한을 관리하세요.
