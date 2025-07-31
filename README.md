@@ -1,4 +1,3 @@
-[English](README.md) | [中文](docs/zh/README.md)
 
 ## 목차
 
