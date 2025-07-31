@@ -209,14 +209,8 @@ npx -y @smithery/cli install @cjo4m06/mcp-shrimp-task-manager --client claude
 ### 수동 설치
 
 ```bash
-# 1. 작업 디렉토리 생성 및 저장소 클론
+# 1. 저장소 클론
 
-# Windows의 경우:
-cd C:\Users\%USERNAME%
-git clone https://github.com/hohollala/TaskManager.git
-
-# macOS/Linux의 경우:
-cd ~
 git clone https://github.com/hohollala/TaskManager.git
 
 # 2. 의존성 설치 및 빌드
