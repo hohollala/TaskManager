@@ -1,0 +1,1 @@
+- **관련 파일:** {fileType} ({fileCount}개): {filesList}
