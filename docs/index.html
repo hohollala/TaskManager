@@ -1794,15 +1794,19 @@ cd TaskManager"
                     >
                       <pre
                         class="text-gray-100 whitespace-pre-wrap font-mono"
-                      ><code class="language-bash">claude mcp add shrimp-task-manager -- mcp-shrimp-task-manager</code></pre>
+                      ><code class="language-bash">cd ~ && claude mcp add shrimp-task-manager -- mcp-shrimp-task-manager</code></pre>
                       <button
                         class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
-                        data-command="claude mcp add shrimp-task-manager -- mcp-shrimp-task-manager"
+                        data-command="cd ~ && claude mcp add shrimp-task-manager -- mcp-shrimp-task-manager"
                         data-i18n="installation.copy-button"
                       >
                         복사
                       </button>
                     </div>
+                  </div>
+                  
+                  <div class="mb-6">
+                    
                   </div>
                 </div>
               </div>
@@ -1835,7 +1839,7 @@ cd TaskManager"
                       <span
                         class="ml-2 text-xs text-gray-400"
                         data-i18n="installation.cursor.mcp-servers"
-                        >프로젝트 디렉토리/.cursor/mcp.jsonn</span
+                        >전역 설정: ~/.cursor/mcp.json</span
                       >
                     </div>
                     <pre
@@ -1845,10 +1849,12 @@ cd TaskManager"
     "shrimp-task-manager": {
       "command": "node",
       "args": [
-        "/path/to/mcp-shrimp-task-manager/dist/index.js"
+        "C:/Users/%USERNAME%/AppData/Roaming/npm/node_modules/mcp-shrimp-task-manager/dist/index.js"
       ],
       "env": {
-        "DATA_DIR": "/path/to/project/data"
+        "DATA_DIR": "C:/Users/%USERNAME%/ShrimpData",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
       }
     }
   }
@@ -1871,6 +1877,55 @@ cd TaskManager"
                     >
                       복사
                     </button>
+                  </div>
+                  
+                  <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-200 mb-2">프로젝트별 설정</h3>
+                    <p class="text-gray-300 mb-4">
+                      각 프로젝트에 대해 별도 설정을 원한다면:
+                    </p>
+                    <div class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative">
+                      <div class="mb-2 flex items-center">
+                        <span class="ml-2 text-xs text-gray-400">프로젝트별 설정: .cursor/mcp.json</span>
+                      </div>
+                      <pre
+                        class="text-gray-100 whitespace-pre-wrap font-mono"
+                      ><code class="language-json">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": [
+        "./node_modules/.bin/mcp-shrimp-task-manager"
+      ],
+      "env": {
+        "DATA_DIR": "./.shrimp-data",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}</code></pre>
+                      <button
+                        class="copy-cmd-btn absolute top-4 right-4 text-xs bg-purple-600 hover:bg-purple-700 text-white py-1 px-3 rounded"
+                        data-command='{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": [
+        "./node_modules/.bin/mcp-shrimp-task-manager"
+      ],
+      "env": {
+        "DATA_DIR": "./.shrimp-data",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}'
+                      >
+                        복사
+                      </button>
+                    </div>
                   </div>
 
                   <div class="bg-red-50 p-4 rounded-lg mb-6">
