@@ -1,6 +1,302 @@
 // i18n.js - 多語系支援功能
 // 翻譯資料結構
 const i18n = {
+  "ko": {
+    // 네비게이션
+    "nav.pain-points": "문제점",
+    "nav.features": "기능",
+    "nav.workflow": "작업 흐름",
+    "nav.installation": "설치 구성",
+    "nav.github": "GitHub",
+    "nav.menu-button": "메뉴",
+    "nav.logo.alt": "Shrimp Task Manager 로고",
+    "nav.prompt-custom": "프롬프트 구성",
+    // 히어로 섹션
+    "hero.title": "Shrimp Task Manager",
+    "hero.subtitle": "AI 프로그래밍 어시스턴트를 위한 구조화된 작업 관리의 지능형 시스템",
+    "hero.description":
+      "AI 어시스턴트에게 장기 메모리 기능을 제공하여 복잡한 작업을 효율적으로 관리하고, 구조화된 작업 분해와 실행 추적을 제공하여 프로그래밍 경험을 더욱 원활하고 효율적으로 만듭니다.",
+    "hero.start": "시작하기",
+    "hero.learn-more": "더 알아보기",
+    "hero.workflow-image.alt": "지능형 작업 관리 워크플로우",
+    // 문제점 해결 섹션
+    "pain-points.title": "문제점과 해결책",
+    "pain-points.subtitle":
+      "Shrimp Task Manager는 AI 프로그래밍 어시스턴트가 작업 관리에서 직면하는 세 가지 핵심 문제점을 해결하기 위해 설계되었습니다.",
+    "pain-points.memory-loss.title": "메모리 손실",
+    "pain-points.memory-loss.description":
+      "AI 어시스턴트는 대화 간 작업 메모리 기능이 부족하여 장기 작업 진행 상황을 추적할 수 없고, 동일한 요구사항을 반복적으로 설명하여 시간과 자원을 낭비합니다.",
+    "pain-points.memory-loss.solution.title": "작업 메모리 기능",
+    "pain-points.memory-loss.solution.description":
+      "실행 기록을 자동으로 저장하여 장기 메모리 기능을 제공하고, AI 어시스턴트가 이전 작업 진행 상황을 기억하여 미완성 작업을 원활하게 계속할 수 있도록 합니다.",
+    "pain-points.memory-loss.icon.alt": "메모리 손실",
+    "pain-points.structure-chaos.title": "구조 혼란",
+    "pain-points.structure-chaos.description":
+      "복잡한 작업의 체계적 관리 부족으로 인한 비효율성, 의존성 관계 관리 부재, 하위 작업 실행 혼란, 전체 진행 상황 추적의 어려움.",
+    "pain-points.structure-chaos.solution.title": "구조화된 작업 분해",
+    "pain-points.structure-chaos.solution.description":
+      "복잡한 작업을 관리 가능한 하위 작업으로 자동 분해하고, 명확한 의존성 관계를 구축하며, 순서가 있는 실행 경로를 제공하여 효율적인 완료를 보장합니다.",
+    "pain-points.structure-chaos.icon.alt": "구조 혼란",
+    "pain-points.structure-chaos.solution.icon.alt": "구조화된 작업 분해",
+    "pain-points.repeat-work.title": "반복 작업",
+    "pain-points.repeat-work.description":
+      "과거 경험과 해결책을 효과적으로 활용할 수 없어, 매번 대화마다 처음부터 시작해야 하며, 지식 축적과 경험 참조 시스템이 부족합니다.",
+    "pain-points.repeat-work.solution.title": "지식 축적과 경험 참조",
+    "pain-points.repeat-work.solution.description":
+      "성공적인 해결책을 자동으로 기록하고, 작업 지식베이스를 구축하며, 유사한 작업의 빠른 참조를 지원하여 경험 축적과 지식 재사용을 실현합니다.",
+    "pain-points.repeat-work.icon.alt": "반복 작업",
+    "pain-points.repeat-work.solution.icon.alt": "지식 축적과 경험 참조",
+    "pain-points.explore": "핵심 기능 탐색",
+    // 기능 블록
+    "features.title": "핵심 기능",
+    "features.subtitle":
+      "Shrimp Task Manager는 복잡한 작업을 효율적으로 관리, 실행 및 추적할 수 있도록 도와주는 여섯 가지 핵심 기능을 제공합니다.",
+    "features.planning.title": "지능형 작업 계획 및 분석",
+    "features.planning.description":
+      "요구사항과 제약 조건을 깊이 있게 분석하여 구조화된 작업 계획을 생성합니다. 범위, 위험 및 우선순위를 자동으로 평가하고, 합리적이고 포괄적인 구현 전략을 제공합니다.",
+    "features.planning.icon.alt": "지능형 작업 계획 및 분석",
+    "features.decomposition.title": "자동 작업 분해 및 의존성 관리",
+    "features.decomposition.description":
+      "복잡한 작업을 관리 가능한 작은 작업으로 지능적으로 분해하고, 작업 간 의존성을 식별하며, 최적화된 실행 경로를 구축하여 자원 충돌과 실행 병목을 방지합니다.",
+    "features.decomposition.icon.alt": "자동 작업 분해 및 의존성 관리",
+    "features.tracking.title": "실행 상태 추적",
+    "features.tracking.description":
+      "각 작업의 실행 상태를 실시간으로 모니터링하고, 진행 상황을 시각적으로 표시하며, 의존성 상태를 자동으로 업데이트하고, 작업 완료 시 상세한 실행 보고서를 제공합니다.",
+    "features.tracking.icon.alt": "실행 상태 추적",
+    "features.verification.title": "작업 완성도 검증",
+    "features.verification.description":
+      "작업 완성도를 포괄적으로 검사하고, 모든 요구사항과 표준이 충족되었는지 확인하며, 검증 보고서와 품질 평가를 제공하여 산출물이 예상 요구사항을 충족하도록 보장합니다.",
+    "features.verification.icon.alt": "작업 완성도 검증",
+    "features.complexity.title": "작업 복잡도 평가",
+    "features.complexity.description":
+      "다차원 기준을 기반으로 작업 복잡도를 평가하고, 자원 요구사항을 추정하며, 고위험 구성 요소를 식별하여 자원과 시간의 합리적인 배분을 도와줍니다.",
+    "features.complexity.icon.alt": "작업 복잡도 평가",
+    "features.memory.title": "작업 메모리 기능",
+    "features.memory.description":
+      "세션 간 작업 메모리 기능을 제공하고, 실행 기록과 컨텍스트를 자동으로 저장하며, 언제든지 작업을 복원하고 계속 실행할 수 있도록 하여 요구사항을 반복적으로 설명할 필요가 없습니다.",
+    "features.memory.icon.alt": "작업 메모리 기능",
+    "features.learn-workflow": "작업 흐름 알아보기",
+    // 작업 흐름 블록
+    "workflow.title": "작업 흐름",
+    "workflow.subtitle":
+      "Shrimp Task Manager는 작업 계획부터 작업 완료까지의 모든 단계가 세심하게 설계된 완전한 작업 흐름을 제공합니다.",
+    "workflow.step1.title": "작업 계획",
+    "workflow.step1.description": "초기화 및 작업 흐름의 상세 계획",
+    "workflow.step2.title": "깊이 있는 분석",
+    "workflow.step2.description": "요구사항을 깊이 있게 분석하고 기술적 실현 가능성 평가",
+    "workflow.step3.title": "방안 반성",
+    "workflow.step3.description": "분석 결과를 비판적으로 검토하고 방안 최적화",
+    "workflow.step4.title": "작업 분해",
+    "workflow.step4.description": "복잡한 작업을 관리 가능한 하위 작업으로 분해",
+    "workflow.step5.title": "작업 실행",
+    "workflow.step5.description": "미리 정한 계획에 따라 특정 작업 실행",
+    "workflow.step6.title": "결과 검증",
+    "workflow.step6.description": "작업 완성도와 품질을 포괄적으로 검증",
+    "workflow.step7.title": "작업 완료",
+    "workflow.step7.description": "작업을 완료 상태로 표시하고 보고서 생성",
+    "workflow.learn-more-link": "더 알아보기 →",
+    "workflow.mobile.step1.full-description":
+      "초기화 및 작업 흐름의 상세 계획, 명확한 목표와 성공 기준 구축, 기존 작업을 참조하여 연속 계획을 선택할 수 있습니다.",
+    "workflow.mobile.step2.full-description":
+      "요구사항을 깊이 있게 분석하고 기술적 실현 가능성을 평가하여 최적의 구현 방안을 결정합니다.",
+    "workflow.mobile.step3.full-description":
+      "분석 결과를 비판적으로 검토하고 방안을 최적화하여 더 나은 해결책을 찾습니다.",
+    "workflow.mobile.step4.full-description":
+      "복잡한 작업을 관리 가능한 하위 작업으로 분해하고 의존성 관계를 구축합니다.",
+    "workflow.mobile.step5.full-description":
+      "미리 정한 계획에 따라 특정 작업을 실행하고 진행 상황을 추적합니다.",
+    "workflow.mobile.step6.full-description":
+      "작업 완성도와 품질을 포괄적으로 검증하여 요구사항 충족을 확인합니다.",
+    "workflow.mobile.step7.full-description":
+      "작업을 완료 상태로 표시하고 상세한 실행 보고서를 생성합니다.",
+    // 프롬프트 사용자 정의 섹션
+    "prompt-customization.title": "프롬프트 사용자 정의",
+    "prompt-customization.subtitle":
+      "Shrimp Task Manager는 다양한 환경에서 사용할 수 있도록 유연한 프롬프트 사용자 정의 기능을 제공합니다.",
+    "prompt-customization.env-vars.title": "환경 변수 설정",
+    "prompt-customization.env-vars.description":
+      "환경 변수를 통해 프롬프트 동작을 사용자 정의할 수 있습니다:",
+    "prompt-customization.template-custom.title": "템플릿 사용자 정의",
+    "prompt-customization.template-custom.description":
+      "기존 템플릿을 복사하고 수정하여 프로젝트에 맞는 맞춤형 프롬프트를 만들 수 있습니다:",
+    "prompt-customization.learn-more": "사용자 정의 가이드 보기",
+    // 설치 구성 섹션
+    "installation.title": "설치 및 구성",
+    "installation.subtitle":
+      "Shrimp Task Manager를 다양한 환경에 설치하고 구성하는 방법을 알아보세요.",
+    "installation.smithery.title": "Smithery를 통한 설치",
+    "installation.smithery.description":
+      "Claude Desktop용 Shrimp Task Manager를 자동으로 설치하려면:",
+    "installation.manual.title": "수동 설치",
+    "installation.manual.description": "수동으로 설치하려면:",
+    "installation.cursor.title": "Cursor IDE 구성",
+    "installation.cursor.description":
+      "Cursor IDE에서 Shrimp Task Manager를 구성하는 방법:",
+    "installation.env-vars.title": "환경 변수",
+    "installation.env-vars.description":
+      "다음 환경 변수를 사용하여 Shrimp Task Manager의 동작을 사용자 정의할 수 있습니다:",
+    // 공통
+    "common.lang.ko": "한국어",
+    "common.lang.en": "영어",
+    "common.lang.zh-tw": "중국어",
+    "common.loading": "로딩 중...",
+    "common.error": "오류",
+    "common.success": "성공",
+    "common.cancel": "취소",
+    "common.confirm": "확인",
+    "common.back": "뒤로",
+    "common.next": "다음",
+    "common.previous": "이전",
+    "common.close": "닫기",
+    "common.open": "열기",
+    "common.save": "저장",
+    "common.edit": "편집",
+    "common.delete": "삭제",
+    "common.copy": "복사",
+    "common.paste": "붙여넣기",
+    "common.search": "검색",
+    "common.filter": "필터",
+    "common.sort": "정렬",
+    "common.refresh": "새로고침",
+    "common.export": "내보내기",
+    "common.import": "가져오기",
+    "common.download": "다운로드",
+    "common.upload": "업로드",
+    "common.print": "인쇄",
+    "common.share": "공유",
+    "common.help": "도움말",
+    "common.about": "정보",
+    "common.contact": "연락처",
+    "common.feedback": "피드백",
+    "common.report": "보고",
+    "common.settings": "설정",
+    "common.profile": "프로필",
+    "common.logout": "로그아웃",
+    "common.login": "로그인",
+    "common.register": "등록",
+    "common.forgot-password": "비밀번호 찾기",
+    "common.reset-password": "비밀번호 재설정",
+    "common.change-password": "비밀번호 변경",
+    "common.remember-me": "로그인 상태 유지",
+    "common.terms": "이용약관",
+    "common.privacy": "개인정보처리방침",
+    "common.cookies": "쿠키 정책",
+    "common.accessibility": "접근성",
+    "common.sitemap": "사이트맵",
+    "common.faq": "자주 묻는 질문",
+    "common.support": "지원",
+    "common.documentation": "문서",
+    "common.api": "API",
+    "common.developers": "개발자",
+    "common.partners": "파트너",
+    "common.careers": "채용",
+    "common.press": "보도자료",
+    "common.blog": "블로그",
+    "common.news": "뉴스",
+    "common.events": "이벤트",
+    "common.webinars": "웨비나",
+    "common.training": "교육",
+    "common.certification": "인증",
+    "common.community": "커뮤니티",
+    "common.forum": "포럼",
+    "common.discord": "Discord",
+    "common.slack": "Slack",
+    "common.twitter": "Twitter",
+    "common.facebook": "Facebook",
+    "common.linkedin": "LinkedIn",
+    "common.youtube": "YouTube",
+    "common.github": "GitHub",
+    "common.gitlab": "GitLab",
+    "common.bitbucket": "Bitbucket",
+    "common.stackoverflow": "Stack Overflow",
+    "common.reddit": "Reddit",
+    "common.hackernews": "Hacker News",
+    "common.producthunt": "Product Hunt",
+    "common.indiehackers": "Indie Hackers",
+    "common.dev": "Dev.to",
+    "common.medium": "Medium",
+    "common.substack": "Substack",
+    "common.hashnode": "Hashnode",
+    "common.devto": "Dev.to",
+    "common.hashnode": "Hashnode",
+    "common.substack": "Substack",
+    "common.medium": "Medium",
+    "common.dev": "Dev.to",
+    "common.indiehackers": "Indie Hackers",
+    "common.producthunt": "Product Hunt",
+    "common.hackernews": "Hacker News",
+    "common.reddit": "Reddit",
+    "common.stackoverflow": "Stack Overflow",
+    "common.bitbucket": "Bitbucket",
+    "common.gitlab": "GitLab",
+    "common.github": "GitHub",
+    "common.youtube": "YouTube",
+    "common.linkedin": "LinkedIn",
+    "common.facebook": "Facebook",
+    "common.twitter": "Twitter",
+    "common.slack": "Slack",
+    "common.discord": "Discord",
+    "common.forum": "포럼",
+    "common.community": "커뮤니티",
+    "common.certification": "인증",
+    "common.training": "교육",
+    "common.webinars": "웨비나",
+    "common.events": "이벤트",
+    "common.news": "뉴스",
+    "common.blog": "블로그",
+    "common.press": "보도자료",
+    "common.careers": "채용",
+    "common.partners": "파트너",
+    "common.developers": "개발자",
+    "common.api": "API",
+    "common.documentation": "문서",
+    "common.support": "지원",
+    "common.faq": "자주 묻는 질문",
+    "common.sitemap": "사이트맵",
+    "common.accessibility": "접근성",
+    "common.cookies": "쿠키 정책",
+    "common.privacy": "개인정보처리방침",
+    "common.terms": "이용약관",
+    "common.remember-me": "로그인 상태 유지",
+    "common.change-password": "비밀번호 변경",
+    "common.reset-password": "비밀번호 재설정",
+    "common.forgot-password": "비밀번호 찾기",
+    "common.register": "등록",
+    "common.login": "로그인",
+    "common.logout": "로그아웃",
+    "common.profile": "프로필",
+    "common.settings": "설정",
+    "common.report": "보고",
+    "common.feedback": "피드백",
+    "common.contact": "연락처",
+    "common.about": "정보",
+    "common.help": "도움말",
+    "common.share": "공유",
+    "common.print": "인쇄",
+    "common.upload": "업로드",
+    "common.download": "다운로드",
+    "common.import": "가져오기",
+    "common.export": "내보내기",
+    "common.refresh": "새로고침",
+    "common.sort": "정렬",
+    "common.filter": "필터",
+    "common.search": "검색",
+    "common.paste": "붙여넣기",
+    "common.copy": "복사",
+    "common.delete": "삭제",
+    "common.edit": "편집",
+    "common.save": "저장",
+    "common.open": "열기",
+    "common.close": "닫기",
+    "common.previous": "이전",
+    "common.next": "다음",
+    "common.back": "뒤로",
+    "common.confirm": "확인",
+    "common.cancel": "취소",
+    "common.success": "성공",
+    "common.error": "오류",
+    "common.loading": "로딩 중..."
+  },
   "zh-TW": {
     // 導航欄
     "nav.pain-points": "痛點",
@@ -324,8 +620,7 @@ const i18n = {
     "pain-points.structure-chaos.title": "Structural Chaos",
     "pain-points.structure-chaos.description":
       "Complex tasks lack systematic management leading to inefficiency, missing dependency management, chaotic subtask execution, and difficulty tracking overall progress.",
-    "pain-points.structure-chaos.solution.title":
-      "Structured Task Decomposition",
+    "pain-points.structure-chaos.solution.title": "Structured Task Decomposition",
     "pain-points.structure-chaos.solution.description":
       "Automatically decompose complex tasks into manageable subtasks, establish clear dependencies, provide ordered execution paths, and ensure efficient completion.",
     "pain-points.structure-chaos.icon.alt": "Structural Chaos",
@@ -334,8 +629,7 @@ const i18n = {
     "pain-points.repeat-work.title": "Repetitive Work",
     "pain-points.repeat-work.description":
       "Unable to effectively utilize past experience and solutions, each conversation starts from scratch, lacking knowledge accumulation and experience reference systems.",
-    "pain-points.repeat-work.solution.title":
-      "Knowledge Accumulation & Experience Reference",
+    "pain-points.repeat-work.solution.title": "Knowledge Accumulation & Experience Reference",
     "pain-points.repeat-work.solution.description":
       "Automatically records successful solutions, builds a task knowledge base, supports quick reference for similar tasks, achieving experience accumulation and knowledge reuse.",
     "pain-points.repeat-work.icon.alt": "Repetitive Work",
@@ -619,23 +913,26 @@ If the user requests "continuous mode", all tasks will be executed in sequence.`
 
 // 翻譯應用函數
 function applyTranslations(lang) {
-  // 確保選擇的語言有效
+  // 한국어로 고정
+  lang = "ko";
+  
+  // 한국어 번역이 있는지 확인
   if (!i18n[lang]) {
-    console.error("不支援的語言:", lang);
+    console.error("한국어 번역을 찾을 수 없습니다:", lang);
     return;
   }
 
-  // 應用翻譯到所有帶有 data-i18n 屬性的元素
+  // data-i18n 속성을 가진 모든 요소에 번역 적용
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     const key = element.getAttribute("data-i18n");
     if (i18n[lang][key]) {
       element.textContent = i18n[lang][key];
     } else {
-      console.warn(`未找到翻譯鍵: ${key}`);
+      console.warn(`번역 키를 찾을 수 없습니다: ${key}`);
     }
   });
 
-  // 處理語言特定的連結
+  // 언어별 링크 처리
   document.querySelectorAll(".lang-specific").forEach((element) => {
     if (element.hasAttribute(`data-lang-${lang}`)) {
       const langSpecificHref = element.getAttribute(`data-lang-${lang}`);
@@ -646,73 +943,80 @@ function applyTranslations(lang) {
   });
 }
 
-// 設置語言並儲存用戶偏好
+// 언어 설정 및 사용자 선호도 저장
 function setLanguage(lang) {
-  // 儲存用戶偏好
+  // 한국어로 고정
+  lang = "ko";
+  
+  // 사용자 선호도 저장
   localStorage.setItem("preferred-language", lang);
 
-  // 應用翻譯
+  // 번역 적용
   applyTranslations(lang);
 
-  // 更新按鈕狀態
-  document.querySelectorAll(".lang-btn").forEach(function (btn) {
-    if (btn.getAttribute("data-lang") === lang) {
-      btn.classList.add("active");
-    } else {
-      btn.classList.remove("active");
-    }
-  });
+  // 언어 버튼 상태 업데이트 (제거됨)
+  // document.querySelectorAll(".lang-btn").forEach(function (btn) {
+  //   if (btn.getAttribute("data-lang") === lang) {
+  //     btn.classList.add("active");
+  //   } else {
+  //     btn.classList.remove("active");
+  //   }
+  // });
 
-  // 更新 html 標籤的 lang 屬性
+  // html 태그의 lang 속성 업데이트
   document.documentElement.setAttribute("lang", lang);
 }
 
-// 獲取用戶偏好語言或瀏覽器語言
+// 사용자 선호 언어 또는 브라우저 언어 가져오기
 function getPreferredLanguage() {
-  // 檢查本地儲存
-  const savedLang = localStorage.getItem("preferred-language");
-  if (savedLang && i18n[savedLang]) {
-    return savedLang;
-  }
+  // 한국어로 고정
+  return "ko";
+  
+  // 기존 코드 (주석 처리)
+  // // 로컬 스토리지 확인
+  // const savedLang = localStorage.getItem("preferred-language");
+  // if (savedLang && i18n[savedLang]) {
+  //   return savedLang;
+  // }
 
-  // 檢查瀏覽器語言
-  const browserLang = navigator.language || navigator.userLanguage;
-  if (browserLang) {
-    // 嘗試使用完整語言代碼匹配
-    if (i18n[browserLang]) {
-      return browserLang;
-    }
+  // // 브라우저 언어 확인
+  // const browserLang = navigator.language || navigator.userLanguage;
+  // if (browserLang) {
+  //   // 전체 언어 코드 매칭 시도
+  //   if (i18n[browserLang]) {
+  //     return browserLang;
+  //   }
 
-    // 嘗試使用語言代碼前兩個字符匹配（如 "zh-TW" -> "zh"）
-    const langPrefix = browserLang.split("-")[0];
-    for (const key in i18n) {
-      if (key.startsWith(langPrefix)) {
-        return key;
-      }
-    }
-  }
+  //   // 언어 코드 앞 두 글자 매칭 시도 (예: "zh-TW" -> "zh")
+  //   const langPrefix = browserLang.split("-")[0];
+  //   for (const key in i18n) {
+  //     if (key.startsWith(langPrefix)) {
+  //       return key;
+  //     }
+  //   }
+  // }
 
-  // 默認返回英文
-  return "en";
+  // // 기본값은 영어
+  // return "en";
 }
 
-// 初始化網站語言
+// 웹사이트 언어 초기화
 function initializeLanguage() {
   const preferredLang = getPreferredLanguage();
   setLanguage(preferredLang);
 }
 
-// 頁面載入完成後初始化語言和事件監聽器
+// 페이지 로드 완료 후 언어 초기화 및 이벤트 리스너
 document.addEventListener("DOMContentLoaded", function () {
-  // 初始化語言
+  // 언어 초기화
   initializeLanguage();
 
-  // 為語言按鈕添加事件監聽器
-  document.querySelectorAll(".lang-btn").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      setLanguage(this.getAttribute("data-lang"));
-    });
-  });
+  // 언어 버튼 이벤트 리스너 (제거됨)
+  // document.querySelectorAll(".lang-btn").forEach(function (btn) {
+  //   btn.addEventListener("click", function () {
+  //     setLanguage(this.getAttribute("data-lang"));
+  //   });
+  // });
 });
 
 // ==================================================
