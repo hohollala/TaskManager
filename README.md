@@ -222,6 +222,9 @@ npm install -g
 
 # 4. 명령어 파일 생성 (선택사항)
 npm run generate-commands
+
+# 5. MCP 서버 추가
+claude mcp add shrimp-task-manager -s user -- node ./dist/index.js
 ```
 
 ## 🔌 <a id="clients"></a>MCP 호환 클라이언트에서 사용
