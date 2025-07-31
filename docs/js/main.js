@@ -44,6 +44,20 @@ document.addEventListener("DOMContentLoaded", function () {
   initMultiLanguage();
 });
 
+// 설치 섹션으로 스크롤하는 함수
+function scrollToInstallation() {
+  const installationSection = document.getElementById('installation');
+  if (installationSection) {
+    const headerHeight = document.querySelector("header").offsetHeight;
+    const targetPosition = installationSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+    
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    });
+  }
+}
+
 /**
  * AOS 스크롤 애니메이션 라이브러리 초기화
  */

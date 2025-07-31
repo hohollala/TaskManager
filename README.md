@@ -227,13 +227,18 @@ npx -y @smithery/cli install @cjo4m06/mcp-shrimp-task-manager --client claude
 ### 수동 설치
 
 ```bash
-# 의존성 설치
-npm install
+# 1. 저장소 클론
+git clone https://github.com/hohollala/TaskManager.git
+cd TaskManager
 
-# 빌드 및 서비스 시작
+# 2. 의존성 설치 및 빌드
+npm install
 npm run build
 
-# 명령어 파일 생성 (선택사항)
+# 3. 글로벌 설치
+npm install -g
+
+# 4. 명령어 파일 생성 (선택사항)
 npm run generate-commands
 ```
 

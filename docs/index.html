@@ -1645,11 +1645,11 @@ MCP_PROMPT_EXECUTE_TASK_APPEND="추가적인 작업 실행 지침"
                     <pre
                       class="text-gray-100 whitespace-pre-wrap font-mono"
                     ><code class="language-bash">git clone https://github.com/hohollala/TaskManager.git
-cd mcp-shrimp-task-manager</code></pre>
+cd TaskManager</code></pre>
                     <button
                       class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
                                               data-command="git clone https://github.com/hohollala/TaskManager.git
-cd mcp-shrimp-task-manager"
+cd TaskManager"
                       data-i18n="installation.copy-button"
                     >
                       복사
@@ -1690,7 +1690,7 @@ cd mcp-shrimp-task-manager"
                 </div>
 
                 <!-- 단계 3: 프로젝트 컴파일 -->
-                <div>
+                <div class="mb-8">
                   <div class="flex items-center mb-3">
                     <div
                       class="bg-green-100 h-8 w-8 rounded-full flex items-center justify-center mr-3"
@@ -1714,6 +1714,38 @@ cd mcp-shrimp-task-manager"
                     <button
                       class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
                       data-command="npm run build"
+                      data-i18n="installation.copy-button"
+                    >
+                      복사
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 단계 4: 글로벌 설치 -->
+                <div>
+                  <div class="flex items-center mb-3">
+                    <div
+                      class="bg-green-100 h-8 w-8 rounded-full flex items-center justify-center mr-3"
+                    >
+                      <span class="text-green-600 font-bold">4</span>
+                    </div>
+                    <h4
+                      class="text-lg font-semibold"
+                      data-i18n="installation.step4"
+                    >
+                      글로벌 설치
+                    </h4>
+                  </div>
+
+                  <div
+                    class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg ml-11 relative"
+                  >
+                    <pre
+                      class="text-gray-100 whitespace-pre-wrap font-mono"
+                    ><code class="language-bash">npm install -g</code></pre>
+                    <button
+                      class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
+                      data-command="npm install -g"
                       data-i18n="installation.copy-button"
                     >
                       복사
@@ -1920,7 +1952,7 @@ cd mcp-shrimp-task-manager"
                 설치 후 빠른 시작 가이드를 확인하여 MCP Shrimp Task Manager를 사용하는 방법을 알아보세요.
               </p>
               <a
-                href="faq.md"
+                href="quickstart.md"
                 class="text-blue-600 hover:text-blue-800 font-medium"
                 data-i18n="quickstart.view-code-link"
               >
@@ -2011,7 +2043,7 @@ cd mcp-shrimp-task-manager"
                 </svg>
                 <span data-i18n="cta.github">GitHub 저장소로 이동</span>
               </a>
-              <a href="#installation" class="btn btn-secondary btn-lg">
+              <a href="#installation" class="btn btn-secondary btn-lg cursor-pointer">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-5 w-5 mr-2"
