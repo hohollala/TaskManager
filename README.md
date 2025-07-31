@@ -212,14 +212,12 @@ npx -y @smithery/cli install @cjo4m06/mcp-shrimp-task-manager --client claude
 # 1. 작업 디렉토리 생성 및 저장소 클론
 
 # Windows의 경우:
-mkdir C:\Users\%USERNAME%\TaskManager
-cd C:\Users\%USERNAME%\TaskManager
-git clone https://github.com/hohollala/TaskManager.git .
+cd C:\Users\%USERNAME%
+git clone https://github.com/hohollala/TaskManager.git
 
 # macOS/Linux의 경우:
-mkdir ~/TaskManager
-cd ~/TaskManager
-git clone https://github.com/hohollala/TaskManager.git .
+cd ~
+git clone https://github.com/hohollala/TaskManager.git
 
 # 2. 의존성 설치 및 빌드
 npm install
