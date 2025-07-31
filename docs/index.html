@@ -1775,11 +1775,32 @@ cd TaskManager"
                     >
                       <pre
                         class="text-gray-100 whitespace-pre-wrap font-mono"
-                      ><code class="language-bash">claude mcp add shrimp-task-manager -s user -- node dist/index.js</code></pre>
+                      ><code class="language-bash"># Windows의 경우:
+mkdir C:\Users\%USERNAME%\TaskManager
+cd C:\Users\%USERNAME%\TaskManager
+git clone https://github.com/hohollala/TaskManager.git .
+
+# macOS/Linux의 경우:
+mkdir ~/TaskManager
+cd ~/TaskManager
+git clone https://github.com/hohollala/TaskManager.git .
+
+# MCP 서버 추가:
+claude mcp add shrimp-task-manager -s user -- node dist/index.js</code></pre>
                       <button
                         class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
-                        data-command="claude mcp add shrimp-task-manager -s user -- node dist/index.js"
-                        data-i18n="installation.copy-button"
+                        data-command="# Windows의 경우:
+mkdir C:\Users\%USERNAME%\TaskManager
+cd C:\Users\%USERNAME%\TaskManager
+git clone https://github.com/hohollala/TaskManager.git .
+
+# macOS/Linux의 경우:
+mkdir ~/TaskManager
+cd ~/TaskManager
+git clone https://github.com/hohollala/TaskManager.git .
+
+# MCP 서버 추가:
+claude mcp add shrimp-task-manager -s user -- node dist/index.js"
                       >
                         복사
                       </button>
