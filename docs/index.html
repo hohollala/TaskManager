@@ -1664,21 +1664,7 @@ cd TaskManager">
                       </div>
                     </div>
 
-                    <!-- 단계 6: Claude Desktop에서 MCP 서버 등록 -->
-                    <div>
-                      <div class="flex items-center mb-3">
-                        <div class="bg-blue-100 h-8 w-8 rounded-full flex items-center justify-center mr-3">
-                          <span class="text-blue-600 font-bold">6</span>
-                        </div>
-                        <h5 class="text-lg font-semibold">Claude Desktop에서 MCP 서버 등록</h5>
-                      </div>
-                      <div class="mockup-code bg-gray-900 text-gray-100 p-4 rounded-lg ml-11 relative">
-                        <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">claude mcp add shrimp-task-manager -s user -- mcp-shrimp-task-manager</pre>
-                        <button class="copy-cmd-btn absolute top-4 right-4 text-xs bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded" data-command="claude mcp add shrimp-task-manager -s user -- mcp-shrimp-task-manager">
-                          복사
-                        </button>
-                      </div>
-                    </div>
+              
 
                   </div>
 
@@ -1823,6 +1809,47 @@ export ENABLE_GUI=false</pre>
                       >
                         복사
                       </button>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <h4 class="text-lg font-semibold mb-3">수동 설정: ~/.claude.json 파일 편집</h4>
+                    <p class="text-gray-700 mb-3">Claude Code 설정 파일을 직접 편집하여 MCP 서버를 추가할 수 있습니다.</p>
+                    <div
+                      class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative"
+                    >
+                      <div class="mb-2 flex items-center">
+                        <span class="ml-2 text-xs text-gray-400">Windows: C:\Users\사용자명\.claude.json</span>
+                      </div>
+                      <pre
+                        class="text-gray-100 whitespace-pre-wrap font-mono"
+                      ><code class="language-json">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "[설치폴더경로]/dist/index.js"
+      ],
+      "env": {}
+    }
+  }
+}</code></pre>
+                      <button
+                        class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
+                        data-command='{"mcpServers":{"shrimp-task-manager":{"type":"stdio","command":"node","args":["[설치폴더경로]/dist/index.js"],"env":{}}}}'
+                      >
+                        복사
+                      </button>
+                    </div>
+                    <div class="mt-3 p-3 bg-blue-50 border-l-4 border-blue-400 rounded">
+                      <p class="text-sm text-blue-800">
+                        <strong>설정 방법:</strong><br>
+                        1. <code>~/.claude.json</code> 파일을 메모장이나 코드 에디터로 열기<br>
+                        2. <code>"mcpServers"</code> 섹션에 위의 설정 추가<br>
+                        3. <code>[설치폴더경로]</code>를 실제 설치 경로로 변경 (예: <code>C:/claudeMCPS/TaskManager</code>)<br>
+                        4. 파일 저장 후 Claude Code 재시작
+                      </p>
                     </div>
                   </div>
                 </div>

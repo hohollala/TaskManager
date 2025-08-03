@@ -12,3 +12,9 @@ export * from "./research/index.js";
 
 // 새 프로젝트 도구 내보내기
 export * from "./newProject.js";
+
+// MCP 설치 도구 내보내기
+export * from "./installMCP.js";
+
+// MCP 제거 도구 내보내기
+export * from "./removeMCP.js";

@@ -49,6 +49,10 @@ import {
   researchModeSchema,
   newProject,
   newProjectSchema,
+  installMCP,
+  installMCPSchema,
+  removeMCP,
+  removeMCPSchema,
 } from "./tools/index.js";
 
 async function main() {
@@ -205,6 +209,16 @@ async function main() {
               "toolsDescription/newProject.md"
             ),
             inputSchema: zodToJsonSchema(newProjectSchema),
+          },
+          {
+            name: "install-mcp",
+            description: "MCP 서버를 자동으로 설치하고 올바른 경로를 설정합니다",
+            inputSchema: zodToJsonSchema(installMCPSchema),
+          },
+          {
+            name: "remove-mcp",
+            description: "MCP 서버를 자동으로 제거합니다",
+            inputSchema: zodToJsonSchema(removeMCPSchema),
           },
         ],
       };
@@ -372,6 +386,26 @@ async function main() {
                 );
               }
               return await newProject(parsedArgs.data);
+            case "install-mcp":
+              parsedArgs = await installMCPSchema.safeParseAsync(
+                request.params.arguments
+              );
+              if (!parsedArgs.success) {
+                throw new Error(
+                  `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
+                );
+              }
+              return await installMCP(parsedArgs.data);
+            case "remove-mcp":
+              parsedArgs = await removeMCPSchema.safeParseAsync(
+                request.params.arguments
+              );
+              if (!parsedArgs.success) {
+                throw new Error(
+                  `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
+                );
+              }
+              return await removeMCP(parsedArgs.data);
             default:
               throw new Error(`Tool ${request.params.name} does not exist`);
           }
@@ -392,7 +426,10 @@ async function main() {
 
     // 연결 설정
     const transport = new StdioServerTransport();
+    console.log("🔌 MCP 서버 연결 중...");
     await server.connect(transport);
+    console.log("✅ MCP 서버가 성공적으로 연결되었습니다!");
+    console.log("📡 서버가 요청을 대기 중입니다...");
   } catch (error) {
     process.exit(1);
   }
