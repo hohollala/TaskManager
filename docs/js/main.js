@@ -745,158 +745,158 @@ function initWorkflowModal() {
         `,
       },
     },
-    "zh-TW": {
+    "ko": {
       1: {
-        title: "任務規劃",
+        title: "작업 계획",
         content: `
-          <p>任務規劃階段是初始階段，AI助手定義項目範圍、設定目標，並建立成功標準。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>작업 계획 단계는 AI 조수가 프로젝트 범위를 정의하고, 목표를 설정하며, 성공 기준을 수립하는 초기 단계입니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>釐清項目需求和約束條件</li>
-            <li>設定明確目標和定義可衡量的成功標準</li>
-            <li>確立項目界限和識別相關利益方</li>
-            <li>創建高級計劃及時間估算</li>
-            <li>可選擇參考現有任務進行持續規劃</li>
+            <li>프로젝트 요구사항 및 제약 조건 명확화</li>
+            <li>명확한 목표 설정 및 측정 가능한 성공 기준 정의</li>
+            <li>프로젝트 범위 설정 및 이해관계자 식별</li>
+            <li>타임라인 추정치를 포함한 상위 수준 계획 수립</li>
+            <li>지속적인 계획을 위해 기존 작업 참조(선택 사항)</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">輸出成果：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">산출물:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>全面的任務描述</li>
-            <li>明確的成功標準</li>
-            <li>技術需求和約束條件</li>
+            <li>포괄적인 작업 설명</li>
+            <li>명확한 성공 기준</li>
+            <li>기술적 요구사항 및 제약 조건</li>
           </ul>
-          <p class="mt-4">此階段為所有後續工作奠定基礎，確保AI助手和用戶對需要完成的工作有共同理解。</p>
+          <p class="mt-4">이 단계는 모든 후속 작업의 기초를 마련하여 AI 조수와 사용자 모두가 달성해야 할 목표에 대해 공통된 이해를 갖도록 보장합니다.</p>
         `,
       },
       2: {
-        title: "深入分析",
+        title: "심층 분석",
         content: `
-          <p>深入分析階段涉及對需求和技術環境的徹底檢查，以制定可行的實施策略。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>심층 분석 단계에서는 실행 가능한 구현 전략을 개발하기 위해 요구사항과 기술 환경을 철저히 검토합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>分析需求並識別技術挑戰</li>
-            <li>評估技術可行性和潛在風險</li>
-            <li>研究最佳實踐和可用解決方案</li>
-            <li>系統性地審查現有代碼庫（如適用）</li>
-            <li>開發初步實施概念</li>
+            <li>요구사항 분석 및 기술적 과제 식별</li>
+            <li>기술적 타당성 및 잠재적 위험 평가</li>
+            <li>모범 사례 및 사용 가능한 솔루션 연구</li>
+            <li>해당하는 경우 기존 코드베이스를 체계적으로 검토</li>
+            <li>초기 구현 개념 개발</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">輸出成果：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">산출물:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>技術可行性評估</li>
-            <li>風險識別和緩解策略</li>
-            <li>初步實施方法</li>
-            <li>適當的偽代碼或架構圖</li>
+            <li>기술적 타당성 평가</li>
+            <li>위험 식별 및 완화 전략</li>
+            <li>초기 구현 접근 방식</li>
+            <li>적절한 경우 의사 코드 또는 아키텍처 다이어그램</li>
           </ul>
-          <p class="mt-4">此階段確保在進行實施前，提出的解決方案在技術上是合理的，並能處理所有需求。</p>
+          <p class="mt-4">이 단계는 제안된 솔루션이 기술적으로 타당하고 구현을 진행하기 전에 모든 요구사항을 해결하는지 확인합니다.</p>
         `,
       },
       3: {
-        title: "方案反思",
+        title: "솔루션 성찰",
         content: `
-          <p>方案反思階段涉及在實施前對提出的方法進行批判性審查和優化。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>솔루션 성찰 단계에서는 구현 전에 제안된 접근 방식을 비판적으로 검토하고 최적화합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>批判性審查分析結果和提出的解決方案</li>
-            <li>識別潛在差距、邊緣情況或低效問題</li>
-            <li>考慮替代方法及其權衡</li>
-            <li>根據最佳實踐和設計原則評估解決方案</li>
-            <li>根據洞察優化實施策略</li>
+            <li>분석 결과 및 제안된 솔루션을 비판적으로 검토</li>
+            <li>잠재적인 격차, 예외 사례 또는 비효율성 식별</li>
+            <li>대체 접근 방식 및 장단점 고려</li>
+            <li>모범 사례 및 설계 원칙에 따라 솔루션 평가</li>
+            <li>통찰력을 바탕으로 구현 전략 구체화</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">輸出成果：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">산출물:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>優化後的解決方案設計</li>
-            <li>記錄的考慮事項和權衡</li>
-            <li>改進的實施策略</li>
+            <li>최적화된 솔루션 설계</li>
+            <li>고려 사항 및 장단점 문서화</li>
+            <li>구체화된 구현 전략</li>
           </ul>
-          <p class="mt-4">這種反思過程有助於及早發現潛在問題，並確保在投入實施前所選方法是最佳選擇。</p>
+          <p class="mt-4">이 성찰 과정은 잠재적인 문제를 조기에 발견하고 구현에 투자하기 전에 선택한 접근 방식이 최적인지 확인하는 데 도움이 됩니다.</p>
         `,
       },
       4: {
-        title: "任務分解",
+        title: "작업 분해",
         content: `
-          <p>任務分解階段將複雜任務分解為可管理的原子子任務，並建立明確的依賴關係和執行順序。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>작업 분해 단계는 복잡한 작업을 관리 가능하고 원자적인 하위 작업으로 나누고 명확한 종속성 및 실행 순서를 설정합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>將複雜任務分解為更小、可管理的單元</li>
-            <li>建立子任務之間的明確依賴關係</li>
-            <li>為每個子任務定義範圍和驗收標準</li>
-            <li>分配優先級別並評估複雜度</li>
-            <li>創建邏輯執行順序</li>
+            <li>복잡한 작업을 더 작고 관리 가능한 단위로 분해</li>
+            <li>하위 작업 간의 명확한 종속성 설정</li>
+            <li>각 하위 작업의 범위 및 수용 기준 정의</li>
+            <li>우선순위 수준 할당 및 복잡성 추정</li>
+            <li>논리적 실행 순서 생성</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">支持的更新模式：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">지원되는 업데이트 모드:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li><strong>追加(append)：</strong>保留所有現有任務並添加新任務</li>
-            <li><strong>覆蓋(overwrite)：</strong>清除所有未完成的任務並完全替換，同時保留已完成的任務</li>
-            <li><strong>選擇性更新(selective)：</strong>根據任務名稱智能匹配更新現有任務，同時保留其他任務</li>
-            <li><strong>清除所有任務(clearAllTasks)：</strong>移除所有任務並創建備份</li>
+            <li><strong>추가(append):</strong> 기존 모든 작업을 유지하고 새 작업을 추가합니다.</li>
+            <li><strong>덮어쓰기(overwrite):</strong> 완료되지 않은 모든 작업을 지우고 완료된 작업을 유지하면서 완전히 교체합니다.</li>
+            <li><strong>선택적 업데이트(selective):</strong> 작업 이름을 기반으로 기존 작업을 지능적으로 업데이트하고 목록에 없는 작업은 유지합니다.</li>
+            <li><strong>모든 작업 지우기(clearAllTasks):</strong> 모든 작업을 제거하고 백업을 생성합니다.</li>
           </ul>
-          <p class="mt-4">這種結構化方法通過創建由小型、可實現步驟組成的清晰路線圖，使複雜項目變得可管理。</p>
+          <p class="mt-4">이 구조화된 접근 방식은 작고 달성 가능한 단계의 명확한 로드맵을 만들어 복잡한 프로젝트를 관리 가능하게 만듭니다.</p>
         `,
       },
       5: {
-        title: "任務執行",
+        title: "작업 실행",
         content: `
-          <p>任務執行階段涉及按照預定計劃實施特定任務，重點關注質量和需求遵從。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>작업 실행 단계는 사전에 결정된 계획에 따라 특정 작업을 구현하며, 품질 및 요구사항 준수에 중점을 둡니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>根據依賴和優先順序選擇要執行的任務</li>
-            <li>按照實施指南實施解決方案</li>
-            <li>遵循編碼標準和最佳實踐</li>
-            <li>處理邊緣情況和錯誤條件</li>
-            <li>記錄實施決策和理由</li>
+            <li>종속성 및 우선순위에 따라 실행할 작업 선택</li>
+            <li>구현 가이드에 따라 솔루션 구현</li>
+            <li>코딩 표준 및 모범 사례 준수</li>
+            <li>예외 사례 및 오류 조건 처리</li>
+            <li>구현 결정 및 근거 문서화</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">Execution Process:</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">실행 프로세스:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>準備必要的資源和環境</li>
-            <li>逐步遵循實施指南</li>
-            <li>監控進度並處理任何意外問題</li>
-            <li>維護代碼質量和文檔</li>
+            <li>필요한 리소스 및 환경 준비</li>
+            <li>구현 가이드를 단계별로 따름</li>
+            <li>진행 상황 모니터링 및 예기치 않은 문제 처리</li>
+            <li>코드 품질 및 문서 유지</li>
           </ul>
-          <p class="mt-4">該階段將計劃轉化為具體結果，實施早期階段設計的解決方案。</p>
+          <p class="mt-4">이 단계는 계획을 구체적인 결과로 전환하여 이전 단계에서 설계된 솔루션을 구현합니다.</p>
         `,
       },
       6: {
-        title: "結果驗證",
+        title: "결과 검증",
         content: `
-          <p>結果驗證階段確保已實施的任務在標記為完成前滿足所有需求和質量標準。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">Key Activities:</h4>
+          <p>결과 검증 단계는 구현된 작업이 완료로 표시되기 전에 모든 요구사항과 품질 표준을 충족하는지 확인합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>驗證是否已實施所有需求</li>
-            <li>檢查是否遵循技術標準和最佳實踐</li>
-            <li>測試邊緣情況和錯誤處理</li>
-            <li>審查代碼質量和文檔</li>
-            <li>根據為任務定義的驗證標準進行驗證</li>
+            <li>모든 요구사항이 구현되었는지 확인</li>
+            <li>기술 표준 및 모범 사례 준수 여부 확인</li>
+            <li>예외 사례 및 오류 처리 테스트</li>
+            <li>코드 품질 및 문서 검토</li>
+            <li>작업에 대해 정의된 검증 기준에 따라 검증</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">驗證清單：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">검증 체크리스트:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>功能正確性：是否按預期工作？</li>
-            <li>完整性：是否涵蓋所有需求？</li>
-            <li>質量：是否符合編碼標準和最佳實踐？</li>
-            <li>性能：是否高效運行？</li>
-            <li>文檔：實施是否有良好的文檔？</li>
+            <li>기능적 정확성: 예상대로 작동하는가?</li>
+            <li>완전성: 모든 요구사항이 해결되었는가?</li>
+            <li>품질: 코딩 표준 및 모범 사례를 충족하는가?</li>
+            <li>성능: 효율적으로 작동하는가?</li>
+            <li>문서: 구현이 잘 문서화되었는가?</li>
           </ul>
-          <p class="mt-4">這種徹底的驗證過程確保交付高質量的成果，完全滿足需求。</p>
+          <p class="mt-4">이 철저한 검증 과정은 요구사항을 완전히 충족하는 고품질 결과물을 보장합니다.</p>
         `,
       },
       7: {
-        title: "任務完成",
+        title: "작업 완료",
         content: `
-          <p>任務完成階段正式將任務標記為已完成，生成詳細的完成報告，並更新相關依賴任務的狀態。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">Key Activities:</h4>
+          <p>작업 완료 단계는 작업을 공식적으로 완료로 표시하고, 상세한 완료 보고서를 생성하며, 종속 작업의 상태를 업데이트합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>成功驗證後正式將任務標記為已完成</li>
-            <li>生成全面的完成報告</li>
-            <li>更新依賴任務的狀態</li>
-            <li>歸檔相關信息以供將來參考</li>
-            <li>向利益相關者傳達完成情況</li>
+            <li>성공적인 검증 후 작업을 공식적으로 완료로 표시</li>
+            <li>포괄적인 완료 보고서 생성</li>
+            <li>종속 작업의 상태 업데이트</li>
+            <li>향후 참조를 위해 관련 정보 보관</li>
+            <li>이해관계자에게 완료 사실 전달</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">完成報告內容：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">완료 보고서 내용:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>已完成工作摘要</li>
-            <li>實施亮點和關鍵決策</li>
-            <li>遇到的任何值得注意的挑戰及其解決方案</li>
-            <li>對未來工作或改進的建議</li>
+            <li>완료된 작업 요약</li>
+            <li>구현 하이라이트 및 주요 결정</li>
+            <li>발생한 주목할 만한 과제 및 해결책</li>
+            <li>향후 작업 또는 개선을 위한 권장 사항</li>
           </ul>
-          <p class="mt-4">完成階段確保任務適當結束，維持工作流程連續性，並為未來項目建立機構知識。</p>
+          <p class="mt-4">완료 단계는 작업의 적절한 마무리를 보장하고, 워크플로우 연속성을 유지하며, 향후 프로젝트를 위한 조직적 지식을 구축합니다.</p>
         `,
       },
     },
@@ -1301,8 +1301,8 @@ function initMultiLanguage() {
       try {
         const currentLang =
           localStorage.getItem("preferred-language") ||
-          (navigator.language && navigator.language.startsWith("zh")
-            ? "zh-TW"
+          (navigator.language && navigator.language.startsWith("ko")
+            ? "ko"
             : "en");
         document.documentElement.setAttribute("lang", currentLang);
       } catch (e) {
@@ -1378,8 +1378,8 @@ function initMultiLanguage() {
         try {
           const savedLang =
             localStorage.getItem("preferred-language") ||
-            (navigator.language && navigator.language.startsWith("zh")
-              ? "zh-TW"
+            (navigator.language && navigator.language.startsWith("ko")
+              ? "ko"
               : "en");
 
           langBtns.forEach((btn) => {
@@ -1417,7 +1417,7 @@ function initMultiLanguage() {
           } else if (typeof translateText === "function") {
             return translateText(key, defaultText);
           } else {
-            return lang === "en" ? defaultText.en : defaultText.zh;
+            return lang === "en" ? defaultText.en : defaultText.ko;
           }
         };
 
@@ -1426,7 +1426,7 @@ function initMultiLanguage() {
           const copyBtns = document.querySelectorAll(".copy-cmd-btn");
           const copyText = getTranslation("common.copy", {
             en: "Copy",
-            zh: "복사",
+            ko: "복사",
           });
 
           copyBtns.forEach((btn) => {
@@ -1448,7 +1448,7 @@ function initMultiLanguage() {
           if (closeModalBtn) {
             closeModalBtn.textContent = getTranslation("common.close", {
               en: "Close",
-              zh: "닫기",
+              ko: "닫기",
             });
           }
         } catch (e) {
@@ -1473,7 +1473,7 @@ function initMultiLanguage() {
 
 /**
  * 현재 언어에 따라 작업 흐름 모달 창 내용 업데이트
- * @param {string} lang - 현재 언어 코드 ("en" 또는 "zh-TW")
+ * @param {string} lang - 현재 언어 코드 ("en" 또는 "ko")
  */
 function updateWorkflowModalContent(lang) {
   const modal = document.getElementById("workflow-detail-modal");
@@ -1487,7 +1487,7 @@ function updateWorkflowModalContent(lang) {
   if (currentStep && modalTitle && modalContent) {
     // 작업 흐름 상세 데이터에서 해당 언어의 내용 가져오기
     const workflowDetails = getWorkflowDetails();
-    const langKey = lang === "en" ? "en" : "zh-TW";
+    const langKey = lang === "en" ? "en" : "ko";
 
     if (workflowDetails[langKey] && workflowDetails[langKey][currentStep]) {
       const stepData = workflowDetails[langKey][currentStep];
@@ -1671,158 +1671,158 @@ function getWorkflowDetails() {
         `,
       },
     },
-    "zh-TW": {
+    "ko": {
       1: {
-        title: "任務規劃",
+        title: "작업 계획",
         content: `
-          <p>任務規劃階段是初始階段，AI助手定義項目範圍、設定目標，並建立成功標準。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>작업 계획 단계는 AI 조수가 프로젝트 범위를 정의하고, 목표를 설정하며, 성공 기준을 수립하는 초기 단계입니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>釐清項目需求和約束條件</li>
-            <li>設定明確目標和定義可衡量的成功標準</li>
-            <li>確立項目界限和識別相關利益方</li>
-            <li>創建高級計劃及時間估算</li>
-            <li>可選擇參考現有任務進行持續規劃</li>
+            <li>프로젝트 요구사항 및 제약 조건 명확화</li>
+            <li>명확한 목표 설정 및 측정 가능한 성공 기준 정의</li>
+            <li>프로젝트 범위 설정 및 이해관계자 식별</li>
+            <li>타임라인 추정치를 포함한 상위 수준 계획 수립</li>
+            <li>지속적인 계획을 위해 기존 작업 참조(선택 사항)</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">輸出成果：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">산출물:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>全面的任務描述</li>
-            <li>明確的成功標準</li>
-            <li>技術需求和約束條件</li>
+            <li>포괄적인 작업 설명</li>
+            <li>명확한 성공 기준</li>
+            <li>기술적 요구사항 및 제약 조건</li>
           </ul>
-          <p class="mt-4">此階段為所有後續工作奠定基礎，確保AI助手和用戶對需要完成的工作有共同理解。</p>
+          <p class="mt-4">이 단계는 모든 후속 작업의 기초를 마련하여 AI 조수와 사용자 모두가 달성해야 할 목표에 대해 공통된 이해를 갖도록 보장합니다.</p>
         `,
       },
       2: {
-        title: "深入分析",
+        title: "심층 분석",
         content: `
-          <p>深入分析階段涉及對需求和技術環境的徹底檢查，以制定可行的實施策略。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>심층 분석 단계에서는 실행 가능한 구현 전략을 개발하기 위해 요구사항과 기술 환경을 철저히 검토합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>分析需求並識別技術挑戰</li>
-            <li>評估技術可行性和潛在風險</li>
-            <li>研究最佳實踐和可用解決方案</li>
-            <li>系統性地審查現有代碼庫（如適用）</li>
-            <li>開發初步實施概念</li>
+            <li>요구사항 분석 및 기술적 과제 식별</li>
+            <li>기술적 타당성 및 잠재적 위험 평가</li>
+            <li>모범 사례 및 사용 가능한 솔루션 연구</li>
+            <li>해당하는 경우 기존 코드베이스를 체계적으로 검토</li>
+            <li>초기 구현 개념 개발</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">輸出成果：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">산출물:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>技術可行性評估</li>
-            <li>風險識別和緩解策略</li>
-            <li>初步實施方法</li>
-            <li>適當的偽代碼或架構圖</li>
+            <li>기술적 타당성 평가</li>
+            <li>위험 식별 및 완화 전략</li>
+            <li>초기 구현 접근 방식</li>
+            <li>적절한 경우 의사 코드 또는 아키텍처 다이어그램</li>
           </ul>
-          <p class="mt-4">此階段確保在進行實施前，提出的解決方案在技術上是合理的，並能處理所有需求。</p>
+          <p class="mt-4">이 단계는 제안된 솔루션이 기술적으로 타당하고 구현을 진행하기 전에 모든 요구사항을 해결하는지 확인합니다.</p>
         `,
       },
       3: {
-        title: "方案反思",
+        title: "솔루션 성찰",
         content: `
-          <p>方案反思階段涉及在實施前對提出的方法進行批判性審查和優化。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>솔루션 성찰 단계에서는 구현 전에 제안된 접근 방식을 비판적으로 검토하고 최적화합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>批判性審查分析結果和提出的解決方案</li>
-            <li>識別潛在差距、邊緣情況或低效問題</li>
-            <li>考慮替代方法及其權衡</li>
-            <li>根據最佳實踐和設計原則評估解決方案</li>
-            <li>根據洞察優化實施策略</li>
+            <li>분석 결과 및 제안된 솔루션을 비판적으로 검토</li>
+            <li>잠재적인 격차, 예외 사례 또는 비효율성 식별</li>
+            <li>대체 접근 방식 및 장단점 고려</li>
+            <li>모범 사례 및 설계 원칙에 따라 솔루션 평가</li>
+            <li>통찰력을 바탕으로 구현 전략 구체화</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">輸出成果：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">산출물:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>優化後的解決方案設計</li>
-            <li>記錄的考慮事項和權衡</li>
-            <li>改進的實施策略</li>
+            <li>최적화된 솔루션 설계</li>
+            <li>고려 사항 및 장단점 문서화</li>
+            <li>구체화된 구현 전략</li>
           </ul>
-          <p class="mt-4">這種反思過程有助於及早發現潛在問題，並確保在投入實施前所選方法是最佳選擇。</p>
+          <p class="mt-4">이 성찰 과정은 잠재적인 문제를 조기에 발견하고 구현에 투자하기 전에 선택한 접근 방식이 최적인지 확인하는 데 도움이 됩니다.</p>
         `,
       },
       4: {
-        title: "任務分解",
+        title: "작업 분해",
         content: `
-          <p>任務分解階段將複雜任務分解為可管理的原子子任務，並建立明確的依賴關係和執行順序。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>작업 분해 단계는 복잡한 작업을 관리 가능하고 원자적인 하위 작업으로 나누고 명확한 종속성 및 실행 순서를 설정합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>將複雜任務分解為更小、可管理的單元</li>
-            <li>建立子任務之間的明確依賴關係</li>
-            <li>為每個子任務定義範圍和驗收標準</li>
-            <li>分配優先級別並評估複雜度</li>
-            <li>創建邏輯執行順序</li>
+            <li>복잡한 작업을 더 작고 관리 가능한 단위로 분해</li>
+            <li>하위 작업 간의 명확한 종속성 설정</li>
+            <li>각 하위 작업의 범위 및 수용 기준 정의</li>
+            <li>우선순위 수준 할당 및 복잡성 추정</li>
+            <li>논리적 실행 순서 생성</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">支持的更新模式：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">지원되는 업데이트 모드:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li><strong>追加(append)：</strong>保留所有現有任務並添加新任務</li>
-            <li><strong>覆蓋(overwrite)：</strong>清除所有未完成的任務並完全替換，同時保留已完成的任務</li>
-            <li><strong>選擇性更新(selective)：</strong>根據任務名稱智能匹配更新現有任務，同時保留其他任務</li>
-            <li><strong>清除所有任務(clearAllTasks)：</strong>移除所有任務並創建備份</li>
+            <li><strong>추가(append):</strong> 기존 모든 작업을 유지하고 새 작업을 추가합니다.</li>
+            <li><strong>덮어쓰기(overwrite):</strong> 완료되지 않은 모든 작업을 지우고 완료된 작업을 유지하면서 완전히 교체합니다.</li>
+            <li><strong>선택적 업데이트(selective):</strong> 작업 이름을 기반으로 기존 작업을 지능적으로 업데이트하고 목록에 없는 작업은 유지합니다.</li>
+            <li><strong>모든 작업 지우기(clearAllTasks):</strong> 모든 작업을 제거하고 백업을 생성합니다.</li>
           </ul>
-          <p class="mt-4">這種結構化方法通過創建由小型、可實現步驟組成的清晰路線圖，使複雜項目變得可管理。</p>
+          <p class="mt-4">이 구조화된 접근 방식은 작고 달성 가능한 단계의 명확한 로드맵을 만들어 복잡한 프로젝트를 관리 가능하게 만듭니다.</p>
         `,
       },
       5: {
-        title: "任務執行",
+        title: "작업 실행",
         content: `
-          <p>任務執行階段涉及按照預定計劃實施特定任務，重點關注質量和需求遵從。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">主要活動：</h4>
+          <p>작업 실행 단계는 사전에 결정된 계획에 따라 특정 작업을 구현하며, 품질 및 요구사항 준수에 중점을 둡니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>根據依賴和優先順序選擇要執行的任務</li>
-            <li>按照實施指南實施解決方案</li>
-            <li>遵循編碼標準和最佳實踐</li>
-            <li>處理邊緣情況和錯誤條件</li>
-            <li>記錄實施決策和理由</li>
+            <li>종속성 및 우선순위에 따라 실행할 작업 선택</li>
+            <li>구현 가이드에 따라 솔루션 구현</li>
+            <li>코딩 표준 및 모범 사례 준수</li>
+            <li>예외 사례 및 오류 조건 처리</li>
+            <li>구현 결정 및 근거 문서화</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">Execution Process:</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">실행 프로세스:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>準備必要的資源和環境</li>
-            <li>逐步遵循實施指南</li>
-            <li>監控進度並處理任何意外問題</li>
-            <li>維護代碼質量和文檔</li>
+            <li>필요한 리소스 및 환경 준비</li>
+            <li>구현 가이드를 단계별로 따름</li>
+            <li>진행 상황 모니터링 및 예기치 않은 문제 처리</li>
+            <li>코드 품질 및 문서 유지</li>
           </ul>
-          <p class="mt-4">該階段將計劃轉化為具體結果，實施早期階段設計的解決方案。</p>
+          <p class="mt-4">이 단계는 계획을 구체적인 결과로 전환하여 이전 단계에서 설계된 솔루션을 구현합니다.</p>
         `,
       },
       6: {
-        title: "結果驗證",
+        title: "결과 검증",
         content: `
-          <p>結果驗證階段確保已實施的任務在標記為完成前滿足所有需求和質量標準。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">Key Activities:</h4>
+          <p>결과 검증 단계는 구현된 작업이 완료로 표시되기 전에 모든 요구사항과 품질 표준을 충족하는지 확인합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>驗證是否已實施所有需求</li>
-            <li>檢查是否遵循技術標準和最佳實踐</li>
-            <li>測試邊緣情況和錯誤處理</li>
-            <li>審查代碼質量和文檔</li>
-            <li>根據為任務定義的驗證標準進行驗證</li>
+            <li>모든 요구사항이 구현되었는지 확인</li>
+            <li>기술 표준 및 모범 사례 준수 여부 확인</li>
+            <li>예외 사례 및 오류 처리 테스트</li>
+            <li>코드 품질 및 문서 검토</li>
+            <li>작업에 대해 정의된 검증 기준에 따라 검증</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">驗證清單：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">검증 체크리스트:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>功能正確性：是否按預期工作？</li>
-            <li>完整性：是否涵蓋所有需求？</li>
-            <li>質量：是否符合編碼標準和最佳實踐？</li>
-            <li>性能：是否高效運行？</li>
-            <li>文檔：實施是否有良好的文檔？</li>
+            <li>기능적 정확성: 예상대로 작동하는가?</li>
+            <li>완전성: 모든 요구사항이 해결되었는가?</li>
+            <li>품질: 코딩 표준 및 모범 사례를 충족하는가?</li>
+            <li>성능: 효율적으로 작동하는가?</li>
+            <li>문서: 구현이 잘 문서화되었는가?</li>
           </ul>
-          <p class="mt-4">這種徹底的驗證過程確保交付高質量的成果，完全滿足需求。</p>
+          <p class="mt-4">이 철저한 검증 과정은 요구사항을 완전히 충족하는 고품질 결과물을 보장합니다.</p>
         `,
       },
       7: {
-        title: "任務完成",
+        title: "작업 완료",
         content: `
-          <p>任務完成階段正式將任務標記為已完成，生成詳細的完成報告，並更新相關依賴任務的狀態。</p>
-          <h4 class="text-lg font-semibold mt-4 mb-2">Key Activities:</h4>
+          <p>작업 완료 단계는 작업을 공식적으로 완료로 표시하고, 상세한 완료 보고서를 생성하며, 종속 작업의 상태를 업데이트합니다.</p>
+          <h4 class="text-lg font-semibold mt-4 mb-2">주요 활동:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>成功驗證後正式將任務標記為已完成</li>
-            <li>生成全面的完成報告</li>
-            <li>更新依賴任務的狀態</li>
-            <li>歸檔相關信息以供將來參考</li>
-            <li>向利益相關者傳達完成情況</li>
+            <li>성공적인 검증 후 작업을 공식적으로 완료로 표시</li>
+            <li>포괄적인 완료 보고서 생성</li>
+            <li>종속 작업의 상태 업데이트</li>
+            <li>향후 참조를 위해 관련 정보 보관</li>
+            <li>이해관계자에게 완료 사실 전달</li>
           </ul>
-          <h4 class="text-lg font-semibold mt-4 mb-2">完成報告內容：</h4>
+          <h4 class="text-lg font-semibold mt-4 mb-2">완료 보고서 내용:</h4>
           <ul class="list-disc pl-6 space-y-2">
-            <li>已完成工作摘要</li>
-            <li>實施亮點和關鍵決策</li>
-            <li>遇到的任何值得注意的挑戰及其解決方案</li>
-            <li>對未來工作或改進的建議</li>
+            <li>완료된 작업 요약</li>
+            <li>구현 하이라이트 및 주요 결정</li>
+            <li>발생한 주목할 만한 과제 및 해결책</li>
+            <li>향후 작업 또는 개선을 위한 권장 사항</li>
           </ul>
-          <p class="mt-4">完成階段確保任務適當結束，維持工作流程連續性，並為未來項目建立機構知識。</p>
+          <p class="mt-4">완료 단계는 작업의 적절한 마무리를 보장하고, 워크플로우 연속성을 유지하며, 향후 프로젝트를 위한 조직적 지식을 구축합니다.</p>
         `,
       },
     },

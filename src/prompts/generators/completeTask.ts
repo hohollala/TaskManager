@@ -1,6 +1,6 @@
 /**
- * completeTask prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * completeTask 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task } from "../../types/index.js";
 
 /**
- * completeTask prompt 參數介面
+ * completeTask 프롬프트 매개변수 인터페이스
  */
 export interface CompleteTaskPromptParams {
   task: Task;
@@ -19,9 +19,9 @@ export interface CompleteTaskPromptParams {
 }
 
 /**
- * 獲取 completeTask 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * completeTask의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getCompleteTaskPrompt(
   params: CompleteTaskPromptParams
@@ -30,13 +30,13 @@ export async function getCompleteTaskPrompt(
 
   const indexTemplate = await loadPromptFromTemplate("completeTask/index.md");
 
-  // 開始構建基本 prompt
+  // 기본 프롬프트 빌드 시작
   let prompt = generatePrompt(indexTemplate, {
     name: task.name,
     id: task.id,
     completionTime: completionTime,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "COMPLETE_TASK");
 }

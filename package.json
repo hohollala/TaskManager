@@ -19,6 +19,7 @@
     "build": "tsc && copyfiles -u 1 \"src/**/*.md\" dist && copyfiles -u 1 \"src/public/**/*\" dist && node scripts/add-shebang.js",
     "dev": "ts-node src/index.ts",
     "start": "node dist/index.js",
+    "view": "node scripts/start-viewer.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-commands": "ts-node src/utils/commandGenerator.ts",
     "install-commands": "npm run build && node dist/utils/commandGenerator.js"

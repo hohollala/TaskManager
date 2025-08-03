@@ -1,6 +1,6 @@
 /**
- * getTaskDetail prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * getTaskDetail 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task } from "../../types/index.js";
 
 /**
- * getTaskDetail prompt 參數介面
+ * getTaskDetail 프롬프트 매개변수 인터페이스
  */
 export interface GetTaskDetailPromptParams {
   taskId: string;
@@ -20,16 +20,16 @@ export interface GetTaskDetailPromptParams {
 }
 
 /**
- * 獲取 getTaskDetail 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * getTaskDetail의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getGetTaskDetailPrompt(
   params: GetTaskDetailPromptParams
 ): Promise<string> {
   const { taskId, task, error } = params;
 
-  // 如果有錯誤，顯示錯誤訊息
+  // 오류가 있으면 오류 메시지 표시
   if (error) {
     const errorTemplate = await loadPromptFromTemplate(
       "getTaskDetail/error.md"
@@ -39,7 +39,7 @@ export async function getGetTaskDetailPrompt(
     });
   }
 
-  // 如果找不到任務，顯示找不到任務的訊息
+  // 작업을 찾을 수 없으면 찾을 수 없다는 메시지 표시
   if (!task) {
     const notFoundTemplate = await loadPromptFromTemplate(
       "getTaskDetail/notFound.md"
@@ -114,14 +114,14 @@ export async function getGetTaskDetailPrompt(
       "getTaskDetail/complatedSummary.md"
     );
     complatedSummaryPrompt = generatePrompt(complatedSummaryTemplate, {
-      completedTime: new Date(task.completedAt).toLocaleString("zh-TW"),
-      summary: task.summary || "*無完成摘要*",
+      completedTime: new Date(task.completedAt).toLocaleString("ko"),
+      summary: task.summary || "*완료 요약 없음*",
     });
   }
 
   const indexTemplate = await loadPromptFromTemplate("getTaskDetail/index.md");
 
-  // 開始構建基本 prompt
+  // 기본 프롬프트 빌드 시작
   let prompt = generatePrompt(indexTemplate, {
     name: task.name,
     id: task.id,
@@ -132,11 +132,11 @@ export async function getGetTaskDetailPrompt(
     implementationGuideTemplate: implementationGuidePrompt,
     verificationCriteriaTemplate: verificationCriteriaPrompt,
     relatedFilesTemplate: relatedFilesPrompt,
-    createdTime: new Date(task.createdAt).toLocaleString("zh-TW"),
-    updatedTime: new Date(task.updatedAt).toLocaleString("zh-TW"),
+        createdTime: new Date(task.createdAt).toLocaleString("ko"),
+    updatedTime: new Date(task.updatedAt).toLocaleString("ko"),
     complatedSummaryTemplate: complatedSummaryPrompt,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "GET_TASK_DETAIL");
 }

@@ -1,4 +1,4 @@
-# Node.js 相關
+# Node.js 관련
 node_modules/
 npm-debug.log
 yarn-debug.log
@@ -6,19 +6,19 @@ yarn-error.log
 .npm
 .yarn-integrity
 
-# TypeScript 編譯輸出
+# TypeScript 컴파일 출력
 dist/
 build/
 *.tsbuildinfo
 
-# 環境變數和敏感資訊
+# 환경 변수 및 민감한 정보
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# IDE 和編輯器
+# IDE 및 편집기
 .idea/
 .vscode/*
 !.vscode/extensions.json
@@ -28,31 +28,31 @@ build/
 *.code-workspace
 .DS_Store
 
-# 日誌檔案
+# 로그 파일
 logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# 暫存檔案
+# 임시 파일
 .tmp/
 .temp/
 tmp/
 temp/
 
-# 系統檔案
+# 시스템 파일
 .DS_Store
 Thumbs.db
 
-# 覆蓋率報告
+# 커버리지 보고서
 coverage/
 
-# 資料檔案
+# 데이터 파일
 *.sqlite
 data/*.json
 data/*/*.json
 data/*
 
-# Cursor AI 生成的暫存檔案
+# Cursor AI 생성 임시 파일
 .cursor/tmp/ 

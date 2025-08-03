@@ -13,7 +13,7 @@ import { setGlobalServer } from "./utils/paths.js";
 import { createWebServer } from "./web/webServer.js";
 import { generateCommandFiles } from "./utils/commandGenerator.js";
 
-// 導入所有工具函數和 schema
+// 모든 도구 함수 및 스키마 가져오기
 import {
   planTask,
   planTaskSchema,
@@ -62,7 +62,7 @@ async function main() {
       console.warn('⚠️ 명령어 파일 생성 실패 (선택사항):', error);
     }
 
-    // 創建MCP服務器
+    // MCP 서버 생성
     const server = new Server(
       {
         name: "Shrimp Task Manager",
@@ -76,10 +76,10 @@ async function main() {
       }
     );
 
-    // 設置全局 server 實例
+    // 전역 서버 인스턴스 설정
     setGlobalServer(server);
 
-    // 監聽 initialized 通知來啟動 web 服務器
+    // 웹 서버 시작을 위해 초기화된 알림 수신 대기
     if (ENABLE_GUI) {
       server.setNotificationHandler(InitializedNotificationSchema, async () => {
         try {
@@ -371,7 +371,7 @@ async function main() {
       }
     );
 
-    // 建立連接
+    // 연결 설정
     const transport = new StdioServerTransport();
     await server.connect(transport);
   } catch (error) {

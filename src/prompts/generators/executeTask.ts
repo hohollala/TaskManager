@@ -1,6 +1,6 @@
 /**
- * executeTask prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * executeTask 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task, TaskStatus } from "../../types/index.js";
 
 /**
- * 任務複雜度評估的介面
+ * 작업 복잡도 평가 인터페이스
  */
 interface ComplexityAssessment {
   level: string;
@@ -23,7 +23,7 @@ interface ComplexityAssessment {
 }
 
 /**
- * executeTask prompt 參數介面
+ * executeTask 프롬프트 매개변수 인터페이스
  */
 export interface ExecuteTaskPromptParams {
   task: Task;
@@ -33,27 +33,27 @@ export interface ExecuteTaskPromptParams {
 }
 
 /**
- * 獲取複雜度級別的樣式文字
- * @param level 複雜度級別
- * @returns 樣式文字
+ * 복잡도 수준에 대한 스타일 텍스트를 가져옵니다.
+ * @param level 복잡도 수준
+ * @returns 스타일 텍스트
  */
 function getComplexityStyle(level: string): string {
   switch (level) {
     case "VERY_HIGH":
-      return "⚠️ **警告：此任務複雜度極高** ⚠️";
+      return "⚠️ **경고: 이 작업은 복잡도가 매우 높습니다** ⚠️";
     case "HIGH":
-      return "⚠️ **注意：此任務複雜度較高**";
+      return "⚠️ **주의: 이 작업은 복잡도가 높습니다**";
     case "MEDIUM":
-      return "**提示：此任務具有一定複雜性**";
+      return "**팁: 이 작업은 어느 정도 복잡합니다**";
     default:
       return "";
   }
 }
 
 /**
- * 獲取 executeTask 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * executeTask의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getExecuteTaskPrompt(
   params: ExecuteTaskPromptParams
@@ -112,7 +112,7 @@ export async function getExecuteTaskPrompt(
       let dependencyTasksContent = "";
       for (const depTask of completedDependencyTasks) {
         dependencyTasksContent += `### ${depTask.name}\n${
-          depTask.summary || "*無完成摘要*"
+          depTask.summary || "*완료 요약 없음*"
         }\n\n`;
       }
       dependencyTasksPrompt = generatePrompt(dependencyTasksTemplate, {
@@ -126,7 +126,7 @@ export async function getExecuteTaskPrompt(
   );
   let relatedFilesSummaryPrompt = "";
   relatedFilesSummaryPrompt = generatePrompt(relatedFilesSummaryTemplate, {
-    relatedFilesSummary: relatedFilesSummary || "當前任務沒有關聯的文件。",
+    relatedFilesSummary: relatedFilesSummary || "현재 작업에 연결된 파일이 없습니다.",
   });
 
   const complexityTemplate = await loadPromptFromTemplate(
@@ -167,6 +167,6 @@ export async function getExecuteTaskPrompt(
     complexityTemplate: complexityPrompt,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "EXECUTE_TASK");
 }

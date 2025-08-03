@@ -1538,7 +1538,7 @@ MCP_PROMPT_EXECUTE_TASK_APPEND="추가적인 작업 실행 지침"
                 <a
                   href="en/prompt-customization.md"
                   class="btn btn-primary lang-specific"
-                  data-lang-zh-tw="zh/prompt-customization.md"
+                  data-lang-ko="ko/prompt-customization.md"
                   data-lang-en="en/prompt-customization.md"
                   data-i18n="prompt-custom.view-docs"
                 >
@@ -1607,6 +1607,24 @@ MCP_PROMPT_EXECUTE_TASK_APPEND="추가적인 작업 실행 지침"
                 <span data-i18n="installation.cursor.title"
                   >Cursor IDE 설정</span
                 >
+              </button>
+              <button
+                class="install-tab-btn flex-1 py-4 px-6 text-center font-medium focus:outline-none"
+                data-target="gemini-cli"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 inline-block mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>Gemini CLI 설정</span>
               </button>
             </div>
 
@@ -2014,6 +2032,430 @@ cd TaskManager"
                       설정을 사용하여 다른 작업 환경에 적응할 수 있습니다.
                     </p>
                   </div>
+                </div>
+              </div>
+
+              <!-- Gemini CLI 설정 -->
+              <div
+                id="gemini-cli"
+                class="install-content-section hidden p-6"
+              >
+                <div class="mb-6">
+                  <h3
+                    class="text-2xl font-bold mb-3 text-orange-600"
+                    data-i18n="installation.gemini.title"
+                  >
+                    Gemini CLI 설정
+                  </h3>
+                  <p
+                    class="text-gray-700 mb-4"
+                    data-i18n="installation.gemini.description"
+                  >
+                    Gemini CLI를 사용하여 Shrimp Task Manager를 설정하고 사용할 수 있습니다. Shrimp Task Manager는 AI 에이전트를 위한 작업 도구로, 사고 과정, 반성, 스타일 일관성을 강조하며 자연어를 구조화된 개발 작업으로 변환합니다.
+                  </p>
+                </div>
+
+                <!-- 단계 1: Gemini CLI 설치 -->
+                <div class="mb-8">
+                  <div class="flex items-center mb-3">
+                    <div
+                      class="bg-orange-100 h-8 w-8 rounded-full flex items-center justify-center mr-3"
+                    >
+                      <span class="text-orange-600 font-bold">1</span>
+                    </div>
+                    <h4
+                      class="text-lg font-semibold"
+                      data-i18n="installation.gemini.step1"
+                    >
+                      Gemini CLI 설치
+                    </h4>
+                  </div>
+
+                  <div
+                    class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg ml-11 relative"
+                  >
+                    <pre
+                      class="text-gray-100 whitespace-pre-wrap font-mono"
+                    ><code class="language-bash">npm install -g @google/generative-ai</code></pre>
+                    <button
+                      class="copy-cmd-btn absolute top-4 right-4 text-xs bg-orange-600 hover:bg-orange-700 text-white py-1 px-3 rounded"
+                      data-command="npm install -g @google/generative-ai"
+                      data-i18n="installation.copy-button"
+                    >
+                      복사
+                    </button>
+                  </div>
+                </div>
+
+                <!-- 단계 2: API 키 설정 -->
+                <div class="mb-8">
+                  <div class="flex items-center mb-3">
+                    <div
+                      class="bg-orange-100 h-8 w-8 rounded-full flex items-center justify-center mr-3"
+                    >
+                      <span class="text-orange-600 font-bold">2</span>
+                    </div>
+                    <h4
+                      class="text-lg font-semibold"
+                      data-i18n="installation.gemini.step2"
+                    >
+                      API 키 설정
+                    </h4>
+                  </div>
+
+                  <div class="mb-4">
+                    <p class="text-gray-700 mb-3">
+                      Google AI Studio에서 API 키를 발급받아 환경 변수로 설정하세요:
+                    </p>
+                    <div
+                      class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative"
+                    >
+                      <pre
+                        class="text-gray-100 whitespace-pre-wrap font-mono"
+                      ><code class="language-bash"># Windows
+set GOOGLE_API_KEY=your_api_key_here
+
+# macOS/Linux
+export GOOGLE_API_KEY=your_api_key_here</code></pre>
+                      <button
+                        class="copy-cmd-btn absolute top-4 right-4 text-xs bg-orange-600 hover:bg-orange-700 text-white py-1 px-3 rounded"
+                        data-command="set GOOGLE_API_KEY=your_api_key_here"
+                        data-i18n="installation.copy-button"
+                      >
+                        복사
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 단계 3: Shrimp Task Manager 설정 -->
+                <div class="mb-8">
+                  <div class="flex items-center mb-3">
+                    <div
+                      class="bg-orange-100 h-8 w-8 rounded-full flex items-center justify-center mr-3"
+                    >
+                      <span class="text-orange-600 font-bold">3</span>
+                    </div>
+                    <h4
+                      class="text-lg font-semibold"
+                      data-i18n="installation.gemini.step3"
+                    >
+                      Shrimp Task Manager 설정
+                    </h4>
+                  </div>
+
+                  <div class="mb-4">
+                    <p class="text-gray-700 mb-3">
+                      Gemini CLI에서 Shrimp Task Manager를 사용하기 위한 설정 파일을 생성하세요:
+                    </p>
+                    <div
+                      class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative"
+                    >
+                      <div class="mb-4">
+                        <h4 class="text-lg font-semibold mb-3">Windows용 설정:</h4>
+                        <div class="mb-2 flex items-center">
+                          <span class="ml-2 text-xs text-gray-400">설정 파일: ~/.gemini/_settings.json</span>
+                        </div>
+                        <pre
+                          class="text-gray-100 whitespace-pre-wrap font-mono"
+                        ><code class="language-json">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "env": {
+        "DATA_DIR": "C:\\YOUR_PATH\\TaskManager",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}</code></pre>
+                        <button
+                          class="copy-cmd-btn absolute top-4 right-4 text-xs bg-orange-600 hover:bg-orange-700 text-white py-1 px-3 rounded"
+                          data-command='{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "env": {
+        "DATA_DIR": "C:\\YOUR_PATH\\TaskManager",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}'
+                        >
+                          복사
+                        </button>
+                      </div>
+
+                      <div class="mb-4">
+                        <h4 class="text-lg font-semibold mb-3">macOS/Linux용 설정:</h4>
+                        <div class="mb-2 flex items-center">
+                          <span class="ml-2 text-xs text-gray-400">설정 파일: ~/.gemini/_settings.json</span>
+                        </div>
+                        <pre
+                          class="text-gray-100 whitespace-pre-wrap font-mono"
+                        ><code class="language-json">{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["$(pwd)/dist/index.js"],
+      "env": {
+        "DATA_DIR": "/home/YOUR_USERNAME/TaskManager",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}</code></pre>
+                        <button
+                          class="copy-cmd-btn absolute top-4 right-4 text-xs bg-orange-600 hover:bg-orange-700 text-white py-1 px-3 rounded"
+                          data-command='{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["$(pwd)/dist/index.js"],
+      "env": {
+        "DATA_DIR": "/home/YOUR_USERNAME/TaskManager",
+        "TEMPLATES_USE": "ko",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}'
+                        >
+                          복사
+                        </button>
+                      </div>
+
+                      <div class="bg-yellow-50 p-4 rounded-lg mb-4">
+                        <h4 class="text-lg font-semibold mb-2 text-yellow-600 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                          </svg>
+                          중요: DATA_DIR 설정
+                        </h4>
+                        <ul class="list-disc ml-6 space-y-2 text-gray-700">
+                          <li><strong>YOUR_PATH</strong>를 실제 경로로 변경하세요</li>
+                          <li>Windows: <code class="bg-yellow-100 px-1 py-0.5 rounded">C:\\YOUR_PATH\\TaskManager</code></li>
+                          <li>macOS/Linux: <code class="bg-yellow-100 px-1 py-0.5 rounded">/home/YOUR_USERNAME/TaskManager</code></li>
+                          <li>예시: <code class="bg-yellow-100 px-1 py-0.5 rounded">C:\\claudeMCPS\\TaskManager</code></li>
+                          <li><strong>중요:</strong> 프로젝트를 먼저 빌드해야 합니다 (<code class="bg-yellow-100 px-1 py-0.5 rounded">npm run build</code>)</li>
+                          <li><strong>macOS/Linux:</strong> <code class="bg-yellow-100 px-1 py-0.5 rounded">$(pwd)/dist/index.js</code> 형식으로 절대 경로 사용</li>
+                          <li>또는 원하는 다른 경로로 설정할 수 있습니다</li>
+                        </ul>
+                      </div>
+
+                      <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                        <h4 class="text-lg font-semibold mb-2 text-blue-600 flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd" />
+                          </svg>
+                          GUI 옵션 설정
+                        </h4>
+                        <div class="space-y-3">
+                          <div>
+                            <h5 class="font-semibold text-gray-800 mb-2">ENABLE_GUI: false (기본값)</h5>
+                            <ul class="list-disc ml-6 space-y-1 text-gray-700">
+                              <li>CLI 전용 모드로 실행</li>
+                              <li>Gemini CLI에서 직접 명령어로 작업 관리</li>
+                              <li>더 빠르고 가벼운 실행</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h5 class="font-semibold text-gray-800 mb-2">ENABLE_GUI: true</h5>
+                            <ul class="list-disc ml-6 space-y-1 text-gray-700">
+                              <li>웹 기반 그래픽 인터페이스 활성화</li>
+                              <li>브라우저에서 작업을 시각적으로 관리</li>
+                              <li>작업 상태, 진행률, 의존성을 시각적으로 확인</li>
+                              <li>드래그 앤 드롭으로 작업 순서 변경</li>
+                              <li>실시간 작업 업데이트 및 알림</li>
+                            </ul>
+                          </div>
+                          <div class="bg-gray-100 p-3 rounded">
+                            <p class="text-sm text-gray-700">
+                              <strong>GUI 사용 시 추가 설정:</strong><br>
+                              <code class="bg-gray-200 px-1 py-0.5 rounded">"WEB_PORT": "3000"</code> - 웹 서버 포트 설정 (선택사항)
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 단계 4: 사용 방법 -->
+                <div class="mb-8">
+                  <div class="flex items-center mb-3">
+                    <div
+                      class="bg-orange-100 h-8 w-8 rounded-full flex items-center justify-center mr-3"
+                    >
+                      <span class="text-orange-600 font-bold">4</span>
+                    </div>
+                    <h4
+                      class="text-lg font-semibold"
+                      data-i18n="installation.gemini.step4"
+                    >
+                      사용 방법
+                    </h4>
+                  </div>
+
+                  <div class="mb-4">
+                    <p class="text-gray-700 mb-3">
+                      Gemini CLI에서 Shrimp Task Manager를 사용하는 방법:
+                    </p>
+                    <div
+                      class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative"
+                    >
+                                              <pre
+                          class="text-gray-100 whitespace-pre-wrap font-mono"
+                        ><code class="language-bash"># Gemini CLI 시작
+gemini
+
+# MCP 서버 연결 확인
+# Gemini CLI가 자동으로 설정된 MCP 서버를 인식합니다
+
+# 작업 계획 생성
+plan_task "새로운 웹 애플리케이션 개발"
+
+# 작업 분석
+analyze_task "task_id_here"
+
+# 작업 목록 확인
+list_tasks
+
+# 특정 작업 상세 정보 확인
+get_task_detail "task_id_here"
+
+# 작업 분해
+split_tasks "task_id_here"
+
+# 작업 실행
+execute_task "task_id_here"
+
+# 작업 검증
+verify_task "task_id_here"
+
+# 작업 반성 및 개선
+reflect_task "task_id_here"
+
+# 연구 모드
+research_mode "기술 주제"
+
+# 프로젝트 규칙 초기화
+init_project_rules
+
+# GUI 모드 사용 시 (ENABLE_GUI: true)
+# 브라우저에서 http://localhost:3000 접속하여 웹 인터페이스 사용</code></pre>
+                      <button
+                        class="copy-cmd-btn absolute top-4 right-4 text-xs bg-orange-600 hover:bg-orange-700 text-white py-1 px-3 rounded"
+                        data-command="gemini"
+                        data-i18n="installation.copy-button"
+                      >
+                        복사
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 주의사항 -->
+                <div class="bg-orange-50 p-4 rounded-lg mb-6">
+                  <h4
+                    class="text-lg font-semibold mb-2 text-orange-600 flex items-center"
+                    data-i18n="installation.gemini.note.title"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    주의사항
+                  </h4>
+                  <ul class="list-disc ml-6 space-y-2 text-gray-700">
+                    <li data-i18n="installation.gemini.note.item1">
+                      Gemini CLI는 Google의 AI 모델을 사용하므로 인터넷 연결이 필요합니다.
+                    </li>
+                    <li data-i18n="installation.gemini.note.item2">
+                      API 키는 안전하게 보관하고 공개 저장소에 업로드하지 마세요.
+                    </li>
+                    <li data-i18n="installation.gemini.note.item3">
+                      사용량에 따라 Google AI Studio에서 요금이 발생할 수 있습니다.
+                    </li>
+                    <li data-i18n="installation.gemini.note.item4">
+                      npx를 통해 패키지를 실행하므로 Node.js가 설치되어 있어야 합니다.
+                    </li>
+                    <li data-i18n="installation.gemini.note.item5">
+                      DATA_DIR 경로는 반드시 실제 존재하는 경로로 설정해야 합니다.
+                    </li>
+                    <li data-i18n="installation.gemini.note.item6">
+                      설정 파일 경로는 운영체제에 따라 다를 수 있습니다.
+                    </li>
+                    <li data-i18n="installation.gemini.note.item7">
+                      Gemini CLI는 실험적 기능이므로 안정성을 위해 정기적으로 업데이트하세요.
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- 추가 리소스 -->
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <h4
+                    class="text-lg font-semibold mb-2 text-blue-600"
+                    data-i18n="installation.gemini.resources.title"
+                  >
+                    추가 리소스
+                  </h4>
+                  <ul class="list-disc ml-6 space-y-2 text-gray-700">
+                    <li>
+                      <a
+                        href="https://github.com/cjo4m06/mcp-shrimp-task-manager"
+                        target="_blank"
+                        class="text-blue-600 hover:text-blue-800"
+                        data-i18n="installation.gemini.resources.item1"
+                      >
+                        Shrimp Task Manager GitHub 저장소
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://cjo4m06.github.io/mcp-shrimp-task-manager/"
+                        target="_blank"
+                        class="text-blue-600 hover:text-blue-800"
+                        data-i18n="installation.gemini.resources.item2"
+                      >
+                        공식 문서 및 데모
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://ai.google.dev/"
+                        target="_blank"
+                        class="text-blue-600 hover:text-blue-800"
+                        data-i18n="installation.gemini.resources.item3"
+                      >
+                        Google AI Studio 공식 문서
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://makersuite.google.com/app/apikey"
+                        target="_blank"
+                        class="text-blue-600 hover:text-blue-800"
+                        data-i18n="installation.gemini.resources.item4"
+                      >
+                        API 키 발급 페이지
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>

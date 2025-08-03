@@ -1,0 +1,25 @@
+{
+  "name": "task-viewer",
+  "version": "1.0.0",
+  "description": "작업 내역을 확인할 수 있는 웹 뷰어",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "task",
+    "viewer",
+    "web",
+    "dashboard"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+} 

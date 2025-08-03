@@ -1,6 +1,6 @@
 /**
- * listTasks prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * listTasks 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task, TaskStatus } from "../../types/index.js";
 
 /**
- * listTasks prompt 參數介面
+ * listTasks 프롬프트 매개변수 인터페이스
  */
 export interface ListTasksPromptParams {
   status: string;
@@ -20,31 +20,31 @@ export interface ListTasksPromptParams {
 }
 
 /**
- * 獲取 listTasks 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * listTasks의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getListTasksPrompt(
   params: ListTasksPromptParams
 ): Promise<string> {
   const { status, tasks, allTasks } = params;
 
-  // 如果沒有任務，顯示通知
+  // 작업이 없으면 알림 표시
   if (allTasks.length === 0) {
     const notFoundTemplate = await loadPromptFromTemplate(
       "listTasks/notFound.md"
     );
-    const statusText = status === "all" ? "任何" : `任何 ${status} 的`;
+    const statusText = status === "all" ? "어떤" : `${status} 상태의`;
     return generatePrompt(notFoundTemplate, {
       statusText: statusText,
     });
   }
 
-  // 獲取所有狀態的計數
+  // 모든 상태의 개수 가져오기
   const statusCounts = Object.values(TaskStatus)
     .map((statusType) => {
       const count = tasks[statusType]?.length || 0;
-      return `- **${statusType}**: ${count} 個任務`;
+      return `- **${statusType}**: ${count} 개 작업`;
     })
     .join("\n");
 
@@ -65,7 +65,7 @@ export async function getListTasksPrompt(
   let taskDetailsTemplate = await loadPromptFromTemplate(
     "listTasks/taskDetails.md"
   );
-  // 添加每個狀態下的詳細任務
+  // 각 상태별 상세 작업 추가
   for (const statusType of Object.values(TaskStatus)) {
     const tasksWithStatus = tasks[statusType] || [];
     if (
@@ -73,7 +73,7 @@ export async function getListTasksPrompt(
       (filterStatus === "all" || filterStatus === statusType)
     ) {
       for (const task of tasksWithStatus) {
-        let dependencies = "沒有依賴";
+        let dependencies = "의존성 없음";
         if (task.dependencies && task.dependencies.length > 0) {
           dependencies = task.dependencies
             .map((d) => `\`${d.taskId}\``)
@@ -100,6 +100,6 @@ export async function getListTasksPrompt(
     taskDetailsTemplate: taskDetails,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "LIST_TASKS");
 }

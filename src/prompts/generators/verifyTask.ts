@@ -1,6 +1,6 @@
 /**
- * verifyTask prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * verifyTask 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task } from "../../types/index.js";
 
 /**
- * verifyTask prompt 參數介面
+ * verifyTask 프롬프트 매개변수 인터페이스
  */
 export interface VerifyTaskPromptParams {
   task: Task;
@@ -20,10 +20,10 @@ export interface VerifyTaskPromptParams {
 }
 
 /**
- * 提取摘要內容
- * @param content 原始內容
- * @param maxLength 最大長度
- * @returns 提取的摘要
+ * 요약 내용 추출
+ * @param content 원본 내용
+ * @param maxLength 최대 길이
+ * @returns 추출된 요약
  */
 function extractSummary(
   content: string | undefined,
@@ -35,14 +35,14 @@ function extractSummary(
     return content;
   }
 
-  // 簡單的摘要提取：截取前 maxLength 個字符並添加省略號
+  // 간단한 요약 추출: maxLength 문자열을 자르고 생략 부호 추가
   return content.substring(0, maxLength) + "...";
 }
 
 /**
- * 獲取 verifyTask 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * verifyTask의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getVerifyTaskPrompt(
   params: VerifyTaskPromptParams
@@ -62,16 +62,16 @@ export async function getVerifyTaskPrompt(
     name: task.name,
     id: task.id,
     description: task.description,
-    notes: task.notes || "no notes",
+    notes: task.notes || "메모 없음",
     verificationCriteria:
-      task.verificationCriteria || "no verification criteria",
+      task.verificationCriteria || "검증 기준 없음",
     implementationGuideSummary:
       extractSummary(task.implementationGuide, 200) ||
-      "no implementation guide",
+      "구현 가이드 없음",
     analysisResult:
-      extractSummary(task.analysisResult, 300) || "no analysis result",
+      extractSummary(task.analysisResult, 300) || "분석 결과 없음",
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "VERIFY_TASK");
 }

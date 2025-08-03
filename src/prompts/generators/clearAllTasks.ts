@@ -1,6 +1,6 @@
 /**
- * clearAllTasks prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * clearAllTasks 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -10,7 +10,7 @@ import {
 } from "../loader.js";
 
 /**
- * clearAllTasks prompt 參數介面
+ * clearAllTasks 프롬프트 매개변수 인터페이스
  */
 export interface ClearAllTasksPromptParams {
   confirm?: boolean;
@@ -21,16 +21,16 @@ export interface ClearAllTasksPromptParams {
 }
 
 /**
- * 獲取 clearAllTasks 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * clearAllTasks의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getClearAllTasksPrompt(
   params: ClearAllTasksPromptParams
 ): Promise<string> {
   const { confirm, success, message, backupFile, isEmpty } = params;
 
-  // 處理未確認的情況
+  // 확인되지 않은 경우 처리
   if (confirm === false) {
     const cancelTemplate = await loadPromptFromTemplate(
       "clearAllTasks/cancel.md"
@@ -38,7 +38,7 @@ export async function getClearAllTasksPrompt(
     return generatePrompt(cancelTemplate, {});
   }
 
-  // 處理無任務需要清除的情況
+  // 지울 작업이 없는 경우 처리
   if (isEmpty) {
     const emptyTemplate = await loadPromptFromTemplate(
       "clearAllTasks/empty.md"
@@ -46,10 +46,10 @@ export async function getClearAllTasksPrompt(
     return generatePrompt(emptyTemplate, {});
   }
 
-  // 處理清除成功或失敗的情況
+  // 지우기 성공 또는 실패의 경우 처리
   const responseTitle = success ? "Success" : "Failure";
 
-  // 使用模板生成 backupInfo
+  // 템플릿을 사용하여 backupInfo 생성
   const backupInfo = backupFile
     ? generatePrompt(
         await loadPromptFromTemplate("clearAllTasks/backupInfo.md"),
@@ -66,6 +66,6 @@ export async function getClearAllTasksPrompt(
     backupInfo,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "CLEAR_ALL_TASKS");
 }

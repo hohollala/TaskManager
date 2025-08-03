@@ -1,6 +1,6 @@
-/* MCP Shrimp Task Manager 網站樣式 */
+/* MCP Shrimp Task Manager 웹사이트 스타일 */
 
-/* 全局變量 */
+/* 전역 변수 */
 :root {
   --primary-color: #3b82f6;
   --primary-dark: #2563eb;
@@ -19,18 +19,18 @@
   --solution-purple: #8b5cf6;
 }
 
-/* 全局樣式 */
+/* 전역 스타일 */
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden; /* 防止水平溢出 */
+  overflow-x: hidden; /* 수평 스크롤 방지 */
 }
 
 body {
   line-height: 1.6;
-  overflow-x: hidden; /* 防止水平溢出 */
+  overflow-x: hidden; /* 수평 스크롤 방지 */
 }
 
-/* 自定義動畫 */
+/* 사용자 정의 애니메이션 */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -87,7 +87,7 @@ body {
   }
 }
 
-/* 導航欄樣式 */
+/* 네비게이션 바 스타일 */
 header nav img {
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -129,7 +129,7 @@ header nav a:hover::after {
   max-height: 500px;
 }
 
-/* 英雄區樣式 */
+/* 히어로 섹션 스타일 */
 #hero {
   position: relative;
   overflow: hidden;
@@ -181,7 +181,7 @@ header nav a:hover::after {
   animation-fill-mode: forwards;
 }
 
-/* 痛點與解決方案區樣式 */
+/* 문제점 및 해결책 섹션 스타일 */
 #pain-points .shadow-lg {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -248,7 +248,7 @@ header nav a:hover::after {
   background-color: var(--solution-purple);
 }
 
-/* 按鈕樣式 */
+/* 버튼 스타일 */
 .btn {
   display: inline-block;
   padding: 0.75rem 1.5rem;
@@ -303,7 +303,7 @@ header nav a:hover::after {
   box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
 }
 
-/* 卡片樣式 */
+/* 카드 스타일 */
 .card {
   background-color: white;
   border-radius: 0.5rem;
@@ -316,7 +316,7 @@ header nav a:hover::after {
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* 代碼區塊樣式增強 */
+/* 코드 블록 스타일 강화 */
 pre[class*="language-"] {
   border-radius: 0.5rem;
   margin: 1.5rem 0;
@@ -329,7 +329,7 @@ pre[class*="language-"]:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* 響應式調整 - 手機端 (<768px) */
+/* 반응형 조정 - 모바일 (<768px) */
 @media (max-width: 767px) {
   h1 {
     font-size: 1.875rem;
@@ -376,7 +376,7 @@ pre[class*="language-"]:hover {
   }
 }
 
-/* 平板端 (768px-1024px) */
+/* 태블릿 (768px-1024px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   h1 {
     font-size: 2.25rem;
@@ -399,7 +399,7 @@ pre[class*="language-"]:hover {
   }
 }
 
-/* 低性能設備動畫降級 */
+/* 저사양 기기 애니메이션 다운그레이드 */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -411,7 +411,7 @@ pre[class*="language-"]:hover {
   }
 }
 
-/* 輔助類 */
+/* 헬퍼 클래스 */
 .text-gradient {
   background: linear-gradient(
     90deg,
@@ -443,7 +443,7 @@ pre[class*="language-"]:hover {
   );
 }
 
-/* GitHub圖標 */
+/* GitHub 아이콘 */
 header nav a[href*="github"] svg {
   transition: transform 0.3s ease;
 }
@@ -452,7 +452,7 @@ header nav a[href*="github"]:hover svg {
   transform: rotate(10deg);
 }
 
-/* 自定義滾動條 */
+/* 사용자 정의 스크롤바 */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -470,7 +470,7 @@ header nav a[href*="github"]:hover svg {
   background: var(--gray-dark);
 }
 
-/* 功能卡片樣式 */
+/* 기능 카드 스타일 */
 #features .rounded-lg {
   position: relative;
   overflow: hidden;
@@ -526,7 +526,7 @@ header nav a[href*="github"]:hover svg {
   width: 100%;
 }
 
-/* 根據顏色設置不同顏色光暈 */
+/* 색상에 따라 다른 색상 광선 설정 */
 #features .bg-indigo-50 {
   box-shadow: 0 0 0 transparent;
   transition: box-shadow 0.3s ease;
@@ -581,7 +581,7 @@ header nav a[href*="github"]:hover svg {
   box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
 }
 
-/* 工作流程區域樣式 */
+/* 작업 흐름 영역 스타일 */
 #workflow {
   position: relative;
   overflow: hidden;
@@ -599,7 +599,7 @@ header nav a[href*="github"]:hover svg {
   pointer-events: none;
 }
 
-/* 桌面版時間軸樣式 */
+/* 데스크탑 버전 타임라인 스타일 */
 .workflow-step {
   display: flex;
   flex-direction: column;
@@ -632,7 +632,7 @@ header nav a[href*="github"]:hover svg {
   transform: translateY(-2px);
 }
 
-/* 移動版時間軸樣式 */
+/* 모바일 버전 타임라인 스타일 */
 .workflow-icon-mobile {
   width: 48px;
   height: 48px;
@@ -656,7 +656,7 @@ header nav a[href*="github"]:hover svg {
   }
 }
 
-/* 步驟詳情彈窗樣式 */
+/* 단계 상세 팝업 스타일 */
 #workflow-detail-modal {
   transition: opacity 0.3s ease;
 }
@@ -687,7 +687,7 @@ header nav a[href*="github"]:hover svg {
   width: 100%;
 }
 
-/* 安裝與配置區樣式 */
+/* 설치 및 구성 영역 스타일 */
 #installation .install-tab-btn {
   transition: all 0.3s ease;
   color: var(--gray-dark);
@@ -713,11 +713,11 @@ header nav a[href*="github"]:hover svg {
   transform: scale(1.2);
 }
 
-/* 命令行介面樣式 */
+/* 커맨드 라인 인터페이스 스타일 */
 .mockup-code {
   font-family: "Fira Code", monospace;
-  background-color: #1a202c; /* 深色背景 */
-  color: #e2e8f0; /* 亮色文本 */
+  background-color: #1a202c; /* 어두운 배경 */
+  color: #e2e8f0; /* 밝은 텍스트 */
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -758,7 +758,7 @@ header nav a[href*="github"]:hover svg {
   transform: translateY(-2px);
 }
 
-/* Cursor IDE 配置選項卡 */
+/* Cursor IDE 구성 옵션 탭 */
 .cursor-tab-btn {
   transition: all 0.3s ease;
   background-color: #f3f4f6;
@@ -770,7 +770,7 @@ header nav a[href*="github"]:hover svg {
   border-color: var(--primary-color);
 }
 
-/* 安裝卡片樣式 */
+/* 설치 카드 스타일 */
 #installation .grid > div {
   transition: all 0.3s ease;
   background-size: 200% 200%;
@@ -838,7 +838,7 @@ header nav a[href*="github"]:hover svg {
   }
 }
 
-/* CTA與資源區樣式 */
+/* CTA 및 리소스 영역 스타일 */
 #cta {
   position: relative;
   overflow: hidden;
@@ -856,7 +856,7 @@ header nav a[href*="github"]:hover svg {
   pointer-events: none;
 }
 
-/* CTA按鈕增強 */
+/* CTA 버튼 강화 */
 .btn-lg {
   padding: 0.875rem 1.75rem;
   display: flex;
@@ -871,7 +871,7 @@ header nav a[href*="github"]:hover svg {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* 資源卡片樣式 */
+/* 리소스 카드 스타일 */
 .resource-card {
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(4px);
@@ -916,7 +916,7 @@ header nav a[href*="github"]:hover svg {
   opacity: 1;
 }
 
-/* 使用統計卡片 */
+/* 사용 통계 카드 */
 #cta .text-center {
   transition: all 0.3s ease;
   overflow: hidden;
@@ -948,7 +948,7 @@ header nav a[href*="github"]:hover svg {
   width: 80%;
 }
 
-/* 頁腳樣式 */
+/* 푸터 스타일 */
 footer {
   position: relative;
   overflow: hidden;
@@ -1013,7 +1013,7 @@ footer ul li:hover {
   }
 }
 
-/* 語言切換按鈕 */
+/* 언어 전환 버튼 */
 .language-switcher {
   display: flex;
   align-items: center;
@@ -1047,7 +1047,7 @@ footer ul li:hover {
   border-color: var(--primary-color);
 }
 
-/* 在移動設備上調整語言切換按鈕 */
+/* 모바일 장치에서 언어 전환 버튼 조정 */
 @media (max-width: 767px) {
   .language-switcher {
     margin: 0.5rem 0;

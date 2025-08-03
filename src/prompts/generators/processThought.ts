@@ -36,10 +36,10 @@ export async function getProcessThoughtPrompt(
     thoughtNumber: param.thoughtNumber,
     totalThoughts: param.totalThoughts,
     stage: param.stage,
-    tags: param.tags.join(", ") || "no tags",
-    axioms_used: param.axioms_used.join(", ") || "no axioms used",
+    tags: param.tags.join(", ") || "태그 없음",
+    axioms_used: param.axioms_used.join(", ") || "사용된 공리 없음",
     assumptions_challenged:
-      param.assumptions_challenged.join(", ") || "no assumptions challenged",
+      param.assumptions_challenged.join(", ") || "도전받은 가정 없음",
     nextThoughtNeeded,
   });
 

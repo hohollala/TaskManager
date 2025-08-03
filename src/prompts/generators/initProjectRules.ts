@@ -1,20 +1,20 @@
 /**
- * initProjectRules prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * initProjectRules 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import { loadPrompt, loadPromptFromTemplate } from "../loader.js";
 /**
- * initProjectRules prompt 參數介面
+ * initProjectRules 프롬프트 매개변수 인터페이스
  */
 export interface InitProjectRulesPromptParams {
-  // 目前沒有額外參數，未來可按需擴展
+  // 현재 추가 매개변수 없음, 필요에 따라 확장 가능
 }
 
 /**
- * 獲取 initProjectRules 的完整 prompt
- * @param params prompt 參數（可選）
- * @returns 生成的 prompt
+ * initProjectRules의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수 (선택 사항)
+ * @returns 생성된 프롬프트
  */
 export async function getInitProjectRulesPrompt(
   params?: InitProjectRulesPromptParams
@@ -23,6 +23,6 @@ export async function getInitProjectRulesPrompt(
     "initProjectRules/index.md"
   );
 
-  // 載入可能的自定義 prompt (通過環境變數覆蓋或追加)
+  // 가능한 사용자 정의 프롬프트 로드 (환경 변수를 통해 덮어쓰거나 추가)
   return loadPrompt(indexTemplate, "INIT_PROJECT_RULES");
 }

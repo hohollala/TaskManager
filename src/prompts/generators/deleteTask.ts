@@ -1,6 +1,6 @@
 /**
- * deleteTask prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * deleteTask 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task } from "../../types/index.js";
 
 /**
- * deleteTask prompt 參數介面
+ * deleteTask 프롬프트 매개변수 인터페이스
  */
 export interface DeleteTaskPromptParams {
   taskId: string;
@@ -22,16 +22,16 @@ export interface DeleteTaskPromptParams {
 }
 
 /**
- * 獲取 deleteTask 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * deleteTask의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getDeleteTaskPrompt(
   params: DeleteTaskPromptParams
 ): Promise<string> {
   const { taskId, task, success, message, isTaskCompleted } = params;
 
-  // 處理任務不存在的情況
+  // 작업이 존재하지 않는 경우 처리
   if (!task) {
     const notFoundTemplate = await loadPromptFromTemplate(
       "deleteTask/notFound.md"
@@ -41,7 +41,7 @@ export async function getDeleteTaskPrompt(
     });
   }
 
-  // 處理任務已完成的情況
+  // 작업이 이미 완료된 경우 처리
   if (isTaskCompleted) {
     const completedTemplate = await loadPromptFromTemplate(
       "deleteTask/completed.md"
@@ -52,7 +52,7 @@ export async function getDeleteTaskPrompt(
     });
   }
 
-  // 處理刪除成功或失敗的情況
+  // 삭제 성공 또는 실패의 경우 처리
   const responseTitle = success ? "Success" : "Failure";
   const indexTemplate = await loadPromptFromTemplate("deleteTask/index.md");
   const prompt = generatePrompt(indexTemplate, {
@@ -60,6 +60,6 @@ export async function getDeleteTaskPrompt(
     message,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "DELETE_TASK");
 }

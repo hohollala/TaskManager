@@ -1,6 +1,6 @@
 /**
- * planTask prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * planTask 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task, TaskDependency } from "../../types/index.js";
 
 /**
- * planTask prompt 參數介面
+ * planTask 프롬프트 매개변수 인터페이스
  */
 export interface PlanTaskPromptParams {
   description: string;
@@ -23,9 +23,9 @@ export interface PlanTaskPromptParams {
 }
 
 /**
- * 獲取 planTask 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * planTask의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getPlanTaskPrompt(
   params: PlanTaskPromptParams
@@ -37,21 +37,21 @@ export async function getPlanTaskPrompt(
     params.pendingTasks
   ) {
     const allTasks = [...params.completedTasks, ...params.pendingTasks];
-    // 如果存在任務，則添加相關資訊
+    // 작업이 존재하면 관련 정보 추가
     if (allTasks.length > 0) {
-      let completeTasksContent = "no completed tasks";
+      let completeTasksContent = "완료된 작업 없음";
 
-      // 處理已完成任務
+      // 완료된 작업 처리
       if (params.completedTasks.length > 0) {
         completeTasksContent = "";
-        // 最多顯示10個已完成任務，避免提示詞過長
+        // 프롬프트가 너무 길어지는 것을 방지하기 위해 최대 10개의 완료된 작업만 표시
         const tasksToShow =
           params.completedTasks.length > 10
             ? params.completedTasks.slice(0, 10)
             : params.completedTasks;
 
         tasksToShow.forEach((task, index) => {
-          // 產生完成時間資訊 (如果有)
+          // 완료 시간 정보 생성 (있는 경우)
           const completedTimeText = task.completedAt
             ? `   - completedAt：${task.completedAt.toLocaleString()}\n`
             : "";
@@ -63,20 +63,20 @@ export async function getPlanTaskPrompt(
               ? task.description.substring(0, 100) + "..."
               : task.description
           }\n${completedTimeText}`;
-          // 如果不是最後一個任務，添加換行
+          // 마지막 작업이 아니면 줄 바꿈 추가
           if (index < tasksToShow.length - 1) {
             completeTasksContent += "\n\n";
           }
         });
 
-        // 如果有更多任務，顯示提示
+        // 더 많은 작업이 있으면 힌트 표시
         if (params.completedTasks.length > 10) {
           completeTasksContent += `\n\n*（僅顯示前10個，共 ${params.completedTasks.length} 個）*\n`;
         }
       }
 
-      let unfinishedTasksContent = "no pending tasks";
-      // 處理未完成任務
+      let unfinishedTasksContent = "대기 중인 작업 없음";
+      // 미완료 작업 처리
       if (params.pendingTasks && params.pendingTasks.length > 0) {
         unfinishedTasksContent = "";
 
@@ -96,7 +96,7 @@ export async function getPlanTaskPrompt(
               : task.description
           }\n   - status：${task.status}\n${dependenciesText}`;
 
-          // 如果不是最後一個任務，添加換行
+          // 마지막 작업이 아니면 줄 바꿈 추가
           if (index < (params.pendingTasks?.length ?? 0) - 1) {
             unfinishedTasksContent += "\n\n";
           }
@@ -120,13 +120,13 @@ export async function getPlanTaskPrompt(
   const indexTemplate = await loadPromptFromTemplate("planTask/index.md");
   let prompt = generatePrompt(indexTemplate, {
     description: params.description,
-    requirements: params.requirements || "No requirements",
+    requirements: params.requirements || "요구 사항 없음",
     tasksTemplate: tasksContent,
     rulesPath: "shrimp-rules.md",
     memoryDir: params.memoryDir,
     thoughtTemplate: thoughtTemplate,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "PLAN_TASK");
 }

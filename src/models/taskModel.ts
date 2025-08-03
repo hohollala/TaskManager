@@ -15,19 +15,19 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import { getDataDir, getTasksFilePath, getMemoryDir } from "../utils/paths.js";
 
-// 確保獲取專案資料夾路徑
+// 모든 도구 함수 및 스키마 가져오기
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "../..");
 
-// 數據文件路徑（改為異步獲取）
+// 데이터 파일 경로 (비동기 가져오기로 변경)
 // const DATA_DIR = getDataDir();
 // const TASKS_FILE = getTasksFilePath();
 
-// 將exec轉換為Promise形式
+// exec을 Promise 형태로 변환
 const execPromise = promisify(exec);
 
-// 確保數據目錄存在
+// 데이터 디렉토리가 존재하는지 확인
 async function ensureDataDir() {
   const DATA_DIR = await getDataDir();
   const TASKS_FILE = await getTasksFilePath();
@@ -45,14 +45,14 @@ async function ensureDataDir() {
   }
 }
 
-// 讀取所有任務
+// 모든 작업 읽기
 async function readTasks(): Promise<Task[]> {
   await ensureDataDir();
   const TASKS_FILE = await getTasksFilePath();
   const data = await fs.readFile(TASKS_FILE, "utf-8");
   const tasks = JSON.parse(data).tasks;
 
-  // 將日期字串轉換回 Date 物件
+  // 날짜 문자열을 Date 객체로 변환
   return tasks.map((task: any) => ({
     ...task,
     createdAt: task.createdAt ? new Date(task.createdAt) : new Date(),
@@ -61,25 +61,25 @@ async function readTasks(): Promise<Task[]> {
   }));
 }
 
-// 寫入所有任務
+// 모든 작업 쓰기
 async function writeTasks(tasks: Task[]): Promise<void> {
   await ensureDataDir();
   const TASKS_FILE = await getTasksFilePath();
   await fs.writeFile(TASKS_FILE, JSON.stringify({ tasks }, null, 2));
 }
 
-// 獲取所有任務
+// 모든 작업 가져오기
 export async function getAllTasks(): Promise<Task[]> {
   return await readTasks();
 }
 
-// 根據ID獲取任務
+// ID로 작업 가져오기
 export async function getTaskById(taskId: string): Promise<Task | null> {
   const tasks = await readTasks();
   return tasks.find((task) => task.id === taskId) || null;
 }
 
-// 創建新任務
+// 새 작업 생성
 export async function createTask(
   name: string,
   description: string,
@@ -337,7 +337,7 @@ export async function batchCreateOrUpdateTasks(
     taskNameToIdMap.set(task.name, task.id);
   });
 
-  // 創建新任務的列表
+  // 새 작업 생성的列表
   const newTasks: Task[] = [];
 
   for (const taskData of taskDataList) {
@@ -386,7 +386,7 @@ export async function batchCreateOrUpdateTasks(
         tasksToKeep = tasksToKeep.filter((task) => task.id !== existingTaskId);
       }
     } else {
-      // 創建新任務
+      // 새 작업 생성
       const newTaskId = uuidv4();
 
       // 將新任務的名稱和ID添加到映射中
@@ -679,7 +679,7 @@ export async function clearAllTasks(): Promise<{
   backupFile?: string;
 }> {
   try {
-    // 確保數據目錄存在
+    // 데이터 디렉토리가 존재하는지 확인
     await ensureDataDir();
 
     // 讀取現有任務

@@ -1,6 +1,6 @@
 /**
- * updateTaskContent prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * updateTaskContent 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -11,7 +11,7 @@ import {
 import { Task, RelatedFile } from "../../types/index.js";
 
 /**
- * updateTaskContent prompt 參數介面
+ * updateTaskContent 프롬프트 매개변수 인터페이스
  */
 export interface UpdateTaskContentPromptParams {
   taskId: string;
@@ -24,9 +24,9 @@ export interface UpdateTaskContentPromptParams {
 }
 
 /**
- * 獲取 updateTaskContent 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * updateTaskContent의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getUpdateTaskContentPrompt(
   params: UpdateTaskContentPromptParams
@@ -41,7 +41,7 @@ export async function getUpdateTaskContentPrompt(
     updatedTask,
   } = params;
 
-  // 處理任務不存在的情況
+  // 작업이 존재하지 않는 경우 처리
   if (!task) {
     const notFoundTemplate = await loadPromptFromTemplate(
       "updateTaskContent/notFound.md"
@@ -51,7 +51,7 @@ export async function getUpdateTaskContentPrompt(
     });
   }
 
-  // 處理驗證錯誤的情況
+  // 유효성 검사 오류 처리
   if (validationError) {
     const validationTemplate = await loadPromptFromTemplate(
       "updateTaskContent/validation.md"
@@ -61,7 +61,7 @@ export async function getUpdateTaskContentPrompt(
     });
   }
 
-  // 處理空更新的情況
+  // 빈 업데이트 처리
   if (emptyUpdate) {
     const emptyUpdateTemplate = await loadPromptFromTemplate(
       "updateTaskContent/emptyUpdate.md"
@@ -69,24 +69,24 @@ export async function getUpdateTaskContentPrompt(
     return generatePrompt(emptyUpdateTemplate, {});
   }
 
-  // 處理更新成功或失敗的情況
+  // 업데이트 성공 또는 실패 처리
   const responseTitle = success ? "Success" : "Failure";
   let content = message || "";
 
-  // 更新成功且有更新後的任務詳情
+  // 업데이트 성공 및 업데이트된 작업 세부 정보가 있는 경우
   if (success && updatedTask) {
     const successTemplate = await loadPromptFromTemplate(
       "updateTaskContent/success.md"
     );
 
-    // 編合相關文件信息
+    // 관련 파일 정보 컴파일
     let filesContent = "";
     if (updatedTask.relatedFiles && updatedTask.relatedFiles.length > 0) {
       const fileDetailsTemplate = await loadPromptFromTemplate(
         "updateTaskContent/fileDetails.md"
       );
 
-      // 按文件類型分組
+      // 파일 유형별 그룹화
       const filesByType = updatedTask.relatedFiles.reduce((acc, file) => {
         if (!acc[file.type]) {
           acc[file.type] = [];
@@ -95,7 +95,7 @@ export async function getUpdateTaskContentPrompt(
         return acc;
       }, {} as Record<string, RelatedFile[]>);
 
-      // 為每種文件類型生成內容
+      // 각 파일 유형에 대한 콘텐츠 생성
       for (const [type, files] of Object.entries(filesByType)) {
         const filesList = files.map((file) => `\`${file.path}\``).join(", ");
         filesContent += generatePrompt(fileDetailsTemplate, {
@@ -106,22 +106,23 @@ export async function getUpdateTaskContentPrompt(
       }
     }
 
-    // 處理任務備註
-    const taskNotesPrefix = "- **Notes:** ";
+    // 작업 메모 처리
+    const taskNotesPrefix = "- **메모:** ";
     const taskNotes = updatedTask.notes
-      ? `${taskNotesPrefix}${
+      ? `${taskNotesPrefix}` +
+        (
           updatedTask.notes.length > 100
-            ? `${updatedTask.notes.substring(0, 100)}...`
+            ? `${updatedTask.notes.substring(0, 100)}...` 
             : updatedTask.notes
-        }\n`
+        )
       : "";
 
-    // 生成成功更新的詳細信息
+    // 성공적인 업데이트에 대한 세부 정보 생성
     content += generatePrompt(successTemplate, {
       taskName: updatedTask.name,
       taskDescription:
         updatedTask.description.length > 100
-          ? `${updatedTask.description.substring(0, 100)}...`
+          ? `${updatedTask.description.substring(0, 100)}...` 
           : updatedTask.description,
       taskNotes: taskNotes,
       taskStatus: updatedTask.status,
@@ -138,6 +139,6 @@ export async function getUpdateTaskContentPrompt(
     message: content,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "UPDATE_TASK_CONTENT");
 }

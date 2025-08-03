@@ -1,6 +1,6 @@
 /**
- * reflectTask prompt 生成器
- * 負責將模板和參數組合成最終的 prompt
+ * reflectTask 프롬프트 생성기
+ * 템플릿과 매개변수를 결합하여 최종 프롬프트를 생성하는 역할을 합니다.
  */
 
 import {
@@ -10,7 +10,7 @@ import {
 } from "../loader.js";
 
 /**
- * reflectTask prompt 參數介面
+ * reflectTask 프롬프트 매개변수 인터페이스
  */
 export interface ReflectTaskPromptParams {
   summary: string;
@@ -18,9 +18,9 @@ export interface ReflectTaskPromptParams {
 }
 
 /**
- * 獲取 reflectTask 的完整 prompt
- * @param params prompt 參數
- * @returns 生成的 prompt
+ * reflectTask의 전체 프롬프트를 가져옵니다.
+ * @param params 프롬프트 매개변수
+ * @returns 생성된 프롬프트
  */
 export async function getReflectTaskPrompt(
   params: ReflectTaskPromptParams
@@ -31,6 +31,6 @@ export async function getReflectTaskPrompt(
     analysis: params.analysis,
   });
 
-  // 載入可能的自定義 prompt
+  // 가능한 사용자 정의 프롬프트 로드
   return loadPrompt(prompt, "REFLECT_TASK");
 }
