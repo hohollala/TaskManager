@@ -1779,16 +1779,33 @@ export ENABLE_GUI=false</pre>
                   </div>
 
                   <div class="mb-4">
-                    <h4 class="text-lg font-semibold mb-3">Windows용 MCP 서버 추가:</h4>
+                    <h4 class="text-lg font-semibold mb-3">Windows PowerShell용 MCP 서버 추가:</h4>
                     <div
                       class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative"
                     >
                       <pre
                         class="text-gray-100 whitespace-pre-wrap font-mono"
-                      ><code class="language-bash">claude mcp add shrimp-task-manager -s user -- node dist/index.js</code></pre>
+                      ><code class="language-bash">claude mcp add shrimp-task-manager -s user -- node "$PWD/dist/index.js"</code></pre>
                       <button
                         class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
-                        data-command="claude mcp add shrimp-task-manager -s user -- node dist/index.js"
+                        data-command="claude mcp add shrimp-task-manager -s user -- node $PWD/dist/index.js"
+                      >
+                        복사
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="mb-4">
+                    <h4 class="text-lg font-semibold mb-3">Windows CMD용 MCP 서버 추가:</h4>
+                    <div
+                      class="mockup-code bg-gray-900 text-gray-100 p-5 rounded-lg relative"
+                    >
+                      <pre
+                        class="text-gray-100 whitespace-pre-wrap font-mono"
+                      ><code class="language-bash">claude mcp add shrimp-task-manager -s user -- node "[설치경로]/dist/index.js"</code></pre>
+                      <button
+                        class="copy-cmd-btn absolute top-4 right-4 text-xs bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded"
+                        data-command="claude mcp add shrimp-task-manager -s user -- node C:/claudeMCPS/TaskManager/dist/index.js"
                       >
                         복사
                       </button>
