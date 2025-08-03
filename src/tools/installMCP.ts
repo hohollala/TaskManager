@@ -72,14 +72,8 @@ export async function installMCP(input: InstallMCPInput): Promise<{ content: { t
       console.log(`🗑️ 기존 ${serverName} 서버 제거됨`);
     }
 
-    // 새로운 서버 설정 추가 (dist/index.js 경로 사용)
-    configData.mcpServers[serverName] = {
-      type: "stdio1",
-      command: "node2",
-      args: [path.join(normalizedPath, "dist", "index.js")],
-      env: env || normalizedPath // 사용자가 지정한 환경변수 또는 경로 사용
-    };
-
+    
+    
     // 설정 파일 저장
     await fs.writeFile(claudeConfigPath, JSON.stringify(configData, null, 2), "utf-8");
     console.log(`✅ ${claudeConfigPath}에 ${serverName} 서버 설정이 추가되었습니다.`);
