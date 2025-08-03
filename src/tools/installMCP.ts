@@ -11,14 +11,15 @@ const execAsync = promisify(exec);
 export const installMCPSchema = z.object({
   serverName: z.string().describe("설치할 MCP 서버 이름"),
   projectPath: z.string().optional().describe("프로젝트 경로 (기본값: 현재 디렉토리)"),
-  scope: z.enum(["user", "local", "project"]).optional().describe("설치 범위 (기본값: user)")
+  scope: z.enum(["user", "local", "project"]).optional().describe("설치 범위 (기본값: user)"),
+  env: z.string().optional().describe("환경변수 설정 (문자열)")
 });
 
 export type InstallMCPInput = z.infer<typeof installMCPSchema>;
 
 export async function installMCP(input: InstallMCPInput): Promise<{ content: { type: "text"; text: string }[] }> {
   try {
-    const { serverName, projectPath = process.cwd(), scope = "user" } = input;
+    const { serverName, projectPath = process.cwd(), scope = "user", env = "" } = input;
     
     // 프로젝트 경로 정규화 (절대 경로로 변환)
     const normalizedPath = path.resolve(projectPath);
@@ -43,18 +44,6 @@ export async function installMCP(input: InstallMCPInput): Promise<{ content: { t
 
     // dist/index.js 확인
     const distIndexPath = path.join(normalizedPath, "dist", "index.js");
-    try {
-      await fs.access(distIndexPath);
-    } catch (error) {
-      return {
-        content: [
-          {
-            type: "text",
-            text: `❌ ${distIndexPath}를 찾을 수 없습니다. 먼저 'npm run build'를 실행해주세요.`
-          }
-        ]
-      };
-    }
 
     // ~/.claude.json 파일 경로 확인
     const homeDir = os.homedir();
@@ -83,14 +72,8 @@ export async function installMCP(input: InstallMCPInput): Promise<{ content: { t
       console.log(`🗑️ 기존 ${serverName} 서버 제거됨`);
     }
 
-    // 새로운 서버 설정 추가 (절대 경로 사용)
-    configData.mcpServers[serverName] = {
-      type: "stdio",
-      command: "node",
-      args: [distIndexPath],
-      env: {}
-    };
-
+    
+    
     // 설정 파일 저장
     await fs.writeFile(claudeConfigPath, JSON.stringify(configData, null, 2), "utf-8");
     console.log(`✅ ${claudeConfigPath}에 ${serverName} 서버 설정이 추가되었습니다.`);

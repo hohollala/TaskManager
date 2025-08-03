@@ -18,10 +18,30 @@ async function quickAddMCP() {
       process.exit(1);
     }
 
-    // 현재 작업 폴더에서 절대 경로 생성
-    const currentDir = process.cwd();
-    const distIndexPath = path.join(currentDir, "dist", "index.js");
+    // 프로젝트 루트 디렉토리 찾기
+    async function findProjectRoot(startDir) {
+      let currentDir = startDir;
+      while (true) {
+        const packageJsonPath = path.join(currentDir, 'package.json');
+        try {
+          await fs.access(packageJsonPath);
+          return currentDir; // package.json이 있으면 여기가 루트
+        } catch (e) {
+          const parentDir = path.dirname(currentDir);
+          if (parentDir === currentDir) {
+            // 더 이상 올라갈 수 없음 (루트 디렉토리)
+            throw new Error("package.json을 찾을 수 없습니다. 프로젝트 루트 디렉토리에서 실행해주세요.");
+          }
+          currentDir = parentDir;
+        }
+      }
+    }
+
+    const projectRoot = await findProjectRoot(process.cwd());
+    const distIndexPath = path.join(projectRoot, "dist", "index.js");
     const absolutePath = path.resolve(distIndexPath);
+
+    console.log(`📁 프로젝트 루트 폴더: ${projectRoot}`);
 
     console.log(`📁 현재 작업 폴더: ${currentDir}`);
     console.log(`🔧 생성된 경로: ${absolutePath}`);

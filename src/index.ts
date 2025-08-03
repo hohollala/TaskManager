@@ -3,6 +3,8 @@ import { loadPromptFromTemplate } from "./prompts/loader.js";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
+import path from "path";
+import { fileURLToPath } from "url";
 import {
   CallToolRequest,
   CallToolRequestSchema,
@@ -57,6 +59,26 @@ import {
 
 async function main() {
   try {
+    // 무조건 "가나다라" 출력
+    console.log("가나다라");
+    
+    // 현재 작업 디렉토리를 기준으로 dist/index.js 경로 설정
+    const currentWorkingDir = process.cwd();
+    const distPath = path.join(currentWorkingDir, "dist", "index.js");
+    
+    // 경로가 존재하는지 확인하고 로그 출력
+    const fs = await import("fs");
+    if (fs.existsSync(distPath)) {
+      console.log(`✅ 서버 경로 확인됨: ${distPath}`);
+      // 현재 실행 파일 경로를 올바른 경로로 변경
+      process.argv[1] = distPath;
+    } else {
+      console.warn(`⚠️ 경로가 존재하지 않음: ${distPath}`);
+      console.log(`📁 현재 작업 디렉토리: ${currentWorkingDir}`);
+      // 경로가 없어도 현재 작업 디렉토리 기준으로 설정
+      process.argv[1] = distPath;
+    }
+    
     const ENABLE_GUI = process.env.ENABLE_GUI === "true";
     let webServerInstance: Awaited<ReturnType<typeof createWebServer>> | null =
       null;
