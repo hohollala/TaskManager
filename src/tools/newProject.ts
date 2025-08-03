@@ -1,6 +1,7 @@
 import { z } from "zod";
 import fs from "fs/promises";
 import path from "path";
+import * as readline from 'readline';
 import { getDataDir } from "../utils/paths.js";
 
 // 스키마 정의
@@ -17,56 +18,48 @@ export const newProjectSchema = z.object({
 
 export type NewProjectInput = z.infer<typeof newProjectSchema>;
 
+function askQuestion(rl: readline.Interface, query: string): Promise<string> {
+  return new Promise(resolve => rl.question(query, ans => {
+    resolve(ans);
+  }));
+}
+
 export async function newProject(input: NewProjectInput): Promise<{ content: { type: "text"; text: string }[] }> {
   try {
-    // 입력값이 없거나 불완전한 경우 대화형 질문 안내
+    // 입력값이 없거나 불완전한 경우 대화형 질문
     const hasInput = input.purpose || input.features || input.design || input.server || 
                     input.externalServices || input.platforms || input.techStack || input.otherRequirements;
     
     if (!hasInput) {
-      return {
-        content: [
-          {
-            type: "text",
-            text: `🤔 새 프로젝트를 시작하기 위해 몇 가지 질문을 드리겠습니다.
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
 
-다음 8개 질문에 답변해주시면 프로젝트 요구사항 문서를 생성해드립니다:
+      console.log("🤔 새 프로젝트를 시작하기 위해 몇 가지 질문을 드리겠습니다.\n");
 
-1️⃣ **앱의 주요 목적은 무엇인가요?**
-   예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹, 교육 앱 등
+      const questions = [
+        { key: 'purpose', question: "1️⃣ 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등): " },
+        { key: 'features', question: "2️⃣ 필수 기능은 무엇인가요? (예: 사용자 로그인, 데이터 저장, 결제 처리, 알림 등): " },
+        { key: 'design', question: "3️⃣ 디자인 요구사항은 어떻게 되나요? (예: 기존 디자인 파일 있음, 간단한 기본 디자인, 완전 커스텀 디자인 필요): " },
+        { key: 'server', question: "4️⃣ 서버/API는 어떻게 구성할 예정인가요? (예: 기존 API 서버 있음, 새로 개발 필요, Firebase/Supabase 사용): " },
+        { key: 'externalServices', question: "5️⃣ 외부 서비스 연동이 필요한가요? (예: 소셜 로그인, 결제 게이트웨이, 지도 API, 푸시 알림 등): " },
+        { key: 'platforms', question: "6️⃣ 어떤 플랫폼을 지원할 예정인가요? (예: iOS만, Android만, 둘 다, 웹앱도 포함): " },
+        { key: 'techStack', question: "7️⃣ 기술 스택이나 제한사항이 있나요? (예: React Native, Flutter, 네이티브 개발, 특정 라이브러리 사용/금지): " },
+        { key: 'otherRequirements', question: "8️⃣ 기타 요구사항이 있나요? (예: 성능 요구사항, 보안 요구사항, 특별한 기능 등): " }
+      ];
 
-2️⃣ **필수 기능은 무엇인가요?**
-   예: 사용자 로그인, 데이터 저장, 결제 처리, 알림, 검색 등
+      const answers: any = {};
+      
+      for (const q of questions) {
+        const answer = await askQuestion(rl, q.question);
+        answers[q.key] = answer;
+      }
 
-3️⃣ **디자인 요구사항은 어떻게 되나요?**
-   예: 기존 디자인 파일 있음, 간단한 기본 디자인, 완전 커스텀 디자인 필요
+      rl.close();
 
-4️⃣ **서버/API는 어떻게 구성할 예정인가요?**
-   예: 기존 API 서버 있음, 새로 개발 필요, Firebase/Supabase 사용
-
-5️⃣ **외부 서비스 연동이 필요한가요?**
-   예: 소셜 로그인, 결제 게이트웨이, 지도 API, 푸시 알림 등
-
-6️⃣ **어떤 플랫폼을 지원할 예정인가요?**
-   예: iOS만, Android만, 둘 다, 웹앱도 포함
-
-7️⃣ **기술 스택이나 제한사항이 있나요?**
-   예: React Native, Flutter, 네이티브 개발, 특정 라이브러리 사용/금지
-
-8️⃣ **기타 요구사항이 있나요?**
-   예: 성능 요구사항, 보안 요구사항, 특별한 기능 등
-
-💡 **사용법**: 각 질문에 구체적이고 상세하게 답변해주시면 더 정확한 요구사항 문서가 생성됩니다.
-
-예시:
-\`\`\`
-new "앱 목적: 할일 관리, 필수 기능: 사용자 로그인/데이터 저장, 디자인: 기본 디자인, 서버: 새로 개발, 외부 서비스: 푸시 알림, 플랫폼: iOS/Android, 기술 스택: React Native, 기타: 없음"
-\`\`\`
-
-또는 각 질문에 하나씩 답변해주세요!`
-          }
-        ]
-      };
+      // 입력값을 input 객체에 설정
+      Object.assign(input, answers);
     }
 
     const DATA_DIR = await getDataDir();
