@@ -26,6 +26,37 @@ export const planTaskSchema = z.object({
     .describe("기존 작업을 계획 기반으로 참조할지 여부, 작업 조정 및 연속성 계획에 사용"),
 });
 
+// 프로젝트 파일들을 확인하고 읽는 함수
+async function getProjectFiles(PROJECT_ROOT: string) {
+  const projectFiles: { [key: string]: string } = {};
+  
+  // 확인할 파일 목록
+  const filesToCheck = [
+    "docs/requirements.md",
+    "docs/designed.md", 
+    "docs/task.md",
+    "package.json",
+    ".env",
+    "README.md",
+    "docs/patterns/singleton.md"
+  ];
+
+  for (const filePath of filesToCheck) {
+    const fullPath = path.join(PROJECT_ROOT, filePath);
+    try {
+      if (fs.existsSync(fullPath)) {
+        const content = fs.readFileSync(fullPath, 'utf8');
+        projectFiles[filePath] = content;
+        console.log(`📋 ${filePath} 파일을 찾았습니다.`);
+      }
+    } catch (error) {
+      console.warn(`⚠️ ${filePath} 파일 읽기 실패:`, error);
+    }
+  }
+
+  return projectFiles;
+}
+
 export async function planTask({
   description,
   requirements,
@@ -37,24 +68,31 @@ export async function planTask({
   const PROJECT_ROOT = path.resolve(__dirname, "../../..");
   const MEMORY_DIR = await getMemoryDir();
 
-  // docs/requirements.md 파일 확인 및 읽기
-  let requirementsContent = "";
-  const requirementsPath = path.join(PROJECT_ROOT, "docs", "requirements.md");
+  // 프로젝트 파일들 확인 및 읽기
+  const projectFiles = await getProjectFiles(PROJECT_ROOT);
   
-  try {
-    if (fs.existsSync(requirementsPath)) {
-      requirementsContent = fs.readFileSync(requirementsPath, 'utf8');
-      console.log("📋 docs/requirements.md 파일을 찾았습니다. 요구사항을 참조합니다.");
+  // 프로젝트 파일 정보를 requirements에 추가
+  let projectContext = "";
+  if (Object.keys(projectFiles).length > 0) {
+    projectContext = "\n\n## 프로젝트 파일 정보\n\n";
+    
+    for (const [filePath, content] of Object.entries(projectFiles)) {
+      projectContext += `### ${filePath}\n\`\`\`\n${content}\n\`\`\`\n\n`;
     }
-  } catch (error) {
-    console.warn("⚠️ docs/requirements.md 파일 읽기 실패:", error);
   }
 
   // requirements.md 내용이 있으면 requirements 매개변수에 추가
-  if (requirementsContent) {
+  if (projectFiles["docs/requirements.md"]) {
     requirements = requirements 
-      ? `${requirements}\n\n## 프로젝트 요구사항 문서\n\n${requirementsContent}`
-      : `## 프로젝트 요구사항 문서\n\n${requirementsContent}`;
+      ? `${requirements}\n\n## 프로젝트 요구사항 문서\n\n${projectFiles["docs/requirements.md"]}`
+      : `## 프로젝트 요구사항 문서\n\n${projectFiles["docs/requirements.md"]}`;
+  }
+
+  // 프로젝트 컨텍스트를 requirements에 추가
+  if (projectContext) {
+    requirements = requirements 
+      ? `${requirements}\n${projectContext}`
+      : projectContext;
   }
 
   // 필요한 매개변수 준비

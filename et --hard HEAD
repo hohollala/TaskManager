@@ -1,0 +1,5 @@
+[33m5927c6b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m feat: Gemini CLI 설정 섹션 추가 및 수정
+[33m993843e[m docs: cd ~ 명령어 제거 및 설치 가이드 간소화
+[33m382e5e7[m docs: 운영체제별 MCP 서버 추가 명령어 분리 - Windows와 macOS/Linux용 명령어를 별도로 제공
+[33mb6f6158[m docs: HTML 설치 명령어 간소화
+[33m6e7ee05[m docs: 운영체제별 디렉토리 생성 명령어 추가 - Windows와 macOS/Linux용 설치 가이드 개선

@@ -39,6 +39,27 @@ Shrimp Task Manager는 가이드 워크플로우와 체계적인 작업 관리�
 
 Shrimp는 본질적으로 AI Agent가 프로젝트를 더 잘 이해하고 작업할 수 있도록 안내하는 프롬프트 템플릿입니다. 일련의 프롬프트를 사용하여 Agent가 프로젝트의 특정 요구사항과 규칙에 밀접하게 정렬되도록 보장합니다.
 
+### 새 프로젝트 생성 (new 명령어)
+
+새로운 프로젝트를 시작할 때는 `new` 명령어를 사용하여 프로젝트 요구사항을 생성할 수 있습니다. 이 명령어는 다음과 같은 정보를 포함한 상세한 프로젝트 요구사항을 생성합니다:
+
+- **앱 목적**: 프로젝트의 주요 목적과 기능
+- **필수 기능**: 핵심 기능 목록
+- **디자인**: UI/UX 요구사항
+- **서버**: 백엔드 개발 방식
+- **외부 서비스**: 필요한 외부 API나 서비스
+- **플랫폼**: 지원할 플랫폼 (웹, 모바일, 데스크톱 등)
+- **기술 스택**: 사용할 기술과 프레임워크
+- **기타**: 추가 요구사항
+
+#### 사용 예제:
+
+```bash
+new "앱 목적: 할일 관리, 필수 기능: 사용자 로그인/데이터 저장, 디자인: 기본 디자인, 서버: 새로 개발, 외부 서비스: 푸시 알림, 플랫폼: iOS/Android, 기술 스택: React Native, 기타: 없음"
+```
+
+이 명령어를 통해 생성된 요구사항은 이후 작업 계획 및 개발 과정에서 참조할 수 있는 기반이 됩니다.
+
 ### 실제 연구 모드
 
 작업 계획을 시작하기 전에 기술 조사와 지식 수집을 위해 연구 모드를 활용할 수 있습니다. 이는 다음과 같은 경우에 특히 유용합니다:
@@ -182,6 +203,7 @@ STM은 이제 설치 시 `~/.claude/commands/stm/`에 명령어 문서를 자동
 
 | 명령어 | 기능 | 설명 |
 |--------|------|------|
+| `new` | 새 프로젝트 | 새 프로젝트 요구사항 생성 - 앱 목적, 필수 기능, 디자인, 서버, 외부 서비스, 플랫폼, 기술 스택 등을 포함한 상세한 프로젝트 요구사항을 생성합니다. |
 | `plan` | 작업 계획 | 새 작업을 계획하고 생성 |
 | `analyze` | 작업 분석 | 작업 요구사항을 깊이 분석 |
 | `reflect` | 작업 검토 | 작업 접근 방식을 검토하고 개선 |
@@ -198,32 +220,147 @@ STM은 이제 설치 시 `~/.claude/commands/stm/`에 명령어 문서를 자동
 | `init` | 규칙 설정 | 프로젝트 개발 규칙 설정 |
 | `research` | 연구 모드 | 기술 연구 모드 |
 
+## 🚀 **자동 설치 (권장)**
+
 ### Smithery를 통한 설치
 
-[Smithery](https://smithery.ai/server/@cjo4m06/mcp-shrimp-task-manager)를 통해 Claude Desktop용 Shrimp Task Manager를 자동으로 설치하려면:
+가장 간단한 방법으로 Claude Desktop용 Shrimp Task Manager를 자동으로 설치합니다:
 
 ```bash
 npx -y @smithery/cli install @cjo4m06/mcp-shrimp-task-manager --client claude
 ```
 
-### 수동 설치
+### NPX를 통한 설치
+
+빠른 시작을 위한 임시 설치 방법입니다:
 
 ```bash
-# 1. 저장소 클론
+npx -y mcp-shrimp-task-manager
+```
 
+## ⚙️ **IDE별 설정**
+
+### Cursor IDE 설정
+
+Shrimp Task Manager는 전역 구성과 프로젝트별 구성의 두 가지 구성 방법을 제공합니다.
+
+#### ListRoots 프로토콜 지원
+
+Shrimp Task Manager는 이제 자동 프로젝트 격리와 유연한 경로 구성을 가능하게 하는 **ListRoots 프로토콜**을 지원합니다:
+
+- **클라이언트가 ListRoots를 지원하는 경우** (예: Cursor IDE):
+
+  - **절대 경로 모드**: 지정된 DATA_DIR 내에 프로젝트 폴더를 생성하여 전역 mcp.json 구성을 사용하면서 Shrimp가 자동으로 프로젝트를 격리할 수 있도록 함
+  - **상대 경로 모드**: 프로젝트 루트 디렉토리 내에 DATA_DIR을 생성하여 프로젝트별 데이터 저장
+
+- **클라이언트가 ListRoots를 지원하지 않는 경우**:
+  - DATA_DIR은 레거시 동작을 유지 (절대 경로 권장)
+  - 향상된 기능을 위해 클라이언트 벤더에게 ListRoots 프로토콜 지원을 요청하는 것을 권장합니다
+
+#### 전역 구성
+
+1. Cursor IDE 전역 구성 파일을 엽니다 (보통 `~/.cursor/mcp.json`에 위치)
+2. `mcpServers` 섹션에 다음 구성을 추가합니다:
+
+**옵션 A: 절대 경로 (프로젝트 격리 모드)**
+
+```json
+{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["/path/to/mcp-shrimp-task-manager/dist/index.js"],
+      "env": {
+        "DATA_DIR": "/Users/username/ShrimpData", // 절대 경로 - 프로젝트 폴더를 자동으로 생성
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+```
+
+**옵션 B: NPX와 절대 경로**
+
+```json
+{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "npx",
+      "args": ["-y", "mcp-shrimp-task-manager"],
+      "env": {
+        "DATA_DIR": "/Users/username/ShrimpData", // 절대 경로 - 프로젝트 폴더를 자동으로 생성
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+```
+
+> ⚠️ `/path/to/mcp-shrimp-task-manager`와 `/Users/username/ShrimpData`를 실제 경로로 교체하세요.
+>
+> 💡 **절대 경로 장점**: ListRoots 지원으로 Shrimp는 각 프로젝트에 대해 별도의 폴더를 자동으로 생성합니다 (예: `/Users/username/ShrimpData/my-project/`, `/Users/username/ShrimpData/another-project/`), 단일 전역 구성으로 완벽한 프로젝트 격리를 가능하게 합니다.
+>
+> 💡 **선택사항**: `env` 섹션에 `"WEB_PORT": "3000"`을 추가하여 웹 GUI의 사용자 정의 포트를 지정할 수 있습니다. 지정하지 않으면 사용 가능한 포트가 자동으로 선택됩니다.
+
+#### 프로젝트별 구성
+
+각 프로젝트에 대한 전용 구성을 설정할 수도 있습니다. 이 방법을 사용하면 프로젝트 포함 데이터 저장을 위해 상대 경로를 사용할 수 있습니다:
+
+1. 프로젝트 루트에 `.cursor` 디렉토리를 생성합니다
+2. 이 디렉토리에 다음 내용이 포함된 `mcp.json` 파일을 생성합니다:
+
+```json
+{
+  "mcpServers": {
+    "shrimp-task-manager": {
+      "command": "node",
+      "args": ["./node_modules/.bin/mcp-shrimp-task-manager"],
+      "env": {
+        "DATA_DIR": "./.shrimp-data", // 상대 경로 - 프로젝트별 데이터 저장
+        "TEMPLATES_USE": "en",
+        "ENABLE_GUI": "false"
+      }
+    }
+  }
+}
+```
+
+> 💡 **상대 경로 장점**: 프로젝트별 데이터 저장을 위해 상대 경로를 사용할 수 있으며, 프로젝트와 함께 이동할 수 있습니다.
+
+## 🔧 **수동 설치 (고급 사용자용)**
+
+완전한 제어를 위한 수동 설치 가이드입니다. 이 방법을 통해 소스 코드를 직접 관리하고 커스터마이징할 수 있습니다.
+
+### 단계별 설치 가이드
+
+#### 1. 저장소 클론
+
+```bash
 git clone https://github.com/hohollala/TaskManager.git
+cd TaskManager
+```
 
-# 2. 의존성 설치 및 빌드
+#### 2. 의존성 설치
+
+```bash
 npm install
+```
+
+#### 3. 프로젝트 빌드
+
+```bash
 npm run build
+```
 
-# 3. 글로벌 설치
-npm install -g
+#### 4. 글로벌 설치
 
-# 4. 명령어 파일 생성 (선택사항)
-npm run generate-commands
+```bash
+npm install -g .
+```
 
-# 5. MCP 서버 추가
+#### 5. MCP 서버 추가
 
 **Windows용:**
 ```bash
@@ -234,7 +371,13 @@ claude mcp add shrimp-task-manager -s user -- node dist/index.js
 ```bash
 claude mcp add shrimp-task-manager -s user -- node $(pwd)/dist/index.js
 ```
-```
+
+### 주의사항
+
+- Node.js와 Git이 시스템에 설치되어 있어야 합니다.
+- 관리자 권한이 필요할 수 있습니다 (글로벌 설치 시).
+- 소스 코드를 직접 수정할 수 있어 커스터마이징이 가능합니다.
+- 업데이트 시 수동으로 git pull을 수행해야 합니다.
 
 ## 🔌 <a id="clients"></a>MCP 호환 클라이언트에서 사용
 
@@ -411,7 +554,3 @@ Cursor IDE에서 Shrimp Task Manager를 최대한 활용하려면 사용자 정�
 - **Claude 3.5 Sonnet**: 일반적인 개발 작업에 적합
 
 > 💡 **성능 팁**: 더 나은 결과를 위해 모델의 컨텍스트 창을 최대한 활용하고, 필요에 따라 새 채팅 세션을 시작하여 토큰 제한을 관리하세요.
-=======
-# TaskManager
-쉬림프 테스크 메니저에서 한문을 한글로 바꾸고 명령어를 줄여서 만듬.
->>>>>>> ed3dd068074787715ea773752dc2ad9485efc84b

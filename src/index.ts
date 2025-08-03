@@ -47,6 +47,8 @@ import {
   initProjectRulesSchema,
   researchMode,
   researchModeSchema,
+  newProject,
+  newProjectSchema,
 } from "./tools/index.js";
 
 async function main() {
@@ -196,6 +198,13 @@ async function main() {
               "toolsDescription/researchMode.md"
             ),
             inputSchema: zodToJsonSchema(researchModeSchema),
+          },
+          {
+            name: "new",
+            description: await loadPromptFromTemplate(
+              "toolsDescription/newProject.md"
+            ),
+            inputSchema: zodToJsonSchema(newProjectSchema),
           },
         ],
       };
@@ -353,6 +362,16 @@ async function main() {
                 );
               }
               return await researchMode(parsedArgs.data);
+            case "new":
+              parsedArgs = await newProjectSchema.safeParseAsync(
+                request.params.arguments
+              );
+              if (!parsedArgs.success) {
+                throw new Error(
+                  `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
+                );
+              }
+              return await newProject(parsedArgs.data);
             default:
               throw new Error(`Tool ${request.params.name} does not exist`);
           }
