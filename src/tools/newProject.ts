@@ -813,17 +813,24 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
     };
   }
 
-  // 순차 검증: 이전 질문들이 모두 답변되었는지 확인
+  // 순차 검증: 이전 질문들이 모두 답변되었는지 확인 (더 유연하게)
   const expectedNextQuestion = answers.length + 1;
-  if (questionNumber !== expectedNextQuestion && questionNumber !== 1) {
+  
+  // 건너뛰기 방지 (하지만 너무 엄격하지 않게)
+  if (questionNumber > expectedNextQuestion + 1 && questionNumber !== 1) {
     return {
       content: [
         {
           type: "text",
-          text: `⚠️ 순서 오류: 현재 질문 ${questionNumber}번을 건너뛰었습니다.\n\n**올바른 순서**: ${expectedNextQuestion}번 질문부터 진행해야 합니다.\n\n**해결 방법**: ask-project-question 도구를 questionNumber: ${expectedNextQuestion}로 호출하세요.`
+          text: `⚠️ 순서 오류: 질문을 너무 많이 건너뛰었습니다.\n\n**올바른 순서**: ${expectedNextQuestion}번 질문부터 진행해야 합니다.\n\n**해결 방법**: ask-project-question 도구를 questionNumber: ${expectedNextQuestion}로 호출하세요.`
         }
       ]
     };
+  }
+  
+  // 이전 질문이 비어있으면 경고만 표시하고 계속 진행
+  if (questionNumber > expectedNextQuestion && questionNumber !== 1) {
+    console.log(`⚠️ 경고: 질문 ${expectedNextQuestion}번이 비어있지만 계속 진행합니다.`);
   }
 
   const question = questions[questionNumber - 1];
