@@ -1308,6 +1308,16 @@
 new "앱 목적: 할일 관리, 필수 기능: 사용자 로그인/데이터 저장, 디자인: 기본 디자인, 서버: 새로 개발, 외부 서비스: 푸시 알림, 플랫폼: iOS/Android, 기술 스택: React Native, 기타: 없음"</pre>
                         </div>
 
+                        <h4 class="text-lg font-semibold mb-3 text-gray-800">Gemini CLI 사용법:</h4>
+                        <div class="mockup-code bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                          <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">
+default_api.new</pre>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                          Gemini CLI에서는 <code class="bg-yellow-100 px-2 py-1 rounded">default_api.[명령어]</code> 방식으로 호출할 수 있습니다. 
+                          예를 들어 <code class="bg-yellow-100 px-2 py-1 rounded">default_api.new</code>를 호출하면 <code class="bg-green-100 px-2 py-1 rounded">new</code> 명령어가 실행됩니다.
+                        </p>
+
                         <h4 class="text-lg font-semibold mb-3 text-gray-800">생성되는 내용:</h4>
                         <ul class="list-disc ml-5 mb-4 space-y-2 text-gray-700">
                           <li>프로젝트 개요 및 목표</li>
@@ -1345,6 +1355,16 @@ new "앱 목적: 할일 관리, 필수 기능: 사용자 로그인/데이터 저
 plan "새로운 웹 애플리케이션 개발"</pre>
                         </div>
 
+                        <h4 class="text-lg font-semibold mb-3 text-gray-800">Gemini CLI 사용법:</h4>
+                        <div class="mockup-code bg-gray-900 text-gray-100 p-4 rounded-lg mb-4">
+                          <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">
+default_api.plan "새로운 웹 애플리케이션 개발"</pre>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">
+                          Gemini CLI에서는 <code class="bg-yellow-100 px-2 py-1 rounded">default_api.[명령어]</code> 방식으로 호출할 수 있습니다. 
+                          예를 들어 <code class="bg-yellow-100 px-2 py-1 rounded">default_api.plan</code>를 호출하면 <code class="bg-blue-100 px-2 py-1 rounded">plan</code> 명령어가 실행됩니다.
+                        </p>
+
                         <h4 class="text-lg font-semibold mb-3 text-gray-800">계획 과정:</h4>
                         <ol class="list-decimal ml-5 mb-4 space-y-2 text-gray-700">
                           <li>
@@ -1381,7 +1401,11 @@ plan "새로운 웹 애플리케이션 개발"</pre>
                         <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">
 execute "task_id_here"</pre>
                       </div>
-                      <p class="text-sm text-gray-600">선택된 작업을 지정된 계획에 따라 실행합니다.</p>
+                      <p class="text-sm text-gray-600 mb-2">선택된 작업을 지정된 계획에 따라 실행합니다.</p>
+                      <div class="mockup-code bg-gray-900 text-gray-100 p-2 rounded-lg mb-2">
+                        <pre class="text-gray-100 whitespace-pre-wrap font-mono text-xs">
+default_api.execute "task_id_here"</pre>
+                      </div>
                     </div>
 
                     <!-- 작업 목록 예제 -->
@@ -1391,7 +1415,11 @@ execute "task_id_here"</pre>
                         <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">
 list</pre>
                       </div>
-                      <p class="text-sm text-gray-600">모든 작업의 목록과 현재 상태를 확인합니다.</p>
+                      <p class="text-sm text-gray-600 mb-2">모든 작업의 목록과 현재 상태를 확인합니다.</p>
+                      <div class="mockup-code bg-gray-900 text-gray-100 p-2 rounded-lg mb-2">
+                        <pre class="text-gray-100 whitespace-pre-wrap font-mono text-xs">
+default_api.list</pre>
+                      </div>
                     </div>
 
                     <!-- 연구 모드 예제 -->
@@ -1401,7 +1429,64 @@ list</pre>
                         <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">
 research "React Native 상태 관리"</pre>
                       </div>
-                      <p class="text-sm text-gray-600">기술 주제에 대한 체계적인 연구를 수행합니다.</p>
+                      <p class="text-sm text-gray-600 mb-2">기술 주제에 대한 체계적인 연구를 수행합니다.</p>
+                      <div class="mockup-code bg-gray-900 text-gray-100 p-2 rounded-lg mb-2">
+                        <pre class="text-gray-100 whitespace-pre-wrap font-mono text-xs">
+default_api.research "React Native 상태 관리"</pre>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Gemini CLI 명령어 참조 섹션 -->
+                  <div class="mt-8 bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-lg shadow-md" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-4 text-orange-600">🦀 Gemini CLI 명령어 참조</h3>
+                    <p class="text-gray-700 mb-4">
+                      Gemini CLI에서는 <code class="bg-yellow-100 px-2 py-1 rounded">default_api.[명령어]</code> 방식으로 모든 명령어를 호출할 수 있습니다.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      <!-- 프로젝트 관리 명령어 -->
+                      <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-blue-600 mb-2">프로젝트 관리</h4>
+                        <ul class="space-y-1 text-sm">
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.new</code> - 새 프로젝트 생성</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.init</code> - 프로젝트 규칙 설정</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.research</code> - 연구 모드</li>
+                        </ul>
+                      </div>
+
+                      <!-- 작업 관리 명령어 -->
+                      <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-green-600 mb-2">작업 관리</h4>
+                        <ul class="space-y-1 text-sm">
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.plan</code> - 작업 계획</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.analyze</code> - 작업 분석</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.split</code> - 작업 분할</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.execute</code> - 작업 실행</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.verify</code> - 작업 확인</li>
+                        </ul>
+                      </div>
+
+                      <!-- 조회 및 관리 명령어 -->
+                      <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <h4 class="font-bold text-purple-600 mb-2">조회 및 관리</h4>
+                        <ul class="space-y-1 text-sm">
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.list</code> - 작업 목록</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.query</code> - 작업 검색</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.detail</code> - 상세 정보</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.update</code> - 작업 수정</li>
+                          <li><code class="bg-gray-100 px-1 rounded">default_api.delete</code> - 작업 삭제</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                      <h4 class="font-bold text-blue-600 mb-2">💡 사용 팁</h4>
+                      <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• 명령어 뒤에 매개변수를 추가할 수 있습니다: <code class="bg-blue-100 px-1 rounded">default_api.plan "새로운 웹 애플리케이션 개발"</code></li>
+                        <li>• 복잡한 매개변수는 따옴표로 감싸주세요: <code class="bg-blue-100 px-1 rounded">default_api.new "앱 목적: 할일 관리, 필수 기능: 사용자 로그인"</code></li>
+                        <li>• 모든 명령어는 대화형으로도 사용 가능합니다</li>
+                      </ul>
                     </div>
                   </div>
                 </div>

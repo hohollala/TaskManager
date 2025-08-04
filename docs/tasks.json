@@ -1,372 +1,325 @@
 {
   "tasks": [
     {
-      "id": "03b1a8c1-7669-4a15-8ee0-1c98376f3e0b",
-      "name": "UI/UX 디자인 문서 구체화",
-      "description": "docs/designed.md에 와이어프레임, 사용자 흐름, 컬러 팔레트, 타이포그래피를 구체화하고, 다크/라이트 모드 및 WCAG 2.1 접근성 가이드라인을 상세히 명시합니다.",
-      "status": "in_progress",
+      "id": "36e2d121-7bf4-4410-8c14-0f4786866b42",
+      "name": "프로젝트 초기 설정 및 문서화",
+      "description": "프로젝트의 기본 디렉토리 구조를 설정하고, 필요한 초기 문서를 생성 및 업데이트합니다.",
+      "status": "completed",
       "dependencies": [],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:13.970Z",
+      "createdAt": "2025-08-04T02:41:12.770Z",
+      "updatedAt": "2025-08-04T02:43:13.664Z",
       "relatedFiles": [
         {
-          "path": "docs/designed.md",
-          "type": "TO_MODIFY",
-          "description": "UI/UX 디자인 가이드 문서"
+          "path": "src/",
+          "type": "CREATE",
+          "description": "소스 코드 루트 디렉토리"
+        },
+        {
+          "path": "src/components/",
+          "type": "CREATE",
+          "description": "재사용 가능한 UI 컴포넌트 디렉토리"
+        },
+        {
+          "path": "src/styles/",
+          "type": "CREATE",
+          "description": "스타일 관련 파일 디렉토리"
+        },
+        {
+          "path": "src/singletons/",
+          "type": "CREATE",
+          "description": "싱글톤 패턴 클래스 디렉토리"
+        },
+        {
+          "path": "docs/folder.md",
+          "type": "CREATE",
+          "description": "폴더 구조 문서"
+        },
+        {
+          "path": "docs/components.md",
+          "type": "CREATE",
+          "description": "컴포넌트 문서"
+        },
+        {
+          "path": "docs/fakedatas.md",
+          "type": "CREATE",
+          "description": "가짜 데이터 문서"
+        },
+        {
+          "path": "docs/fakefunctions.md",
+          "type": "CREATE",
+          "description": "미완성 함수 문서"
+        },
+        {
+          "path": "docs/errors.md",
+          "type": "CREATE",
+          "description": "에러 기록 문서"
+        },
+        {
+          "path": "docs/clarifications.md",
+          "type": "CREATE",
+          "description": "모호한 요구사항 질문 기록 문서"
+        },
+        {
+          "path": "docs/performance.md",
+          "type": "CREATE",
+          "description": "성능 최적화 문서"
+        },
+        {
+          "path": "docs/security.md",
+          "type": "CREATE",
+          "description": "보안 문서"
+        },
+        {
+          "path": "docs/feedback.md",
+          "type": "CREATE",
+          "description": "사용자 피드백 문서"
         }
       ],
-      "implementationGuide": "docs/designed.md 파일을 열어 UI/UX 디자인 관련 내용을 상세하게 작성합니다. 와이어프레임은 각 주요 화면(로그인, 대시보드, 할일 목록 등)에 대해 구체적인 레이아웃을 포함하고, 사용자 흐름은 주요 기능(로그인, 할일 추가, 할일 완료 등)의 단계를 시각적으로 표현합니다. 컬러 팔레트는 Primary, Secondary, Accent, Background, Text 색상을 정의하고, 타이포그래피는 폰트 패밀리, 크기, 가중치 등을 명시합니다. 다크/라이트 모드 전환에 대한 디자인 가이드라인과 WCAG 2.1 준수를 위한 접근성 요소를 포함합니다.",
-      "verificationCriteria": "docs/designed.md 파일이 업데이트되었는지 확인하고, 와이어프레임, 사용자 흐름, 컬러 팔레트, 타이포그래피, 다크/라이트 모드, WCAG 2.1 접근성 관련 내용이 상세하고 명확하게 기술되었는지 검토합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
+      "implementationGuide": "src 디렉토리와 하위 컴포넌트, 스타일, 싱글톤 디렉토리를 생성하고, docs/folder.md, docs/components.md, docs/fakedatas.md, docs/fakefunctions.md, docs/errors.md, docs/clarifications.md, docs/performance.md, docs/security.md, docs/feedback.md 파일을 생성합니다.",
+      "verificationCriteria": "모든 지정된 디렉토리와 파일이 올바른 위치에 생성되었는지 확인합니다.",
+      "analysisResult": "일기장 앱 개발을 위한 초기 분석 및 설계 제안. 모바일(Flutter), 웹(React), 백엔드(Node.js/Express.js)로 구성되며, 사용자 로그인, 일기 작성/조회, 데이터 저장, 알림 기능을 포함한다. 미니멀리즘, 다크/라이트 모드, WCAG 2.1 준수 디자인 원칙을 따르며, JWT 기반 인증과 RESTful API를 사용한다.",
+      "notes": "모든 지정된 디렉토리와 파일이 올바른 위치에 생성되었는지 확인합니다.",
+      "summary": "프로젝트 초기 설정 및 문서화 작업이 성공적으로 완료되었습니다. 모든 지정된 디렉토리와 파일이 올바른 위치에 생성되었음을 확인했습니다.",
+      "completedAt": "2025-08-04T02:43:13.663Z"
     },
     {
-      "id": "5c1ba7c3-6fde-44ac-b04e-ec6093f74d7a",
-      "name": "테마 시스템 구축",
-      "description": "src/styles/theme.py에 테마(컬러 팔레트, 타이포그래피)를 정의하고, 다크/라이트 모드를 지원하도록 구현합니다. 모든 UI 요소는 이 테마 파일을 참조하도록 합니다.",
+      "id": "341d0e23-e59b-48f2-b6e2-b27869df9988",
+      "name": "백엔드 API 개발 (Node.js/Express.js)",
+      "description": "일기장 앱의 백엔드 API를 개발합니다. 사용자 인증, 일기 CRUD, 데이터베이스 연동을 포함합니다.",
       "status": "pending",
       "dependencies": [
         {
-          "taskId": "03b1a8c1-7669-4a15-8ee0-1c98376f3e0b"
+          "taskId": "36e2d121-7bf4-4410-8c14-0f4786866b42"
         }
       ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
+      "createdAt": "2025-08-04T02:41:12.770Z",
+      "updatedAt": "2025-08-04T02:41:12.770Z",
       "relatedFiles": [
         {
-          "path": "src/styles/theme.py",
+          "path": "backend/",
           "type": "CREATE",
-          "description": "테마 시스템 정의 파일"
+          "description": "백엔드 프로젝트 루트 디렉토리"
         },
         {
-          "path": "src/styles/__init__.py",
+          "path": "backend/package.json",
           "type": "CREATE",
-          "description": "스타일 패키지 초기화 파일"
+          "description": "Node.js 프로젝트 설정 파일"
+        },
+        {
+          "path": "backend/app.js",
+          "type": "CREATE",
+          "description": "Express.js 메인 애플리케이션 파일"
+        },
+        {
+          "path": "backend/routes/auth.js",
+          "type": "CREATE",
+          "description": "인증 관련 라우트"
+        },
+        {
+          "path": "backend/routes/diary.js",
+          "type": "CREATE",
+          "description": "일기 관련 라우트"
+        },
+        {
+          "path": "backend/middleware/auth.js",
+          "type": "CREATE",
+          "description": "인증 미들웨어"
+        },
+        {
+          "path": "backend/config/db.js",
+          "type": "CREATE",
+          "description": "데이터베이스 연결 설정"
+        },
+        {
+          "path": "backend/models/User.js",
+          "type": "CREATE",
+          "description": "사용자 모델"
+        },
+        {
+          "path": "backend/models/Diary.js",
+          "type": "CREATE",
+          "description": "일기 모델"
         }
       ],
-      "implementationGuide": "src/styles 디렉토리를 생성하고 그 안에 theme.py 파일을 생성합니다. theme.py 파일에는 컬러 팔레트, 폰트 스타일, 크기 등 UI 테마 관련 변수들을 정의합니다. 다크 모드와 라이트 모드를 전환할 수 있는 로직을 포함하고, 각 모드에 따른 색상 값을 설정합니다. Avalonia UI에서 이 테마를 동적으로 적용할 수 있도록 구현합니다.",
-      "verificationCriteria": "src/styles/theme.py 파일이 생성되었는지 확인하고, 테마 변수들이 올바르게 정의되었는지, 다크/라이트 모드 전환 로직이 포함되었는지 검토합니다. Avalonia UI에서 테마가 정상적으로 적용되는지 확인합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
+      "implementationGuide": "Node.js 프로젝트를 초기화하고 Express.js를 설정합니다. JWT 기반 사용자 인증(회원가입, 로그인)을 구현하고, 일기 생성, 조회, 수정, 삭제 API를 개발합니다. 데이터베이스는 MongoDB를 연동합니다. 알림 로직의 기본 구조를 마련합니다.",
+      "verificationCriteria": "백엔드 서버가 성공적으로 실행되고, 사용자 회원가입/로그인 및 일기 CRUD API가 정상적으로 작동하는지 Postman 또는 유사 도구로 테스트합니다.",
+      "analysisResult": "일기장 앱 개발을 위한 초기 분석 및 설계 제안. 모바일(Flutter), 웹(React), 백엔드(Node.js/Express.js)로 구성되며, 사용자 로그인, 일기 작성/조회, 데이터 저장, 알림 기능을 포함한다. 미니멀리즘, 다크/라이트 모드, WCAG 2.1 준수 디자인 원칙을 따르며, JWT 기반 인증과 RESTful API를 사용한다."
     },
     {
-      "id": "494b2fd5-7ead-4164-875e-c34faba8d875",
-      "name": "싱글턴 패턴 구현",
-      "description": "src/singletons/ 디렉토리를 생성하고, 공통 데이터 관리를 위한 싱글턴 클래스를 구현합니다. (예: 사용자 설정, 테마 정보)",
-      "status": "pending",
-      "dependencies": [],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
-      "relatedFiles": [
-        {
-          "path": "src/singletons/__init__.py",
-          "type": "CREATE",
-          "description": "싱글턴 패키지 초기화 파일"
-        },
-        {
-          "path": "src/singletons/app_settings.py",
-          "type": "CREATE",
-          "description": "애플리케이션 설정 싱글턴 예시"
-        },
-        {
-          "path": "docs/patterns/singleton.md",
-          "type": "REFERENCE",
-          "description": "싱글턴 패턴 문서"
-        }
-      ],
-      "implementationGuide": "src/singletons 디렉토리를 생성하고, 필요한 싱글턴 클래스(예: AppSettingsSingleton, ThemeManagerSingleton)를 구현합니다. 이 클래스들은 애플리케이션 전반에서 단일 인스턴스로 접근 가능하도록 설계합니다. docs/patterns/singleton.md에 정의된 싱글턴 패턴 가이드라인을 따릅니다.",
-      "verificationCriteria": "src/singletons 디렉토리와 싱글턴 클래스 파일이 생성되었는지 확인하고, 싱글턴 패턴이 올바르게 적용되었는지, 애플리케이션 내에서 단일 인스턴스로 접근 가능한지 테스트합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
-    },
-    {
-      "id": "8dd5ffcd-43d2-4f8b-a45f-1e7c72398188",
-      "name": "Avalonia UI 프로젝트 초기 설정",
-      "description": "Avalonia UI 프로젝트를 초기 설정하고, 기본 창 및 레이아웃을 구성합니다.",
-      "status": "pending",
-      "dependencies": [
-        {
-          "taskId": "5c1ba7c3-6fde-44ac-b04e-ec6093f74d7a"
-        }
-      ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
-      "relatedFiles": [
-        {
-          "path": "src/ui/AvaloniaApp.csproj",
-          "type": "CREATE",
-          "description": "Avalonia UI 프로젝트 파일"
-        },
-        {
-          "path": "src/ui/App.axaml",
-          "type": "CREATE",
-          "description": "Avalonia 애플리케이션 정의"
-        },
-        {
-          "path": "src/ui/App.axaml.cs",
-          "type": "CREATE",
-          "description": "Avalonia 애플리케이션 코드 비하인드"
-        },
-        {
-          "path": "src/ui/Views/MainWindow.axaml",
-          "type": "CREATE",
-          "description": "메인 창 UI 정의"
-        },
-        {
-          "path": "src/ui/Views/MainWindow.axaml.cs",
-          "type": "CREATE",
-          "description": "메인 창 코드 비하인드"
-        },
-        {
-          "path": "src/ui/ViewModels/MainWindowViewModel.cs",
-          "type": "CREATE",
-          "description": "메인 창 뷰모델"
-        }
-      ],
-      "implementationGuide": "Avalonia UI 프로젝트를 생성하고, 주 창(MainWindow.axaml, MainWindow.axaml.cs)을 설정합니다. 기본적인 레이아웃 구조를 정의하고, 테마 시스템과 연동할 수 있는 준비를 합니다. Avalonia의 MVVM 패턴을 고려하여 초기 구조를 잡습니다.",
-      "verificationCriteria": "Avalonia UI 프로젝트가 성공적으로 빌드되고 실행되는지 확인합니다. 기본 창이 표시되고, 초기 레이아웃이 올바르게 구성되었는지 검토합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
-    },
-    {
-      "id": "3a55628e-c5bf-4b0c-8304-3f909d9c666b",
-      "name": "기본 UI 컴포넌트 개발",
-      "description": "src/components/에 재사용 가능한 기본 UI 컴포넌트(버튼, 입력 필드, 카드 등)를 개발합니다. 이 컴포넌트들은 테마 시스템을 참조하도록 합니다.",
+      "id": "a8183a70-d1e1-4247-8b37-83f4dff3224c",
+      "name": "모바일 앱 개발 (Flutter)",
+      "description": "일기장 앱의 모바일 클라이언트를 Flutter로 개발합니다. 사용자 인증 UI, 일기 목록 및 작성 UI를 포함합니다.",
       "status": "pending",
       "dependencies": [
         {
-          "taskId": "5c1ba7c3-6fde-44ac-b04e-ec6093f74d7a"
+          "taskId": "36e2d121-7bf4-4410-8c14-0f4786866b42"
         },
         {
-          "taskId": "8dd5ffcd-43d2-4f8b-a45f-1e7c72398188"
+          "taskId": "341d0e23-e59b-48f2-b6e2-b27869df9988"
         }
       ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
+      "createdAt": "2025-08-04T02:41:12.770Z",
+      "updatedAt": "2025-08-04T02:41:12.770Z",
       "relatedFiles": [
         {
-          "path": "src/components/__init__.py",
+          "path": "mobile/",
           "type": "CREATE",
-          "description": "컴포넌트 패키지 초기화 파일"
+          "description": "모바일 프로젝트 루트 디렉토리"
         },
         {
-          "path": "src/components/Button.axaml",
+          "path": "mobile/pubspec.yaml",
           "type": "CREATE",
-          "description": "재사용 가능한 버튼 컴포넌트"
+          "description": "Flutter 프로젝트 설정 파일"
         },
         {
-          "path": "src/components/TextBox.axaml",
+          "path": "mobile/lib/main.dart",
           "type": "CREATE",
-          "description": "재사용 가능한 텍스트 입력 필드 컴포넌트"
+          "description": "Flutter 앱 진입점"
         },
         {
-          "path": "src/components/Card.axaml",
+          "path": "mobile/lib/theme/app_theme.dart",
           "type": "CREATE",
-          "description": "재사용 가능한 카드 컴포넌트"
+          "description": "앱 테마 정의"
+        },
+        {
+          "path": "mobile/lib/screens/auth_screen.dart",
+          "type": "CREATE",
+          "description": "인증 화면"
+        },
+        {
+          "path": "mobile/lib/screens/home_screen.dart",
+          "type": "CREATE",
+          "description": "홈 화면 (일기 목록)"
+        },
+        {
+          "path": "mobile/lib/screens/diary_edit_screen.dart",
+          "type": "CREATE",
+          "description": "일기 작성/수정 화면"
+        },
+        {
+          "path": "mobile/lib/widgets/diary_entry_card.dart",
+          "type": "CREATE",
+          "description": "일기 항목 카드 위젯"
+        },
+        {
+          "path": "mobile/lib/services/api_service.dart",
+          "type": "CREATE",
+          "description": "백엔드 API 통신 서비스"
         }
       ],
-      "implementationGuide": "src/components 디렉토리를 생성하고, Button.axaml, TextBox.axaml, Card.axaml 등 재사용 가능한 Avalonia UI 컴포넌트들을 정의합니다. 각 컴포넌트는 theme.py에 정의된 색상, 폰트, 크기 등을 참조하여 스타일링합니다. 다크/라이트 모드 전환 시 컴포넌트 스타일이 동적으로 변경되는지 확인합니다.",
-      "verificationCriteria": "기본 UI 컴포넌트들이 src/components에 생성되었는지 확인하고, 테마 시스템과 연동되어 스타일이 올바르게 적용되는지, 다크/라이트 모드 전환 시 스타일이 변경되는지 테스트합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
+      "implementationGuide": "Flutter 프로젝트를 초기화하고, `docs/designed.md`에 따라 테마 시스템을 구현합니다. 사용자 로그인 및 회원가입 UI를 개발하고, 백엔드 API와 연동합니다. 일기 목록을 표시하는 홈 화면과 일기 작성/수정 UI를 구현합니다. 재사용 가능한 UI 컴포넌트를 `src/components/`에 정의합니다.",
+      "verificationCriteria": "모바일 앱이 성공적으로 빌드 및 실행되고, 사용자 로그인/회원가입, 일기 작성/조회 기능이 정상적으로 작동하는지 확인합니다.",
+      "analysisResult": "일기장 앱 개발을 위한 초기 분석 및 설계 제안. 모바일(Flutter), 웹(React), 백엔드(Node.js/Express.js)로 구성되며, 사용자 로그인, 일기 작성/조회, 데이터 저장, 알림 기능을 포함한다. 미니멀리즘, 다크/라이트 모드, WCAG 2.1 준수 디자인 원칙을 따르며, JWT 기반 인증과 RESTful API를 사용한다."
     },
     {
-      "id": "5b13e7ca-0eb4-47d9-80e0-6c784515bc33",
-      "name": "Firebase 연동 모듈 개발",
-      "description": "Firebase Authentication (소셜 로그인), Firestore (데이터베이스), FCM (푸시 알림) 연동을 위한 Python 모듈을 개발합니다.",
+      "id": "cb27c7e6-b026-4309-9a3a-3c73fe15c211",
+      "name": "웹 앱 개발 (React)",
+      "description": "일기장 앱의 웹 클라이언트를 React로 개발합니다. 사용자 인증 UI, 일기 목록 및 작성 UI를 포함합니다.",
       "status": "pending",
       "dependencies": [
         {
-          "taskId": "494b2fd5-7ead-4164-875e-c34faba8d875"
+          "taskId": "36e2d121-7bf4-4410-8c14-0f4786866b42"
+        },
+        {
+          "taskId": "341d0e23-e59b-48f2-b6e2-b27869df9988"
         }
       ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
+      "createdAt": "2025-08-04T02:41:12.770Z",
+      "updatedAt": "2025-08-04T02:41:12.770Z",
       "relatedFiles": [
         {
-          "path": "src/firebase/__init__.py",
+          "path": "web/",
           "type": "CREATE",
-          "description": "Firebase 연동 패키지 초기화 파일"
+          "description": "웹 프로젝트 루트 디렉토리"
         },
         {
-          "path": "src/firebase/auth.py",
+          "path": "web/package.json",
           "type": "CREATE",
-          "description": "Firebase Authentication 모듈"
+          "description": "React 프로젝트 설정 파일"
         },
         {
-          "path": "src/firebase/firestore.py",
+          "path": "web/src/App.js",
           "type": "CREATE",
-          "description": "Firebase Firestore 모듈"
+          "description": "React 앱 메인 컴포넌트"
         },
         {
-          "path": "src/firebase/fcm.py",
+          "path": "web/src/styles/theme.css",
           "type": "CREATE",
-          "description": "Firebase Cloud Messaging 모듈"
+          "description": "웹 앱 테마 CSS"
         },
         {
-          "path": "src/firebase/config.py",
+          "path": "web/src/pages/AuthPage.js",
           "type": "CREATE",
-          "description": "Firebase 설정 파일 (서비스 계정 키 등)"
+          "description": "인증 페이지"
+        },
+        {
+          "path": "web/src/pages/HomePage.js",
+          "type": "CREATE",
+          "description": "홈 페이지 (일기 목록)"
+        },
+        {
+          "path": "web/src/pages/DiaryEditPage.js",
+          "type": "CREATE",
+          "description": "일기 작성/수정 페이지"
+        },
+        {
+          "path": "web/src/components/DiaryCard.js",
+          "type": "CREATE",
+          "description": "일기 항목 카드 컴포넌트"
+        },
+        {
+          "path": "web/src/services/apiService.js",
+          "type": "CREATE",
+          "description": "백엔드 API 통신 서비스"
         }
       ],
-      "implementationGuide": "src/firebase 디렉토리를 생성하고, Firebase Admin SDK를 사용하여 Firebase와 연동하는 Python 모듈을 구현합니다. 사용자 인증, Firestore 데이터 CRUD, FCM 메시지 전송 기능을 포함합니다. Firebase 프로젝트 설정 및 서비스 계정 키 관리에 대한 가이드라인을 포함합니다. 싱글턴 패턴을 활용하여 Firebase 앱 인스턴스를 관리합니다.",
-      "verificationCriteria": "Firebase 연동 모듈들이 생성되었는지 확인하고, Firebase Authentication, Firestore, FCM 기능이 Python에서 정상적으로 호출되고 작동하는지 단위 테스트를 통해 검증합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
+      "implementationGuide": "React 프로젝트를 초기화하고, `docs/designed.md`에 따라 테마 시스템을 구현합니다. 사용자 로그인 및 회원가입 UI를 개발하고, 백엔드 API와 연동합니다. 일기 목록을 표시하는 홈 화면과 일기 작성/수정 UI를 구현합니다. 재사용 가능한 UI 컴포넌트를 `src/components/`에 정의합니다.",
+      "verificationCriteria": "웹 앱이 성공적으로 빌드 및 실행되고, 사용자 로그인/회원가입, 일기 작성/조회 기능이 정상적으로 작동하는지 확인합니다.",
+      "analysisResult": "일기장 앱 개발을 위한 초기 분석 및 설계 제안. 모바일(Flutter), 웹(React), 백엔드(Node.js/Express.js)로 구성되며, 사용자 로그인, 일기 작성/조회, 데이터 저장, 알림 기능을 포함한다. 미니멀리즘, 다크/라이트 모드, WCAG 2.1 준수 디자인 원칙을 따르며, JWT 기반 인증과 RESTful API를 사용한다."
     },
     {
-      "id": "ee032d10-6305-4df5-9c25-f1ceba249fdc",
-      "name": "Python FastAPI 백엔드 초기 설정",
-      "description": "FastAPI 프로젝트를 초기 설정하고, 기본 API 엔드포인트를 구성합니다.",
+      "id": "6391b170-2011-41e9-8877-678b815fedfb",
+      "name": "중앙 집중식 오류 처리 및 로깅",
+      "description": "애플리케이션 전반에 걸쳐 일관된 오류 처리 및 로깅 메커니즘을 구현합니다.",
       "status": "pending",
       "dependencies": [
         {
-          "taskId": "5b13e7ca-0eb4-47d9-80e0-6c784515bc33"
+          "taskId": "341d0e23-e59b-48f2-b6e2-b27869df9988"
+        },
+        {
+          "taskId": "a8183a70-d1e1-4247-8b37-83f4dff3224c"
+        },
+        {
+          "taskId": "cb27c7e6-b026-4309-9a3a-3c73fe15c211"
         }
       ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
+      "createdAt": "2025-08-04T02:41:12.770Z",
+      "updatedAt": "2025-08-04T02:41:12.770Z",
       "relatedFiles": [
         {
-          "path": "backend/main.py",
+          "path": "backend/middleware/error_handler.js",
           "type": "CREATE",
-          "description": "FastAPI 메인 애플리케이션 파일"
+          "description": "백엔드 전역 오류 핸들러"
         },
         {
-          "path": "backend/requirements.txt",
+          "path": "backend/utils/logger.js",
           "type": "CREATE",
-          "description": "Python 백엔드 의존성 파일"
+          "description": "백엔드 로깅 유틸리티"
         },
         {
-          "path": "backend/app/__init__.py",
+          "path": "mobile/lib/utils/error_handler.dart",
           "type": "CREATE",
-          "description": "FastAPI 애플리케이션 패키지 초기화"
+          "description": "모바일 앱 오류 처리 유틸리티"
         },
         {
-          "path": "backend/app/api/v1/__init__.py",
+          "path": "web/src/utils/errorHandler.js",
           "type": "CREATE",
-          "description": "API 버전 1 패키지 초기화"
-        },
-        {
-          "path": "backend/app/api/v1/endpoints/__init__.py",
-          "type": "CREATE",
-          "description": "API 엔드포인트 패키지 초기화"
+          "description": "웹 앱 오류 처리 유틸리티"
         }
       ],
-      "implementationGuide": "FastAPI 프로젝트를 생성하고, main.py 파일을 설정합니다. 기본적인 라우팅 구조를 정의하고, CORS 설정, 미들웨어 등을 구성합니다. Firebase 연동 모듈을 FastAPI에서 사용할 수 있도록 준비합니다. 가상 환경 설정 및 의존성 관리를 위한 requirements.txt 파일을 생성합니다.",
-      "verificationCriteria": "FastAPI 프로젝트가 성공적으로 실행되는지 확인하고, 기본 API 엔드포인트가 정상적으로 응답하는지 테스트합니다. requirements.txt 파일이 올바르게 생성되었는지 검토합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
-    },
-    {
-      "id": "55bf7da2-9ab8-4973-92dc-1b2d35cc7611",
-      "name": "사용자 인증 API 개발",
-      "description": "Firebase Authentication과 연동하여 사용자 로그인, 회원가입, 로그아웃 API를 개발합니다.",
-      "status": "pending",
-      "dependencies": [
-        {
-          "taskId": "5b13e7ca-0eb4-47d9-80e0-6c784515bc33"
-        },
-        {
-          "taskId": "ee032d10-6305-4df5-9c25-f1ceba249fdc"
-        }
-      ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
-      "relatedFiles": [
-        {
-          "path": "backend/app/api/v1/endpoints/auth.py",
-          "type": "CREATE",
-          "description": "사용자 인증 API 엔드포인트"
-        },
-        {
-          "path": "backend/app/schemas/user.py",
-          "type": "CREATE",
-          "description": "사용자 관련 Pydantic 스키마"
-        }
-      ],
-      "implementationGuide": "FastAPI 백엔드에 사용자 인증 관련 엔드포인트(예: /auth/register, /auth/login, /auth/logout)를 구현합니다. Firebase 연동 모듈의 auth.py를 사용하여 Firebase Authentication 기능을 호출합니다. JWT 토큰을 사용하여 사용자 세션을 관리하고, 보안 규칙을 적용합니다. 소셜 로그인(Google, Facebook 등) 연동을 위한 엔드포인트도 포함합니다.",
-      "verificationCriteria": "사용자 인증 API 엔드포인트들이 정상적으로 작동하는지 Postman 또는 curl을 사용하여 테스트합니다. 회원가입, 로그인, 로그아웃 기능이 Firebase와 연동되어 올바르게 처리되는지 확인합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
-    },
-    {
-      "id": "6f38e3c1-3f21-444b-aa1d-0dbbc2bfd66a",
-      "name": "할일 CRUD API 개발",
-      "description": "Firestore와 연동하여 할일 생성, 조회, 수정, 삭제 API를 개발합니다.",
-      "status": "pending",
-      "dependencies": [
-        {
-          "taskId": "5b13e7ca-0eb4-47d9-80e0-6c784515bc33"
-        },
-        {
-          "taskId": "ee032d10-6305-4df5-9c25-f1ceba249fdc"
-        }
-      ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
-      "relatedFiles": [
-        {
-          "path": "backend/app/api/v1/endpoints/todos.py",
-          "type": "CREATE",
-          "description": "할일 CRUD API 엔드포인트"
-        },
-        {
-          "path": "backend/app/schemas/todo.py",
-          "type": "CREATE",
-          "description": "할일 관련 Pydantic 스키마"
-        }
-      ],
-      "implementationGuide": "FastAPI 백엔드에 할일 관리 관련 엔드포인트(예: /todos, /todos/{todo_id})를 구현합니다. Firebase 연동 모듈의 firestore.py를 사용하여 Firestore에서 할일 데이터를 CRUD합니다. 사용자별 할일 데이터 접근 권한을 관리하고, 데이터 유효성 검사를 수행합니다.",
-      "verificationCriteria": "할일 CRUD API 엔드포인트들이 정상적으로 작동하는지 테스트합니다. 할일 생성, 조회, 수정, 삭제 기능이 Firestore와 연동되어 올바르게 처리되는지 확인합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
-    },
-    {
-      "id": "362ce652-d7e1-4c01-8c6c-76736dcd78d4",
-      "name": "푸시 알림 API 개발",
-      "description": "Firebase Cloud Messaging (FCM)을 사용하여 푸시 알림 전송 API를 개발합니다.",
-      "status": "pending",
-      "dependencies": [
-        {
-          "taskId": "5b13e7ca-0eb4-47d9-80e0-6c784515bc33"
-        },
-        {
-          "taskId": "ee032d10-6305-4df5-9c25-f1ceba249fdc"
-        }
-      ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
-      "relatedFiles": [
-        {
-          "path": "backend/app/api/v1/endpoints/notifications.py",
-          "type": "CREATE",
-          "description": "푸시 알림 API 엔드포인트"
-        }
-      ],
-      "implementationGuide": "FastAPI 백엔드에 푸시 알림 전송 엔드포인트(예: /notifications/send)를 구현합니다. Firebase 연동 모듈의 fcm.py를 사용하여 FCM 메시지를 전송합니다. 특정 사용자에게 알림을 보내거나, 특정 주제를 구독한 사용자들에게 알림을 보내는 기능을 포함합니다.",
-      "verificationCriteria": "푸시 알림 API 엔드포인트가 정상적으로 작동하는지 테스트합니다. FCM을 통해 실제 디바이스 또는 시뮬레이터로 푸시 알림이 전송되는지 확인합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
-    },
-    {
-      "id": "28559ab4-df2e-4b9f-ac18-3bb326683c96",
-      "name": "API 명세 문서화",
-      "description": "docs/api_spec.md 파일을 생성하고, 개발된 API 엔드포인트에 대한 명세를 작성합니다. (Swagger/OpenAPI 형식)",
-      "status": "pending",
-      "dependencies": [
-        {
-          "taskId": "55bf7da2-9ab8-4973-92dc-1b2d35cc7611"
-        },
-        {
-          "taskId": "6f38e3c1-3f21-444b-aa1d-0dbbc2bfd66a"
-        },
-        {
-          "taskId": "362ce652-d7e1-4c01-8c6c-76736dcd78d4"
-        }
-      ],
-      "createdAt": "2025-08-04T02:22:10.208Z",
-      "updatedAt": "2025-08-04T02:22:10.208Z",
-      "relatedFiles": [
-        {
-          "path": "docs/api_spec.md",
-          "type": "CREATE",
-          "description": "API 명세 문서"
-        }
-      ],
-      "implementationGuide": "docs/api_spec.md 파일을 생성하고, 개발된 사용자 인증, 할일 CRUD, 푸시 알림 API 엔드포인트에 대한 상세한 명세를 작성합니다. 각 엔드포인트의 HTTP 메서드, URL 경로, 요청/응답 형식, 파라미터, 인증 요구사항, 에러 코드 등을 포함합니다. Swagger/OpenAPI 형식으로 작성하여 추후 자동 문서화 도구와 연동할 수 있도록 합니다.",
-      "verificationCriteria": "docs/api_spec.md 파일이 생성되었는지 확인하고, 모든 개발된 API 엔드포인트에 대한 명세가 상세하고 정확하게 기술되었는지 검토합니다.",
-      "analysisResult": "할일관리 앱 개발을 위한 초기 분석이 완료되었습니다. Avalonia UI, Python 백엔드, Firebase를 활용한 아키텍처는 요구사항을 잘 반영하고 있으며, 모듈화 및 컴포넌트 기반 개발 원칙을 따릅니다. Firebase와 FastAPI의 연동을 통해 확장성과 성능을 확보할 수 있습니다. 향후 API 명세 문서화를 통해 개발 효율성을 높일 것을 제안합니다."
+      "implementationGuide": "백엔드에서는 Express.js 미들웨어를 사용하여 전역 오류 핸들러를 구현하고, Winston과 같은 로깅 라이브러리를 사용하여 상세한 로그를 기록합니다. 모바일(Flutter) 및 웹(React) 앱에서는 API 호출 시 발생하는 오류를 처리하고 사용자에게 적절한 피드백을 제공하는 공통 유틸리티를 구현합니다.",
+      "verificationCriteria": "각 계층에서 의도적으로 오류를 발생시켜 오류 처리 및 로깅이 정상적으로 작동하는지 확인합니다. 로그 파일이 올바르게 생성되고 내용이 기록되는지 확인합니다.",
+      "analysisResult": "일기장 앱 개발을 위한 초기 분석 및 설계 제안. 모바일(Flutter), 웹(React), 백엔드(Node.js/Express.js)로 구성되며, 사용자 로그인, 일기 작성/조회, 데이터 저장, 알림 기능을 포함한다. 미니멀리즘, 다크/라이트 모드, WCAG 2.1 준수 디자인 원칙을 따르며, JWT 기반 인증과 RESTful API를 사용한다."
     }
   ]
 }
