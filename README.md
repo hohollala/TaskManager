@@ -362,9 +362,14 @@ npm install -g .
 
 #### 5. MCP 서버 추가
 
-**Windows용:**
+**Windows PowerShell용:**
 ```bash
-claude mcp add shrimp-task-manager -s user -- node dist/index.js
+claude mcp add shrimp-task-manager -s user -- node "$PWD/dist/index.js"
+```
+
+**Windows CMD용:**
+```bash
+claude mcp add shrimp-task-manager -s user -- node "[설치경로]/dist/index.js"
 ```
 
 **macOS/Linux용:**
