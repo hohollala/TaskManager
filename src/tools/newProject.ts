@@ -115,7 +115,7 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
     };
   }
 
-  // 대화형 모드 - 첫 번째 질문 시작
+  // 대화형 모드 - 첫 번째 질문 시작 (중복 체크 없이)
   return await askProjectQuestion({
     questionNumber: 1,
     answer: undefined,
