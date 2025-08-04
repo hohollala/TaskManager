@@ -414,7 +414,7 @@ async function main() {
                   `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
                 );
               }
-              return await newProject(parsedArgs.data, true);
+              return await newProject(parsedArgs.data);
             case "ask-project-question":
               parsedArgs = await askProjectQuestionSchema.safeParseAsync(
                 request.params.arguments
@@ -460,6 +460,14 @@ async function main() {
             ],
           };
         }
+        return {
+          content: [
+            {
+              type: "text",
+              text: "Tool execution completed",
+            },
+          ],
+        };
       }
     );
 

@@ -91,7 +91,7 @@ export function generatePrompt(
 export async function loadPromptFromTemplate(
   templatePath: string
 ): Promise<string> {
-  const templateSetName = process.env.TEMPLATES_USE || "en";
+  const templateSetName = process.env.TEMPLATES_USE || "ko";
   const builtInTemplatesBaseDir = __dirname;
 
   let finalPath = "";

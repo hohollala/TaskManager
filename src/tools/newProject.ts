@@ -1,4 +1,8 @@
 import { z } from "zod";
+import { promises as fs } from "fs";
+import path from "path";
+import { initProjectRules } from "./initProjectRules.js";
+import { planTask } from "./planTask.js";
 
 // 스키마 정의
 export const newProjectSchema = z.object({
@@ -12,18 +16,11 @@ export const newProjectSchema = z.object({
   otherRequirements: z.string().optional().describe("기타 요구사항")
 });
 
-
 export const askProjectQuestionSchema = z.object({
   questionNumber: z.number(),
   answer: z.string().optional(),
   answers: z.array(z.string()).optional()
 });
-
-// 중복 호출 방지를 위한 캐시
-let lastInput: string | null = null;
-let lastOutput: string | null = null;
-let lastCallTime: number = 0;
-const DUPLICATE_THRESHOLD = 5000; // 5초 내 동일 입력은 중복으로 간주
 
 // 질문 목록
 const QUESTIONS = [
@@ -37,34 +34,265 @@ const QUESTIONS = [
   "8. 기타 요구사항이 있나요? (예: 성능 요구사항, 보안 요구사항, 특별한 기능 등)"
 ] as const;
 
+// 파일 생성 함수들
+async function createProjectFiles(answers: string[]) {
+  const [purpose, features, design, server, externalServices, platforms, techStack, otherRequirements] = answers;
+  
+  // docs 디렉토리 생성
+  const docsDir = path.join(process.cwd(), 'docs');
+  await fs.mkdir(docsDir, { recursive: true });
+
+  // requirements.md 생성
+  const requirementsContent = `# 프로젝트 요구사항 요약
+
+## 프로젝트 개요
+**목적**: ${purpose || '미정'}
+
+## 핵심 기능 요구사항
+${features || '미정'}
+
+## 디자인 요구사항
+${design || '미정'}
+
+## 서버/API 요구사항
+${server || '미정'}
+
+## 외부 서비스 연동
+${externalServices || '미정'}
+
+## 지원 플랫폼
+${platforms || '미정'}
+
+## 기술 스택 및 제한사항
+${techStack || '미정'}
+
+## 기타 요구사항
+${otherRequirements || '미정'}
+
+---
+*생성일: ${new Date().toLocaleDateString('ko-KR')}*
+`;
+
+  // designed.md 생성
+  const designedContent = `# UI/UX 디자인 가이드
+
+## 디자인 방향성
+${design || '미정'}
+
+## 플랫폼별 고려사항
+${platforms || '미정'}
+
+## 사용자 경험 (UX) 요구사항
+- 직관적이고 사용하기 쉬운 인터페이스
+- 일관된 디자인 패턴 적용
+- 접근성 고려 (WCAG 2.1 준수)
+
+## 디자인 시스템
+- 컬러 스키마: TBD
+- 타이포그래피: TBD
+- 컴포넌트 라이브러리: TBD
+
+## 반응형 디자인
+- 모바일 우선 접근법
+- 다양한 화면 크기 지원
+- 터치 친화적 인터페이스
+
+---
+*생성일: ${new Date().toLocaleDateString('ko-KR')}*
+`;
+
+  // technical_spec.md 생성
+  const technicalSpecContent = `# 기술 명세서
+
+## 아키텍처 개요
+**목적**: ${purpose || '미정'}
+
+## 기술 스택
+${techStack || '미정'}
+
+## 서버 구성
+${server || '미정'}
+
+## 외부 API 및 서비스
+${externalServices || '미정'}
+
+## 플랫폼 지원
+${platforms || '미정'}
+
+## 보안 요구사항
+- 데이터 암화화 (전송 중/저장 중)
+- 사용자 인증 및 권한 관리
+- API 보안 (HTTPS, 토큰 기반 인증)
+
+## 성능 요구사항
+- 페이지 로딩 시간: < 3초
+- API 응답 시간: < 500ms
+- 모바일 최적화
+
+## 확장성 고려사항
+- 클라우드 기반 인프라
+- 마이크로서비스 아키텍처 (필요시)
+- 데이터베이스 확장성
+
+## 개발 환경
+- 버전 관리: Git
+- CI/CD 파이프라인
+- 테스트 자동화
+
+## 기타 기술적 요구사항
+${otherRequirements || '미정'}
+
+---
+*생성일: ${new Date().toLocaleDateString('ko-KR')}*
+`;
+
+  // CLAUDE.md 생성
+  const claudeContent = `# 프로젝트 컨텍스트 및 가이드라인
+
+## 프로젝트 개요
+${purpose || '미정'}
+
+## 핵심 기능
+${features || '미정'}
+
+## 기술 스택
+${techStack || '미정'}
+
+## 개발 가이드라인
+
+### 코딩 컨벤션
+- ESLint + Prettier 사용
+- TypeScript 엄격 모드
+- 컴포넌트 단위 개발
+
+### 브랜치 전략
+- main: 프로덕션 배포용
+- develop: 개발용 통합 브랜치
+- feature/: 기능 개발용
+
+### 커밋 메시지 규칙
+- feat: 새로운 기능 추가
+- fix: 버그 수정
+- docs: 문서 수정
+- style: 코드 스타일 변경
+- refactor: 코드 리팩토링
+- test: 테스트 추가/수정
+
+### 폴더 구조
+\`\`\`
+src/
+├── components/     # 재사용 가능한 컴포넌트
+├── pages/         # 페이지 컴포넌트
+├── services/      # API 서비스
+├── utils/         # 유틸리티 함수
+├── styles/        # 스타일 파일
+└── types/         # TypeScript 타입 정의
+\`\`\`
+
+## 품질 관리
+- 코드 리뷰 필수
+- 단위 테스트 커버리지 > 80%
+- E2E 테스트 자동화
+
+## 배포 프로세스
+1. 개발 환경 테스트
+2. 스테이징 환경 검증
+3. 프로덕션 배포
+
+---
+*생성일: ${new Date().toLocaleDateString('ko-KR')}*
+*마지막 업데이트: ${new Date().toLocaleDateString('ko-KR')}*
+`;
+
+  // 파일들 생성
+  await fs.writeFile(path.join(docsDir, 'requirements.md'), requirementsContent, 'utf-8');
+  await fs.writeFile(path.join(docsDir, 'designed.md'), designedContent, 'utf-8');
+  await fs.writeFile(path.join(docsDir, 'technical_spec.md'), technicalSpecContent, 'utf-8');
+  await fs.writeFile(path.join(process.cwd(), 'CLAUDE.md'), claudeContent, 'utf-8');
+
+  return {
+    files: ['docs/requirements.md', 'docs/designed.md', 'docs/technical_spec.md', 'CLAUDE.md'],
+    docsDir
+  };
+}
+
 // 질문 처리 함수
 export async function askProjectQuestion(input: { questionNumber: number; answer?: string; answers?: string[] }) {
   const { questionNumber, answer, answers = [] } = input;
   const currentIndex = questionNumber - 1;
   const isLastQuestion = questionNumber === QUESTIONS.length;
 
-  // 답변이 있는 경우
+  // 답변이 있는 경우 - 답변 확인 후 다음 질문
   if (answer?.trim()) {
     const updatedAnswers = [...answers];
     updatedAnswers[currentIndex] = answer;
 
-    // 마지막 질문이면 완료
+    // 마지막 질문이면 완료 및 후속 작업 실행
     if (isLastQuestion) {
-      return {
-        content: [{ 
-          type: "text", 
-          text: `✅ 모든 질문 완료!\n\n📝 수집된 답변:\n${updatedAnswers.map((ans, idx) => `${idx + 1}. ${ans}`).join('\n')}` 
-        }]
-      };
+      try {
+        // 1. 파일 생성
+        const fileResult = await createProjectFiles(updatedAnswers);
+        
+        // 2. init 명령 실행
+        const initResult = await initProjectRules();
+        
+        // 3. plan 명령 실행 (수집된 답변을 기반으로)
+        const planDescription = `프로젝트 요구사항을 바탕으로 ${updatedAnswers[0] || '새 프로젝트'} 개발을 위한 계획을 수립합니다.
+
+핵심 기능: ${updatedAnswers[1] || '미정'}
+기술 스택: ${updatedAnswers[6] || '미정'}
+플랫폼: ${updatedAnswers[5] || '미정'}`;
+
+        const planResult = await planTask({ 
+          description: planDescription,
+          existingTasksReference: false 
+        });
+
+        return {
+          content: [{ 
+            type: "text", 
+            text: `✅ 모든 질문 완료!
+
+📝 수집된 답변:
+${updatedAnswers.map((ans, idx) => `${idx + 1}. ${ans}`).join('\n')}
+
+🎉 프로젝트 초기화 완료!
+
+📁 생성된 파일들:
+${fileResult.files.map(file => `- ${file}`).join('\n')}
+
+🔧 프로젝트 규칙 초기화 완료
+📋 프로젝트 계획 수립 완료
+
+✨ 이제 개발을 시작할 수 있습니다!`
+          }]
+        };
+      } catch (error) {
+        return {
+          content: [{ 
+            type: "text", 
+            text: `✅ 모든 질문 완료!
+
+📝 수집된 답변:
+${updatedAnswers.map((ans, idx) => `${idx + 1}. ${ans}`).join('\n')}
+
+⚠️ 후속 작업 중 오류 발생: ${error instanceof Error ? error.message : String(error)}
+
+수동으로 다음 명령을 실행해주세요:
+1. init 명령으로 프로젝트 규칙 초기화
+2. plan 명령으로 프로젝트 계획 수립`
+          }]
+        };
+      }
     }
 
-    // 답변을 받았으므로 다음 질문으로 진행
-    const nextQuestionIndex = questionNumber; // 다음 질문 번호 (1부터 시작하므로 배열 인덱스로 사용 가능)
+    // 답변 확인 후 다음 질문
+    const nextQuestionIndex = questionNumber;
     const nextQuestion = QUESTIONS[nextQuestionIndex];
     return {
       content: [{ 
         type: "text", 
-        text: `${nextQuestion}` 
+        text: `✅ 답변: ${answer}\n\n${nextQuestion}` 
       }]
     };
   }
@@ -78,54 +306,29 @@ export async function askProjectQuestion(input: { questionNumber: number; answer
     }]
   };
 }
+
+// 메인 함수
 export async function newProject(input: NewProjectInput = {}, forceInteractive = false) {
-  const hasInput = input.purpose || input.features || input.design;
-  
-  if (hasInput) {
-    // 중복 호출 방지 로직
-    const currentInput = JSON.stringify(input);
-    const currentTime = Date.now();
-    
-    // 동일한 입력이 5초 내에 다시 호출되면 이전 결과 반환
-    if (currentInput === lastInput && 
-        currentTime - lastCallTime < DUPLICATE_THRESHOLD && 
-        lastOutput) {
-      console.log("🔄 중복 호출 감지 - 이전 결과 반환");
-      return {
-        content: [{ 
-          type: "text", 
-          text: lastOutput
-        }]
-      };
-    }
-    
-    const answers = [input.purpose, input.features, input.design];
-    const outputText = `📝 입력된 정보:\n${answers.map((ans, idx) => `${idx + 1}. ${ans || "없음"}`).join('\n')}`;
-    
-    // 캐시 업데이트
-    lastInput = currentInput;
-    lastOutput = outputText;
-    lastCallTime = currentTime;
-    
+  // 입력이 없으면 첫 번째 질문 시작
+  if (!input.purpose && !input.features && !input.design && !input.server && 
+      !input.externalServices && !input.platforms && !input.techStack && !input.otherRequirements) {
     return {
       content: [{ 
         type: "text", 
-        text: outputText
+        text: `🚀 새 프로젝트 요구사항 수집을 시작합니다!\n\n${QUESTIONS[0]}\n\n💡 답변 후 ask-project-question 도구로 계속 진행됩니다.` 
       }]
     };
   }
 
-  // 대화형 모드 - 첫 번째 질문 시작 (중복 체크 없이)
-  // 중복 체크 변수 초기화
-  lastInput = null;
-  lastOutput = null;
-  lastCallTime = 0;
+  const answers = [input.purpose, input.features, input.design, input.server, 
+                   input.externalServices, input.platforms, input.techStack, input.otherRequirements];
   
-  return await askProjectQuestion({
-    questionNumber: 1,
-    answer: undefined,
-    answers: []
-  });
+  return {
+    content: [{ 
+      type: "text", 
+      text: `📝 입력된 정보:\n${answers.map((ans, idx) => `${idx + 1}. ${ans || "없음"}`).join('\n')}` 
+    }]
+  };
 }
 
 export type NewProjectInput = z.infer<typeof newProjectSchema>; 

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__gemini-mcp__gc-ask",
+      "Bash(npm run build:*)"
+    ],
+    "deny": []
+  }
+}
