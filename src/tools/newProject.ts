@@ -866,7 +866,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
         content: [
           {
             type: "text",
-            text: `✅ 답변 저장됨 (질문 ${questionNumber}/8)\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**중요**: 다음 질문을 위해 ask-project-question 도구를 정확히 questionNumber: ${nextQuestionNumber}로 호출하세요.\n\n**순서 확인**: 현재까지 ${questionNumber}개 질문 완료, 다음은 ${nextQuestionNumber}번 질문입니다.`
+            text: `✅ 답변 저장됨 (질문 ${questionNumber}/8)\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**중요**: 사용자의 답변을 받은 후에만 ask-project-question 도구를 questionNumber: ${nextQuestionNumber}로 호출하세요.\n\n**주의**: 답변 없이 바로 호출하지 마세요. 사용자가 답변을 입력할 때까지 기다리세요.\n\n**순서 확인**: 현재까지 ${questionNumber}개 질문 완료, 다음은 ${nextQuestionNumber}번 질문입니다.`
           }
         ]
       };
@@ -910,6 +910,7 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
 5. **중요**: 질문 번호를 순서대로 진행하세요 (1→2→3→4→5→6→7→8)
 6. **절대 건너뛰지 마세요**: 질문 번호를 건너뛰면 시스템이 오류를 표시합니다
 7. **순서 강제**: 시스템이 자동으로 순서를 검증하므로 반드시 순차적으로 진행하세요
+8. **대화형 진행**: 사용자가 답변을 입력할 때까지 기다리세요. 답변 없이 자동으로 넘어가지 마세요
 
 **질문 목록**:
 1. 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)
