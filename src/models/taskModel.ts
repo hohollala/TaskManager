@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { fileURLToPath } from "url";
 import { exec } from "child_process";
 import { promisify } from "util";
-import { getDataDir, getTasksFilePath, getMemoryDir } from "../utils/paths.js";
+import { getTasksFilePath, getMemoryDir } from "../utils/paths.js";
 
 // 모든 도구 함수 및 스키마 가져오기
 const __filename = fileURLToPath(import.meta.url);
@@ -29,14 +29,7 @@ const execPromise = promisify(exec);
 
 // 데이터 디렉토리가 존재하는지 확인
 async function ensureDataDir() {
-  const DATA_DIR = await getDataDir();
   const TASKS_FILE = await getTasksFilePath();
-
-  try {
-    await fs.access(DATA_DIR);
-  } catch (error) {
-    await fs.mkdir(DATA_DIR, { recursive: true });
-  }
 
   try {
     await fs.access(TASKS_FILE);

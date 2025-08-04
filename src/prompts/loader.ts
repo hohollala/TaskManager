@@ -13,7 +13,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { getDataDir } from "../utils/paths.js";
+import { getProjectRoot } from "../utils/paths.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -92,15 +92,13 @@ export async function loadPromptFromTemplate(
   templatePath: string
 ): Promise<string> {
   const templateSetName = process.env.TEMPLATES_USE || "en";
-  const dataDir = await getDataDir();
   const builtInTemplatesBaseDir = __dirname;
 
   let finalPath = "";
   const checkedPaths: string[] = []; // 더 자세한 오류 보고를 위해
 
-  // 1. DATA_DIR의 사용자 정의 경로 확인
-  // path.resolve는 templateSetName이 절대 경로인 경우를 처리할 수 있습니다
-  const customFilePath = path.resolve(dataDir, templateSetName, templatePath);
+  // 1. 사용자 정의 경로 확인 (docs 폴더 사용)
+  const customFilePath = path.resolve(getProjectRoot(), "docs", templateSetName, templatePath);
   checkedPaths.push(`Custom: ${customFilePath}`);
   if (fs.existsSync(customFilePath)) {
     finalPath = customFilePath;

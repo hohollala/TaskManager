@@ -51,6 +51,8 @@ import {
   researchModeSchema,
   newProject,
   newProjectSchema,
+  askProjectQuestion,
+  askProjectQuestionSchema,
   installMCP,
   installMCPSchema,
   removeMCP,
@@ -104,8 +106,8 @@ async function main() {
       }
     );
 
-    // 전역 서버 인스턴스 설정
-    setGlobalServer(server);
+    // 전역 서버 인스턴스 설정 (listRoots 호출 방지)
+    // setGlobalServer(server);
 
     // 웹 서버 시작을 위해 초기화된 알림 수신 대기
     if (ENABLE_GUI) {
@@ -231,6 +233,11 @@ async function main() {
               "toolsDescription/newProject.md"
             ),
             inputSchema: zodToJsonSchema(newProjectSchema),
+          },
+          {
+            name: "ask-project-question",
+            description: "프로젝트 요구사항을 단계별로 수집하기 위한 질문 도구",
+            inputSchema: zodToJsonSchema(askProjectQuestionSchema),
           },
           {
             name: "install-mcp",
@@ -407,7 +414,17 @@ async function main() {
                   `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
                 );
               }
-              return await newProject(parsedArgs.data);
+              return await newProject(parsedArgs.data, true);
+            case "ask-project-question":
+              parsedArgs = await askProjectQuestionSchema.safeParseAsync(
+                request.params.arguments
+              );
+              if (!parsedArgs.success) {
+                throw new Error(
+                  `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
+                );
+              }
+              return await askProjectQuestion(parsedArgs.data);
             case "install-mcp":
               parsedArgs = await installMCPSchema.safeParseAsync(
                 request.params.arguments

@@ -5,9 +5,9 @@ import fs from "fs";
 import fsPromises from "fs/promises";
 import { fileURLToPath } from "url";
 import {
-  getDataDir,
   getTasksFilePath,
   getWebGuiFilePath,
+  getProjectRoot,
 } from "../utils/paths.js";
 
 export async function createWebServer() {
@@ -94,7 +94,7 @@ export async function createWebServer() {
 
       const websiteUrl = `[Task Manager UI](http://localhost:${port}?lang=${language})`;
       const websiteFilePath = await getWebGuiFilePath();
-      const DATA_DIR = await getDataDir();
+      const DATA_DIR = path.join(getProjectRoot(), "docs");
       try {
         await fsPromises.access(DATA_DIR);
       } catch (error) {

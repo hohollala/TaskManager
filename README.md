@@ -478,7 +478,6 @@ Shrimp Task Manager는 이제 자동 프로젝트 격리와 유연한 경로 구
 
 | 변수 | 기본값 | 설명 |
 |------|--------|------|
-| `DATA_DIR` | `./data` | 작업 데이터 저장 디렉토리 |
 | `TEMPLATES_USE` | `en` | 사용할 프롬프트 템플릿 언어 (`en` 또는 `zh`) |
 | `ENABLE_GUI` | `false` | 웹 GUI 활성화 여부 |
 | `WEB_PORT` | 자동 선택 | 웹 GUI 포트 (ENABLE_GUI=true일 때) |
