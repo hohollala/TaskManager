@@ -846,7 +846,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
         content: [
           {
             type: "text",
-            text: `✅ 답변 저장됨\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)`
+            text: `✅ 답변 저장됨\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**다음 단계**: ask-project-question 도구를 questionNumber: ${nextQuestionNumber}로 호출하세요.`
           }
         ]
       };
@@ -899,7 +899,11 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
 7. 기술 스택이나 제한사항이 있나요? (예: React Native, Flutter, 네이티브 개발, 특정 라이브러리 사용/금지)
 8. 기타 요구사항이 있나요? (예: 성능 요구사항, 보안 요구사항, 특별한 기능 등)
 
-**지금 당장 첫 번째 질문을 물어보세요**: 1️⃣ 앱의 주요 목적은 무엇인가요?`
+**지금 당장 첫 번째 질문을 물어보세요**: 
+
+**첫 번째 질문**: 1️⃣ 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)
+
+**도구 호출 방법**: ask-project-question 도구를 questionNumber: 1로 호출하세요.`
           }
         ]
       };
