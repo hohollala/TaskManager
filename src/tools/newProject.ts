@@ -784,14 +784,14 @@ npm run build
 
 export async function askProjectQuestion(input: { questionNumber: number; currentAnswer?: string; answers?: string[] }): Promise<{ content: { type: "text"; text: string }[] }> {
   const questions = [
-    "1️⃣ 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)",
-    "2️⃣ 필수 기능은 무엇인가요? (예: 사용자 로그인, 데이터 저장, 결제 처리, 알림 등)",
-    "3️⃣ 디자인 요구사항은 어떻게 되나요? (예: 기존 디자인 파일 있음, 간단한 기본 디자인, 완전 커스텀 디자인 필요)",
-    "4️⃣ 서버/API는 어떻게 구성할 예정인가요? (예: 기존 API 서버 있음, 새로 개발 필요, Firebase/Supabase 사용)",
-    "5️⃣ 외부 서비스 연동이 필요한가요? (예: 소셜 로그인, 결제 게이트웨이, 지도 API, 푸시 알림 등)",
-    "6️⃣ 어떤 플랫폼을 지원할 예정인가요? (예: iOS만, Android만, 둘 다, 웹앱도 포함)",
-    "7️⃣ 기술 스택이나 제한사항이 있나요? (예: React Native, Flutter, 네이티브 개발, 특정 라이브러리 사용/금지)",
-    "8️⃣ 기타 요구사항이 있나요? (예: 성능 요구사항, 보안 요구사항, 특별한 기능 등)"
+    "1. 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)",
+    "2. 필수 기능은 무엇인가요? (예: 사용자 로그인, 데이터 저장, 결제 처리, 알림 등)",
+    "3. 디자인 요구사항은 어떻게 되나요? (예: 기존 디자인 파일 있음, 간단한 기본 디자인, 완전 커스텀 디자인 필요)",
+    "4. 서버/API는 어떻게 구성할 예정인가요? (예: 기존 API 서버 있음, 새로 개발 필요, Firebase/Supabase 사용)",
+    "5. 외부 서비스 연동이 필요한가요? (예: 소셜 로그인, 결제 게이트웨이, 지도 API, 푸시 알림 등)",
+    "6. 어떤 플랫폼을 지원할 예정인가요? (예: iOS만, Android만, 둘 다, 웹앱도 포함)",
+    "7. 기술 스택이나 제한사항이 있나요? (예: React Native, Flutter, 네이티브 개발, 특정 라이브러리 사용/금지)",
+    "8. 기타 요구사항이 있나요? (예: 성능 요구사항, 보안 요구사항, 특별한 기능 등)"
   ];
 
   const questionNumber = input.questionNumber;
@@ -846,7 +846,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
         content: [
           {
             type: "text",
-            text: `✅ 답변 저장됨\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**다음 단계**: ask-project-question 도구를 questionNumber: ${nextQuestionNumber}로 호출하세요.`
+            text: `✅ 답변 저장됨 (질문 ${questionNumber}/8)\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**중요**: 다음 질문을 위해 ask-project-question 도구를 정확히 questionNumber: ${nextQuestionNumber}로 호출하세요.`
           }
         ]
       };
@@ -857,7 +857,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
       content: [
         {
           type: "text",
-          text: `🤔 ${question}\n\n답변을 입력해주세요. (질문 ${questionNumber}/8)`
+          text: `🤔 ${question}\n\n답변을 입력해주세요. (질문 ${questionNumber}/8)\n\n**현재 상태**: 질문 ${questionNumber}번 진행 중`
         }
       ]
     };
@@ -901,9 +901,9 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
 
 **지금 당장 첫 번째 질문을 물어보세요**: 
 
-**첫 번째 질문**: 1️⃣ 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)
+**첫 번째 질문**: 1. 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)
 
-**도구 호출 방법**: ask-project-question 도구를 questionNumber: 1로 호출하세요.`
+**중요**: ask-project-question 도구를 정확히 questionNumber: 1로 호출하세요. 질문 번호를 건너뛰지 마세요.`
           }
         ]
       };
