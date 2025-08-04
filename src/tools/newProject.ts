@@ -798,6 +798,9 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
   const currentAnswer = input.currentAnswer;
   const answers = input.answers || [];
 
+  // 디버깅 정보 추가
+  console.log(`🔍 askProjectQuestion 호출: questionNumber=${questionNumber}, currentAnswer="${currentAnswer}", answers=${JSON.stringify(answers)}`);
+
   // 질문 번호 유효성 검사 (1-8)
   if (questionNumber < 1 || questionNumber > 8) {
     return {
@@ -884,6 +887,7 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
 2. 각 질문에 대한 답변을 받은 후에만 다음 질문을 물어보세요
 3. 사용자의 답변을 기억하고 요약해주세요
 4. 모든 8개 질문이 끝나면 수집된 정보로 프로젝트 문서를 생성하겠습니다
+5. **중요**: 질문 번호를 순서대로 진행하세요 (1→2→3→4→5→6→7→8)
 
 **질문 목록**:
 1. 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)
