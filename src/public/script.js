@@ -30,6 +30,44 @@ const globalAnalysisResultElement = document.getElementById(
 const langSwitcher = document.getElementById("lang-switcher"); // << 새로 추가: 언어 전환기 요소 가져오기
 const resetViewBtn = document.getElementById("reset-view-btn"); // << 새로 추가: 뷰 재설정 버튼 요소 가져오기
 
+// API 호출 중복 방지를 위한 디바운싱
+let pendingRequests = new Map();
+const DEBOUNCE_DELAY = 1000; // 1초
+
+// 디바운싱된 API 호출 함수
+async function debouncedApiCall(endpoint, data, options = {}) {
+  const requestKey = `${endpoint}-${JSON.stringify(data)}`;
+  
+  // 이미 진행 중인 동일한 요청이 있으면 기다림
+  if (pendingRequests.has(requestKey)) {
+    console.log(`🔄 중복 요청 감지: ${endpoint}`);
+    return pendingRequests.get(requestKey);
+  }
+  
+  // 새 요청 생성
+  const requestPromise = fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+    ...options
+  });
+  
+  // 요청을 맵에 저장
+  pendingRequests.set(requestKey, requestPromise);
+  
+  try {
+    const response = await requestPromise;
+    return response;
+  } finally {
+    // 요청 완료 후 맵에서 제거
+    setTimeout(() => {
+      pendingRequests.delete(requestKey);
+    }, DEBOUNCE_DELAY);
+  }
+}
+
 // 초기화
 document.addEventListener("DOMContentLoaded", () => {
   // fetchTasks(); // initI18n()에 의해 트리거됨
