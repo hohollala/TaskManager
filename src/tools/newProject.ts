@@ -813,6 +813,19 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
     };
   }
 
+  // 순차 검증: 이전 질문들이 모두 답변되었는지 확인
+  const expectedNextQuestion = answers.length + 1;
+  if (questionNumber !== expectedNextQuestion && questionNumber !== 1) {
+    return {
+      content: [
+        {
+          type: "text",
+          text: `⚠️ 순서 오류: 현재 질문 ${questionNumber}번을 건너뛰었습니다.\n\n**올바른 순서**: ${expectedNextQuestion}번 질문부터 진행해야 합니다.\n\n**해결 방법**: ask-project-question 도구를 questionNumber: ${expectedNextQuestion}로 호출하세요.`
+        }
+      ]
+    };
+  }
+
   const question = questions[questionNumber - 1];
   
   // 답변이 있는 경우
@@ -846,7 +859,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
         content: [
           {
             type: "text",
-            text: `✅ 답변 저장됨 (질문 ${questionNumber}/8)\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**중요**: 다음 질문을 위해 ask-project-question 도구를 정확히 questionNumber: ${nextQuestionNumber}로 호출하세요.`
+            text: `✅ 답변 저장됨 (질문 ${questionNumber}/8)\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)\n\n**중요**: 다음 질문을 위해 ask-project-question 도구를 정확히 questionNumber: ${nextQuestionNumber}로 호출하세요.\n\n**순서 확인**: 현재까지 ${questionNumber}개 질문 완료, 다음은 ${nextQuestionNumber}번 질문입니다.`
           }
         ]
       };
@@ -857,7 +870,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
       content: [
         {
           type: "text",
-          text: `🤔 ${question}\n\n답변을 입력해주세요. (질문 ${questionNumber}/8)\n\n**현재 상태**: 질문 ${questionNumber}번 진행 중`
+          text: `🤔 ${question}\n\n답변을 입력해주세요. (질문 ${questionNumber}/8)\n\n**현재 상태**: 질문 ${questionNumber}번 진행 중\n\n**진행 상황**: ${answers.length}개 질문 완료됨`
         }
       ]
     };
@@ -888,6 +901,8 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
 3. 사용자의 답변을 기억하고 요약해주세요
 4. 모든 8개 질문이 끝나면 수집된 정보로 프로젝트 문서를 생성하겠습니다
 5. **중요**: 질문 번호를 순서대로 진행하세요 (1→2→3→4→5→6→7→8)
+6. **절대 건너뛰지 마세요**: 질문 번호를 건너뛰면 시스템이 오류를 표시합니다
+7. **순서 강제**: 시스템이 자동으로 순서를 검증하므로 반드시 순차적으로 진행하세요
 
 **질문 목록**:
 1. 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)
