@@ -843,7 +843,7 @@ export async function askProjectQuestion(input: { questionNumber: number; curren
         content: [
           {
             type: "text",
-            text: `✅ 답변 저장됨\n\n${nextQuestion}`
+            text: `✅ 답변 저장됨\n\n🤔 ${nextQuestion}\n\n답변을 입력해주세요. (질문 ${nextQuestionNumber}/8)`
           }
         ]
       };
