@@ -7,60 +7,60 @@ import {
 import { RelatedFileType } from "../../types/index.js";
 import { getUpdateTaskContentPrompt } from "../../prompts/index.js";
 
-// 更新任務內容工具
+// 작업 내용 업데이트 도구
 export const updateTaskContentSchema = z.object({
   taskId: z
     .string()
     .regex(UUID_V4_REGEX, {
-      message: "任務ID格式無效，請提供有效的UUID v4格式",
+      message: "작업 ID 형식이 유효하지 않습니다. 유효한 UUID v4 형식을 제공해주세요",
     })
-    .describe("待更新任務的唯一標識符，必須是系統中存在且未完成的任務ID"),
-  name: z.string().optional().describe("任務的新名稱（選填）"),
-  description: z.string().optional().describe("任務的新描述內容（選填）"),
-  notes: z.string().optional().describe("任務的新補充說明（選填）"),
+    .describe("업데이트할 작업의 고유 식별자로, 시스템에 존재하고 미완료인 작업 ID여야 합니다"),
+  name: z.string().optional().describe("작업의 새 이름 (선택사항)"),
+  description: z.string().optional().describe("작업의 새 설명 내용 (선택사항)"),
+  notes: z.string().optional().describe("작업의 새 추가 설명 (선택사항)"),
   dependencies: z
     .array(z.string())
     .optional()
-    .describe("任務的新依賴關係（選填）"),
+    .describe("작업의 새 의존 관계 (선택사항)"),
   relatedFiles: z
     .array(
       z.object({
         path: z
           .string()
-          .min(1, { message: "文件路徑不能為空，請提供有效的文件路徑" })
-          .describe("文件路徑，可以是相對於項目根目錄的路徑或絕對路徑"),
+          .min(1, { message: "파일 경로가 비어있습니다. 유효한 파일 경로를 제공해주세요" })
+          .describe("파일 경로로, 프로젝트 루트 디렉토리 기준 상대 경로 또는 절대 경로"),
         type: z
           .nativeEnum(RelatedFileType)
           .describe(
-            "文件與任務的關係類型 (TO_MODIFY, REFERENCE, CREATE, DEPENDENCY, OTHER)"
+            "파일과 작업의 관계 유형 (TO_MODIFY, REFERENCE, CREATE, DEPENDENCY, OTHER)"
           ),
-        description: z.string().optional().describe("文件的補充描述（選填）"),
+        description: z.string().optional().describe("파일의 추가 설명 (선택사항)"),
         lineStart: z
           .number()
           .int()
           .positive()
           .optional()
-          .describe("相關代碼區塊的起始行（選填）"),
+          .describe("관련 코드 블록의 시작 줄 (선택사항)"),
         lineEnd: z
           .number()
           .int()
           .positive()
           .optional()
-          .describe("相關代碼區塊的結束行（選填）"),
+          .describe("관련 코드 블록의 끝 줄 (선택사항)"),
       })
     )
     .optional()
     .describe(
-      "與任務相關的文件列表，用於記錄與任務相關的代碼文件、參考資料、要建立的檔案等（選填）"
+      "작업과 관련된 파일 목록으로, 작업과 관련된 코드 파일, 참조 자료, 생성할 파일 등을 기록하는 데 사용 (선택사항)"
     ),
   implementationGuide: z
     .string()
     .optional()
-    .describe("任務的新實現指南（選填）"),
+    .describe("작업의 새 구현 가이드 (선택사항)"),
   verificationCriteria: z
     .string()
     .optional()
-    .describe("任務的新驗證標準（選填）"),
+    .describe("작업의 새 검증 기준 (선택사항)"),
 });
 
 export async function updateTaskContent({
@@ -87,7 +87,7 @@ export async function updateTaskContent({
               text: await getUpdateTaskContentPrompt({
                 taskId,
                 validationError:
-                  "行號設置無效：必須同時設置起始行和結束行，且起始行必須小於結束行",
+                  "줄 번호 설정이 유효하지 않습니다: 시작 줄과 끝 줄을 동시에 설정해야 하며, 시작 줄은 끝 줄보다 작아야 합니다",
               }),
             },
           ],
@@ -120,7 +120,7 @@ export async function updateTaskContent({
     };
   }
 
-  // 獲取任務以檢查它是否存在
+  // 작업이 존재하는지 확인하기 위해 작업 가져오기
   const task = await getTaskById(taskId);
 
   if (!task) {
@@ -137,19 +137,19 @@ export async function updateTaskContent({
     };
   }
 
-  // 記錄要更新的任務和內容
-  let updateSummary = `準備更新任務：${task.name} (ID: ${task.id})`;
-  if (name) updateSummary += `，新名稱：${name}`;
-  if (description) updateSummary += `，更新描述`;
-  if (notes) updateSummary += `，更新注記`;
+  // 업데이트할 작업과 내용 기록
+  let updateSummary = `작업 업데이트 준비: ${task.name} (ID: ${task.id})`;
+  if (name) updateSummary += `, 새 이름: ${name}`;
+  if (description) updateSummary += `, 설명 업데이트`;
+  if (notes) updateSummary += `, 메모 업데이트`;
   if (relatedFiles)
-    updateSummary += `，更新相關文件 (${relatedFiles.length} 個)`;
+    updateSummary += `, 관련 파일 업데이트 (${relatedFiles.length}개)`;
   if (dependencies)
-    updateSummary += `，更新依賴關係 (${dependencies.length} 個)`;
-  if (implementationGuide) updateSummary += `，更新實現指南`;
-  if (verificationCriteria) updateSummary += `，更新驗證標準`;
+    updateSummary += `, 의존 관계 업데이트 (${dependencies.length}개)`;
+  if (implementationGuide) updateSummary += `, 구현 가이드 업데이트`;
+  if (verificationCriteria) updateSummary += `, 검증 기준 업데이트`;
 
-  // 執行更新操作
+  // 업데이트 작업 실행
   const result = await modelUpdateTaskContent(taskId, {
     name,
     description,

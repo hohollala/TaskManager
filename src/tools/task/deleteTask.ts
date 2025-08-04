@@ -7,14 +7,14 @@ import {
 import { TaskStatus } from "../../types/index.js";
 import { getDeleteTaskPrompt } from "../../prompts/index.js";
 
-// 刪除任務工具
+// 작업 삭제 도구
 export const deleteTaskSchema = z.object({
   taskId: z
     .string()
     .regex(UUID_V4_REGEX, {
-      message: "任務ID格式無效，請提供有效的UUID v4格式",
+      message: "작업 ID 형식이 유효하지 않습니다. 유효한 UUID v4 형식을 제공해주세요",
     })
-    .describe("待刪除任務的唯一標識符，必須是系統中存在且未完成的任務ID"),
+    .describe("삭제할 작업의 고유 식별자로, 시스템에 존재하고 미완료인 작업 ID여야 합니다"),
 });
 
 export async function deleteTask({ taskId }: z.infer<typeof deleteTaskSchema>) {

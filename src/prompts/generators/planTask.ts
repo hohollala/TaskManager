@@ -71,7 +71,7 @@ export async function getPlanTaskPrompt(
 
         // 더 많은 작업이 있으면 힌트 표시
         if (params.completedTasks.length > 10) {
-          completeTasksContent += `\n\n*（僅顯示前10個，共 ${params.completedTasks.length} 個）*\n`;
+          completeTasksContent += `\n\n*（앞의 10개만 표시, 총 ${params.completedTasks.length}개）*\n`;
         }
       }
 

@@ -7,12 +7,12 @@ import {
 import { RelatedFileType, Task } from "../../types/index.js";
 import { getSplitTasksPrompt } from "../../prompts/index.js";
 
-// 拆分任務工具
+// 작업 분할 도구
 export const splitTasksSchema = z.object({
   updateMode: z
     .enum(["append", "overwrite", "selective", "clearAllTasks"])
     .describe(
-      "任務更新模式選擇：'append'(保留所有現有任務並添加新任務)、'overwrite'(清除所有未完成任務並完全替換，保留已完成任務)、'selective'(智能更新：根據任務名稱匹配更新現有任務，保留不在列表中的任務，推薦用於任務微調)、'clearAllTasks'(清除所有任務並創建備份)。\n預設為'clearAllTasks'模式，只有用戶要求變更或修改計劃內容才使用其他模式"
+      "작업 업데이트 모드 선택: 'append'(모든 기존 작업을 유지하고 새 작업 추가), 'overwrite'(모든 미완료 작업을 삭제하고 완전히 교체, 완료된 작업 유지), 'selective'(지능적 업데이트: 작업 이름에 따라 기존 작업을 매칭하여 업데이트, 목록에 없는 작업 유지, 작업 미세 조정에 권장), 'clearAllTasks'(모든 작업 삭제하고 백업 생성).\n기본값은 'clearAllTasks' 모드이며, 사용자가 변경을 요청하거나 계획 내용을 수정할 때만 다른 모드를 사용"
     ),
   tasks: z
     .array(
@@ -20,84 +20,84 @@ export const splitTasksSchema = z.object({
         name: z
           .string()
           .max(100, {
-            message: "任務名稱過長，請限制在100個字符以內",
+            message: "작업 이름이 너무 깁니다. 100자 이내로 제한해주세요",
           })
-          .describe("簡潔明確的任務名稱，應能清晰表達任務目的"),
+          .describe("간결하고 명확한 작업 이름으로 작업 목적을 명확히 표현해야 함"),
         description: z
           .string()
           .min(10, {
-            message: "任務描述過短，請提供更詳細的內容以確保理解",
+            message: "작업 설명이 너무 짧습니다. 이해를 위해 더 상세한 내용을 제공해주세요",
           })
-          .describe("詳細的任務描述，包含實施要點、技術細節和驗收標準"),
+          .describe("상세한 작업 설명으로 구현 요점, 기술 세부사항 및 검수 기준 포함"),
         implementationGuide: z
           .string()
           .describe(
-            "此特定任務的具體實現方法和步驟，請參考之前的分析結果提供精簡pseudocode"
+            "이 특정 작업의 구체적인 구현 방법과 단계로, 이전 분석 결과를 참조하여 간결한 pseudocode 제공"
           ),
         dependencies: z
           .array(z.string())
           .optional()
           .describe(
-            "此任務依賴的前置任務ID或任務名稱列表，支持兩種引用方式，名稱引用更直觀，是一個字串陣列"
+            "이 작업이 의존하는 선행 작업 ID 또는 작업 이름 목록으로, 두 가지 참조 방식을 지원하며, 이름 참조가 더 직관적이고 문자열 배열입니다"
           ),
         notes: z
           .string()
           .optional()
-          .describe("補充說明、特殊處理要求或實施建議（選填）"),
+          .describe("추가 설명, 특별 처리 요구사항 또는 구현 제안 (선택사항)"),
         relatedFiles: z
           .array(
             z.object({
               path: z
                 .string()
                 .min(1, {
-                  message: "文件路徑不能為空",
+                  message: "파일 경로가 비어있습니다",
                 })
-                .describe("文件路徑，可以是相對於項目根目錄的路徑或絕對路徑"),
+                .describe("파일 경로로, 프로젝트 루트 디렉토리 기준 상대 경로 또는 절대 경로"),
               type: z
                 .nativeEnum(RelatedFileType)
                 .describe(
-                  "文件類型 (TO_MODIFY: 待修改, REFERENCE: 參考資料, CREATE: 待建立, DEPENDENCY: 依賴文件, OTHER: 其他)"
+                  "파일 유형 (TO_MODIFY: 수정 예정, REFERENCE: 참조 자료, CREATE: 생성 예정, DEPENDENCY: 의존 파일, OTHER: 기타)"
                 ),
               description: z
                 .string()
                 .min(1, {
-                  message: "文件描述不能為空",
+                  message: "파일 설명이 비어있습니다",
                 })
-                .describe("文件描述，用於說明文件的用途和內容"),
+                .describe("파일 설명으로, 파일의 용도와 내용을 설명하는 데 사용"),
               lineStart: z
                 .number()
                 .int()
                 .positive()
                 .optional()
-                .describe("相關代碼區塊的起始行（選填）"),
+                .describe("관련 코드 블록의 시작 줄 (선택사항)"),
               lineEnd: z
                 .number()
                 .int()
                 .positive()
                 .optional()
-                .describe("相關代碼區塊的結束行（選填）"),
+                .describe("관련 코드 블록의 끝 줄 (선택사항)"),
             })
           )
           .optional()
           .describe(
-            "與任務相關的文件列表，用於記錄與任務相關的代碼文件、參考資料、要建立的文件等（選填）"
+            "작업과 관련된 파일 목록으로, 작업과 관련된 코드 파일, 참조 자료, 생성할 파일 등을 기록하는 데 사용 (선택사항)"
           ),
         verificationCriteria: z
           .string()
           .optional()
-          .describe("此特定任務的驗證標準和檢驗方法"),
+          .describe("이 특정 작업의 검증 기준과 검사 방법"),
       })
     )
     .min(1, {
-      message: "請至少提供一個任務",
+      message: "최소 하나의 작업을 제공해주세요",
     })
     .describe(
-      "結構化的任務清單，每個任務應保持原子性且有明確的完成標準，避免過於簡單的任務，簡單修改可與其他任務整合，避免任務過多"
+      "구조화된 작업 목록으로, 각 작업은 원자성을 유지하고 명확한 완료 기준을 가져야 하며, 너무 간단한 작업을 피하고, 간단한 수정은 다른 작업과 통합할 수 있으며, 작업이 너무 많지 않도록 해야 합니다"
     ),
   globalAnalysisResult: z
     .string()
     .optional()
-    .describe("任務最終目標，來自之前分析適用於所有任務的通用部分"),
+    .describe("작업의 최종 목표로, 이전 분석에서 모든 작업에 적용되는 공통 부분"),
 });
 
 export async function splitTasks({
@@ -106,7 +106,7 @@ export async function splitTasks({
   globalAnalysisResult,
 }: z.infer<typeof splitTasksSchema>) {
   try {
-    // 檢查 tasks 裡面的 name 是否有重複
+    // tasks 안의 name에 중복이 있는지 확인
     const nameSet = new Set();
     for (const task of tasks) {
       if (nameSet.has(task.name)) {
@@ -114,7 +114,7 @@ export async function splitTasks({
           content: [
             {
               type: "text" as const,
-              text: "tasks 參數中存在重複的任務名稱，請確保每個任務名稱是唯一的",
+              text: "tasks 매개변수에 중복된 작업 이름이 있습니다. 각 작업 이름이 고유한지 확인해주세요",
             },
           ],
         };
@@ -122,14 +122,14 @@ export async function splitTasks({
       nameSet.add(task.name);
     }
 
-    // 根據不同的更新模式處理任務
+    // 다른 업데이트 모드에 따라 작업 처리
     let message = "";
     let actionSuccess = true;
     let backupFile = null;
     let createdTasks: Task[] = [];
     let allTasks: Task[] = [];
 
-    // 將任務資料轉換為符合batchCreateOrUpdateTasks的格式
+    // 작업 데이터를 batchCreateOrUpdateTasks에 맞는 형식으로 변환
     const convertedTasks = tasks.map((task) => ({
       name: task.name,
       description: task.description,
@@ -146,7 +146,7 @@ export async function splitTasks({
       })),
     }));
 
-    // 處理 clearAllTasks 模式
+    // clearAllTasks 모드 처리
     if (updateMode === "clearAllTasks") {
       const clearResult = await modelClearAllTasks();
 
@@ -155,16 +155,16 @@ export async function splitTasks({
         backupFile = clearResult.backupFile;
 
         try {
-          // 清空任務後再創建新任務
+          // 작업을 비운 후 새 작업 생성
           createdTasks = await batchCreateOrUpdateTasks(
             convertedTasks,
             "append",
             globalAnalysisResult
           );
-          message += `\n成功創建了 ${createdTasks.length} 個新任務。`;
+          message += `\n${createdTasks.length}개의 새 작업을 성공적으로 생성했습니다.`;
         } catch (error) {
           actionSuccess = false;
-          message += `\n創建新任務時發生錯誤: ${
+          message += `\n새 작업 생성 중 오류 발생: ${
             error instanceof Error ? error.message : String(error)
           }`;
         }
@@ -173,7 +173,7 @@ export async function splitTasks({
         message = clearResult.message;
       }
     } else {
-      // 對於其他模式，直接使用 batchCreateOrUpdateTasks
+      // 다른 모드의 경우 batchCreateOrUpdateTasks 직접 사용
       try {
         createdTasks = await batchCreateOrUpdateTasks(
           convertedTasks,
@@ -181,34 +181,34 @@ export async function splitTasks({
           globalAnalysisResult
         );
 
-        // 根據不同的更新模式生成消息
+        // 다른 업데이트 모드에 따라 메시지 생성
         switch (updateMode) {
           case "append":
-            message = `成功追加了 ${createdTasks.length} 個新任務。`;
+            message = `${createdTasks.length}개의 새 작업을 성공적으로 추가했습니다.`;
             break;
           case "overwrite":
-            message = `成功清除未完成任務並創建了 ${createdTasks.length} 個新任務。`;
+            message = `미완료 작업을 성공적으로 삭제하고 ${createdTasks.length}개의 새 작업을 생성했습니다.`;
             break;
           case "selective":
-            message = `成功選擇性更新/創建了 ${createdTasks.length} 個任務。`;
+            message = `${createdTasks.length}개의 작업을 성공적으로 선택적으로 업데이트/생성했습니다.`;
             break;
         }
       } catch (error) {
         actionSuccess = false;
-        message = `任務創建失敗：${
+        message = `작업 생성 실패: ${
           error instanceof Error ? error.message : String(error)
         }`;
       }
     }
 
-    // 獲取所有任務用於顯示依賴關係
+    // 의존 관계 표시를 위해 모든 작업 가져오기
     try {
       allTasks = await getAllTasks();
     } catch (error) {
-      allTasks = [...createdTasks]; // 如果獲取失敗，至少使用剛創建的任務
+      allTasks = [...createdTasks]; // 가져오기에 실패하면 최소한 방금 생성한 작업 사용
     }
 
-    // 使用prompt生成器獲取最終prompt
+    // prompt 생성기를 사용하여 최종 prompt 가져오기
     const prompt = await getSplitTasksPrompt({
       updateMode,
       createdTasks,
@@ -236,7 +236,7 @@ export async function splitTasks({
         {
           type: "text" as const,
           text:
-            "執行任務拆分時發生錯誤: " +
+            "작업 분할 실행 중 오류 발생: " +
             (error instanceof Error ? error.message : String(error)),
         },
       ],

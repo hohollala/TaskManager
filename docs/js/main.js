@@ -902,7 +902,7 @@ function initWorkflowModal() {
     },
   };
 
-  // 詳情鏈接 클릭 시 팝업 열기
+  // 상세 링크 클릭 시 팝업 열기
   detailLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
       e.preventDefault();

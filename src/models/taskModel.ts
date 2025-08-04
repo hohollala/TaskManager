@@ -104,7 +104,7 @@ export async function createTask(
   return newTask;
 }
 
-// 更新任務
+// 작업 업데이트
 export async function updateTask(
   taskId: string,
   updates: Partial<Task>
@@ -116,9 +116,9 @@ export async function updateTask(
     return null;
   }
 
-  // 檢查任務是否已完成，已完成的任務不允許更新（除非是明確允許的欄位）
+  // 작업이 완료되었는지 확인하고, 완료된 작업은 업데이트를 허용하지 않음 (명시적으로 허용된 필드 제외)
   if (tasks[taskIndex].status === TaskStatus.COMPLETED) {
-    // 僅允許更新 summary 欄位（任務摘要）和 relatedFiles 欄位
+    // summary 필드(작업 요약)와 relatedFiles 필드만 업데이트 허용
     const allowedFields = ["summary", "relatedFiles"];
     const attemptedFields = Object.keys(updates);
 
@@ -142,7 +142,7 @@ export async function updateTask(
   return tasks[taskIndex];
 }
 
-// 更新任務狀態
+// 작업 상태 업데이트
 export async function updateTaskStatus(
   taskId: string,
   status: TaskStatus
@@ -156,7 +156,7 @@ export async function updateTaskStatus(
   return await updateTask(taskId, updates);
 }
 
-// 更新任務摘要
+// 작업 요약 업데이트
 export async function updateTaskSummary(
   taskId: string,
   summary: string
@@ -164,7 +164,7 @@ export async function updateTaskSummary(
   return await updateTask(taskId, { summary });
 }
 
-// 更新任務內容
+// 작업 내용 업데이트
 export async function updateTaskContent(
   taskId: string,
   updates: {
@@ -177,19 +177,19 @@ export async function updateTaskContent(
     verificationCriteria?: string;
   }
 ): Promise<{ success: boolean; message: string; task?: Task }> {
-  // 獲取任務並檢查是否存在
+  // 작업을 가져와서 존재하는지 확인
   const task = await getTaskById(taskId);
 
   if (!task) {
-    return { success: false, message: "找不到指定任務" };
+    return { success: false, message: "지정된 작업을 찾을 수 없습니다" };
   }
 
-  // 檢查任務是否已完成
+  // 작업이 완료되었는지 확인
   if (task.status === TaskStatus.COMPLETED) {
-    return { success: false, message: "無法更新已完成的任務" };
+    return { success: false, message: "완료된 작업은 업데이트할 수 없습니다" };
   }
 
-  // 構建更新物件，只包含實際需要更新的欄位
+  // 업데이트 객체 구성, 실제로 업데이트해야 하는 필드만 포함
   const updateObj: Partial<Task> = {};
 
   if (updates.name !== undefined) {
@@ -222,57 +222,53 @@ export async function updateTaskContent(
     updateObj.verificationCriteria = updates.verificationCriteria;
   }
 
-  // 如果沒有要更新的內容，提前返回
+  // 업데이트할 내용이 없으면 조기 반환
   if (Object.keys(updateObj).length === 0) {
-    return { success: true, message: "沒有提供需要更新的內容", task };
+    return { success: true, message: "업데이트할 내용이 제공되지 않았습니다", task };
   }
 
-  // 執行更新
+  // 업데이트 실행
   const updatedTask = await updateTask(taskId, updateObj);
 
-  if (!updatedTask) {
-    return { success: false, message: "更新任務時發生錯誤" };
+  if (updatedTask) {
+    return { success: true, message: "작업이 성공적으로 업데이트되었습니다", task: updatedTask };
+  } else {
+    return { success: false, message: "작업 업데이트에 실패했습니다" };
   }
-
-  return {
-    success: true,
-    message: "任務內容已成功更新",
-    task: updatedTask,
-  };
 }
 
-// 更新任務相關文件
+// 작업 관련 파일 업데이트
 export async function updateTaskRelatedFiles(
   taskId: string,
   relatedFiles: RelatedFile[]
 ): Promise<{ success: boolean; message: string; task?: Task }> {
-  // 獲取任務並檢查是否存在
+  // 작업을 가져와서 존재하는지 확인
   const task = await getTaskById(taskId);
 
   if (!task) {
-    return { success: false, message: "找不到指定任務" };
+    return { success: false, message: "지정된 작업을 찾을 수 없습니다" };
   }
 
-  // 檢查任務是否已完成
+  // 작업이 완료되었는지 확인
   if (task.status === TaskStatus.COMPLETED) {
-    return { success: false, message: "無法更新已完成的任務" };
+    return { success: false, message: "완료된 작업은 업데이트할 수 없습니다" };
   }
 
-  // 執行更新
+  // 업데이트 실행
   const updatedTask = await updateTask(taskId, { relatedFiles });
 
   if (!updatedTask) {
-    return { success: false, message: "更新任務相關文件時發生錯誤" };
+    return { success: false, message: "작업 관련 파일 업데이트 중 오류가 발생했습니다" };
   }
 
   return {
     success: true,
-    message: `已成功更新任務相關文件，共 ${relatedFiles.length} 個文件`,
+    message: `작업 관련 파일이 성공적으로 업데이트되었습니다. 총 ${relatedFiles.length}개 파일`,
     task: updatedTask,
   };
 }
 
-// 批量創建或更新任務
+// 배치 작업 생성 또는 업데이트
 export async function batchCreateOrUpdateTasks(
   taskDataList: Array<{
     name: string;
@@ -280,109 +276,109 @@ export async function batchCreateOrUpdateTasks(
     notes?: string;
     dependencies?: string[];
     relatedFiles?: RelatedFile[];
-    implementationGuide?: string; // 新增：實現指南
-    verificationCriteria?: string; // 新增：驗證標準
+    implementationGuide?: string; // 추가: 구현 가이드
+    verificationCriteria?: string; // 추가: 검증 기준
   }>,
-  updateMode: "append" | "overwrite" | "selective" | "clearAllTasks", // 必填參數，指定任務更新策略
-  globalAnalysisResult?: string // 新增：全局分析結果
+  updateMode: "append" | "overwrite" | "selective" | "clearAllTasks", // 필수 매개변수, 작업 업데이트 전략 지정
+  globalAnalysisResult?: string // 추가: 전역 분석 결과
 ): Promise<Task[]> {
-  // 讀取現有的所有任務
+  // 작업을 가져와서 존재하는지 확인
   const existingTasks = await readTasks();
 
-  // 根據更新模式處理現有任務
+  // 따라서 현재 작업 목록에서 유지할 작업
   let tasksToKeep: Task[] = [];
 
   if (updateMode === "append") {
-    // 追加模式：保留所有現有任務
+    // 추가 모드: 모든 기존 작업 유지
     tasksToKeep = [...existingTasks];
   } else if (updateMode === "overwrite") {
-    // 覆蓋模式：僅保留已完成的任務，清除所有未完成任務
+    // 덮어쓰기 모드: 완료된 작업만 유지하고 모든 미완료 작업 제거
     tasksToKeep = existingTasks.filter(
       (task) => task.status === TaskStatus.COMPLETED
     );
   } else if (updateMode === "selective") {
-    // 選擇性更新模式：根據任務名稱選擇性更新，保留未在更新列表中的任務
-    // 1. 提取待更新任務的名稱清單
+    // 선택적 업데이트 모드: 작업 이름에 따라 선택적 업데이트, 업데이트 목록에 없는 작업 유지
+    // 1. 업데이트할 작업 이름 목록 추출
     const updateTaskNames = new Set(taskDataList.map((task) => task.name));
 
-    // 2. 保留所有沒有出現在更新列表中的任務
+    // 2. 업데이트 목록에 없는 작업 모두 유지
     tasksToKeep = existingTasks.filter(
       (task) => !updateTaskNames.has(task.name)
     );
   } else if (updateMode === "clearAllTasks") {
-    // 清除所有任務模式：清空任務列表
+    // 모든 작업 모드: 작업 목록 비우기
     tasksToKeep = [];
   }
 
-  // 這個映射將用於存儲名稱到任務ID的映射，用於支持通過名稱引用任務
+  // 이 맵은 작업 이름에서 작업 ID로의 맵을 저장하는 데 사용되며, 작업 이름을 통해 작업을 참조할 때 사용됩니다.
   const taskNameToIdMap = new Map<string, string>();
 
-  // 對於選擇性更新模式，先將現有任務的名稱和ID記錄下來
+  // 선택적 업데이트 모드에서 먼저 기존 작업의 이름과 ID를 기록합니다.
   if (updateMode === "selective") {
     existingTasks.forEach((task) => {
       taskNameToIdMap.set(task.name, task.id);
     });
   }
 
-  // 記錄所有任務的名稱和ID，無論是要保留的任務還是新建的任務
-  // 這將用於稍後解析依賴關係
+  // 모든 작업의 이름과 ID를 기록하며, 유지할 작업이나 새로 생성할 작업 모두 포함
+  // 이는 나중에 의존성을 확인하는 데 사용됩니다.
   tasksToKeep.forEach((task) => {
     taskNameToIdMap.set(task.name, task.id);
   });
 
-  // 새 작업 생성的列表
+  // 새 작업 생성 목록
   const newTasks: Task[] = [];
 
   for (const taskData of taskDataList) {
-    // 檢查是否為選擇性更新模式且該任務名稱已存在
+    // 선택적 업데이트 모드이고 해당 작업 이름이 이미 존재하는지 확인
     if (updateMode === "selective" && taskNameToIdMap.has(taskData.name)) {
-      // 獲取現有任務的ID
+      // 기존 작업의 ID 가져오기
       const existingTaskId = taskNameToIdMap.get(taskData.name)!;
 
-      // 查找現有任務
+      // 기존 작업 찾기
       const existingTaskIndex = existingTasks.findIndex(
         (task) => task.id === existingTaskId
       );
 
-      // 如果找到現有任務並且該任務未完成，則更新它
+      // 기존 작업을 찾았고 해당 작업이 완료되지 않았다면 업데이트
       if (
         existingTaskIndex !== -1 &&
         existingTasks[existingTaskIndex].status !== TaskStatus.COMPLETED
       ) {
         const taskToUpdate = existingTasks[existingTaskIndex];
 
-        // 更新任務的基本信息，但保留原始ID、創建時間等
+        // 작업의 기본 정보를 업데이트하지만 원래 ID, 생성 시간 등은 유지
         const updatedTask: Task = {
           ...taskToUpdate,
           name: taskData.name,
           description: taskData.description,
           notes: taskData.notes,
-          // 後面會處理 dependencies
+          // 의존성은 나중에 처리
           updatedAt: new Date(),
-          // 新增：保存實現指南（如果有）
+          // 추가: 구현 가이드 저장 (있는 경우)
           implementationGuide: taskData.implementationGuide,
-          // 新增：保存驗證標準（如果有）
+          // 추가: 검증 기준 저장 (있는 경우)
           verificationCriteria: taskData.verificationCriteria,
-          // 新增：保存全局分析結果（如果有）
+          // 추가: 전역 분석 결과 저장 (있는 경우)
           analysisResult: globalAnalysisResult,
         };
 
-        // 處理相關文件（如果有）
+        // 관련 파일 처리 (있는 경우)
         if (taskData.relatedFiles) {
           updatedTask.relatedFiles = taskData.relatedFiles;
         }
 
-        // 將更新後的任務添加到新任務列表
+        // 업데이트된 작업을 새 작업 목록에 추가
         newTasks.push(updatedTask);
 
-        // 從tasksToKeep中移除此任務，因為它已經被更新並添加到newTasks中了
+        // tasksToKeep에서 해당 작업 제거, 이미 업데이트되고 newTasks에 추가되었기 때문
         tasksToKeep = tasksToKeep.filter((task) => task.id !== existingTaskId);
       }
     } else {
       // 새 작업 생성
       const newTaskId = uuidv4();
 
-      // 將新任務的名稱和ID添加到映射中
+      // 새 작업의 이름과 ID를 맵에 추가
       taskNameToIdMap.set(taskData.name, newTaskId);
 
       const newTask: Task = {
@@ -391,15 +387,15 @@ export async function batchCreateOrUpdateTasks(
         description: taskData.description,
         notes: taskData.notes,
         status: TaskStatus.PENDING,
-        dependencies: [], // 後面會填充
+        dependencies: [], // 나중에 채우기
         createdAt: new Date(),
         updatedAt: new Date(),
         relatedFiles: taskData.relatedFiles,
-        // 新增：保存實現指南（如果有）
+        // 추가: 구현 가이드 저장 (있는 경우)
         implementationGuide: taskData.implementationGuide,
-        // 新增：保存驗證標準（如果有）
+        // 추가: 검증 기준 저장 (있는 경우)
         verificationCriteria: taskData.verificationCriteria,
-        // 新增：保存全局分析結果（如果有）
+        // 추가: 전역 분석 결과 저장 (있는 경우)
         analysisResult: globalAnalysisResult,
       };
 
@@ -407,38 +403,38 @@ export async function batchCreateOrUpdateTasks(
     }
   }
 
-  // 處理任務之間的依賴關係
+  // 작업 간의 의존성 처리
   for (let i = 0; i < taskDataList.length; i++) {
     const taskData = taskDataList[i];
     const newTask = newTasks[i];
 
-    // 如果存在依賴關係，處理它們
+    // 의존성이 있으면 처리
     if (taskData.dependencies && taskData.dependencies.length > 0) {
       const resolvedDependencies: TaskDependency[] = [];
 
       for (const dependencyName of taskData.dependencies) {
-        // 首先嘗試將依賴項解釋為任務ID
+        // 먼저 의존성을 작업 ID로 해석하려고 시도
         let dependencyTaskId = dependencyName;
 
-        // 如果依賴項看起來不像UUID，則嘗試將其解釋為任務名稱
+        // 의존성이 UUID 형식이 아니면 작업 이름으로 해석하려고 시도
         if (
           !dependencyName.match(
             /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
           )
         ) {
-          // 如果映射中存在此名稱，則使用對應的ID
+          // 맵에 해당 이름이 있으면 해당 ID 사용
           if (taskNameToIdMap.has(dependencyName)) {
             dependencyTaskId = taskNameToIdMap.get(dependencyName)!;
           } else {
-            continue; // 跳過此依賴
+            continue; // 이 의존성 건너뛰기
           }
         } else {
-          // 是UUID格式，但需要確認此ID是否對應實際存在的任務
+          // UUID 형식이지만 이 ID가 실제로 존재하는 작업과 일치하는지 확인
           const idExists = [...tasksToKeep, ...newTasks].some(
             (task) => task.id === dependencyTaskId
           );
           if (!idExists) {
-            continue; // 跳過此依賴
+            continue; // 이 의존성 건너뛰기
           }
         }
 
@@ -449,16 +445,16 @@ export async function batchCreateOrUpdateTasks(
     }
   }
 
-  // 合併保留的任務和新任務
+  // 유지된 작업과 새 작업 병합
   const allTasks = [...tasksToKeep, ...newTasks];
 
-  // 寫入更新後的任務列表
+  // 업데이트된 작업 목록 쓰기
   await writeTasks(allTasks);
 
   return newTasks;
 }
 
-// 檢查任務是否可以執行（所有依賴都已完成）
+// 작업 실행 가능 여부 확인 (모든 의존성이 완료되었는지)
 export async function canExecuteTask(
   taskId: string
 ): Promise<{ canExecute: boolean; blockedBy?: string[] }> {
@@ -469,11 +465,11 @@ export async function canExecuteTask(
   }
 
   if (task.status === TaskStatus.COMPLETED) {
-    return { canExecute: false }; // 已完成的任務不需要再執行
+    return { canExecute: false }; // 완료된 작업은 다시 실행할 필요가 없습니다.
   }
 
   if (task.dependencies.length === 0) {
-    return { canExecute: true }; // 沒有依賴的任務可以直接執行
+    return { canExecute: true }; // 의존성이 없는 작업은 직접 실행할 수 있습니다.
   }
 
   const allTasks = await readTasks();
@@ -493,7 +489,7 @@ export async function canExecuteTask(
   };
 }
 
-// 刪除任務
+// 작업 삭제
 export async function deleteTask(
   taskId: string
 ): Promise<{ success: boolean; message: string }> {
@@ -501,15 +497,15 @@ export async function deleteTask(
   const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
   if (taskIndex === -1) {
-    return { success: false, message: "找不到指定任務" };
+    return { success: false, message: "지정된 작업을 찾을 수 없습니다" };
   }
 
-  // 檢查任務狀態，已完成的任務不允許刪除
+  // 작업 상태 확인, 완료된 작업은 삭제할 수 없습니다.
   if (tasks[taskIndex].status === TaskStatus.COMPLETED) {
-    return { success: false, message: "無法刪除已完成的任務" };
+    return { success: false, message: "완료된 작업은 삭제할 수 없습니다" };
   }
 
-  // 檢查是否有其他任務依賴此任務
+  // 이 작업을 종속하는 다른 작업이 있는지 확인
   const allTasks = tasks.filter((_, index) => index !== taskIndex);
   const dependentTasks = allTasks.filter((task) =>
     task.dependencies.some((dep) => dep.taskId === taskId)
@@ -521,18 +517,18 @@ export async function deleteTask(
       .join(", ");
     return {
       success: false,
-      message: `無法刪除此任務，因為以下任務依賴於它: ${dependentTaskNames}`,
+      message: `이 작업을 삭제할 수 없습니다. 다음 작업이 이 작업을 종속합니다: ${dependentTaskNames}`,
     };
   }
 
-  // 執行刪除操作
+  // 삭제 작업 실행
   tasks.splice(taskIndex, 1);
   await writeTasks(tasks);
 
-  return { success: true, message: "任務刪除成功" };
+  return { success: true, message: "작업 삭제 성공" };
 }
 
-// 評估任務複雜度
+// 작업 복잡도 평가
 export async function assessTaskComplexity(
   taskId: string
 ): Promise<TaskComplexityAssessment | null> {
@@ -542,16 +538,16 @@ export async function assessTaskComplexity(
     return null;
   }
 
-  // 評估各項指標
+  // 각 지표 평가
   const descriptionLength = task.description.length;
   const dependenciesCount = task.dependencies.length;
   const notesLength = task.notes ? task.notes.length : 0;
   const hasNotes = !!task.notes;
 
-  // 基於各項指標評估複雜度級別
+  // 각 지표에 따라 복잡도 레벨 평가
   let level = TaskComplexityLevel.LOW;
 
-  // 描述長度評估
+  // 설명 길이 평가
   if (
     descriptionLength >= TaskComplexityThresholds.DESCRIPTION_LENGTH.VERY_HIGH
   ) {
@@ -566,7 +562,7 @@ export async function assessTaskComplexity(
     level = TaskComplexityLevel.MEDIUM;
   }
 
-  // 依賴數量評估（取最高級別）
+  // 의존성 수량 평가 (최고 레벨 사용)
   if (
     dependenciesCount >= TaskComplexityThresholds.DEPENDENCIES_COUNT.VERY_HIGH
   ) {
@@ -584,7 +580,7 @@ export async function assessTaskComplexity(
     level = TaskComplexityLevel.MEDIUM;
   }
 
-  // 注記長度評估（取最高級別）
+  // 메모 길이 평가 (최고 레벨 사용)
   if (notesLength >= TaskComplexityThresholds.NOTES_LENGTH.VERY_HIGH) {
     level = TaskComplexityLevel.VERY_HIGH;
   } else if (
@@ -600,55 +596,55 @@ export async function assessTaskComplexity(
     level = TaskComplexityLevel.MEDIUM;
   }
 
-  // 根據複雜度級別生成處理建議
+  // 복잡도 레벨에 따른 처리 권고
   const recommendations: string[] = [];
 
-  // 低複雜度任務建議
+  // 낮은 복잡도 작업 권고
   if (level === TaskComplexityLevel.LOW) {
-    recommendations.push("此任務複雜度較低，可直接執行");
-    recommendations.push("建議設定清晰的完成標準，確保驗收有明確依據");
+    recommendations.push("이 작업의 복잡도가 낮으므로 직접 실행할 수 있습니다.");
+    recommendations.push("완료 기준을 명확히 설정하여 검증에 명확한 근거를 제공하세요.");
   }
-  // 中等複雜度任務建議
+  // 중간 복잡도 작업 권고
   else if (level === TaskComplexityLevel.MEDIUM) {
-    recommendations.push("此任務具有一定複雜性，建議詳細規劃執行步驟");
-    recommendations.push("可分階段執行並定期檢查進度，確保理解準確且實施完整");
+    recommendations.push("이 작업은 일부 복잡성을 가지고 있으므로 실행 단계를 상세히 계획하세요.");
+    recommendations.push("단계별로 실행하고 정기적으로 진행 상황을 확인하여 이해를 정확히 하고 완료하세요.");
     if (dependenciesCount > 0) {
-      recommendations.push("注意檢查所有依賴任務的完成狀態和輸出質量");
+      recommendations.push("모든 의존성 작업의 완료 상태와 출력 품질을 확인하세요.");
     }
   }
-  // 高複雜度任務建議
+  // 높은 복잡도 작업 권고
   else if (level === TaskComplexityLevel.HIGH) {
-    recommendations.push("此任務複雜度較高，建議先進行充分的分析和規劃");
-    recommendations.push("考慮將任務拆分為較小的、可獨立執行的子任務");
-    recommendations.push("建立清晰的里程碑和檢查點，便於追蹤進度和品質");
+    recommendations.push("이 작업의 복잡도가 높으므로 충분한 분석과 계획을 먼저 수행하세요.");
+    recommendations.push("작업을 더 작은 독립적인 하위 작업으로 분할하여 실행하세요.");
+    recommendations.push("명확한 마일스톤과 검사점을 설정하여 진행 상황과 품질을 추적하세요.");
     if (
       dependenciesCount > TaskComplexityThresholds.DEPENDENCIES_COUNT.MEDIUM
     ) {
       recommendations.push(
-        "依賴任務較多，建議製作依賴關係圖，確保執行順序正確"
+        "의존성 작업이 많으므로 의존성 관계도를 작성하여 실행 순서를 올바르게 보장하세요."
       );
     }
   }
-  // 極高複雜度任務建議
+  // 매우 높은 복잡도 작업 권고
   else if (level === TaskComplexityLevel.VERY_HIGH) {
-    recommendations.push("⚠️ 此任務複雜度極高，強烈建議拆分為多個獨立任務");
+    recommendations.push("⚠️ 이 작업의 복잡도가 매우 높으므로 여러 개의 독립적인 작업으로 분할하는 것을 강력히 권장합니다.");
     recommendations.push(
-      "在執行前進行詳盡的分析和規劃，明確定義各子任務的範圍和介面"
+      "실행 전에 상세한 분석과 계획을 수행하여 각 하위 작업의 범위와 인터페이스를 명확히 정의하세요."
     );
     recommendations.push(
-      "對任務進行風險評估，識別可能的阻礙因素並制定應對策略"
+      "작업에 대한 위험 평가를 수행하여 잠재적인 장애 요인을 식별하고 대응 전략을 수립하세요."
     );
-    recommendations.push("建立具體的測試和驗證標準，確保每個子任務的輸出質量");
+    recommendations.push("구체적인 테스트와 검증 기준을 설정하여 각 하위 작업의 출력 품질을 보장하세요.");
     if (
       descriptionLength >= TaskComplexityThresholds.DESCRIPTION_LENGTH.VERY_HIGH
     ) {
       recommendations.push(
-        "任務描述非常長，建議整理關鍵點並建立結構化的執行清單"
+        "작업 설명이 매우 길므로 중요 포인트를 정리하고 구조화된 실행 목록을 작성하세요."
       );
     }
     if (dependenciesCount >= TaskComplexityThresholds.DEPENDENCIES_COUNT.HIGH) {
       recommendations.push(
-        "依賴任務數量過多，建議重新評估任務邊界，確保任務切分合理"
+        "의존성 작업 수가 많으므로 작업 경계를 다시 평가하여 적절한 분할을 확인하세요."
       );
     }
   }
@@ -665,7 +661,7 @@ export async function assessTaskComplexity(
   };
 }
 
-// 清除所有任務
+// 모든 작업 삭제
 export async function clearAllTasks(): Promise<{
   success: boolean;
   message: string;
@@ -675,27 +671,27 @@ export async function clearAllTasks(): Promise<{
     // 데이터 디렉토리가 존재하는지 확인
     await ensureDataDir();
 
-    // 讀取現有任務
+    // 현재 작업 읽기
     const allTasks = await readTasks();
 
-    // 如果沒有任務，直接返回
+    // 작업이 없으면 직접 반환
     if (allTasks.length === 0) {
-      return { success: true, message: "沒有任務需要清除" };
+      return { success: true, message: "삭제할 작업이 없습니다" };
     }
 
-    // 篩選出已完成的任務
+    // 완료된 작업 필터링
     const completedTasks = allTasks.filter(
       (task) => task.status === TaskStatus.COMPLETED
     );
 
-    // 創建備份文件名
+    // 백업 파일 이름 생성
     const timestamp = new Date()
       .toISOString()
       .replace(/:/g, "-")
       .replace(/\..+/, "");
     const backupFileName = `tasks_memory_${timestamp}.json`;
 
-    // 確保 memory 目錄存在
+    // memory 디렉토리가 존재하는지 확인
     const MEMORY_DIR = await getMemoryDir();
     try {
       await fs.access(MEMORY_DIR);
@@ -703,34 +699,34 @@ export async function clearAllTasks(): Promise<{
       await fs.mkdir(MEMORY_DIR, { recursive: true });
     }
 
-    // 創建 memory 目錄下的備份路徑
+    // memory 디렉토리 아래에 백업 경로 생성
     const memoryFilePath = path.join(MEMORY_DIR, backupFileName);
 
-    // 同時寫入到 memory 目錄 (只包含已完成的任務)
+    // memory 디렉토리에도 동시에 쓰기 (완료된 작업만 포함)
     await fs.writeFile(
       memoryFilePath,
       JSON.stringify({ tasks: completedTasks }, null, 2)
     );
 
-    // 清空任務文件
+    // 작업 파일 비우기
     await writeTasks([]);
 
     return {
       success: true,
-      message: `已成功清除所有任務，共 ${allTasks.length} 個任務被刪除，已備份 ${completedTasks.length} 個已完成的任務至 memory 目錄`,
+      message: `모든 작업이 성공적으로 삭제되었습니다. 총 ${allTasks.length}개 작업이 삭제되었으며, memory 디렉토리에 ${completedTasks.length}개 완료된 작업이 백업되었습니다.`,
       backupFile: backupFileName,
     };
   } catch (error) {
     return {
       success: false,
-      message: `清除任務時發生錯誤: ${
+      message: `작업 삭제 중 오류가 발생했습니다: ${
         error instanceof Error ? error.message : String(error)
       }`,
     };
   }
 }
 
-// 使用系統指令搜尋任務記憶
+// 시스템 명령어를 사용하여 작업 메모리 검색
 export async function searchTasksWithCommand(
   query: string,
   isId: boolean = false,
@@ -745,21 +741,21 @@ export async function searchTasksWithCommand(
     hasMore: boolean;
   };
 }> {
-  // 讀取當前任務檔案中的任務
+  // 현재 작업 파일에서 작업 읽기
   const currentTasks = await readTasks();
   let memoryTasks: Task[] = [];
 
-  // 搜尋記憶資料夾中的任務
+  // 메모리 폴더에서 작업 검색
   const MEMORY_DIR = await getMemoryDir();
 
   try {
-    // 確保記憶資料夾存在
+    // 메모리 폴더가 존재하는지 확인
     await fs.access(MEMORY_DIR);
 
-    // 生成搜尋命令
+    // 검색 명령 생성
     const cmd = generateSearchCommand(query, isId, MEMORY_DIR);
 
-    // 如果有搜尋命令，執行它
+    // 검색 명령이 있으면 실행
     if (cmd) {
       try {
         const { stdout } = await execPromise(cmd, {
@@ -767,12 +763,12 @@ export async function searchTasksWithCommand(
         });
 
         if (stdout) {
-          // 解析搜尋結果，提取符合的檔案路徑
+          // 검색 결과 파싱, 일치하는 파일 경로 추출
           const matchedFiles = new Set<string>();
 
           stdout.split("\n").forEach((line) => {
             if (line.trim()) {
-              // 格式通常是: 文件路徑:匹配內容
+              // 형식은 일반적으로: 파일 경로:일치 내용
               const filePath = line.split(":")[0];
               if (filePath) {
                 matchedFiles.add(filePath);
@@ -780,20 +776,20 @@ export async function searchTasksWithCommand(
             }
           });
 
-          // 限制讀取檔案數量
+          // 읽을 파일 수 제한
           const MAX_FILES_TO_READ = 10;
           const sortedFiles = Array.from(matchedFiles)
             .sort()
             .reverse()
             .slice(0, MAX_FILES_TO_READ);
 
-          // 只處理符合條件的檔案
+          // 조건에 맞는 파일만 처리
           for (const filePath of sortedFiles) {
             try {
               const data = await fs.readFile(filePath, "utf-8");
               const tasks = JSON.parse(data).tasks || [];
 
-              // 格式化日期字段
+              // 날짜 필드 형식 변환
               const formattedTasks = tasks.map((task: any) => ({
                 ...task,
                 createdAt: task.createdAt
@@ -807,7 +803,7 @@ export async function searchTasksWithCommand(
                   : undefined,
               }));
 
-              // 進一步過濾任務確保符合條件
+              // 추가로 작업 필터링하여 조건에 맞게 보장
               const filteredTasks = isId
                 ? formattedTasks.filter((task: Task) => task.id === query)
                 : formattedTasks.filter((task: Task) => {
@@ -841,46 +837,46 @@ export async function searchTasksWithCommand(
     }
   } catch (error: unknown) {}
 
-  // 從當前任務中過濾符合條件的任務
+  // 현재 작업에서 조건에 맞는 작업 필터링
   const filteredCurrentTasks = filterCurrentTasks(currentTasks, query, isId);
 
-  // 合併結果並去重
+  // 결과 병합 및 중복 제거
   const taskMap = new Map<string, Task>();
 
-  // 當前任務優先
+  // 현재 작업 우선
   filteredCurrentTasks.forEach((task) => {
     taskMap.set(task.id, task);
   });
 
-  // 加入記憶任務，避免重複
+  // 메모리 작업 추가, 중복 방지
   memoryTasks.forEach((task) => {
     if (!taskMap.has(task.id)) {
       taskMap.set(task.id, task);
     }
   });
 
-  // 合併後的結果
+  // 병합된 결과
   const allTasks = Array.from(taskMap.values());
 
-  // 排序 - 按照更新或完成時間降序排列
+  // 정렬 - 업데이트 또는 완료 시간 내림차순
   allTasks.sort((a, b) => {
-    // 優先按完成時間排序
+    // 먼저 완료 시간으로 정렬
     if (a.completedAt && b.completedAt) {
       return b.completedAt.getTime() - a.completedAt.getTime();
     } else if (a.completedAt) {
-      return -1; // a完成了但b未完成，a排前面
+      return -1; // a가 완료되었지만 b는 아니므로 a가 앞에
     } else if (b.completedAt) {
-      return 1; // b完成了但a未完成，b排前面
+      return 1; // b가 완료되었지만 a는 아니므로 b가 앞에
     }
 
-    // 否則按更新時間排序
+    // 그렇지 않으면 업데이트 시간으로 정렬
     return b.updatedAt.getTime() - a.updatedAt.getTime();
   });
 
-  // 分頁處理
+  // 페이지 처리
   const totalResults = allTasks.length;
   const totalPages = Math.ceil(totalResults / pageSize);
-  const safePage = Math.max(1, Math.min(page, totalPages || 1)); // 確保頁碼有效
+  const safePage = Math.max(1, Math.min(page, totalPages || 1)); // 페이지 번호 유효성 검사
   const startIndex = (safePage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize, totalResults);
   const paginatedTasks = allTasks.slice(startIndex, endIndex);
@@ -896,40 +892,40 @@ export async function searchTasksWithCommand(
   };
 }
 
-// 根據平台生成適當的搜尋命令
+// 플랫폼에 맞게 적절한 검색 명령 생성
 function generateSearchCommand(
   query: string,
   isId: boolean,
   memoryDir: string
 ): string {
-  // 安全地轉義用戶輸入
+  // 사용자 입력 안전하게 이스케이프
   const safeQuery = escapeShellArg(query);
   const keywords = safeQuery.split(/\s+/).filter((k) => k.length > 0);
 
-  // 檢測操作系統類型
+  // 운영 체제 유형 감지
   const isWindows = process.platform === "win32";
 
   if (isWindows) {
-    // Windows環境，使用findstr命令
+    // Windows 환경, findstr 명령 사용
     if (isId) {
-      // ID搜尋
+      // ID 검색
       return `findstr /s /i /c:"${safeQuery}" "${memoryDir}\\*.json"`;
     } else if (keywords.length === 1) {
-      // 單一關鍵字
+      // 단일 키워드
       return `findstr /s /i /c:"${safeQuery}" "${memoryDir}\\*.json"`;
     } else {
-      // 多關鍵字搜尋 - Windows中使用PowerShell
+      // 다중 키워드 검색 - Windows에서는 PowerShell 사용
       const keywordPatterns = keywords.map((k) => `'${k}'`).join(" -and ");
       return `powershell -Command "Get-ChildItem -Path '${memoryDir}' -Filter *.json -Recurse | Select-String -Pattern ${keywordPatterns} | ForEach-Object { $_.Path }"`;
     }
   } else {
-    // Unix/Linux/MacOS環境，使用grep命令
+    // Unix/Linux/MacOS 환경, grep 명령 사용
     if (isId) {
       return `grep -r --include="*.json" "${safeQuery}" "${memoryDir}"`;
     } else if (keywords.length === 1) {
       return `grep -r --include="*.json" "${safeQuery}" "${memoryDir}"`;
     } else {
-      // 多關鍵字用管道連接多個grep命令
+      // 다중 키워드는 파이프라인을 통해 여러 grep 명령어 연결
       const firstKeyword = escapeShellArg(keywords[0]);
       const otherKeywords = keywords.slice(1).map((k) => escapeShellArg(k));
 
@@ -943,18 +939,18 @@ function generateSearchCommand(
 }
 
 /**
- * 安全地轉義shell參數，防止命令注入
+ * 안전하게 shell 매개변수를 이스케이프하여 명령 주입 방지
  */
 function escapeShellArg(arg: string): string {
   if (!arg) return "";
 
-  // 移除所有控制字符和特殊字符
+  // 모든 제어 문자와 특수 문자 제거
   return arg
-    .replace(/[\x00-\x1F\x7F]/g, "") // 控制字符
-    .replace(/[&;`$"'<>|]/g, ""); // Shell 特殊字符
+    .replace(/[\x00-\x1F\x7F]/g, "") // 제어 문자
+    .replace(/[&;`$"'<>|]/g, ""); // Shell 특수 문자
 }
 
-// 過濾當前任務列表
+// 현재 작업 목록 필터링
 function filterCurrentTasks(
   tasks: Task[],
   query: string,

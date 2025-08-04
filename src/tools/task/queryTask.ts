@@ -2,26 +2,26 @@ import { z } from "zod";
 import { searchTasksWithCommand } from "../../models/taskModel.js";
 import { getQueryTaskPrompt } from "../../prompts/index.js";
 
-// 查詢任務工具
+// 작업 조회 도구
 export const queryTaskSchema = z.object({
   query: z
     .string()
     .min(1, {
-      message: "查詢內容不能為空，請提供任務ID或搜尋關鍵字",
+      message: "조회 내용이 비어있습니다. 작업 ID 또는 검색 키워드를 입력해주세요",
     })
-    .describe("搜尋查詢文字，可以是任務ID或多個關鍵字（空格分隔）"),
+    .describe("검색 쿼리 문자열로, 작업 ID 또는 여러 키워드(공백 구분) 입력 가능"),
   isId: z
     .boolean()
     .optional()
     .default(false)
-    .describe("指定是否為ID查詢模式，默認為否（關鍵字模式）"),
+    .describe("ID 조회 모드 여부 지정, 기본값은 false(키워드 모드)"),
   page: z
     .number()
     .int()
     .positive()
     .optional()
     .default(1)
-    .describe("分頁頁碼，默認為第1頁"),
+    .describe("페이지 번호, 기본값 1"),
   pageSize: z
     .number()
     .int()
@@ -30,7 +30,7 @@ export const queryTaskSchema = z.object({
     .max(20)
     .optional()
     .default(5)
-    .describe("每頁顯示的任務數量，默認為5筆，最大20筆"),
+    .describe("페이지당 작업 수, 기본 5개, 최대 20개"),
 });
 
 export async function queryTask({
@@ -40,10 +40,10 @@ export async function queryTask({
   pageSize = 3,
 }: z.infer<typeof queryTaskSchema>) {
   try {
-    // 使用系統指令搜尋函數
+    // 시스템 명령어 검색 함수 사용
     const results = await searchTasksWithCommand(query, isId, page, pageSize);
 
-    // 使用prompt生成器獲取最終prompt
+    // prompt 생성기를 사용하여 최종 prompt 가져오기
     const prompt = await getQueryTaskPrompt({
       query,
       isId,
@@ -67,7 +67,7 @@ export async function queryTask({
       content: [
         {
           type: "text" as const,
-          text: `## 系統錯誤\n\n查詢任務時發生錯誤: ${
+          text: `## 시스템 오류\n\n작업 조회 중 오류 발생: ${
             error instanceof Error ? error.message : String(error)
           }`,
         },

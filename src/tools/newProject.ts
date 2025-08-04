@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { promises as fs } from "fs";
 import path from "path";
-import { initProjectRules } from "./initProjectRules.js";
-import { planTask } from "./planTask.js";
+import { initProjectRules } from "./project/initProjectRules.js";
+import { planTask } from "./task/planTask.js";
 
 // 스키마 정의
 export const newProjectSchema = z.object({

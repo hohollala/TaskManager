@@ -1,13 +1,13 @@
 /**
- * 環境變數和自定義 prompt 載入器
+ * 환경 변수와 사용자 정의 prompt 로더
  * 
- * 此模組提供從環境變數載入自定義 prompt 的功能，支援兩種模式：
- * 1. 替換模式：使用 MCP_PROMPT_{KEY} 完全替換原始 prompt
- * 2. 追加模式：使用 MCP_PROMPT_{KEY}_APPEND 在原始 prompt 後追加內容
+ * 이 모듈은 환경 변수에서 사용자 정의 prompt를 로드하는 기능을 제공하며, 두 가지 모드를 지원합니다:
+ * 1. 대체 모드: MCP_PROMPT_{KEY}를 사용하여 원본 prompt를 완전히 대체
+ * 2. 추가 모드: MCP_PROMPT_{KEY}_APPEND를 사용하여 원본 prompt 뒤에 내용 추가
  * 
- * 使用範例：
- * - 替換模式：MCP_PROMPT_PLAN_TASK="Your custom planning prompt"
- * - 追加模式：MCP_PROMPT_PLAN_TASK_APPEND="Additional instructions"
+ * 사용 예시:
+ * - 대체 모드: MCP_PROMPT_PLAN_TASK="Your custom planning prompt"
+ * - 추가 모드: MCP_PROMPT_PLAN_TASK_APPEND="Additional instructions"
  */
 
 import fs from "fs";
@@ -19,9 +19,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
- * 處理環境變數字串，支援基本轉義
- * @param input 環境變數字串
- * @returns 處理後的字串
+ * 환경 변수 문자열 처리, 기본 이스케이프 지원
+ * @param input 환경 변수 문자열
+ * @returns 처리된 문자열
  */
 function processEnvString(input: string | undefined): string {
   if (!input) return "";
@@ -29,7 +29,7 @@ function processEnvString(input: string | undefined): string {
 }
 
 /**
- * 載入 prompt，支援環境變數自定義
+ * prompt 로드, 환경 변수 사용자 정의 지원
  * @param basePrompt 기본 prompt 내용
  * @param promptKey prompt의 키 이름, 환경 변수 이름 생성에 사용
  * @returns 최종 prompt 내용

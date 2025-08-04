@@ -2,42 +2,42 @@ import { z } from "zod";
 import { searchTasksWithCommand } from "../../models/taskModel.js";
 import { getGetTaskDetailPrompt } from "../../prompts/index.js";
 
-// 取得完整任務詳情的參數
+// 작업 상세 정보 조회 매개변수
 export const getTaskDetailSchema = z.object({
   taskId: z
     .string()
     .min(1, {
-      message: "任務ID不能為空，請提供有效的任務ID",
+      message: "작업 ID가 비어있습니다. 유효한 작업 ID를 제공해주세요",
     })
-    .describe("欲檢視詳情的任務ID"),
+    .describe("상세 정보를 확인할 작업 ID"),
 });
 
-// 取得任務完整詳情
+// 작업 상세 정보 조회
 export async function getTaskDetail({
   taskId,
 }: z.infer<typeof getTaskDetailSchema>) {
   try {
-    // 使用 searchTasksWithCommand 替代 getTaskById，實現記憶區任務搜索
-    // 設置 isId 為 true，表示按 ID 搜索；頁碼為 1，每頁大小為 1
+    // getTaskById 대신 searchTasksWithCommand를 사용하여 메모리 영역 작업 검색 구현
+    // isId를 true로 설정하여 ID로 검색하고, 페이지는 1, 페이지 크기는 1로 설정
     const result = await searchTasksWithCommand(taskId, true, 1, 1);
 
-    // 檢查是否找到任務
+    // 작업을 찾았는지 확인
     if (result.tasks.length === 0) {
       return {
         content: [
           {
             type: "text" as const,
-            text: `## 錯誤\n\n找不到ID為 \`${taskId}\` 的任務。請確認任務ID是否正確。`,
+            text: `## 오류\n\nID가 \`${taskId}\`인 작업을 찾을 수 없습니다. 작업 ID가 올바른지 확인해주세요.`,
           },
         ],
         isError: true,
       };
     }
 
-    // 獲取找到的任務（第一個也是唯一的一個）
+    // 찾은 작업 가져오기 (첫 번째이자 유일한 작업)
     const task = result.tasks[0];
 
-    // 使用prompt生成器獲取最終prompt
+    // prompt 생성기를 사용하여 최종 prompt 가져오기
     const prompt = await getGetTaskDetailPrompt({
       taskId,
       task,
@@ -52,7 +52,7 @@ export async function getTaskDetail({
       ],
     };
   } catch (error) {
-    // 使用prompt生成器獲取錯誤訊息
+    // prompt 생성기를 사용하여 오류 메시지 가져오기
     const errorPrompt = await getGetTaskDetailPrompt({
       taskId,
       error: error instanceof Error ? error.message : String(error),

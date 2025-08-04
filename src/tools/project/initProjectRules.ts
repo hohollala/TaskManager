@@ -1,19 +1,19 @@
 import { z } from "zod";
 import { getInitProjectRulesPrompt } from "../../prompts/index.js";
 
-// 定義schema
+// 스키마 정의
 export const initProjectRulesSchema = z.object({});
 
 /**
- * 初始化專案規範工具函數
- * 提供建立規範文件的指導
+ * 프로젝트 규칙 초기화 도구 함수
+ * 규칙 문서 생성 가이드 제공
  */
 export async function initProjectRules() {
   try {
-    // 從生成器獲取提示詞
+    // 생성기에서 프롬프트 가져오기
     const promptContent = await getInitProjectRulesPrompt();
 
-    // 返回成功響應
+    // 성공 응답 반환
     return {
       content: [
         {
@@ -23,13 +23,13 @@ export async function initProjectRules() {
       ],
     };
   } catch (error) {
-    // 錯誤處理
-    const errorMessage = error instanceof Error ? error.message : "未知錯誤";
+    // 오류 처리
+    const errorMessage = error instanceof Error ? error.message : "알 수 없는 오류";
     return {
       content: [
         {
           type: "text" as const,
-          text: `初始化專案規範時發生錯誤: ${errorMessage}`,
+          text: `프로젝트 규칙 초기화 중 오류 발생: ${errorMessage}`,
         },
       ],
     };

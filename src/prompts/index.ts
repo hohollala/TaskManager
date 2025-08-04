@@ -1,13 +1,13 @@
 /**
- * Prompt 管理系統索引文件
- * 匯出所有 prompt 生成器和載入工具
+ * Prompt 관리 시스템 인덱스 파일
+ * 모든 prompt 생성기와 로더 도구 내보내기
  */
 
-// 匯出核心工具
+// 핵심 도구 내보내기
 export { loadPrompt, generatePrompt } from "./loader.js";
 
-// 當完成各個模塊時，將在下方匯出各個 prompt 生成器
-// 例如：
+// 각 모듈이 완료되면 아래에서 각 prompt 생성기를 내보낼 예정
+// 예시:
 export { getPlanTaskPrompt } from "./generators/planTask.js";
 export { getAnalyzeTaskPrompt } from "./generators/analyzeTask.js";
 export { getReflectTaskPrompt } from "./generators/reflectTask.js";

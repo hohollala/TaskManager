@@ -4,30 +4,30 @@ import { fileURLToPath } from "url";
 import { getResearchModePrompt } from "../../prompts/index.js";
 import { getMemoryDir } from "../../utils/paths.js";
 
-// 研究模式工具
+// 연구 모드 도구
 export const researchModeSchema = z.object({
   topic: z
     .string()
     .min(5, {
-      message: "研究主題不能少於5個字符，請提供明確的研究主題",
+      message: "연구 주제는 5자 이상이어야 하며, 명확한 연구 주제를 제공해주세요",
     })
-    .describe("要研究的程式編程主題內容，應該明確且具體"),
+    .describe("연구할 프로그래밍 주제 내용으로, 명확하고 구체적이어야 합니다"),
   previousState: z
     .string()
     .optional()
     .default("")
     .describe(
-      "之前的研究狀態和內容摘要，第一次執行時為空，後續會包含之前詳細且關鍵的研究成果，這將幫助後續的研究"
+      "이전 연구 상태와 내용 요약으로, 첫 실행 시에는 비어있고, 이후에는 이전의 상세하고 중요한 연구 결과를 포함하며, 이는 후속 연구에 도움이 됩니다"
     ),
   currentState: z
     .string()
     .describe(
-      "當前 Agent 主要該執行的內容，例如使用網路工具搜尋某些關鍵字或分析特定程式碼，研究完畢後請呼叫 research_mode 來記錄狀態並與之前的`previousState`整合，這將幫助你更好的保存與執行研究內容"
+      "현재 Agent가 주로 실행해야 할 내용으로, 예를 들어 네트워크 도구를 사용하여 특정 키워드를 검색하거나 특정 코드를 분석하는 등이며, 연구 완료 후 research_mode를 호출하여 상태를 기록하고 이전 `previousState`와 통합해야 하며, 이는 연구 내용을 더 잘 저장하고 실행하는 데 도움이 됩니다"
     ),
   nextSteps: z
     .string()
     .describe(
-      "後續的計劃、步驟或研究方向，用來約束 Agent 不偏離主題或走錯方向，如果研究過程中發現需要調整研究方向，請更新此欄位"
+      "후속 계획, 단계 또는 연구 방향으로, Agent가 주제에서 벗어나거나 잘못된 방향으로 가지 않도록 제약하며, 연구 과정에서 연구 방향을 조정해야 한다고 판단되면 이 필드를 업데이트해주세요"
     ),
 });
 
@@ -37,13 +37,13 @@ export async function researchMode({
   currentState,
   nextSteps,
 }: z.infer<typeof researchModeSchema>) {
-  // 獲取基礎目錄路徑
+  // 기본 디렉토리 경로 가져오기
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const PROJECT_ROOT = path.resolve(__dirname, "../../..");
   const MEMORY_DIR = await getMemoryDir();
 
-  // 使用prompt生成器獲取最終prompt
+  // prompt 생성기를 사용하여 최종 prompt 가져오기
   const prompt = await getResearchModePrompt({
     topic,
     previousState,
