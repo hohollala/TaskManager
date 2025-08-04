@@ -13,12 +13,6 @@ export const askProjectQuestionSchema = z.object({
   answers: z.array(z.string()).optional()
 });
 
-// 중복 호출 방지를 위한 캐시
-let lastInput: string | null = null;
-let lastOutput: string | null = null;
-let lastCallTime: number = 0;
-const DUPLICATE_THRESHOLD = 5000; // 5초 내 동일 입력은 중복으로 간주
-
 // 질문 목록
 const QUESTIONS = [
   "1. 앱의 주요 목적은 무엇인가요? (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)",
@@ -32,7 +26,7 @@ export async function askProjectQuestion(input: { questionNumber: number; answer
   const currentIndex = questionNumber - 1;
   const isLastQuestion = questionNumber === QUESTIONS.length;
 
-  // 답변이 있는 경우
+  // 답변이 있는 경우 - 답변 확인 후 다음 질문
   if (answer?.trim()) {
     const updatedAnswers = [...answers];
     updatedAnswers[currentIndex] = answer;
@@ -47,13 +41,13 @@ export async function askProjectQuestion(input: { questionNumber: number; answer
       };
     }
 
-    // 답변을 받았으므로 다음 질문으로 진행
+    // 답변 확인 후 다음 질문
     const nextQuestionIndex = questionNumber;
     const nextQuestion = QUESTIONS[nextQuestionIndex];
     return {
       content: [{ 
         type: "text", 
-        text: nextQuestion
+        text: `✅ 답변: ${answer}` 
       }]
     };
   }
@@ -73,35 +67,11 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
   const hasInput = input.purpose || input.features || input.design;
   
   if (hasInput) {
-    // 중복 호출 방지 로직
-    const currentInput = JSON.stringify(input);
-    const currentTime = Date.now();
-    
-    // 동일한 입력이 5초 내에 다시 호출되면 이전 결과 반환
-    if (currentInput === lastInput && 
-        currentTime - lastCallTime < DUPLICATE_THRESHOLD && 
-        lastOutput) {
-      console.log("🔄 중복 호출 감지 - 이전 결과 반환");
-      return {
-        content: [{ 
-          type: "text", 
-          text: lastOutput
-        }]
-      };
-    }
-    
     const answers = [input.purpose, input.features, input.design];
-    const outputText = `📝 입력된 정보:\n${answers.map((ans, idx) => `${idx + 1}. ${ans || "없음"}`).join('\n')}`;
-    
-    // 캐시 업데이트
-    lastInput = currentInput;
-    lastOutput = outputText;
-    lastCallTime = currentTime;
-    
     return {
       content: [{ 
         type: "text", 
-        text: outputText
+        text: `📝 입력된 정보:\n${answers.map((ans, idx) => `${idx + 1}. ${ans || "없음"}`).join('\n')}` 
       }]
     };
   }
