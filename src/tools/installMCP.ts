@@ -72,7 +72,16 @@ export async function installMCP(input: InstallMCPInput): Promise<{ content: { t
       console.log(`🗑️ 기존 ${serverName} 서버 제거됨`);
     }
 
-    
+    // 새 서버 설정 추가
+    configData.mcpServers[serverName] = {
+      type: "stdio",
+      command: "node",
+      args: [distIndexPath],
+      env: {
+        "ENABLE_GUI": "true",
+        "TEMPLATES_USE": "ko"
+      }
+    };
     
     // 설정 파일 저장
     await fs.writeFile(claudeConfigPath, JSON.stringify(configData, null, 2), "utf-8");
