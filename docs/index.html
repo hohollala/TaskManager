@@ -1698,6 +1698,35 @@ cd TaskManager">
                     </ul>
                   </div>
 
+                  <!-- 명령어 파일 수동 생성 -->
+                  <div class="mt-8 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <h5 class="text-lg font-semibold mb-2 text-green-800">📝 명령어 파일 수동 생성</h5>
+                    <p class="text-green-700 mb-3">MCP 서버 등록 후 명령어 파일들이 자동으로 생성되지 않은 경우:</p>
+                    <div class="space-y-3">
+                      <div>
+                        <h6 class="font-semibold text-green-700 mb-2">자동 생성 (권장):</h6>
+                        <div class="mockup-code bg-gray-900 text-gray-100 p-3 rounded-lg">
+                          <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">npm install</pre>
+                        </div>
+                        <p class="text-sm text-green-600 mt-1">→ 설치 시 자동으로 ~/.claude/commands/stm 폴더와 명령어 파일들 생성</p>
+                      </div>
+                      <div>
+                        <h6 class="font-semibold text-green-700 mb-2">수동 생성:</h6>
+                        <div class="mockup-code bg-gray-900 text-gray-100 p-3 rounded-lg">
+                          <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">npm run setup-commands</pre>
+                        </div>
+                        <p class="text-sm text-green-600 mt-1">→ 수동으로 명령어 파일들 생성</p>
+                      </div>
+                      <div>
+                        <h6 class="font-semibold text-green-700 mb-2">초기화 모드:</h6>
+                        <div class="mockup-code bg-gray-900 text-gray-100 p-3 rounded-lg">
+                          <pre class="text-gray-100 whitespace-pre-wrap font-mono text-sm">npm run init</pre>
+                        </div>
+                        <p class="text-sm text-green-600 mt-1">→ 초기화 모드로 명령어 파일들 생성</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- 환경 변수 설정 (선택사항) -->
                   <div class="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                     <h5 class="text-lg font-semibold mb-2 text-blue-800">🔧 환경 변수 설정 (선택사항)</h5>

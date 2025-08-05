@@ -71,6 +71,15 @@ export async function removeMCP(input: RemoveMCPInput): Promise<{ content: { typ
     await fs.writeFile(claudeConfigPath, JSON.stringify(configData, null, 2), "utf-8");
     console.log(`✅ ${claudeConfigPath}에서 ${serverName} 서버 설정이 제거되었습니다.`);
 
+    // ~/.claude/commands 폴더 삭제 시도
+    const commandsPath = path.join(homeDir, ".claude", "commands", "stm");
+    try {
+      await fs.rm(commandsPath, { recursive: true, force: true });
+      console.log(`🗑️ ${commandsPath} 폴더 삭제됨`);
+    } catch (error) {
+      console.log(`⚠️ ${commandsPath} 폴더 삭제 실패: ${error}`);
+    }
+
     // 연결 상태 확인
     const { stdout: listOutput } = await execAsync("claude mcp list");
     

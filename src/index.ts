@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { zodToJsonSchema } from "zod-to-json-schema";
 import path from "path";
 import { fileURLToPath } from "url";
+import os from "os";
 import {
   CallToolRequest,
   CallToolRequestSchema,
@@ -85,12 +86,49 @@ async function main() {
     let webServerInstance: Awaited<ReturnType<typeof createWebServer>> | null =
       null;
 
-    // 설치 시 명령어 파일들 생성
+    // 설치 시 명령어 파일들 생성 (폴더가 없을 때만)
     try {
-      await generateCommandFiles();
+      const homeDir = os.homedir();
+      const commandsDir = path.join(homeDir, '.claude', 'commands', 'stm');
+      
+      if (!fs.existsSync(commandsDir)) {
+        await generateCommandFiles();
+        console.log('✅ STM 명령어 파일들이 설치되었습니다.');
+      }
     } catch (error) {
       console.warn('⚠️ 명령어 파일 생성 실패 (선택사항):', error);
     }
+
+    // 프로세스 종료 시 cleanup 함수 등록
+    process.on('SIGINT', async () => {
+      console.log('🔄 MCP 서버 종료 중...');
+      try {
+        const homeDir = os.homedir();
+        const commandsDir = path.join(homeDir, '.claude', 'commands', 'stm');
+        if (fs.existsSync(commandsDir)) {
+          await fs.rmdir(commandsDir, { recursive: true } as any);
+          console.log('🗑️ STM 명령어 파일들이 제거되었습니다.');
+        }
+      } catch (error) {
+        console.warn('⚠️ 명령어 파일 제거 실패:', error);
+      }
+      process.exit(0);
+    });
+
+    process.on('SIGTERM', async () => {
+      console.log('🔄 MCP 서버 종료 중...');
+      try {
+        const homeDir = os.homedir();
+        const commandsDir = path.join(homeDir, '.claude', 'commands', 'stm');
+        if (fs.existsSync(commandsDir)) {
+          await fs.rmdir(commandsDir, { recursive: true } as any);
+          console.log('🗑️ STM 명령어 파일들이 제거되었습니다.');
+        }
+      } catch (error) {
+        console.warn('⚠️ 명령어 파일 제거 실패:', error);
+      }
+      process.exit(0);
+    });
 
     // MCP 서버 생성
     const server = new Server(
@@ -228,7 +266,7 @@ async function main() {
             inputSchema: zodToJsonSchema(researchModeSchema),
           },
           {
-            name: "new",
+            name: "newProject",
             description: await loadPromptFromTemplate(
               "toolsDescription/newProject.md"
             ),
@@ -236,7 +274,7 @@ async function main() {
           },
           {
             name: "ask-project-question",
-            description: "프로젝트 요구사항을 단계별로 수집하기 위한 질문 도구",
+            description: "",
             inputSchema: zodToJsonSchema(askProjectQuestionSchema),
           },
           {
@@ -405,7 +443,7 @@ async function main() {
                 );
               }
               return await researchMode(parsedArgs.data);
-            case "new":
+            case "newProject":
               parsedArgs = await newProjectSchema.safeParseAsync(
                 request.params.arguments
               );

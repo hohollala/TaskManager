@@ -4,6 +4,9 @@ import path from "path";
 import { initProjectRules } from "./project/initProjectRules.js";
 import { planTask } from "./task/planTask.js";
 
+// 임시 답변 상태 저장
+let tempAnswers: string[] = [];
+
 // 스키마 정의
 export const newProjectSchema = z.object({
   purpose: z.string().optional().describe("앱의 주요 목적 (예: 온라인 쇼핑, 할일 관리, 소셜 네트워킹 등)"),
@@ -146,62 +149,80 @@ ${otherRequirements || '미정'}
 *생성일: ${new Date().toLocaleDateString('ko-KR')}*
 `;
 
-  // CLAUDE.md 생성
-  const claudeContent = `# 프로젝트 컨텍스트 및 가이드라인
+  // CLAUDE.md 생성 - AI 개발 어시스턴트를 위한 프로젝트 컨텍스트
+  const claudeContent = `# ${purpose || '프로젝트'} - AI 개발 가이드
 
-## 프로젝트 개요
-${purpose || '미정'}
+Claude와 같은 AI 개발 어시스턴트가 이 프로젝트를 효과적으로 도울 수 있도록 하는 컨텍스트입니다.
 
-## 핵심 기능
-${features || '미정'}
+## 🎯 프로젝트 개요
 
-## 기술 스택
-${techStack || '미정'}
+**목적**: ${purpose || '미정'}
+**핵심 기능**: ${features || '미정'}
+**지원 플랫폼**: ${platforms || '미정'}
+**기술 스택**: ${techStack || '미정'}
 
-## 개발 가이드라인
+## 🔧 개발 환경 설정
 
-### 코딩 컨벤션
-- ESLint + Prettier 사용
-- TypeScript 엄격 모드
-- 컴포넌트 단위 개발
+### 필수 도구
+${techStack?.includes('React') ? '- Node.js (LTS 버전)\n- npm 또는 yarn\n- VS Code (권장 에디터)' : ''}
+${techStack?.includes('Flutter') ? '- Flutter SDK\n- Dart SDK\n- Android Studio 또는 VS Code' : ''}
+${techStack?.includes('Python') ? '- Python 3.8+\n- pip\n- 가상환경 (venv 또는 conda)' : ''}
 
-### 브랜치 전략
-- main: 프로덕션 배포용
-- develop: 개발용 통합 브랜치
-- feature/: 기능 개발용
-
-### 커밋 메시지 규칙
-- feat: 새로운 기능 추가
-- fix: 버그 수정
-- docs: 문서 수정
-- style: 코드 스타일 변경
-- refactor: 코드 리팩토링
-- test: 테스트 추가/수정
-
-### 폴더 구조
-\`\`\`
-src/
-├── components/     # 재사용 가능한 컴포넌트
-├── pages/         # 페이지 컴포넌트
-├── services/      # API 서비스
-├── utils/         # 유틸리티 함수
-├── styles/        # 스타일 파일
-└── types/         # TypeScript 타입 정의
+### 개발 서버 실행
+\`\`\`bash
+# 개발 서버 시작 명령어 예시
+${techStack?.includes('React') ? 'npm start' : ''}
+${techStack?.includes('Flutter') ? 'flutter run' : ''}
+${techStack?.includes('Python') ? 'python app.py' : ''}
 \`\`\`
 
-## 품질 관리
-- 코드 리뷰 필수
-- 단위 테스트 커버리지 > 80%
-- E2E 테스트 자동화
+## 📝 핵심 기능 명세
 
-## 배포 프로세스
-1. 개발 환경 테스트
-2. 스테이징 환경 검증
-3. 프로덕션 배포
+### 주요 기능
+${features ? features.split(',').map(f => `- ${f.trim()}`).join('\n') : '- 기능 명세 필요'}
+
+### 비기능 요구사항
+${otherRequirements ? otherRequirements.split(',').map(r => `- ${r.trim()}`).join('\n') : '- 성능 및 보안 요구사항 정의 필요'}
+
+## 🎨 UI/UX 가이드라인
+
+${design || '디자인 가이드라인 정의 필요'}
+
+**디자인 시스템**:
+- 색상 팔레트: 정의 필요
+- 타이포그래피: 정의 필요
+- 컴포넌트 라이브러리: 정의 필요
+
+## 🏗️ 아키텍처
+
+### 시스템 구조
+${server || '서버 구조 정의 필요'}
+
+### 외부 연동
+${externalServices || '외부 서비스 연동 계획 필요'}
+
+## 📋 개발 우선순위
+
+1. **핵심 기능 구현** - ${features?.split(',')[0]?.trim() || '기본 기능'}
+2. **사용자 인터페이스** - ${design ? '디자인 시스템 적용' : '기본 UI 구현'}
+3. **데이터 관리** - ${server ? '서버 연동' : '로컬 저장소'}
+4. **테스트 및 최적화**
+
+## 🔍 AI 어시스턴트 지침
+
+### 코드 생성 시 고려사항
+- **기술 스택 준수**: ${techStack || '기술 스택 명시 필요'}
+- **플랫폼 호환성**: ${platforms || '플랫폼 명시 필요'}
+- **보안 우선**: ${otherRequirements?.includes('보안') ? '보안 요구사항 반영' : '기본 보안 적용'}
+
+### 질문하기 좋은 항목
+- "${purpose || '이 앱'}의 [구체적 기능] 구현 방법"
+- "${techStack || '기술 스택'}로 [특정 문제] 해결 방법"
+- "${platforms || '플랫폼'}에서 [성능/UI] 최적화 방법"
 
 ---
 *생성일: ${new Date().toLocaleDateString('ko-KR')}*
-*마지막 업데이트: ${new Date().toLocaleDateString('ko-KR')}*
+*AI 개발 어시스턴트용 프로젝트 컨텍스트*
 `;
 
   // 파일들 생성
@@ -218,83 +239,84 @@ src/
 
 // 질문 처리 함수
 export async function askProjectQuestion(input: { questionNumber: number; answer?: string; answers?: string[] }) {
-  const { questionNumber, answer, answers = [] } = input;
+  const { questionNumber, answer } = input;
   const currentIndex = questionNumber - 1;
   const isLastQuestion = questionNumber === QUESTIONS.length;
 
-  // 답변이 있는 경우 - 답변 확인 후 다음 질문
+  // 답변이 있는 경우 - 답변 저장 후 다음 질문
   if (answer?.trim()) {
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentIndex] = answer;
+    // tempAnswers 배열 확장 (필요시)
+    while (tempAnswers.length <= currentIndex) {
+      tempAnswers.push('');
+    }
+    tempAnswers[currentIndex] = answer;
+    
+    console.log(`질문 ${questionNumber}: ${answer}`);
+    console.log('현재 tempAnswers:', tempAnswers);
 
     // 마지막 질문이면 완료 및 후속 작업 실행
     if (isLastQuestion) {
       try {
         // 1. 파일 생성
-        const fileResult = await createProjectFiles(updatedAnswers);
+        const fileResult = await createProjectFiles(tempAnswers);
         
         // 2. init 명령 실행
         const initResult = await initProjectRules();
         
         // 3. plan 명령 실행 (수집된 답변을 기반으로)
-        const planDescription = `프로젝트 요구사항을 바탕으로 ${updatedAnswers[0] || '새 프로젝트'} 개발을 위한 계획을 수립합니다.
+        const planDescription = `프로젝트 요구사항을 바탕으로 ${tempAnswers[0] || '새 프로젝트'} 개발을 위한 계획을 수립합니다.
 
-핵심 기능: ${updatedAnswers[1] || '미정'}
-기술 스택: ${updatedAnswers[6] || '미정'}
-플랫폼: ${updatedAnswers[5] || '미정'}`;
+핵심 기능: ${tempAnswers[1] || '미정'}
+기술 스택: ${tempAnswers[6] || '미정'}
+플랫폼: ${tempAnswers[5] || '미정'}`;
 
         const planResult = await planTask({ 
           description: planDescription,
           existingTasksReference: false 
         });
 
+        // 상태 초기화
+        tempAnswers = [];
+
         return {
           content: [{ 
             type: "text", 
-            text: `✅ 모든 질문 완료!
-
-📝 수집된 답변:
-${updatedAnswers.map((ans, idx) => `${idx + 1}. ${ans}`).join('\n')}
-
-🎉 프로젝트 초기화 완료!
-
-📁 생성된 파일들:
-${fileResult.files.map(file => `- ${file}`).join('\n')}
-
-🔧 프로젝트 규칙 초기화 완료
-📋 프로젝트 계획 수립 완료
-
-✨ 이제 개발을 시작할 수 있습니다!`
+            text: `\n✅ 프로젝트 초기화 완료!\n\n📁 생성된 파일: ${fileResult.files.length}개\n🔧 프로젝트 규칙 설정 완료\n📋 개발 계획 수립 완료\n\n개발을 시작할 수 있습니다.`
           }]
         };
       } catch (error) {
         return {
           content: [{ 
             type: "text", 
-            text: `✅ 모든 질문 완료!
+            text: `⚠️ 초기화 중 오류 발생: ${error instanceof Error ? error.message : String(error)}
 
-📝 수집된 답변:
-${updatedAnswers.map((ans, idx) => `${idx + 1}. ${ans}`).join('\n')}
-
-⚠️ 후속 작업 중 오류 발생: ${error instanceof Error ? error.message : String(error)}
-
-수동으로 다음 명령을 실행해주세요:
-1. init 명령으로 프로젝트 규칙 초기화
-2. plan 명령으로 프로젝트 계획 수립`
+init, plan 명령을 수동 실행해주세요.`
           }]
         };
       }
     }
 
     // 답변 확인 후 다음 질문
-    const nextQuestionIndex = questionNumber;
-    const nextQuestion = QUESTIONS[nextQuestionIndex];
-    return {
-      content: [{ 
-        type: "text", 
-        text: `✅ 답변: ${answer}\n\n${nextQuestion}` 
-      }]
-    };
+    const nextQuestionNumber = questionNumber + 1;
+    const nextQuestionIndex = nextQuestionNumber - 1; // 0-based 인덱스
+    
+    if (nextQuestionIndex < QUESTIONS.length) {
+      const nextQuestion = QUESTIONS[nextQuestionIndex];
+      return {
+        content: [{ 
+          type: "text", 
+          text: `\n${nextQuestion}`
+        }]
+      };
+    } else {
+      // 모든 질문 완료 (이 경우는 발생하지 않아야 함)
+      return {
+        content: [{ 
+          type: "text", 
+          text: "모든 질문이 완료되었습니다."
+        }]
+      };
+    }
   }
 
   // 답변이 없는 경우 - 현재 질문 출력
@@ -302,20 +324,31 @@ ${updatedAnswers.map((ans, idx) => `${idx + 1}. ${ans}`).join('\n')}
   return {
     content: [{ 
       type: "text", 
-      text: currentQuestion
+      text: `\n${currentQuestion}`
     }]
   };
 }
 
 // 메인 함수
-export async function newProject(input: NewProjectInput = {}, forceInteractive = false) {
-  // 입력이 없으면 첫 번째 질문 시작
-  if (!input.purpose && !input.features && !input.design && !input.server && 
-      !input.externalServices && !input.platforms && !input.techStack && !input.otherRequirements) {
+export async function newProject(input: NewProjectInput = {}) {
+  // 새 세션 시작 시 상태 초기화
+  tempAnswers = [];
+  
+  // 모든 입력이 비어있거나 기본값인 경우에만 첫 번째 질문 시작
+  const hasRealInput = Object.values(input).some(value => 
+    value && 
+    value.trim() && 
+    !value.includes("to be") && 
+    !value.includes("To be") &&
+    !value.includes("requirements") &&
+    !value.includes("specifications")
+  );
+
+  if (!hasRealInput) {
     return {
       content: [{ 
         type: "text", 
-        text: `🚀 새 프로젝트 요구사항 수집을 시작합니다!\n\n${QUESTIONS[0]}\n\n💡 답변 후 ask-project-question 도구로 계속 진행됩니다.` 
+        text: `\n📝 프로젝트 요구사항 수집\n\n${QUESTIONS[0]}`
       }]
     };
   }
@@ -326,7 +359,7 @@ export async function newProject(input: NewProjectInput = {}, forceInteractive =
   return {
     content: [{ 
       type: "text", 
-      text: `📝 입력된 정보:\n${answers.map((ans, idx) => `${idx + 1}. ${ans || "없음"}`).join('\n')}` 
+      text: `입력된 정보:\n${answers.map((ans, idx) => `${idx + 1}. ${ans || "없음"}`).join('\n')}` 
     }]
   };
 }
