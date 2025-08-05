@@ -21,4 +21,4 @@ startCommand:
         env: { DATA_DIR: config.dataDir }
     })
   exampleConfig:
-    dataDir: /var/lib/mcp-shrimp-task-manager/data
+    dataDir: /var/lib/mcp-shrimp-task-manager/data 

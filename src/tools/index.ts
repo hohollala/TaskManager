@@ -10,8 +10,8 @@ export * from "./thought/index.js";
 // 모든 연구 도구 내보내기
 export * from "./research/index.js";
 
-// 새 프로젝트 도구 내보내기
-export * from "./newProject.js";
+// 새 프로젝트 도구 내보내기 (주석 처리됨)
+// export * from "./newProject.js";
 
 // MCP 설치 도구 내보내기
 export * from "./installMCP.js";

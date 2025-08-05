@@ -178,11 +178,9 @@ function generateCommandFiles() {
       name: "newProject",
       description: "새 프로젝트 요구사항을 생성합니다",
       category: "프로젝트 관리",
-      usage: "newProject [프로젝트 설정]",
+      usage: "newProject",
       examples: [
-        "newProject",
-        "newProject --purpose '할일 관리 앱'",
-        "newProject --features '사용자 로그인, 할일 CRUD'"
+        "newProject"
       ]
     }
   ];
