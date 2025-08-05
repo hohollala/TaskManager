@@ -132,6 +132,11 @@ const i18n = {
     "installation.cursor.title": "Cursor IDE 구성",
     "installation.cursor.description":
       "Cursor IDE에서 Shrimp Task Manager를 구성하는 방법:",
+    "installation.gemini.title": "Gemini CLI 설정",
+    "installation.gemini.description": "Gemini CLI를 사용하는 경우 다음 설정을 추가하세요.",
+    "installation.gemini.config-file": "Gemini CLI 설정 파일",
+    "installation.gemini.note.title": "참고사항",
+    "installation.gemini.note.description": "Gemini CLI에서는 default_api. 접두사를 사용하여 MCP 도구에 접근합니다. 각 명령어는 함수 형태로 호출됩니다.",
     "installation.env-vars.title": "환경 변수",
     "installation.env-vars.description":
       "다음 환경 변수를 사용하여 Shrimp Task Manager의 동작을 사용자 정의할 수 있습니다:",
