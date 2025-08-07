@@ -170,17 +170,33 @@ const commands: CommandInfo[] = [
       "research 데이터베이스 최적화 방법"
     ]
   },
-  // {
-  //   name: "newProject",
-  //   description: "새 프로젝트 요구사항을 생성합니다",
-  //   category: "프로젝트 관리",
-  //   usage: "newProject [프로젝트 설정]",
-  //   examples: [
-  //     "newProject",
-  //     "newProject --purpose '할일 관리 앱'",
-  //     "newProject --features '사용자 로그인, 할일 CRUD'"
-  //   ]
-  // }
+  {
+    name: "get_url",
+    description: "웹 GUI의 URL을 조회합니다",
+    category: "시스템 관리",
+    usage: "get_url",
+    examples: [
+      "get_url"
+    ]
+  },
+  {
+    name: "continue",
+    description: "진행 중인 작업을 자동으로 찾아서 계속 진행합니다",
+    category: "작업 관리",
+    usage: "continue",
+    examples: [
+      "continue"
+    ]
+  },
+  {
+    name: "newProject",
+    description: "새 프로젝트 요구사항을 생성합니다",
+    category: "프로젝트 관리",
+    usage: "newProject",
+    examples: [
+      "newProject"
+    ]
+  }
 ];
 
 // MD 파일 템플릿 생성
@@ -230,6 +246,7 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 - [update](update.md) - 작업 수정
 - [query](query.md) - 작업 검색
 - [detail](detail.md) - 상세 정보
+- [continue](continue.md) - 작업 계속하기
 
 ### 🧠 사고 과정
 - [process](process.md) - 사고 과정
@@ -237,7 +254,10 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 ### ⚙️ 프로젝트 관리
 - [init](init.md) - 규칙 설정
 - [research](research.md) - 연구 모드
-- // [newProject](newProject.md) - 새 프로젝트
+- [newProject](newProject.md) - 새 프로젝트
+
+### 🌐 시스템 관리
+- [get_url](get_url.md) - GUI URL 조회
 
 ## 빠른 시작
 
@@ -245,7 +265,7 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 2. **작업 목록**: \`list\`
 3. **작업 실행**: \`execute [작업ID]\`
 4. **작업 확인**: \`verify [작업ID]\`
-5. **새 프로젝트**: \`// newProject\`
+5. **새 프로젝트**: \`newProject\`
 
 ## 워크플로우
 
@@ -256,32 +276,61 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 `;
 }
 
-// 설치 시 명령어 파일들 생성
+// 설치 시 명령어 파일들 생성 (SSH_MCP 방식으로 개선)
 export async function generateCommandFiles(): Promise<void> {
   try {
     const homeDir = os.homedir();
     const commandsDir = path.join(homeDir, '.claude', 'commands', 'stm');
     
+    console.log('🔧 STM 명령어 파일 생성 시작...');
+    console.log(`📁 대상 경로: ${commandsDir}`);
+    
     // 디렉토리 생성
     if (!fs.existsSync(commandsDir)) {
       fs.mkdirSync(commandsDir, { recursive: true });
+      console.log(`📂 디렉토리 생성됨: ${commandsDir}`);
+    } else {
+      console.log(`📂 디렉토리 이미 존재: ${commandsDir}`);
     }
+    
+    const createdFiles: string[] = [];
+    const skippedFiles: string[] = [];
     
     // 메인 README 생성
     const mainReadmePath = path.join(commandsDir, 'README.md');
-    fs.writeFileSync(mainReadmePath, generateMainREADME(), 'utf8');
+    if (!fs.existsSync(mainReadmePath)) {
+      fs.writeFileSync(mainReadmePath, generateMainREADME(), 'utf8');
+      createdFiles.push('README.md');
+      console.log('✅ 생성됨: README.md');
+    } else {
+      skippedFiles.push('README.md');
+      console.log('⏭️ 건너뜀: README.md (이미 존재)');
+    }
     
     // 각 명령어 MD 파일 생성
     for (const command of commands) {
       const filePath = path.join(commandsDir, `${command.name}.md`);
-      fs.writeFileSync(filePath, generateCommandMD(command), 'utf8');
+      
+      if (!fs.existsSync(filePath)) {
+        fs.writeFileSync(filePath, generateCommandMD(command), 'utf8');
+        createdFiles.push(`${command.name}.md`);
+        console.log(`✅ 생성됨: ${command.name}.md`);
+      } else {
+        skippedFiles.push(`${command.name}.md`);
+        console.log(`⏭️ 건너뜀: ${command.name}.md (이미 존재)`);
+      }
     }
     
-    console.log(`✅ 명령어 파일들이 생성되었습니다: ${commandsDir}`);
-    console.log(`📁 총 ${commands.length}개의 명령어 파일이 생성되었습니다.`);
+    console.log(`📊 생성 완료: ${createdFiles.length}개 새 파일, ${skippedFiles.length}개 건너뜀`);
+    console.log(`📁 총 ${commands.length + 1}개의 명령어 파일이 처리되었습니다.`);
+    
+    if (createdFiles.length > 0) {
+      console.log(`📋 새로 생성된 파일들: ${createdFiles.join(', ')}`);
+    }
     
   } catch (error) {
     console.error('❌ 명령어 파일 생성 중 오류 발생:', error);
+    throw error;
   }
 }
 

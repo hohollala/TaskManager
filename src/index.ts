@@ -58,6 +58,10 @@ import {
   installMCPSchema,
   removeMCP,
   removeMCPSchema,
+  getUrlTool,
+  handleGetUrl,
+  continueTask,
+  continueTaskSchema,
 } from "./tools/index.js";
 
 async function main() {
@@ -86,14 +90,23 @@ async function main() {
     let webServerInstance: Awaited<ReturnType<typeof createWebServer>> | null =
       null;
 
-    // 설치 시 명령어 파일들 생성 (폴더가 없을 때만)
+    // 설치 시 명령어 파일들 생성 (SSH_MCP 방식으로 개선)
     try {
       const homeDir = os.homedir();
       const commandsDir = path.join(homeDir, '.claude', 'commands', 'stm');
       
-      if (!fs.existsSync(commandsDir)) {
+      console.log('🔧 STM 명령어 파일 설치 중...');
+      console.log(`📁 설치 경로: ${commandsDir}`);
+      
+      // 디렉토리 존재 여부 확인
+      const dirExists = fs.existsSync(commandsDir);
+      console.log(`📂 디렉토리 존재: ${dirExists ? '예' : '아니오'}`);
+      
+      if (!dirExists) {
         await generateCommandFiles();
-        console.log('✅ STM 명령어 파일들이 설치되었습니다.');
+        console.log('✅ STM 명령어 파일들이 새로 설치되었습니다.');
+      } else {
+        console.log('ℹ️ STM 명령어 파일들이 이미 설치되어 있습니다.');
       }
     } catch (error) {
       console.warn('⚠️ 명령어 파일 생성 실패 (선택사항):', error);
@@ -147,14 +160,15 @@ async function main() {
     // 전역 서버 인스턴스 설정 (listRoots 호출 방지)
     // setGlobalServer(server);
 
-    // 웹 서버 시작을 위해 초기화된 알림 수신 대기
+    // 웹 서버 시작 (클라이언트 연결 없이도 시작)
     if (ENABLE_GUI) {
-      server.setNotificationHandler(InitializedNotificationSchema, async () => {
-        try {
-          webServerInstance = await createWebServer();
-          await webServerInstance.startServer();
-        } catch (error) {}
-      });
+      try {
+        webServerInstance = await createWebServer();
+        await webServerInstance.startServer();
+        console.log("🌐 웹 GUI 서버가 시작되었습니다!");
+      } catch (error) {
+        console.error("❌ 웹 GUI 서버 시작 실패:", error);
+      }
     }
 
     server.setRequestHandler(ListToolsRequestSchema, async () => {
@@ -286,6 +300,12 @@ async function main() {
             name: "remove-mcp",
             description: "MCP 서버를 자동으로 제거합니다",
             inputSchema: zodToJsonSchema(removeMCPSchema),
+          },
+          getUrlTool,
+          {
+            name: "continue",
+            description: "진행 중인 작업을 자동으로 찾아서 계속 진행합니다",
+            inputSchema: zodToJsonSchema(continueTaskSchema),
           },
         ],
       };
@@ -483,6 +503,17 @@ async function main() {
                 );
               }
               return await removeMCP(parsedArgs.data);
+            case "get_url":
+              return {
+                content: [
+                  {
+                    type: "text",
+                    text: await handleGetUrl(),
+                  },
+                ],
+              };
+            case "continue":
+              return await continueTask();
             default:
               throw new Error(`Tool ${request.params.name} does not exist`);
           }
