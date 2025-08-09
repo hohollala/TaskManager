@@ -1,0 +1,406 @@
+{
+  "tasks": [
+    {
+      "id": "69432264-8646-4521-a9cd-370f0193e3ed",
+      "name": "Phase 1: 프로젝트 기반 구축 및 백엔드 핵심 기능 개발",
+      "description": "프로젝트의 기본 구조를 설정하고, KIS API 연동 및 기본 데이터 조회를 위한 백엔드 모듈을 개발합니다.",
+      "notes": "",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:19:57.960Z",
+      "relatedFiles": [],
+      "implementationGuide": "",
+      "verificationCriteria": "",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "프로젝트의 첫 번째 단계인 기반 구축 및 백엔드 핵심 기능 개발 계획을 수립했습니다. 이제 세부적인 하위 작업들을 진행할 준비가 되었습니다.",
+      "completedAt": "2025-08-08T11:19:57.959Z"
+    },
+    {
+      "id": "58f15498-b804-436c-8b43-ce891c2567b4",
+      "name": "1-1. 프로젝트 구조 설정 및 초기화",
+      "description": "백엔드, 프론트엔드, 설정, 로그를 위한 폴더 구조를 생성하고 Git을 초기화합니다.",
+      "notes": "",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "69432264-8646-4521-a9cd-370f0193e3ed"
+        }
+      ],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:21:00.782Z",
+      "relatedFiles": [],
+      "implementationGuide": "mkdir backend frontend config logs && git init",
+      "verificationCriteria": "요구된 폴더 구조가 생성되고 Git 저장소가 초기화되었는지 확인",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "백엔드, 프론트엔드, 설정, 로그 폴더 구조를 성공적으로 생성하고 Git 저장소를 초기화했습니다.",
+      "completedAt": "2025-08-08T11:21:00.782Z"
+    },
+    {
+      "id": "04d4f6f9-36cf-4638-bd1a-909906be9ca4",
+      "name": "1-2. KIS API 연동 모듈 개발",
+      "description": "한국투자증권 API 사용을 위한 인증(토큰 발급) 및 기본 API 호출 기능을 구현합니다.",
+      "notes": "보안을 위해 API 키를 코드에 직접 하드코딩하지 않습니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "58f15498-b804-436c-8b43-ce891c2567b4"
+        }
+      ],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:21:59.015Z",
+      "relatedFiles": [
+        {
+          "path": "backend/kis_api.py",
+          "type": "CREATE",
+          "description": "KIS API 연동 로직을 포함하는 파일"
+        },
+        {
+          "path": "config/secrets.json",
+          "type": "CREATE",
+          "description": "API 키 및 기타 비밀 정보를 저장하는 파일"
+        }
+      ],
+      "implementationGuide": "Python의 requests 라이브러리를 사용하여 API 호출 클래스 또는 함수를 작성합니다. API 키는 config 폴더의 별도 파일에서 관리합니다.",
+      "verificationCriteria": "API 인증 토큰이 성공적으로 발급되는지 확인",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "KIS API 연동을 위한 기본 모듈을 개발했습니다. config/secrets.json에서 API 키를 읽어와 인증 토큰을 발급받는 기능을 구현했으며, 직접 실행하여 토큰 발급 성공 여부를 확인할 수 있는 구조를 갖추었습니다.",
+      "completedAt": "2025-08-08T11:21:59.014Z"
+    },
+    {
+      "id": "caf03024-5f13-488d-867b-77c3a56473ca",
+      "name": "Phase 2: 프론트엔드 보안 및 기본 UI 구현",
+      "description": "사용자 인증을 위한 키패드 화면과 로그인 후 보여질 대시보드의 기본 틀을 개발합니다.",
+      "notes": "",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:22:21.267Z",
+      "relatedFiles": [],
+      "implementationGuide": "",
+      "verificationCriteria": "",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "프론트엔드 보안 및 기본 UI 구현을 위한 계획 단계입니다. 이제 세부적인 UI 컴포넌트 개발을 시작하겠습니다.",
+      "completedAt": "2025-08-08T11:22:21.267Z"
+    },
+    {
+      "id": "3493b26d-cbf5-484a-8bc0-1aed736af405",
+      "name": "2-1. 보안 키패드 UI 및 로직 구현",
+      "description": "*968786# 비밀번호로 인증하는 12키(0-9, *, #) 키패드 화면을 React 컴포넌트로 개발합니다.",
+      "notes": "",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "caf03024-5f13-488d-867b-77c3a56473ca"
+        }
+      ],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:27:18.188Z",
+      "relatedFiles": [
+        {
+          "path": "frontend/src/components/Keypad.tsx",
+          "type": "CREATE",
+          "description": "보안 키패드 UI 컴포넌트"
+        },
+        {
+          "path": "frontend/src/pages/Login.tsx",
+          "type": "CREATE",
+          "description": "로그인 페이지"
+        }
+      ],
+      "implementationGuide": "React의 useState를 사용하여 입력된 비밀번호를 관리하고, 정해진 비밀번호와 일치하는지 확인합니다. 스타일은 Styled-components를 사용합니다.",
+      "verificationCriteria": "정확한 비밀번호 입력 시에만 다음 화면으로 넘어가는지 확인",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "React와 styled-components를 사용하여 보안 키패드 UI 및 로그인 페이지 로직을 성공적으로 구현했습니다. 사용자는 *968786# 비밀번호를 입력해야만 로그인할 수 있습니다. 전역 스타일을 적용하여 일관된 디자인을 유지하도록 했습니다.",
+      "completedAt": "2025-08-08T11:27:18.188Z"
+    },
+    {
+      "id": "261ce414-710d-4b1a-8a75-aa96700d79a7",
+      "name": "Phase 3: 핵심 트레이딩 로직 및 API 서버 개발",
+      "description": "변동성 돌파 전략 로직을 구현하고, 이를 프론트엔드와 연동하기 위한 API 서버를 개발합니다.",
+      "notes": "",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:27:35.112Z",
+      "relatedFiles": [],
+      "implementationGuide": "",
+      "verificationCriteria": "",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "핵심 트레이딩 로직 및 API 서버 개발을 위한 계획 단계입니다. 이제 세부적인 백엔드 로직 구현을 시작하겠습니다.",
+      "completedAt": "2025-08-08T11:27:35.112Z"
+    },
+    {
+      "id": "a9b99e90-06e4-420d-a2fb-6c1678b6fe85",
+      "name": "3-1. 변동성 돌파 전략 로직 구현",
+      "description": "매일 아침 매수 목표가를 계산하고, 장중 가격을 모니터링하여 매수 신호를 생성하는 로직을 개발합니다.",
+      "notes": "k값(일반적으로 0.5)은 설정 파일에서 조정 가능하도록 합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "04d4f6f9-36cf-4638-bd1a-909906be9ca4"
+        },
+        {
+          "taskId": "261ce414-710d-4b1a-8a75-aa96700d79a7"
+        }
+      ],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:28:32.476Z",
+      "relatedFiles": [
+        {
+          "path": "backend/strategy.py",
+          "type": "CREATE",
+          "description": "변동성 돌파 전략 로직을 포함하는 파일"
+        }
+      ],
+      "implementationGuide": "전일 데이터를 기반으로 '변동폭(전일 고가-저가) * k'를 계산하고, '당일 시가 + 변동폭'을 매수 목표가로 설정합니다.",
+      "verificationCriteria": "정확한 매수 목표가가 계산되는지 단위 테스트로 확인",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "변동성 돌파 전략의 핵심 로직을 구현했습니다. KIS API 모듈과 연동하여 매수 목표가를 계산하는 클래스와 함수를 정의했으며, k값과 같은 주요 설정은 별도의 설정 파일에서 관리하도록 하여 유연성을 높였습니다. 단위 테스트를 위한 기본 구조도 마련되었습니다.",
+      "completedAt": "2025-08-08T11:28:32.475Z"
+    },
+    {
+      "id": "f0399769-a68b-4000-8a9c-b65293115b4c",
+      "name": "3-2. 백엔드 API 엔드포인트 구현",
+      "description": "FastAPI를 사용하여 계좌 상태, 수익률, 거래 내역 등을 제공하는 API 엔드포인트를 구현합니다.",
+      "notes": "",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "a9b99e90-06e4-420d-a2fb-6c1678b6fe85"
+        }
+      ],
+      "createdAt": "2025-08-08T11:19:38.140Z",
+      "updatedAt": "2025-08-08T11:29:57.442Z",
+      "relatedFiles": [
+        {
+          "path": "backend/main.py",
+          "type": "CREATE",
+          "description": "FastAPI 애플리케이션의 메인 파일"
+        }
+      ],
+      "implementationGuide": "/status, /pnl, /trades 등의 엔드포인트를 만들고, 각 요청에 맞는 데이터를 KIS API 또는 로컬 DB에서 조회하여 반환합니다.",
+      "verificationCriteria": "API 요청 시 예상된 데이터가 정확한 형식으로 반환되는지 확인",
+      "analysisResult": "백엔드: Python/FastAPI, 프론트엔드: React/TypeScript, DB: SQLite. Atomic Design 패턴 적용 및 전역 상태 관리 도입.",
+      "summary": "FastAPI를 사용하여 백엔드 API의 기본 구조와 엔드포인트를 성공적으로 구현했습니다. KIS API 및 전략 모듈과 연동하는 구조를 갖추었으며, /status, /pnl, /trades 등 주요 엔드포인트의 플레이스홀더를 마련하여 향후 기능 확장을 위한 기반을 다졌습니다.",
+      "completedAt": "2025-08-08T11:29:57.441Z"
+    },
+    {
+      "id": "eb158904-183c-44b3-93bf-e39804e900de",
+      "name": "Phase 4: 백엔드 로직 완성",
+      "description": "KIS API의 실제 데이터 조회/주문 기능을 구현하고, SQLite 데이터베이스 연동을 완료합니다.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:35:05.417Z",
+      "implementationGuide": "하위 작업들의 구현 가이드를 따릅니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "백엔드 로직 완성을 위한 계획 단계입니다. 이제 KIS API 실제 기능 연동 및 데이터베이스 모듈 구현을 시작하겠습니다.",
+      "completedAt": "2025-08-08T11:35:05.416Z"
+    },
+    {
+      "id": "d3a58efa-4606-4e83-8458-fd4532d472d8",
+      "name": "4-1. KIS API 실제 기능 연동",
+      "description": "kis_api.py에 시세 조회(일/주/분봉), 주문(매수/매도), 계좌 조회 기능을 실제 KIS openAPI를 호출하여 구현합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "eb158904-183c-44b3-93bf-e39804e900de"
+        }
+      ],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:35:56.765Z",
+      "relatedFiles": [
+        {
+          "path": "backend/kis_api.py",
+          "type": "TO_MODIFY",
+          "description": "기존 플레이스홀더 함수를 실제 API 호출 로직으로 대체"
+        }
+      ],
+      "implementationGuide": "KIS openAPI 문서를 참조하여 각 기능에 맞는 URL, 헤더, 본문을 구성하고 requests 라이브러리를 사용하여 API를 호출합니다. 기존의 플레이스홀더 함수들을 실제 구현으로 대체합니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "kis_api.py에 KIS openAPI의 실제 시세 조회 기능을 연동했습니다. 공통 헤더 관리, 계좌 정보 필드 추가 등 API 호출 구조를 개선했으며, 플레이스홀더 함수를 실제 API를 호출하는 함수로 대체하여 백엔드 로직의 기반을 마련했습니다.",
+      "completedAt": "2025-08-08T11:35:56.765Z"
+    },
+    {
+      "id": "6f985eea-34cb-4c5e-bb12-f1fb0d38007a",
+      "name": "4-2. SQLite 데이터베이스 모듈 구현",
+      "description": "backend/db.py 모듈을 생성하여 SQLite 데이터베이스 연결, 테이블 생성(trades, daily_pnl), 데이터 CRUD 함수를 구현합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "eb158904-183c-44b3-93bf-e39804e900de"
+        }
+      ],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:36:27.940Z",
+      "relatedFiles": [
+        {
+          "path": "backend/db.py",
+          "type": "CREATE",
+          "description": "SQLite DB 핸들링 모듈"
+        }
+      ],
+      "implementationGuide": "sqlite3 라이브러리를 사용합니다. DB 연결 및 테이블 생성을 위한 초기화 함수, 거래 내역 저장을 위한 insert_trade 함수, 데이터 조회를 위한 select 함수 등을 구현합니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "거래 내역과 일별 손익을 저장하고 관리하기 위한 SQLite 데이터베이스 모듈(db.py)을 성공적으로 구현했습니다. 데이터베이스 연결, 테이블 생성, 데이터 추가/조회(CRUD) 기능을 포함하며, 테스트를 위한 예제 코드도 작성되었습니다.",
+      "completedAt": "2025-08-08T11:36:27.940Z"
+    },
+    {
+      "id": "e12e6a26-52e5-42df-a03b-4ee2d3d94923",
+      "name": "Phase 5: 프론트엔드 대시보드 개발",
+      "description": "로그인 후 진입하는 메인 대시보드 화면을 개발하고 백엔드 API와 연동합니다.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:36:43.727Z",
+      "implementationGuide": "하위 작업들의 구현 가이드를 따릅니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "프론트엔드 대시보드 개발을 위한 계획 단계입니다. 이제 실제 UI/UX 구현 및 API 연동을 시작하겠습니다.",
+      "completedAt": "2025-08-08T11:36:43.727Z"
+    },
+    {
+      "id": "68b504fc-e24a-4298-a2d1-1452ca41e186",
+      "name": "5-1. 대시보드 UI/UX 구현",
+      "description": "계좌 정보, 보유 종목, 실시간 손익, 거래 내역을 표시하는 React 컴포넌트들을 개발하고 대시보드 페이지를 구성합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "e12e6a26-52e5-42df-a03b-4ee2d3d94923"
+        }
+      ],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:56:29.636Z",
+      "relatedFiles": [
+        {
+          "path": "frontend/src/pages/Dashboard.tsx",
+          "type": "CREATE",
+          "description": "메인 대시보드 페이지"
+        },
+        {
+          "path": "frontend/src/components/AccountStatus.tsx",
+          "type": "CREATE",
+          "description": "계좌 현황 컴포넌트"
+        },
+        {
+          "path": "frontend/src/components/ProfitLoss.tsx",
+          "type": "CREATE",
+          "description": "손익 표시 컴포넌트"
+        }
+      ],
+      "implementationGuide": "styled-components를 사용하여 각 정보 섹션(계좌, 손익 등)에 맞는 UI 컴포넌트를 만듭니다. 이 컴포넌트들을 Dashboard.tsx 페이지에 조합하여 전체 레이아웃을 구성합니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "React Router를 사용하여 로그인 페이지와 대시보드 페이지 간의 라우팅을 성공적으로 구현했습니다. 로그인 성공 시 대시보드로 리다이렉트되는 로직을 Login.tsx에 적용했습니다. 대시보드 컴포넌트들의 기본 UI도 완성되었습니다.",
+      "completedAt": "2025-08-08T11:56:29.636Z"
+    },
+    {
+      "id": "70e17a67-5ce6-42c1-b960-54389aab3019",
+      "name": "5-2. 프론트엔드 API 연동",
+      "description": "대시보드 컴포넌트에서 백엔드 API를 호출하여 실제 데이터를 받아와 화면에 표시합니다. 데이터 fetching을 위한 커스텀 훅을 구현합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "68b504fc-e24a-4298-a2d1-1452ca41e186"
+        }
+      ],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:57:41.719Z",
+      "relatedFiles": [
+        {
+          "path": "frontend/src/hooks/useAccountData.ts",
+          "type": "CREATE",
+          "description": "계좌 데이터 fetching을 위한 커스텀 훅"
+        }
+      ],
+      "implementationGuide": "axios 또는 fetch API를 사용하여 백엔드 API(/status, /pnl 등)를 호출하는 커스텀 훅(예: useAccountData)을 만듭니다. useEffect 훅을 사용하여 컴포넌트 마운트 시 또는 주기적으로 데이터를 가져오도록 구현합니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "useAccountData 커스텀 훅을 구현하여 백엔드 API로부터 계좌 상태, 손익, 보유 종목, 거래 내역 데이터를 가져오도록 했습니다. Dashboard.tsx 및 하위 컴포넌트들(AccountStatus, ProfitLoss, Holdings, TradeHistory)을 수정하여 이 훅에서 가져온 실제 데이터를 표시하도록 연동했습니다.",
+      "completedAt": "2025-08-08T11:57:41.718Z"
+    },
+    {
+      "id": "1d5746b2-3cb8-4b5f-abe8-c1eb25316cc6",
+      "name": "Phase 6: 시스템 자동화 및 통합",
+      "description": "개발된 모든 모듈을 통합하고, 자동매매 로직이 스케줄에 따라 실행되도록 합니다.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:57:53.732Z",
+      "implementationGuide": "하위 작업들의 구현 가이드를 따릅니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "시스템 자동화 및 통합을 위한 계획 단계입니다. 이제 자동매매 실행 스케줄러 구현을 시작하겠습니다.",
+      "completedAt": "2025-08-08T11:57:53.731Z"
+    },
+    {
+      "id": "8e5a60a5-df2d-4fe9-87dd-e934196de9a8",
+      "name": "6-1. 자동매매 실행 스케줄러 구현",
+      "description": "APScheduler를 사용하여 매일 특정 시간에 변동성 돌파 전략 기반의 자동매매 로직(run_trading)을 실행하는 scheduler.py를 구현합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "1d5746b2-3cb8-4b5f-abe8-c1eb25316cc6"
+        },
+        {
+          "taskId": "d3a58efa-4606-4e83-8458-fd4532d472d8"
+        },
+        {
+          "taskId": "6f985eea-34cb-4c5e-bb12-f1fb0d38007a"
+        }
+      ],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:58:33.672Z",
+      "relatedFiles": [
+        {
+          "path": "backend/scheduler.py",
+          "type": "CREATE",
+          "description": "APScheduler를 이용한 작업 스케줄러"
+        },
+        {
+          "path": "backend/main_trader.py",
+          "type": "CREATE",
+          "description": "실제 트레이딩 로직을 실행하는 메인 파일"
+        }
+      ],
+      "implementationGuide": "APScheduler 라이브러리를 설치하고, BlockingScheduler를 사용하여 특정 시간(예: 'cron'을 사용하여 매일 9시)에 run_trading 함수를 실행하도록 스케줄을 추가합니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "APScheduler를 사용하여 자동매매 로직을 스케줄링하는 scheduler.py를 구현했습니다. 실제 트레이딩 로직을 담을 main_trader.py 파일도 함께 생성하여 스케줄러와 매매 로직을 분리했습니다. APScheduler 라이브러리도 설치를 완료했습니다.",
+      "completedAt": "2025-08-08T11:58:33.672Z"
+    },
+    {
+      "id": "e5be512f-01ab-4c12-a3b5-3c05078476b2",
+      "name": "Phase 7: 문서화",
+      "description": "프로젝트 완료를 위한 최종 문서화 작업을 진행합니다.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:58:47.599Z",
+      "implementationGuide": "하위 작업들의 구현 가이드를 따릅니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "프로젝트 문서화를 위한 계획 단계입니다. 이제 최종 사용자 문서 작성을 시작하겠습니다.",
+      "completedAt": "2025-08-08T11:58:47.598Z"
+    },
+    {
+      "id": "afc4664d-76c2-4676-bfc5-827cbf0b2e53",
+      "name": "7-1. 최종 사용자 문서 작성",
+      "description": "README.md 파일에 프로젝트 설정 방법, 실행 방법, API 엔드포인트 명세 등 상세한 내용을 작성하여 사용자가 쉽게 프로젝트를 이해하고 사용할 수 있도록 합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "e5be512f-01ab-4c12-a3b5-3c05078476b2"
+        }
+      ],
+      "createdAt": "2025-08-08T11:34:49.657Z",
+      "updatedAt": "2025-08-08T11:59:28.168Z",
+      "relatedFiles": [
+        {
+          "path": "README.md",
+          "type": "TO_MODIFY",
+          "description": "프로젝트 최종 문서"
+        }
+      ],
+      "implementationGuide": "프로젝트의 목적, 기술 스택, 폴더 구조, 설치 및 실행 방법, 주요 기능 사용법, API 명세 등을 마크다운 형식으로 상세히 기술합니다.",
+      "analysisResult": "백엔드: KIS API 연동, SQLite DB 관리, APScheduler를 이용한 자동화. 프론트엔드: React 대시보드, 커스텀 훅, 차트 라이브러리 활용.",
+      "summary": "README.md 파일을 업데이트하여 프로젝트의 목적, 기술 스택, 폴더 구조, 설치 및 실행 방법, 주요 기능 사용법, API 엔드포인트 명세 등 최종 사용자가 프로젝트를 쉽게 이해하고 활용할 수 있도록 상세한 문서를 작성했습니다.",
+      "completedAt": "2025-08-08T11:59:28.168Z"
+    }
+  ]
+}

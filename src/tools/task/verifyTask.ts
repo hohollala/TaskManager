@@ -66,6 +66,14 @@ export async function verifyTask({
     // 작업 상태를 완료로 업데이트하고 요약 추가
     await updateTaskSummary(taskId, summary);
     await updateTaskStatus(taskId, TaskStatus.COMPLETED);
+    
+    // TodoWrite 연동: 작업 완료 시 체크리스트 업데이트
+    console.log(`✅ 작업 완료: ${task.name}`);
+    console.log(`☑ ${task.name} (완료됨) - 점수: ${score}/100`);
+  } else {
+    // TodoWrite 연동: 작업 실패 시 체크리스트 업데이트
+    console.log(`❌ 작업 검증 실패: ${task.name}`);
+    console.log(`☐ ${task.name} (수정 필요) - 점수: ${score}/100`);
   }
 
   // prompt 생성기를 사용하여 최종 prompt 가져오기

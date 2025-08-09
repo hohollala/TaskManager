@@ -162,6 +162,12 @@ export async function splitTasks({
             globalAnalysisResult
           );
           message += `\n${createdTasks.length}개의 새 작업을 성공적으로 생성했습니다.`;
+          
+          // TodoWrite 연동: 새 작업들 체크리스트 표시
+          console.log(`📋 ${createdTasks.length}개의 새 작업이 생성되었습니다:`);
+          createdTasks.forEach((task, index) => {
+            console.log(`☐ ${index + 1}. ${task.name}`);
+          });
         } catch (error) {
           actionSuccess = false;
           message += `\n새 작업 생성 중 오류 발생: ${
@@ -180,6 +186,14 @@ export async function splitTasks({
           updateMode,
           globalAnalysisResult
         );
+
+        // TodoWrite 연동: 다른 모드에서도 체크리스트 표시
+        if (createdTasks.length > 0) {
+          console.log(`📋 ${createdTasks.length}개의 작업이 처리되었습니다:`);
+          createdTasks.forEach((task, index) => {
+            console.log(`☐ ${index + 1}. ${task.name}`);
+          });
+        }
 
         // 다른 업데이트 모드에 따라 메시지 생성
         switch (updateMode) {

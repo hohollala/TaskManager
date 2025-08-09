@@ -182,6 +182,33 @@ function generateCommandFiles() {
       examples: [
         "newProject"
       ]
+    },
+    {
+      name: "get_url",
+      description: "웹 GUI의 URL을 조회합니다",
+      category: "시스템 관리",
+      usage: "get_url",
+      examples: [
+        "get_url"
+      ]
+    },
+    {
+      name: "continue",
+      description: "진행 중인 작업을 자동으로 찾아서 계속 진행합니다",
+      category: "작업 관리",
+      usage: "continue",
+      examples: [
+        "continue"
+      ]
+    },
+    {
+      name: "stm-g",
+      description: "~/.claude/commands/stm의 MD 파일들을 ~/.gemini/commands/stm의 TOML 파일로 변환합니다",
+      category: "시스템 관리",
+      usage: "stm-g",
+      examples: [
+        "stm-g"
+      ]
     }
   ];
 
@@ -230,6 +257,7 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 - [update](update.md) - 작업 수정
 - [query](query.md) - 작업 검색
 - [detail](detail.md) - 상세 정보
+- [continue](continue.md) - 작업 계속하기
 
 ### 🧠 사고 과정
 - [process](process.md) - 사고 과정
@@ -238,6 +266,9 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 - [init](init.md) - 규칙 설정
 - [research](research.md) - 연구 모드
 - [newProject](newProject.md) - 새 프로젝트
+
+### 🌐 시스템 관리
+- [get_url](get_url.md) - GUI URL 조회
 
 ## 빠른 시작
 

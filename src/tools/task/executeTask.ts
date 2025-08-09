@@ -22,7 +22,7 @@ export const executeTaskSchema = z.object({
 
 export async function executeTask({
   taskId,
-}: z.infer<typeof executeTaskSchema>) {
+}: z.infer<typeof executeTaskSchema>, options?: { skipFileLoading?: boolean }) {
   try {
     // 작업이 존재하는지 확인
     const task = await getTaskById(taskId);
@@ -82,6 +82,16 @@ export async function executeTask({
     // 작업 상태를 "진행 중"으로 업데이트
     await updateTaskStatus(taskId, TaskStatus.IN_PROGRESS);
 
+    // TodoWrite 연동: 작업 시작 시 체크리스트 표시
+    console.log(`📋 작업 시작: ${task.name}`);
+    console.log(`☐ ${task.name} (진행 중)`);
+    if (task.dependencies && task.dependencies.length > 0) {
+      console.log(`의존성 작업들:`);
+      for (const dep of task.dependencies) {
+        console.log(`☑ ${dep} (완료됨)`);
+      }
+    }
+
     // 작업 복잡도 평가
     const complexityResult = await assessTaskComplexity(taskId);
 
@@ -108,9 +118,9 @@ export async function executeTask({
       }
     }
 
-    // 작업 관련 파일 내용 로드
+    // 작업 관련 파일 내용 로드 (옵션에 따라 건너뛸 수 있음)
     let relatedFilesSummary = "";
-    if (task.relatedFiles && task.relatedFiles.length > 0) {
+    if (!options?.skipFileLoading && task.relatedFiles && task.relatedFiles.length > 0) {
       try {
         const relatedFilesResult = await loadTaskRelatedFiles(
           task.relatedFiles

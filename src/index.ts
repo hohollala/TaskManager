@@ -50,10 +50,10 @@ import {
   initProjectRulesSchema,
   researchMode,
   researchModeSchema,
-  // newProject,
-  // newProjectSchema,
-  // askProjectQuestion,
-  // askProjectQuestionSchema,
+  newProject,
+  newProjectSchema,
+  askProjectQuestion,
+  askProjectQuestionSchema,
   installMCP,
   installMCPSchema,
   removeMCP,
@@ -62,6 +62,8 @@ import {
   handleGetUrl,
   continueTask,
   continueTaskSchema,
+  stmGSchema,
+  handleStmG,
 } from "./tools/index.js";
 
 async function main() {
@@ -279,18 +281,18 @@ async function main() {
             ),
             inputSchema: zodToJsonSchema(researchModeSchema),
           },
-          // {
-          //   name: "newProject",
-          //   description: await loadPromptFromTemplate(
-          //     "toolsDescription/newProject.md"
-          //   ),
-          //   inputSchema: zodToJsonSchema(newProjectSchema),
-          // },
-          // {
-          //   name: "ask-project-question",
-          //   description: "",
-          //   inputSchema: zodToJsonSchema(askProjectQuestionSchema),
-          // },
+          {
+            name: "newProject",
+            description: await loadPromptFromTemplate(
+              "toolsDescription/newProject.md"
+            ),
+            inputSchema: zodToJsonSchema(newProjectSchema),
+          },
+          {
+            name: "ask-project-question",
+            description: "",
+            inputSchema: zodToJsonSchema(askProjectQuestionSchema),
+          },
           {
             name: "install-mcp",
             description: "MCP 서버를 자동으로 설치하고 올바른 경로를 설정합니다",
@@ -463,26 +465,26 @@ async function main() {
                 );
               }
               return await researchMode(parsedArgs.data);
-            // case "newProject":
-            //   parsedArgs = await newProjectSchema.safeParseAsync(
-            //     request.params.arguments
-            //   );
-            //   if (!parsedArgs.success) {
-            //     throw new Error(
-            //       `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
-            //   );
-            //   }
-            //   return await newProject(parsedArgs.data);
-            // case "ask-project-question":
-            //   parsedArgs = await askProjectQuestionSchema.safeParseAsync(
-            //     request.params.arguments
-            //   );
-            //   if (!parsedArgs.success) {
-            //     throw new Error(
-            //       `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
-            //   );
-            //   }
-            //   return await askProjectQuestion(parsedArgs.data);
+            case "newProject":
+              parsedArgs = await newProjectSchema.safeParseAsync(
+                request.params.arguments
+              );
+              if (!parsedArgs.success) {
+                throw new Error(
+                  `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
+                );
+              }
+              return await newProject(parsedArgs.data);
+            case "ask-project-question":
+              parsedArgs = await askProjectQuestionSchema.safeParseAsync(
+                request.params.arguments
+              );
+              if (!parsedArgs.success) {
+                throw new Error(
+                  `Invalid arguments for tool ${request.params.name}: ${parsedArgs.error.message}`
+                );
+              }
+              return await askProjectQuestion(parsedArgs.data);
             case "install-mcp":
               parsedArgs = await installMCPSchema.safeParseAsync(
                 request.params.arguments
@@ -539,6 +541,9 @@ async function main() {
         };
       }
     );
+
+    // stm-g 도구 등록
+    server.setRequestHandler(stmGSchema, handleStmG);
 
     // 연결 설정
     const transport = new StdioServerTransport();

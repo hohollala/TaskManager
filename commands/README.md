@@ -25,7 +25,7 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 ### ⚙️ 프로젝트 관리
 - [init](init.md) - 규칙 설정
 - [research](research.md) - 연구 모드
-- [newProject](newProject.md) - 새 프로젝트
+- // [newProject](newProject.md) - 새 프로젝트
 
 ## 빠른 시작
 
@@ -33,7 +33,7 @@ STM은 AI Agent를 위한 작업 관리 도구입니다. 체인 오브 쏘트, �
 2. **작업 목록**: `list`
 3. **작업 실행**: `execute [작업ID]`
 4. **작업 확인**: `verify [작업ID]`
-5. **새 프로젝트**: `newProject`
+5. **새 프로젝트**: `// newProject`
 
 ## 워크플로우
 

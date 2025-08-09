@@ -196,6 +196,15 @@ const commands: CommandInfo[] = [
     examples: [
       "newProject"
     ]
+  },
+  {
+    name: "stm-g",
+    description: "~/.claude/commands/stm의 MD 파일들을 ~/.gemini/commands/stm의 TOML 파일로 변환합니다",
+    category: "시스템 관리",
+    usage: "stm-g",
+    examples: [
+      "stm-g"
+    ]
   }
 ];
 
@@ -221,6 +230,46 @@ ${command.examples.map(example => `- \`${example}\``).join('\n')}
 - [목록](list.md) - 모든 명령어 보기
 - [작업 관리 명령어들](../task-management.md)
 - [프로젝트 관리 명령어들](../project-management.md)
+`;
+}
+
+// TOML 파일 템플릿 생성
+function generateCommandTOML(command: CommandInfo): string {
+  return `description="${command.description}"
+prompt = """
+---
+allowed-tools: [Read, Grep, Glob, Bash, TodoWrite]
+description: "${command.description}"
+---
+
+# /sc:${command.name} - ${command.category}
+
+## Purpose
+${command.description}
+
+## Usage
+\`\`\`
+/sc:${command.name} ${command.usage.replace(/^${command.name}/, '').trim()}
+\`\`\`
+
+## Arguments
+${command.examples.map(example => {
+  const args = example.replace(/^${command.name}/, '').trim();
+  return args ? `- \`${args}\` - ${command.description}` : '';
+}).filter(arg => arg).join('\n')}
+
+## Execution
+1. Execute ${command.name} command with provided arguments
+2. Process the task according to ${command.category} requirements
+3. Generate appropriate output and recommendations
+4. Maintain structured reporting and documentation
+
+## Claude Code Integration
+- Uses appropriate tools for ${command.category} tasks
+- Leverages system integration for task management
+- Applies structured approach for consistent results
+- Maintains comprehensive task tracking and reporting
+"""
 `;
 }
 
@@ -362,15 +411,111 @@ export async function generateCommandFilesDev(): Promise<void> {
   }
 }
 
+// Gemini용 TOML 파일 생성 함수
+export async function generateGeminiTOMLFiles(): Promise<void> {
+  try {
+    const homeDir = os.homedir();
+    const claudeCommandsDir = path.join(homeDir, '.claude', 'commands', 'stm');
+    const geminiCommandsDir = path.join(homeDir, '.gemini', 'commands', 'stm');
+    
+    console.log('🔧 Gemini TOML 파일 생성 시작...');
+    console.log(`📁 Claude 경로: ${claudeCommandsDir}`);
+    console.log(`📁 Gemini 경로: ${geminiCommandsDir}`);
+    
+    // Gemini 디렉토리 생성
+    if (!fs.existsSync(geminiCommandsDir)) {
+      fs.mkdirSync(geminiCommandsDir, { recursive: true });
+      console.log(`📂 Gemini 디렉토리 생성됨: ${geminiCommandsDir}`);
+    } else {
+      console.log(`📂 Gemini 디렉토리 이미 존재: ${geminiCommandsDir}`);
+    }
+    
+    // Claude 디렉토리가 존재하는지 확인
+    if (!fs.existsSync(claudeCommandsDir)) {
+      console.log('⚠️ Claude 명령어 디렉토리가 존재하지 않습니다. 먼저 stm 명령어를 생성하세요.');
+      return;
+    }
+    
+    const createdFiles: string[] = [];
+    const skippedFiles: string[] = [];
+    
+    // 각 명령어 TOML 파일 생성
+    for (const command of commands) {
+      const filePath = path.join(geminiCommandsDir, `${command.name}.toml`);
+      
+      if (!fs.existsSync(filePath)) {
+        const tomlContent = generateCommandTOML(command);
+        fs.writeFileSync(filePath, tomlContent, 'utf8');
+        createdFiles.push(`${command.name}.toml`);
+        console.log(`✅ 생성됨: ${command.name}.toml`);
+      } else {
+        skippedFiles.push(`${command.name}.toml`);
+        console.log(`⏭️ 건너뜀: ${command.name}.toml (이미 존재)`);
+      }
+    }
+    
+    // Gemini용 README 생성
+    const geminiReadmePath = path.join(geminiCommandsDir, 'README.md');
+    if (!fs.existsSync(geminiReadmePath)) {
+      const geminiReadme = `# STM (Shrimp Task Manager) - Gemini Commands
+
+## 개요
+STM은 Gemini용 TOML 명령어 파일들입니다. 각 명령어는 /sc: 접두사를 사용합니다.
+
+## 명령어 목록
+
+${commands.map(cmd => `- [${cmd.name}](${cmd.name}.toml) - ${cmd.description}`).join('\n')}
+
+## 사용법
+각 명령어는 /sc: 접두사를 사용합니다. 예: \`/sc:plan 새로운 기능 개발\`
+
+## 설치
+이 파일들은 \`stm-g\` 명령어로 자동 생성됩니다.
+`;
+      fs.writeFileSync(geminiReadmePath, geminiReadme, 'utf8');
+      createdFiles.push('README.md');
+      console.log('✅ 생성됨: README.md');
+    } else {
+      skippedFiles.push('README.md');
+      console.log('⏭️ 건너뜀: README.md (이미 존재)');
+    }
+    
+    console.log('\n📊 생성 완료:');
+    console.log(`✅ 생성된 파일: ${createdFiles.length}개`);
+    console.log(`⏭️ 건너뛴 파일: ${skippedFiles.length}개`);
+    console.log(`📁 대상 경로: ${geminiCommandsDir}`);
+    
+  } catch (error) {
+    console.error('❌ Gemini TOML 파일 생성 중 오류 발생:', error);
+    throw error;
+  }
+}
+
 // 직접 실행 시
-if (process.argv[1] && process.argv[1].endsWith('commandGenerator.js')) {
-  console.log('🚀 STM 명령어 파일 생성 시작...');
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const command = process.argv[2];
   
-  // 개발용으로 실행
-  generateCommandFilesDev().then(() => {
-    console.log('✅ 개발용 명령어 파일 생성 완료!');
-  }).catch((error) => {
-    console.error('❌ 오류 발생:', error);
-    process.exit(1);
-  });
+  if (command === 'stm-g') {
+    console.log('🚀 STM-G 명령어 실행 중...');
+    generateGeminiTOMLFiles()
+      .then(() => {
+        console.log('✅ STM-G 완료');
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error('❌ STM-G 오류:', error);
+        process.exit(1);
+      });
+  } else {
+    console.log('🚀 STM 명령어 파일 생성 중...');
+    generateCommandFiles()
+      .then(() => {
+        console.log('✅ STM 완료');
+        process.exit(0);
+      })
+      .catch((error) => {
+        console.error('❌ STM 오류:', error);
+        process.exit(1);
+      });
+  }
 } 

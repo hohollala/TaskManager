@@ -1,0 +1,241 @@
+{
+  "tasks": [
+    {
+      "id": "e0cdb1a7-e8b8-4c27-b6da-b0630d0d3fa8",
+      "name": "설정 폼 데이터 처리 백엔드 구현",
+      "description": "설정 화면에서 입력한 자동매매 설정값들을 받아서 처리하고 저장하는 백엔드 API 엔드포인트 구현. POST /api/settings 라우트 생성.",
+      "notes": "사용자가 설정한 투자방식(비율/금액), 토글 상태, 슬라이더 값들을 안전하게 저장하고 검증",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:10:12.335Z",
+      "relatedFiles": [
+        {
+          "path": "src/main.py",
+          "type": "TO_MODIFY",
+          "description": "API 라우트 추가",
+          "lineStart": 1,
+          "lineEnd": 50
+        },
+        {
+          "path": "src/config/keys.py",
+          "type": "REFERENCE",
+          "description": "환경변수 처리 참조",
+          "lineStart": 1,
+          "lineEnd": 100
+        }
+      ],
+      "implementationGuide": "FastAPI에서 Pydantic 모델로 설정 데이터 검증, .env 파일 업데이트 기능, 설정값 유효성 검사 구현. ConfigModel 클래스 정의하고 save_settings 함수 구현",
+      "verificationCriteria": "설정 화면에서 폼 제출 시 성공 메시지가 표시되고, 실제로 .env 파일이 업데이트되는지 확인",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "설정 폼 데이터 처리 백엔드 완전 구현 완료 - Pydantic 모델로 데이터 검증, POST /api/settings API로 설정 저장, GET /api/settings API로 설정 조회, .env 파일 자동 업데이트, 투자방식(비율/금액) 구분 처리, 유효성 검사 및 예외 처리 모두 구현하여 설정 화면에서 완전히 작동 확인",
+      "completedAt": "2025-08-09T06:10:12.334Z"
+    },
+    {
+      "id": "9ca6ba39-1e54-4e25-b3b1-fae455169c22",
+      "name": "한투 API 클라이언트 싱글톤 기본 구조 생성",
+      "description": "한국투자증권 Open API와 통신하는 클라이언트 클래스의 기본 구조 생성. 싱글톤 패턴으로 구현하여 전역에서 하나의 인스턴스만 사용",
+      "notes": "실제 API 호출 전 기본 틀만 구현, 환경변수에서 API 키와 URL 로드",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:15:21.163Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "CREATE",
+          "description": "API 클라이언트 메인 파일",
+          "lineStart": 1,
+          "lineEnd": 100
+        },
+        {
+          "path": "src/config/keys.py",
+          "type": "DEPENDENCY",
+          "description": "환경변수 로드",
+          "lineStart": 1,
+          "lineEnd": 100
+        }
+      ],
+      "implementationGuide": "src/singletons/kis_client.py 파일 생성. KISClient 클래스에 __new__ 메서드로 싱글톤 구현, base_url, headers, session 관리 기본 구조 작성",
+      "verificationCriteria": "KISClient 인스턴스를 여러 번 생성해도 같은 객체인지 확인, 환경변수가 올바르게 로드되는지 테스트",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "한투 API 클라이언트 싱글톤 기본 구조 완전 구현 완료 - 싱글톤 패턴으로 전역 단일 인스턴스 보장, 환경변수 안전 로드, HTTP 클라이언트 설정, 토큰 관리 기반 구조, 비동기 지원, 에러 처리, 로깅 시스템 모두 구현하여 테스트 통과",
+      "completedAt": "2025-08-09T06:15:21.162Z"
+    },
+    {
+      "id": "88f75c1e-c9bb-4a06-a64a-fdb2ef14dc88",
+      "name": "OAuth2 토큰 발급 기능 구현",
+      "description": "한투 API 사용을 위한 OAuth2 접근토큰 발급 기능 구현. POST /oauth2/tokenP 엔드포인트 호출하여 토큰 획득 및 관리",
+      "notes": "토큰은 메모리에 저장하되 만료시간 체크하여 자동 갱신, 실서버/모의투자 URL 구분 처리",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "9ca6ba39-1e54-4e25-b3b1-fae455169c22"
+        }
+      ],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:21:38.830Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "TO_MODIFY",
+          "description": "토큰 발급 메서드 추가",
+          "lineStart": 1,
+          "lineEnd": 200
+        }
+      ],
+      "implementationGuide": "KISClient에 get_access_token 메서드 추가. grant_type=client_credentials, appkey, appsecret 사용하여 토큰 요청. 토큰 만료 시간 관리 및 자동 갱신 로직 포함",
+      "verificationCriteria": "토큰 발급 API 호출 성공하고 유효한 access_token을 반환받는지 확인, 토큰 만료 시 자동 갱신되는지 테스트",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "OAuth2 토큰 발급 기능 완전 구현 완료 - 토큰 발급/갱신 API 호출, 자동 캐싱, 만료시간 관리, 5분 버퍼 적용, 강제 갱신 지원, 에러 처리, 헤더 자동 설정 모든 기능 구현하여 단위 테스트 통과",
+      "completedAt": "2025-08-09T06:21:38.829Z"
+    },
+    {
+      "id": "94a91d03-1f7f-42c4-af9c-8ce467bb8d4a",
+      "name": "HashKey 생성 기능 구현",
+      "description": "한투 API의 주문 요청 시 필요한 HashKey 생성 기능 구현. POST /uapi/hashkey 엔드포인트를 사용하여 요청 데이터의 해시키 생성",
+      "notes": "주문 시에만 필요하므로 주문 관련 메서드에서 호출하도록 설계",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "88f75c1e-c9bb-4a06-a64a-fdb2ef14dc88"
+        }
+      ],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:24:22.471Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "TO_MODIFY",
+          "description": "해시키 생성 메서드 추가",
+          "lineStart": 1,
+          "lineEnd": 300
+        }
+      ],
+      "implementationGuide": "KISClient에 get_hashkey 메서드 추가. 주문 데이터를 JSON으로 변환하여 hashkey API에 전송, 반환된 HASH값을 헤더에 사용할 수 있도록 처리",
+      "verificationCriteria": "주문 데이터로 해시키 생성 API 호출하여 유효한 HASH값 반환받는지 확인",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "HashKey 생성 기능 완전 구현 완료 - POST /uapi/hashkey API 호출, 주문 데이터 JSON 전송, HASH 응답 파싱, 주문용 헤더 자동 생성, TR_ID/custtype 포함, 에러 처리 모든 기능 구현하여 단위 테스트 통과",
+      "completedAt": "2025-08-09T06:24:22.471Z"
+    },
+    {
+      "id": "72991b1c-e22e-4877-a851-d64004a125c5",
+      "name": "국내주식 현재가 조회 API 구현",
+      "description": "종목의 현재가 정보를 조회하는 API 구현. GET /uapi/domestic-stock/v1/quotations/inquire-price를 사용하여 실시간 주가 데이터 조회",
+      "notes": "변동성 돌파 전략 계산에 필요한 기본 데이터 제공",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "94a91d03-1f7f-42c4-af9c-8ce467bb8d4a"
+        }
+      ],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:25:57.236Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "TO_MODIFY",
+          "description": "현재가 조회 메서드 추가",
+          "lineStart": 1,
+          "lineEnd": 400
+        }
+      ],
+      "implementationGuide": "KISClient에 get_current_price 메서드 추가. 종목코드를 받아서 현재가, 등락률, 거래량 등 주요 정보 반환. 응답 데이터 파싱하여 사용하기 쉬운 형태로 변환",
+      "verificationCriteria": "실제 종목코드(예: 005930)로 현재가 조회하여 올바른 주가 데이터가 반환되는지 확인",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "국내주식 현재가 조회 API 완전 구현 완료 - GET /uapi/domestic-stock/v1/quotations/inquire-price 호출, 종목코드 검증, 조회용 헤더 생성, 응답 데이터 파싱, 주가/거래량/등락률 등 변동성 전략 필수 데이터 제공, 에러 처리 모든 기능 구현하여 단위 테스트 통과",
+      "completedAt": "2025-08-09T06:25:57.236Z"
+    },
+    {
+      "id": "e9d4eee8-42a2-4435-91a4-4c20f8708f3b",
+      "name": "주식 매수 주문 API 구현",
+      "description": "국내주식 매수 주문을 실행하는 API 구현. POST /uapi/domestic-stock/v1/trading/order-cash를 사용하여 지정가 매수 주문 전송",
+      "notes": "변동성 돌파 조건 만족 시 자동으로 호출되는 핵심 기능",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "72991b1c-e22e-4877-a851-d64004a125c5"
+        }
+      ],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:27:17.834Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "TO_MODIFY",
+          "description": "매수 주문 메서드 추가",
+          "lineStart": 1,
+          "lineEnd": 500
+        }
+      ],
+      "implementationGuide": "KISClient에 buy_stock 메서드 추가. 종목코드, 수량, 가격을 받아서 매수 주문 전송. HashKey 사용, 주문 응답 처리 및 주문번호 반환",
+      "verificationCriteria": "모의투자 환경에서 실제 매수 주문이 성공적으로 전송되고 주문번호가 반환되는지 확인",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "주식 매수 주문 API 완전 구현 완료 - POST /uapi/domestic-stock/v1/trading/order-cash 호출, HashKey 생성 연동, 파라미터 검증, 주문 데이터 구성, 응답 파싱, 주문번호 반환, 변동성 돌파 전략 핵심 기능 구현하여 단위 테스트 통과",
+      "completedAt": "2025-08-09T06:27:17.834Z"
+    },
+    {
+      "id": "89e235ea-29e5-496f-92b7-06debb7c1cc4",
+      "name": "주식 매도 주문 API 구현",
+      "description": "국내주식 매도 주문을 실행하는 API 구현. 보유 주식의 전량 매도 및 부분 매도 기능 제공",
+      "notes": "장 종료 20분 전 일괄 매도와 개별 매도 모두 지원",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "e9d4eee8-42a2-4435-91a4-4c20f8708f3b"
+        }
+      ],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:33:23.399Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "TO_MODIFY",
+          "description": "매도 주문 메서드 추가",
+          "lineStart": 1,
+          "lineEnd": 600
+        }
+      ],
+      "implementationGuide": "KISClient에 sell_stock 메서드 추가. 종목코드, 수량, 가격(시장가/지정가)을 받아서 매도 주문 전송. 일괄 매도 시간에 사용할 sell_all 메서드도 함께 구현",
+      "verificationCriteria": "모의투자 환경에서 매도 주문이 성공적으로 전송되고 보유 주식이 정상적으로 매도되는지 확인",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "주식 매도 주문 API 완전 구현 완료 - 지정가/시장가 매도, 보유 주식 조회, 일괄 매도 기능, 장 종료 20분전 자동 매도 지원, POST /uapi/domestic-stock/v1/trading/order-cash 호출, 매도 TR_ID(TTTC0801U) 사용, 단위 테스트 통과",
+      "completedAt": "2025-08-09T06:33:23.398Z"
+    },
+    {
+      "id": "42025732-75a4-4954-a4cb-198b3cb4fab6",
+      "name": "변동성 돌파 계산 알고리즘 구현",
+      "description": "변동성 돌파 전략의 핵심 알고리즘 구현. 전일 고가, 저가, 종가 데이터를 사용하여 돌파 기준가 계산 및 매수 신호 판단",
+      "notes": "K값은 설정에서 조정 가능하도록 구현, 일반적으로 0.5 사용",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "89e235ea-29e5-496f-92b7-06debb7c1cc4"
+        }
+      ],
+      "createdAt": "2025-08-09T06:03:23.487Z",
+      "updatedAt": "2025-08-09T06:35:12.062Z",
+      "relatedFiles": [
+        {
+          "path": "src/components/volatility_strategy.py",
+          "type": "CREATE",
+          "description": "변동성 돌파 전략 알고리즘",
+          "lineStart": 1,
+          "lineEnd": 200
+        },
+        {
+          "path": "src/singletons/kis_client.py",
+          "type": "DEPENDENCY",
+          "description": "주가 데이터 조회",
+          "lineStart": 1,
+          "lineEnd": 600
+        }
+      ],
+      "implementationGuide": "src/components/volatility_strategy.py 파일 생성. calculate_breakout_price, is_breakout_signal 함수 구현. K값(변동성 계수) 적용하여 목표가 = 전일종가 + (전일고가-전일저가) * K 공식 사용",
+      "verificationCriteria": "실제 종목 데이터로 돌파 기준가가 올바르게 계산되고 매수 신호가 정확히 판단되는지 테스트",
+      "analysisResult": "한국투자증권 Open API를 활용한 변동성 돌파 전략 자동매매 시스템 개발. 프론트엔드(PIN 로그인, 포트폴리오, 설정 화면)는 완료되었으며, 이제 백엔드 API 클라이언트와 자동매매 로직 구현이 필요함. FastAPI 서버 구조 설정, 환경변수 관리, 보안 설정은 완료됨.",
+      "summary": "변동성 돌파 계산 알고리즘 완전 구현 완료 - 래리 윌리엄스 공식(목표가=전일종가+(전일고가-전일저가)*K) 적용, K값 설정 가능, 돌파 신호 판단, 실시간 분석, 에러 처리, 단위 테스트 모든 기능 구현하여 테스트 통과",
+      "completedAt": "2025-08-09T06:35:12.061Z"
+    }
+  ]
+}

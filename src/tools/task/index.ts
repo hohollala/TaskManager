@@ -37,3 +37,6 @@ export { queryTask, queryTaskSchema } from "./queryTask.js";
 export { getTaskDetail, getTaskDetailSchema } from "./getTaskDetail.js";
 
 export { splitTasksRaw, splitTasksRawSchema } from "./splitTasksRaw.js";
+
+// continueTask
+export { continueTask, continueTaskSchema } from "./continueTask.js";

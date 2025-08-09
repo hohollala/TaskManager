@@ -20,13 +20,16 @@
     "dev": "ts-node src/index.ts",
     "start": "node dist/index.js",
     "view": "node scripts/start-viewer.js",
+    "gui": "node scripts/find-gui-url.js",
+    "url": "node scripts/get-url.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-commands": "ts-node src/utils/commandGenerator.ts",
     "install-commands": "npm run build && node dist/utils/commandGenerator.js",
     "add-mcp": "node scripts/quick-add-mcp.js",
     "setup-commands": "node scripts/setup-stm-commands.js",
     "postinstall": "npm run setup-commands",
-    "init": "node scripts/setup-stm-commands.js init"
+    "init": "node scripts/setup-stm-commands.js init",
+    "stm-g": "npm run build && node dist/utils/commandGenerator.js stm-g"
   },
   "keywords": [
     "mcp",

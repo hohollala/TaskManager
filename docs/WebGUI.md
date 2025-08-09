@@ -1,6 +1,6 @@
 # Web GUI 접근 정보
 
-[Task Manager UI](http://localhost:3000?lang=en)
+[Task Manager UI](http://localhost:5733?lang=en)
 
 ## 사용 방법
 

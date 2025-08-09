@@ -1,0 +1,259 @@
+{
+  "tasks": [
+    {
+      "id": "6734edca-b430-49f9-a287-4b1526aff7fd",
+      "name": "일기장 Avalonia 프로젝트 초기 설정",
+      "description": "기존 FireBaseMCP 프로젝트 내에 Avalonia UI 프로젝트를 위한 기본 디렉토리 구조를 생성하고, Avalonia 프로젝트를 초기화합니다. src/DiaryApp/ 디렉토리를 생성하고, Avalonia 프로젝트 파일을 설정합니다.",
+      "status": "completed",
+      "dependencies": [],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:08:15.284Z",
+      "relatedFiles": [
+        {
+          "path": "src/DiaryApp/",
+          "type": "CREATE",
+          "description": "Avalonia 프로젝트 루트 디렉토리"
+        },
+        {
+          "path": "src/DiaryApp/App.axaml",
+          "type": "CREATE",
+          "description": "Avalonia 애플리케이션 정의"
+        },
+        {
+          "path": "src/DiaryApp/App.axaml.cs",
+          "type": "CREATE",
+          "description": "Avalonia 애플리케이션 코드 비하인드"
+        },
+        {
+          "path": "src/DiaryApp/MainWindow.axaml",
+          "type": "CREATE",
+          "description": "메인 윈도우 UI 정의"
+        },
+        {
+          "path": "src/DiaryApp/MainWindow.axaml.cs",
+          "type": "CREATE",
+          "description": "메인 윈도우 코드 비하인드"
+        },
+        {
+          "path": "src/DiaryApp/Program.cs",
+          "type": "CREATE",
+          "description": "애플리케이션 진입점"
+        },
+        {
+          "path": "src/DiaryApp/DiaryApp.csproj",
+          "type": "CREATE",
+          "description": "프로젝트 파일"
+        }
+      ],
+      "implementationGuide": "1. `src/DiaryApp/` 디렉토리 생성.\n2. Avalonia UI 프로젝트를 위한 기본 파일 (예: `App.axaml`, `App.axaml.cs`, `MainWindow.axaml`, `MainWindow.axaml.cs`, `Program.cs`)을 생성하고 최소한의 Avalonia 애플리케이션이 실행되도록 설정합니다.\n3. 필요한 Avalonia NuGet 패키지를 추가합니다.",
+      "verificationCriteria": "Avalonia 애플리케이션이 성공적으로 빌드되고 빈 창이 실행되는 것을 확인합니다.",
+      "summary": "Avalonia 애플리케이션이 성공적으로 빌드되고 실행되었습니다. DiaryApp.Desktop 프로젝트가 올바르게 설정되어 있으며, 필요한 모든 파일(App.axaml, MainWindow.axaml, Program.cs 등)이 존재하고 정상적으로 작동합니다.",
+      "completedAt": "2025-08-05T11:08:15.284Z"
+    },
+    {
+      "id": "ffe56af1-0bf7-41ea-81c0-3ee708f5bf9a",
+      "name": "일기 항목 모델 정의",
+      "description": "일기 항목의 데이터 구조를 정의하는 `DiaryEntry` 클래스를 생성합니다. 제목, 내용, 날짜 등의 속성을 포함합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "6734edca-b430-49f9-a287-4b1526aff7fd"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:10:56.291Z",
+      "relatedFiles": [
+        {
+          "path": "src/models/",
+          "type": "CREATE",
+          "description": "모델 디렉토리"
+        },
+        {
+          "path": "src/models/DiaryEntry.cs",
+          "type": "CREATE",
+          "description": "일기 항목 데이터 모델"
+        }
+      ],
+      "implementationGuide": "1. `src/models/` 디렉토리 생성 (필요시).\n2. `src/models/DiaryEntry.cs` 파일을 생성하고 `Title`, `Content`, `Date` 속성을 포함하는 `DiaryEntry` 클래스를 정의합니다.",
+      "verificationCriteria": "`DiaryEntry.cs` 파일이 올바르게 생성되고 컴파일 오류가 없는지 확인합니다.",
+      "summary": "DiaryEntry 클래스가 성공적으로 생성되었습니다. Id, Title, Content, Date, ModifiedDate 속성을 포함하며, 기본 생성자와 매개변수가 있는 생성자를 제공합니다. 프로젝트가 성공적으로 빌드되어 컴파일 오류가 없음을 확인했습니다.",
+      "completedAt": "2025-08-05T11:10:56.291Z"
+    },
+    {
+      "id": "3ddd779e-2ed8-4048-ac31-5f446b51699c",
+      "name": "DiaryManager 싱글턴 구현 (로컬 JSON 저장)",
+      "description": "일기 항목을 관리하는 `DiaryManager` 싱글턴 클래스를 구현합니다. 일기 항목을 로컬 JSON 파일에 저장하고 불러오는 기능을 포함합니다. 비동기 파일 I/O를 적용합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "6734edca-b430-49f9-a287-4b1526aff7fd"
+        },
+        {
+          "taskId": "ffe56af1-0bf7-41ea-81c0-3ee708f5bf9a"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:13:38.286Z",
+      "relatedFiles": [
+        {
+          "path": "src/singletons/Avalonia/",
+          "type": "CREATE",
+          "description": "싱글턴 디렉토리"
+        },
+        {
+          "path": "src/singletons/Avalonia/DiaryManager.cs",
+          "type": "CREATE",
+          "description": "일기 관리 싱글턴 클래스"
+        }
+      ],
+      "implementationGuide": "1. `src/singletons/Avalonia/` 디렉토리 생성 (필요시).\n2. `src/singletons/Avalonia/DiaryManager.cs` 파일을 생성하고 싱글턴 패턴을 적용한 `DiaryManager` 클래스를 정의합니다.\n3. `AddDiaryEntry`, `GetDiaryEntries` 메서드를 구현합니다.\n4. `SaveDiaries` 및 `LoadDiaries` 메서드를 비동기(`async/await`)로 구현하여 JSON 파일에 데이터를 저장하고 불러옵니다.\n5. 파일 I/O에 대한 기본적인 예외 처리를 포함합니다.",
+      "verificationCriteria": "`DiaryManager` 클래스가 컴파일 오류 없이 구현되고, 일기 항목을 추가/조회할 때 메모리 내에서 정상적으로 동작하는지 확인합니다. 파일 저장/불러오기 기능은 UI 구현 후 통합 테스트합니다.",
+      "summary": "DiaryManager 싱글턴 클래스가 성공적으로 구현되었습니다. Lazy<T> 패턴을 사용한 스레드 안전한 싱글턴 구현, 비동기 JSON 파일 저장/불러오기, CRUD 작업 메서드들을 포함합니다. 프로젝트가 성공적으로 빌드되어 컴파일 오류가 없음을 확인했습니다.",
+      "completedAt": "2025-08-05T11:13:38.285Z"
+    },
+    {
+      "id": "db30a5e9-6c9d-454d-a01d-4223770083b0",
+      "name": "UI - 일기 작성 뷰 구현",
+      "description": "새로운 일기 항목을 작성할 수 있는 UI 뷰를 Avalonia XAML로 구현합니다. 제목과 내용을 입력할 수 있는 컨트롤을 포함합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "6734edca-b430-49f9-a287-4b1526aff7fd"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:14:52.160Z",
+      "relatedFiles": [
+        {
+          "path": "src/views/",
+          "type": "CREATE",
+          "description": "뷰 디렉토리"
+        },
+        {
+          "path": "src/views/WriteDiaryView.axaml",
+          "type": "CREATE",
+          "description": "일기 작성 UI"
+        }
+      ],
+      "implementationGuide": "1. `src/views/` 디렉토리 생성 (필요시).\n2. `src/views/WriteDiaryView.axaml` 파일을 생성하고 제목(`TextBox`)과 내용(`TextBox` 또는 `RichTextBox`)을 입력할 수 있는 UI를 디자인합니다.\n3. 일기 저장을 위한 버튼을 추가합니다.",
+      "verificationCriteria": "`WriteDiaryView.axaml`이 성공적으로 컴파일되고, 디자인된 UI가 Avalonia 애플리케이션 내에서 올바르게 렌더링되는지 확인합니다.",
+      "summary": "WriteDiaryView가 성공적으로 구현되었습니다. 제목과 내용을 입력할 수 있는 TextBox, 현재 날짜 표시, 저장 및 취소 버튼을 포함한 완전한 UI가 생성되었습니다. WriteDiaryViewModel도 함께 구현되어 데이터 바인딩과 명령 처리를 담당합니다. 프로젝트가 성공적으로 빌드되어 컴파일 오류가 없음을 확인했습니다.",
+      "completedAt": "2025-08-05T11:14:52.159Z"
+    },
+    {
+      "id": "8a8095b8-88a4-4ce1-94b7-37d4aef6801d",
+      "name": "UI - 일기 목록 뷰 구현",
+      "description": "작성된 일기 항목들을 목록으로 표시하는 UI 뷰를 Avalonia XAML로 구현합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "6734edca-b430-49f9-a287-4b1526aff7fd"
+        },
+        {
+          "taskId": "ffe56af1-0bf7-41ea-81c0-3ee708f5bf9a"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:15:56.725Z",
+      "relatedFiles": [
+        {
+          "path": "src/views/DiaryListView.axaml",
+          "type": "CREATE",
+          "description": "일기 목록 UI"
+        }
+      ],
+      "implementationGuide": "1. `src/views/DiaryListView.axaml` 파일을 생성하고 `ListBox` 또는 `DataGrid`와 같은 컨트롤을 사용하여 일기 항목 목록을 표시할 수 있는 UI를 디자인합니다.\n2. 각 일기 항목의 제목과 날짜를 간략하게 표시합니다.",
+      "verificationCriteria": "`DiaryListView.axaml`이 성공적으로 컴파일되고, 디자인된 UI가 Avalonia 애플리케이션 내에서 올바르게 렌더링되는지 확인합니다.",
+      "summary": "DiaryListView가 성공적으로 구현되었습니다. ListBox를 사용하여 일기 항목들을 목록으로 표시하고, 각 항목의 제목, 내용 미리보기, 날짜를 보여주는 완전한 UI가 생성되었습니다. 보기/삭제 버튼과 새 일기 작성 버튼도 포함되어 있습니다. DiaryListViewModel도 함께 구현되어 데이터 바인딩과 명령 처리를 담당합니다. 프로젝트가 성공적으로 빌드되어 컴파일 오류가 없음을 확인했습니다.",
+      "completedAt": "2025-08-05T11:15:56.724Z"
+    },
+    {
+      "id": "f7005f30-d943-490d-b456-69a07fe4651b",
+      "name": "ViewModel - 일기 작성 ViewModel 구현",
+      "description": "`WriteDiaryView`와 `DiaryManager`를 연결하는 `WriteDiaryViewModel`을 구현합니다. 사용자 입력을 처리하고 `DiaryManager`를 통해 일기 항목을 저장합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "db30a5e9-6c9d-454d-a01d-4223770083b0"
+        },
+        {
+          "taskId": "3ddd779e-2ed8-4048-ac31-5f446b51699c"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:16:07.327Z",
+      "relatedFiles": [
+        {
+          "path": "src/viewmodels/",
+          "type": "CREATE",
+          "description": "뷰모델 디렉토리"
+        },
+        {
+          "path": "src/viewmodels/WriteDiaryViewModel.cs",
+          "type": "CREATE",
+          "description": "일기 작성 뷰모델"
+        }
+      ],
+      "implementationGuide": "1. `src/viewmodels/` 디렉토리 생성 (필요시).\n2. `src/viewmodels/WriteDiaryViewModel.cs` 파일을 생성하고 `Title`, `Content` 속성을 정의합니다.\n3. `SaveCommand`를 구현하여 `DiaryManager.Instance.AddDiaryEntry()`를 호출하고, 저장 후 UI 상태를 업데이트하거나 다른 뷰로 이동하는 로직을 포함합니다.",
+      "verificationCriteria": "`WriteDiaryViewModel`이 컴파일 오류 없이 구현되고, `SaveCommand`가 `DiaryManager`와 올바르게 연동되는지 확인합니다.",
+      "summary": "WriteDiaryViewModel이 이미 성공적으로 구현되어 있습니다. Title, Content, CurrentDate, CanSave 속성과 SaveCommand, CancelCommand가 구현되어 있으며, DiaryManager와 올바르게 연결되어 일기 항목을 저장할 수 있습니다. 프로젝트가 성공적으로 빌드되어 컴파일 오류가 없음을 확인했습니다.",
+      "completedAt": "2025-08-05T11:16:07.326Z"
+    },
+    {
+      "id": "f742c8f9-2dd5-4979-986d-fb8ae2bf2aa7",
+      "name": "ViewModel - 일기 목록 ViewModel 구현",
+      "description": "`DiaryListView`와 `DiaryManager`를 연결하는 `DiaryListViewModel`을 구현합니다. `DiaryManager`에서 일기 항목 목록을 가져와 뷰에 바인딩합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "8a8095b8-88a4-4ce1-94b7-37d4aef6801d"
+        },
+        {
+          "taskId": "3ddd779e-2ed8-4048-ac31-5f446b51699c"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T11:16:13.606Z",
+      "relatedFiles": [
+        {
+          "path": "src/viewmodels/DiaryListViewModel.cs",
+          "type": "CREATE",
+          "description": "일기 목록 뷰모델"
+        }
+      ],
+      "implementationGuide": "1. `src/viewmodels/DiaryListViewModel.cs` 파일을 생성하고 `ObservableCollection<DiaryEntry>` 타입의 `DiaryEntries` 속성을 정의합니다.\n2. 생성자에서 `DiaryManager.Instance.GetDiaryEntries()`를 호출하여 목록을 초기화합니다.",
+      "verificationCriteria": "`DiaryListViewModel`이 컴파일 오류 없이 구현되고, `DiaryEntries` 속성이 `DiaryManager`에서 데이터를 올바르게 가져오는지 확인합니다.",
+      "summary": "DiaryListViewModel이 이미 성공적으로 구현되어 있습니다. ObservableCollection<DiaryEntry> 타입의 DiaryEntries 속성과 SelectedDiaryEntry, DiaryCount 속성이 구현되어 있으며, DiaryManager에서 데이터를 가져와 뷰에 바인딩합니다. LoadDiaryEntries, DeleteDiaryAsync, ViewDiary, NewDiary, Refresh 명령들도 구현되어 있습니다. 프로젝트가 성공적으로 빌드되어 컴파일 오류가 없음을 확인했습니다.",
+      "completedAt": "2025-08-05T11:16:13.606Z"
+    },
+    {
+      "id": "e6555946-fb35-4b38-abe8-459b58051a74",
+      "name": "Avalonia 스타일 및 테마 시스템 통합",
+      "description": "Avalonia 애플리케이션에 프로젝트의 스타일 가이드라인을 통합합니다. `docs/designed.md`의 컬러 팔레트와 타이포그래피를 반영하고, 다크/라이트 모드 전환을 지원하는 테마 시스템을 설정합니다.",
+      "status": "completed",
+      "dependencies": [
+        {
+          "taskId": "6734edca-b430-49f9-a287-4b1526aff7fd"
+        }
+      ],
+      "createdAt": "2025-08-04T06:12:14.539Z",
+      "updatedAt": "2025-08-05T13:43:26.602Z",
+      "relatedFiles": [
+        {
+          "path": "src/styles/Avalonia/",
+          "type": "CREATE",
+          "description": "스타일 디렉토리"
+        },
+        {
+          "path": "src/styles/Avalonia/Theme.axaml",
+          "type": "CREATE",
+          "description": "Avalonia 테마 정의"
+        }
+      ],
+      "implementationGuide": "1. `src/styles/Avalonia/` 디렉토리 생성 (필요시).\n2. `src/styles/Avalonia/Theme.axaml` 파일을 생성하여 컬러 팔레트, 폰트 크기 등 디자인 시스템 요소를 Avalonia 리소스로 정의합니다.\n3. `App.axaml`에서 `Theme.axaml`을 참조하도록 설정합니다.\n4. 다크/라이트 모드 전환 로직을 구현하고, UI 요소들이 동적으로 테마를 따르도록 설정합니다.",
+      "verificationCriteria": "애플리케이션의 UI 요소들이 정의된 테마를 따르고, 다크/라이트 모드 전환 시 UI가 올바르게 변경되는지 확인합니다.",
+      "summary": "Avalonia 애플리케이션의 UI 요소들이 정의된 테마를 따르고, 다크/라이트 모드 전환 시 UI가 올바르게 변경되는 것을 확인했습니다. 폰트 관련 오류는 폰트 패밀리 설정을 제거하여 해결했습니다.",
+      "completedAt": "2025-08-05T13:43:26.602Z"
+    }
+  ]
+}
